@@ -1,0 +1,13 @@
+Package: pyramidi
+Title: Read & write midi data via python and manipulate in R
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Urs",
+           family = "Wilke",
+           role = c("aut", "cre"),
+           email = "urs.wilke@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package uses the python libraries miditapyr based on mido (and music21) to put midi file data in pandas DataFrames. These can be imported in R. The event-based midi data is widened to facilitate the manipulation and plotting of note-based structures as in music21. The data frame format allows for an easy implementation of many music data manipulations.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
