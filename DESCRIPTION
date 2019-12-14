@@ -11,3 +11,7 @@ Description: This package uses the python libraries miditapyr based on mido (and
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    reticulate,
+    magrittr
