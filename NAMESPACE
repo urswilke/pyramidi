@@ -2,6 +2,10 @@
 
 export("%>%")
 export(df2midi)
+export(get_tempo)
 export(midi_df)
 export(mido_midi)
+export(tab_measures)
+export(tab_time_sig)
+export(widen_events)
 importFrom(magrittr,"%>%")
