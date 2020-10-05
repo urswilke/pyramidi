@@ -4,3 +4,4 @@
 ^data-raw$
 setup_stuff/*
 removed/*
+^README\.Rmd$
