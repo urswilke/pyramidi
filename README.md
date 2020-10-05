@@ -35,6 +35,15 @@ remotes::install_github("UrsWilke/pyramidi")
 
 ``` r
 library(pyramidi)
+library(tidyverse)
+#> ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+#> ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+#> ✓ tibble  3.0.3     ✓ dplyr   1.0.2
+#> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+#> ✓ readr   1.3.1     ✓ forcats 0.5.0
+#> ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
 library(zeallot)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
@@ -45,7 +54,7 @@ mido$MidiFile(mid_file) %>%
 df_notes_wide <-  
   tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   widen_events() %>%
-  dplyr::left_join(pyramidi::midi_defs)
+  left_join(pyramidi::midi_defs)
 #> Joining, by = "note"
 df_notes_wide
 #> # A tibble: 2,481 x 18
@@ -71,17 +80,64 @@ df_notes_wide
 
 ``` r
 p1 <- df_notes_wide %>%
-  ggplot2::ggplot() +
-  ggplot2::geom_segment(ggplot2::aes(x = m_note_on,
-                                     y = note_name,
-                                     xend = m_note_off,
-                                     yend = note_name,
-                                     color = velocity_note_on)) +
-# each midi track is printed into its own facet
-  ggplot2::facet_wrap(~ i_track,
-                      ncol=1,
-                      scales = "free_y")
+  ggplot() +
+  geom_segment(
+    aes(
+      x = m_note_on,
+      y = note_name,
+      xend = m_note_off,
+      yend = note_name,
+      color = velocity_note_on
+    )
+  ) +
+  # each midi track is printed into its own facet:
+  facet_wrap( ~ i_track,
+              ncol = 1,
+              scales = "free_y")
 p1
 ```
 
 <img src="man/figures/README-midi_piano roll-1.png" width="100%" />
+
+### Pivot note data frame back to long format
+
+``` r
+df_notes_out <- 
+  df_notes_wide %>% 
+  select(c("i_track", "name", "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>% 
+  pivot_longer(matches("_note_o[nf]f?$"),
+               names_to = c(".value", "type"),
+               names_pattern = "(.+?)_(.*)") %>% 
+  arrange(i_track, t)
+
+df_notes_out <- 
+  df_notes_out %>% 
+  group_by(i_track) %>% 
+  mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>% 
+  ungroup()
+
+df_notes_out
+#> # A tibble: 4,962 x 12
+#>    i_track name  channel  note i_note type      m     b     t ticks  time
+#>      <dbl> <chr>   <dbl> <dbl>  <int> <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1       1 nan         9    38      1 note…  0       0  0         0     0
+#>  2       1 nan         9    36      1 note…  0       0  0         0     0
+#>  3       1 nan         9    38      1 note…  0.25    1  0.136   240   240
+#>  4       1 nan         9    36      1 note…  0.25    1  0.136   240     0
+#>  5       1 nan         9    38      2 note…  1.5     6  0.818  1440  1200
+#>  6       1 nan         9    38      2 note…  1.75    7. 0.955  1680   240
+#>  7       1 nan         9    38      3 note…  2       8  1.09   1920   240
+#>  8       1 nan         9    36      2 note…  2       8  1.09   1920     0
+#>  9       1 nan         9    38      3 note…  2.25    9  1.23   2160   240
+#> 10       1 nan         9    36      2 note…  2.25    9  1.23   2160     0
+#> # … with 4,952 more rows, and 1 more variable: velocity <dbl>
+```
+
+### Write midi dataframe back to a midi file
+
+``` r
+mt$df_2_midi(df_meta %>% mutate(time = as.integer(time)), 
+             df_notes_out, 
+             ticks_per_beat, 
+             "test.mid")
+```

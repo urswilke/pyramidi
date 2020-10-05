@@ -44,6 +44,7 @@ remotes::install_github("UrsWilke/pyramidi")
 
 ```{r midi_df}
 library(pyramidi)
+library(tidyverse)
 library(zeallot)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
@@ -54,7 +55,7 @@ mido$MidiFile(mid_file) %>%
 df_notes_wide <-  
   tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   widen_events() %>%
-  dplyr::left_join(pyramidi::midi_defs)
+  left_join(pyramidi::midi_defs)
 df_notes_wide
 ```
 
@@ -62,17 +63,53 @@ df_notes_wide
 
 ```{r midi_piano roll}
 p1 <- df_notes_wide %>%
-  ggplot2::ggplot() +
-  ggplot2::geom_segment(ggplot2::aes(x = m_note_on,
-                                     y = note_name,
-                                     xend = m_note_off,
-                                     yend = note_name,
-                                     color = velocity_note_on)) +
-# each midi track is printed into its own facet
-  ggplot2::facet_wrap(~ i_track,
-                      ncol=1,
-                      scales = "free_y")
+  ggplot() +
+  geom_segment(
+    aes(
+      x = m_note_on,
+      y = note_name,
+      xend = m_note_off,
+      yend = note_name,
+      color = velocity_note_on
+    )
+  ) +
+  # each midi track is printed into its own facet:
+  facet_wrap( ~ i_track,
+              ncol = 1,
+              scales = "free_y")
 p1
 
+```
+
+
+
+### Pivot note data frame back to long format
+
+```{r pivot_long}
+df_notes_out <- 
+  df_notes_wide %>% 
+  select(c("i_track", "name", "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>% 
+  pivot_longer(matches("_note_o[nf]f?$"),
+               names_to = c(".value", "type"),
+               names_pattern = "(.+?)_(.*)") %>% 
+  arrange(i_track, t)
+
+df_notes_out <- 
+  df_notes_out %>% 
+  group_by(i_track) %>% 
+  mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>% 
+  ungroup()
+
+df_notes_out
+```
+
+### Write midi dataframe back to a midi file
+
+
+```{r write_midi, eval=FALSE}
+mt$df_2_midi(df_meta %>% mutate(time = as.integer(time)), 
+             df_notes_out, 
+             ticks_per_beat, 
+             "test.mid")
 ```
 
