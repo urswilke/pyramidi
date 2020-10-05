@@ -9,6 +9,9 @@ midi_df(mid_file)
 \arguments{
 \item{mid_file}{file path}
 }
+\value{
+
+}
 \description{
 Tabulate midi file data in data frames
 }

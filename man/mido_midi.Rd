@@ -9,6 +9,9 @@ mido_midi(mid_file)
 \arguments{
 \item{mid_file}{file path name}
 }
+\value{
+
+}
 \description{
 read midi file via mido
 }
