@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-tab_measures <- function(df_notes, df_meta, ticks_per_beat) {
+tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
   df_notes %>%
     tibble::as_tibble() %>%
     dplyr::group_by(i_track) %>%
