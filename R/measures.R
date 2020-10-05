@@ -33,33 +33,33 @@ tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
 }
 
 
-classify_beat_patterns <- function(df_plot) {
-
-  l <-
-    df_plot %>%
-    dplyr::filter(i_track == 1) %>%
-    dplyr::group_split(round(m_note_on %/% 2, 8), round(m_note_off %/% 2, 8)) %>%
-    purrr::map(~dplyr::select(.x, i_track, note, m_note_on, m_note_off) %>%
-                 dplyr::mutate(m_note_on = round(m_note_on %% 2, 6),
-                               m_note_off = round(m_note_off %% 2))) %>%
-    purrr::set_names()
-
-  lu <-
-    unique(l) %>%
-    purrr::set_names()
-
-  classes <- factor(names(l), names(lu)) %>% as.numeric() #%>% tidyr::replace_na()
-
-  # min_note <- df_plot %>% dplyr::filter(i_track == 1,note == min(df_plot %>% dplyr::filter(i_track == 1) %>% dplyr::pull(note))) %>% dplyr::pull(note_name) %>% unique()
-  # max_note <- df_plot %>% dplyr::filter(i_track == 1,note == max(df_plot %>% dplyr::filter(i_track == 1) %>% dplyr::pull(note))) %>% dplyr::pull(note_name) %>% unique()
-  df_beats <-
-    (1:floor(max(df_plot$m_note_off) / 2) * 2) %>%
-    tibble::tibble(m_note_off = .) %>%
-    dplyr::mutate(note_name = "pattern",
-           note_name_max = "pattern2",
-           pattern = classes,
-           i_track = 1,
-           m_note_on = lag(m_note_off, default = 0) %>% as.vector())
-  df_beats
-}
+# classify_beat_patterns <- function(df_plot) {
+#
+#   l <-
+#     df_plot %>%
+#     dplyr::filter(i_track == 1) %>%
+#     dplyr::group_split(round(m_note_on %/% 2, 8), round(m_note_off %/% 2, 8)) %>%
+#     purrr::map(~dplyr::select(.x, i_track, note, m_note_on, m_note_off) %>%
+#                  dplyr::mutate(m_note_on = round(m_note_on %% 2, 6),
+#                                m_note_off = round(m_note_off %% 2))) %>%
+#     purrr::set_names()
+#
+#   lu <-
+#     unique(l) %>%
+#     purrr::set_names()
+#
+#   classes <- factor(names(l), names(lu)) %>% as.numeric() #%>% tidyr::replace_na()
+#
+#   # min_note <- df_plot %>% dplyr::filter(i_track == 1,note == min(df_plot %>% dplyr::filter(i_track == 1) %>% dplyr::pull(note))) %>% dplyr::pull(note_name) %>% unique()
+#   # max_note <- df_plot %>% dplyr::filter(i_track == 1,note == max(df_plot %>% dplyr::filter(i_track == 1) %>% dplyr::pull(note))) %>% dplyr::pull(note_name) %>% unique()
+#   df_beats <-
+#     (1:floor(max(df_plot$m_note_off) / 2) * 2) %>%
+#     tibble::tibble(m_note_off = .) %>%
+#     dplyr::mutate(note_name = "pattern",
+#            note_name_max = "pattern2",
+#            pattern = classes,
+#            i_track = 1,
+#            m_note_on = lag(m_note_off, default = 0) %>% as.vector())
+#   df_beats
+# }
 
