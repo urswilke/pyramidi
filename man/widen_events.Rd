@@ -15,3 +15,13 @@ widen_events(df_measures)
 \description{
 write note_on and _off events in the same line (long to wide)
 }
+\examples{
+library(zeallot)
+mid_file <- '/home/chief/Bitwig Studio/Projects/bossa_raw/midi_arpeggiated.mid'
+mt <- reticulate::import("miditapyr")
+mido <- reticulate::import("mido")
+mido$MidiFile(mid_file) \%>\%
+  mt$mido_midi_df()  \%->\% c(df_meta, df_notes, ticks_per_beat)
+  tab_measures(df_meta, df_notes, ticks_per_beat) \%>\%
+  widen_events()
+}

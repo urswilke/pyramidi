@@ -19,4 +19,5 @@ Imports:
     dplyr,
     stringr,
     tidyr,
-    ggplot2
+    ggplot2,
+    zeallot
