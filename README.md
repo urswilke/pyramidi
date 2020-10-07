@@ -16,7 +16,7 @@ written back to midi files (again using miditapyr).
 
 ## Installation
 
-You can install the released version of pyramidi from
+You can install pyramidi from
 [github](https://github.com/urswilke/pyramidi) with:
 
 ``` r
@@ -28,6 +28,15 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 ## install dev version of rtweettree from github
 remotes::install_github("UrsWilke/pyramidi")
 ```
+
+The python package [miditapyr](https://pypi.org/project/miditapyr/) also
+needs to be installed via
+
+``` sh
+pip install miditapyr
+```
+
+in your virtual environment.
 
 ## Basic usage
 
