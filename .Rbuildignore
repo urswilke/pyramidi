@@ -5,3 +5,6 @@
 setup_stuff/*
 removed/*
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
