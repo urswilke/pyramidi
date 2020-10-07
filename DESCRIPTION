@@ -20,6 +20,7 @@ Imports:
     stringr,
     tidyr,
     ggplot2,
-    zeallot
+    zeallot,
+    magrittr
 Depends: 
     R (>= 2.10)
