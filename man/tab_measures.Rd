@@ -2,18 +2,25 @@
 % Please edit documentation in R/measures.R
 \name{tab_measures}
 \alias{tab_measures}
-\title{Tabulate measure related data in the mdi event data}
+\title{Tabulate measure related data in the midi event data}
 \usage{
 tab_measures(df_meta, df_notes, ticks_per_beat)
 }
 \arguments{
-\item{df_notes}{}
+\item{df_meta}{Meta event data.frame resulting of miditapyr$mido_midi_df()}
+
+\item{df_notes}{Note event data.frame resulting of miditapyr$mido_midi_df()}
+
+\item{ticks_per_beat}{integer resulting of miditapyr$mido_midi_df()}
 }
 \value{
-
+A data.frame with the following columns added: c("m", "b", "t", "ticks", "time"). \cr
+  m: measure \cr
+  b: beat \cr
+  t: time in seconds \cr
 }
 \description{
-Tabulate measure related data in the mdi event data
+Tabulate measure related data in the midi event data
 }
 \examples{
 library(zeallot)

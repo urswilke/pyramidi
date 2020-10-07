@@ -10,7 +10,7 @@ get_tempo(df_meta)
 \item{df_meta}{data.frame containing midi meta event data resulting of miditapyr$mido_midi_df()}
 }
 \value{
-
+tempo integer
 }
 \description{
 Get tempo

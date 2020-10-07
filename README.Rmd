@@ -86,7 +86,7 @@ df_notes_wide
 
 ### Plot the midi file information in a piano roll plot
 
-```{r midi_piano roll}
+```{r midi_piano_roll}
 p1 <- df_notes_wide %>%
   ggplot() +
   geom_segment(

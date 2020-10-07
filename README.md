@@ -144,7 +144,7 @@ p1 <- df_notes_wide %>%
 p1
 ```
 
-<img src="man/figures/README-midi_piano roll-1.png" width="100%" />
+<img src="man/figures/README-midi_piano_roll-1.png" width="100%" />
 
 ### Pivot note data frame back to long format
 

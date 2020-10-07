@@ -10,7 +10,7 @@ tab_time_sig(df_meta)
 \item{df_meta}{data.frame containing midi meta event data resulting of miditapyr$mido_midi_df()}
 }
 \value{
-
+time signature data.frame
 }
 \description{
 Tabulate time signature
@@ -22,5 +22,5 @@ mido <- reticulate::import("mido")
 mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido$MidiFile(mid_file) \%>\%
   mt$mido_midi_df()  \%->\% c(df_meta, df_notes, ticks_per_beat)
-tab_time_sig(df_meta)
+pyramidi:::tab_time_sig(df_meta)
 }
