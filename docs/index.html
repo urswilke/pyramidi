@@ -47,7 +47,14 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/urswilke/pyramidi/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -68,7 +75,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of pyramidi from <a href="https://github.com/urswilke/pyramidi">github</a> with:</p>
+<p>You can install pyramidi from <a href="https://github.com/urswilke/pyramidi">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co">## install remotes package if it's not already</span>
 <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
@@ -77,6 +84,9 @@
 
 <span class="co">## install dev version of rtweettree from github</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></pre></div>
+<p>The python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> also needs to be installed via</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
+<p>in your virtual environment.</p>
 </div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
@@ -84,8 +94,8 @@
 <div id="load-libraries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-libraries" class="anchor"></a>Load libraries</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pyramidi</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
 <span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
@@ -94,11 +104,11 @@
 <div id="extract-midi-file-information-into-dataframes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#extract-midi-file-information-into-dataframes" class="anchor"></a>Extract midi file information into dataframes</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">mid_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">mid_file</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="va">mt</span><span class="op">$</span><span class="fu">mido_midi_df</span><span class="op">(</span><span class="op">)</span>  <span class="op">%-&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span>, <span class="va">ticks_per_beat</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">df_meta</span>
 <span class="co">#&gt;                type         name time  tempo numerator denominator</span>
 <span class="co">#&gt; 0        track_name Drum Machine    0    NaN       NaN         NaN</span>
@@ -118,7 +128,7 @@
 <span class="co">#&gt; 2435              NaN                         NaN       2</span>
 <span class="co">#&gt; 2436              NaN                         NaN       3</span>
 <span class="co">#&gt; 4969              NaN                         NaN       3</span></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">df_notes</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4,962 x 7</span>
 <span class="co">#&gt;    type     name   time  note velocity channel i_track</span>
@@ -134,14 +144,14 @@
 <span class="co">#&gt;  9 note_off nan     240    38      101       9       1</span>
 <span class="co">#&gt; 10 note_off nan       0    36      101       9       1</span>
 <span class="co">#&gt; # … with 4,952 more rows</span></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="va">ticks_per_beat</span>
 <span class="co">#&gt; [1] 960</span></pre></div>
 </div>
 <div id="pivot-note-dataframe-to-wide" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-dataframe-to-wide" class="anchor"></a>Pivot note dataframe to wide</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 
 <span class="va">df_notes_wide</span> <span class="op">&lt;-</span>  
   <span class="fu"><a href="reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -170,7 +180,7 @@
 <div id="plot-the-midi-file-information-in-a-piano-roll-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-the-midi-file-information-in-a-piano-roll-plot" class="anchor"></a>Plot the midi file information in a piano roll plot</h3>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">df_notes_wide</span> <span class="op">%&gt;%</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_segment</span><span class="op">(</span>
@@ -192,7 +202,7 @@
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-data-frame-back-to-long-format" class="anchor"></a>Pivot note data frame back to long format</h3>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">df_notes_out</span> <span class="op">&lt;-</span> 
   <span class="va">df_notes_wide</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"i_track"</span>, <span class="st">"name"</span>, <span class="st">"channel"</span>, <span class="st">"note"</span>, <span class="st">"i_note"</span><span class="op">)</span>, <span class="fu">matches</span><span class="op">(</span><span class="st">"_note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -226,7 +236,7 @@
 <div id="write-midi-dataframe-back-to-a-midi-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-midi-dataframe-back-to-a-midi-file" class="anchor"></a>Write midi dataframe back to a midi file</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="va">mt</span><span class="op">$</span><span class="fu">df_2_midi</span><span class="op">(</span><span class="va">df_meta</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span>, 
              <span class="va">df_notes_out</span>, 
              <span class="va">ticks_per_beat</span>, 
@@ -237,7 +247,14 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/urswilke/pyramidi/">https://​github.com/​urswilke/​pyramidi/​</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
