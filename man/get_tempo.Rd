@@ -7,11 +7,20 @@
 get_tempo(df_meta)
 }
 \arguments{
-\item{df_meta}{}
+\item{df_meta}{data.frame containing midi meta event data resulting of miditapyr$mido_midi_df()}
 }
 \value{
 
 }
 \description{
 Get tempo
+}
+\examples{
+library(zeallot)
+mt <- reticulate::import("miditapyr")
+mido <- reticulate::import("mido")
+mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mido$MidiFile(mid_file) \%>\%
+  mt$mido_midi_df()  \%->\% c(df_meta, df_notes, ticks_per_beat)
+get_tempo(df_meta)
 }
