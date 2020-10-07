@@ -17,9 +17,9 @@ Tabulate measure related data in the mdi event data
 }
 \examples{
 library(zeallot)
-mid_file <- '/home/chief/Bitwig Studio/Projects/bossa_raw/midi_arpeggiated.mid'
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
+mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido$MidiFile(mid_file) \%>\%
   mt$mido_midi_df()  \%->\% c(df_meta, df_notes, ticks_per_beat)
   tab_measures(df_meta, df_notes, ticks_per_beat)
