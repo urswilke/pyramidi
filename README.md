@@ -31,26 +31,73 @@ remotes::install_github("UrsWilke/pyramidi")
 
 ## Basic usage
 
-### Extract midi file information into a dataframe
+### Load libraries
 
 ``` r
 library(pyramidi)
 library(tidyverse)
-#> ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-#> ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-#> ✓ tibble  3.0.3     ✓ dplyr   1.0.2
-#> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-#> ✓ readr   1.3.1     ✓ forcats 0.5.0
-#> ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
 library(zeallot)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
- 
+```
+
+### Extract midi file information into dataframes
+
+``` r
 mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido$MidiFile(mid_file) %>%
   mt$mido_midi_df()  %->% c(df_meta, df_notes, ticks_per_beat)
+```
+
+``` r
+df_meta
+#>                type         name time  tempo numerator denominator
+#> 0        track_name Drum Machine    0    NaN       NaN         NaN
+#> 3         set_tempo          nan    0 545454       NaN         NaN
+#> 4    time_signature          nan    0    NaN         4           4
+#> 2151   end_of_track          nan  241    NaN       NaN         NaN
+#> 2152     track_name         FM-4    0    NaN       NaN         NaN
+#> 2435   end_of_track          nan 1954    NaN       NaN         NaN
+#> 2436     track_name         FM-4    0    NaN       NaN         NaN
+#> 4969   end_of_track          nan  202    NaN       NaN         NaN
+#>      clocks_per_click notated_32nd_notes_per_beat i_track
+#> 0                 NaN                         NaN       1
+#> 3                 NaN                         NaN       1
+#> 4                  24                           8       1
+#> 2151              NaN                         NaN       1
+#> 2152              NaN                         NaN       2
+#> 2435              NaN                         NaN       2
+#> 2436              NaN                         NaN       3
+#> 4969              NaN                         NaN       3
+```
+
+``` r
+df_notes %>% as_tibble()
+#> # A tibble: 4,962 x 7
+#>    type     name   time  note velocity channel i_track
+#>    <chr>    <chr> <dbl> <dbl>    <dbl>   <dbl>   <dbl>
+#>  1 note_on  nan       0    38      101       9       1
+#>  2 note_on  nan       0    36      101       9       1
+#>  3 note_off nan     240    38      101       9       1
+#>  4 note_off nan       0    36      101       9       1
+#>  5 note_on  nan    1200    38      101       9       1
+#>  6 note_off nan     240    38      101       9       1
+#>  7 note_on  nan     240    38      101       9       1
+#>  8 note_on  nan       0    36      101       9       1
+#>  9 note_off nan     240    38      101       9       1
+#> 10 note_off nan       0    36      101       9       1
+#> # … with 4,952 more rows
+```
+
+``` r
+ticks_per_beat
+#> [1] 960
+```
+
+### Pivot note dataframe to wide
+
+``` r
+
 df_notes_wide <-  
   tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   widen_events() %>%

@@ -40,18 +40,43 @@ remotes::install_github("UrsWilke/pyramidi")
 
 ## Basic usage
 
-### Extract midi file information into a dataframe
+### Load libraries
 
-```{r midi_df}
+```{r load_libs, message=FALSE}
 library(pyramidi)
 library(tidyverse)
 library(zeallot)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
- 
+```
+
+### Extract midi file information into dataframes
+
+```{r midi_df, message=FALSE}
 mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido$MidiFile(mid_file) %>%
   mt$mido_midi_df()  %->% c(df_meta, df_notes, ticks_per_beat)
+```
+
+
+```{r df_meta}
+df_meta
+```
+
+
+```{r df_notes}
+df_notes %>% as_tibble()
+```
+
+
+```{r ticksperbeat}
+ticks_per_beat
+```
+
+### Pivot note dataframe to wide 
+
+```{r df_notes_wide}
+
 df_notes_wide <-  
   tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   widen_events() %>%
