@@ -1,8 +1,9 @@
 #' write note_on and _off events in the same line (long to wide)
 #'
-#' @param df_measures
+#' @param df_measures data.frame resulting of miditapyr$mido_midi_df() and then running tab_measures() (see example)
 #'
-#' @return
+#' @return A data.frame with the following columns pivoted to wide: c("m", "b", "t", "ticks", "time", "velocity"). Every column is pivoted to wide with the suffix "_note_on" & "_note_off" showing the values of the original column as a prefix. See \code{?tab_measures} for an explanation of the meaning of these columns.
+#'
 #' @export
 #'
 #' @examples
