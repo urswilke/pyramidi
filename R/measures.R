@@ -20,16 +20,16 @@
 #' mido$MidiFile(mid_file) %>%
 #'   mt$mido_midi_df()  %->% c(df_meta, df_notes, ticks_per_beat)
 #'   tab_measures(df_meta, df_notes, ticks_per_beat)
-tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
-  df_notes %>%
+tab_measures <- function(df, ticks_per_beat) {
+  df %>%
     tibble::as_tibble() %>%
     dplyr::group_by(.data$i_track) %>%
     dplyr::mutate(ticks = cumsum(.data$time)) %>%
-    dplyr::mutate(t = .data$ticks * get_ticks2second_scale(df_meta, ticks_per_beat)) %>%
-    dplyr::mutate(m = t * get_bpm(df_meta) / 60) %>%
+    dplyr::mutate(t = .data$ticks * get_ticks2second_scale(df, ticks_per_beat)) %>%
+    dplyr::mutate(m = t * get_bpm(df) / 60) %>%
     # TODO: generalize for several
     # the "[1]" only takes the first time signature if several in file:
-    dplyr::mutate(b = .data$m * tab_time_sig(df_meta)$numerator[1]) %>%
+    dplyr::mutate(b = .data$m * tab_time_sig(df)$numerator[1]) %>%
     # mutate(track = cumsum(str_detect(type, "track_name" ))) %>%
     # dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
     dplyr::group_by(.data$i_track, .data$note) %>%
