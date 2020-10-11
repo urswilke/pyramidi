@@ -29,7 +29,7 @@ tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
     dplyr::mutate(m = t * get_bpm(df_meta) / 60) %>%
     dplyr::mutate(b = .data$m * tab_time_sig(df_meta)$numerator) %>%
     # mutate(track = cumsum(str_detect(type, "track_name" ))) %>%
-    dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
+    # dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
     dplyr::group_by(.data$i_track, .data$note) %>%
     # mutate(i_note = cumsum(ifelse(type == "^note_on$", 1, 0))) %>%
     dplyr::mutate(i_note = cumsum(stringr::str_detect(.data$type, "^note_on$"))) %>%
