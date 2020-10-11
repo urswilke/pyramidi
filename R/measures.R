@@ -27,7 +27,9 @@ tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
     dplyr::mutate(ticks = cumsum(.data$time)) %>%
     dplyr::mutate(t = .data$ticks * get_ticks2second_scale(df_meta, ticks_per_beat)) %>%
     dplyr::mutate(m = t * get_bpm(df_meta) / 60) %>%
-    dplyr::mutate(b = .data$m * tab_time_sig(df_meta)$numerator) %>%
+    # TODO: generalize for several
+    # the "[1]" only takes the first time signature if several in file:
+    dplyr::mutate(b = .data$m * tab_time_sig(df_meta)$numerator[1]) %>%
     # mutate(track = cumsum(str_detect(type, "track_name" ))) %>%
     # dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
     dplyr::group_by(.data$i_track, .data$note) %>%
