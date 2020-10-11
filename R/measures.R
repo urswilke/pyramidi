@@ -33,9 +33,10 @@ tab_measures <- function(df_meta, df_notes, ticks_per_beat) {
     dplyr::group_by(.data$i_track, .data$note) %>%
     # mutate(i_note = cumsum(ifelse(type == "^note_on$", 1, 0))) %>%
     dplyr::mutate(i_note = cumsum(stringr::str_detect(.data$type, "^note_on$"))) %>%
-    dplyr::ungroup()  %>%
-    # select(-tempo, -numerator, -denominator, -clocks_per_click, -notated_32nd_notes_per_beat) %>%
-    dplyr::select(c("i_track", "name", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note"))
+    dplyr::ungroup()
+  # %>%
+  #   # select(-tempo, -numerator, -denominator, -clocks_per_click, -notated_32nd_notes_per_beat) %>%
+  #   dplyr::select(c("i_track", "name", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note"))
 
 }
 
