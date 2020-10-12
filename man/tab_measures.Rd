@@ -4,12 +4,10 @@
 \alias{tab_measures}
 \title{Tabulate measure related data in the midi event data}
 \usage{
-tab_measures(df_meta, df_notes, ticks_per_beat)
+tab_measures(df, ticks_per_beat)
 }
 \arguments{
-\item{df_meta}{Meta event data.frame resulting of miditapyr$mido_midi_df()}
-
-\item{df_notes}{Note event data.frame resulting of miditapyr$mido_midi_df()}
+\item{df}{Note event data.frame resulting of miditapyr$tidy_df()}
 
 \item{ticks_per_beat}{integer resulting of miditapyr$mido_midi_df()}
 }
@@ -23,11 +21,13 @@ A data.frame with the following columns added: c("m", "b", "t", "ticks", "time")
 Tabulate measure related data in the midi event data
 }
 \examples{
-library(zeallot)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
-mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mido$MidiFile(mid_file) \%>\%
-  mt$mido_midi_df()  \%->\% c(df_meta, df_notes, ticks_per_beat)
-  tab_measures(df_meta, df_notes, ticks_per_beat)
+mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mido_mid_file <- mido$MidiFile(mid_file_str)
+dfc <- mt$midi_to_df(mido_mid_file)
+ticks_per_beat = mido_mid_file$ticks_per_beat
+df <- dfc \%>\%
+  mt$tidy_df()
+tab_measures(df, ticks_per_beat)
 }
