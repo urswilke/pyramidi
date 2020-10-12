@@ -61,14 +61,37 @@ mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
 ```
 
-### Extract midi file information into dataframes
+### Extract midi file information into dataframe
 
 ```{r midi_df, message=FALSE}
-mid_file <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mido$MidiFile(mid_file) %>%
-  mt$mido_midi_df()  %->% c(df_meta, df_notes, ticks_per_beat)
+midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+
+midifile <- mido$MidiFile(midi_file_str)
+ticks_per_beat <- midifile$ticks_per_beat
+
+dfc = mt$midi_to_df(midifile)
+head(dfc, 20)
 ```
 
+
+```{r ticksperbeat}
+ticks_per_beat
+```
+
+
+```{r}
+df = mt$tidy_df(dfc)
+head(df, 20)
+```
+
+```{r}
+dfm <- tab_measures(df, ticks_per_beat)
+```
+
+```{r}
+dfm %>% 
+    mt$split_df()  %->% c(df_meta, df_notes)
+```
 
 ```{r df_meta}
 df_meta
@@ -79,21 +102,22 @@ df_meta
 df_notes %>% as_tibble()
 ```
 
-
-```{r ticksperbeat}
-ticks_per_beat
-```
-
-### Pivot note dataframe to wide 
+### Pivot note dataframe to wide
 
 ```{r df_notes_wide}
+df_not_notes <- 
+  df_notes %>% 
+  dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$")) 
 
-df_notes_wide <-  
-  tab_measures(df_meta, df_notes, ticks_per_beat) %>%
+df_notes_wide <-
+  df_notes %>% 
+  dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
+  # tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   widen_events() %>%
   left_join(pyramidi::midi_defs)
 df_notes_wide
 ```
+
 
 ### Plot the midi file information in a piano roll plot
 
@@ -122,18 +146,24 @@ p1
 ### Pivot note data frame back to long format
 
 ```{r pivot_long}
-df_notes_out <- 
-  df_notes_wide %>% 
-  select(c("i_track", "name", "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>% 
+df_notes_out <-
+  df_notes_wide %>%
+  select(c("i_track", 
+           # "name", 
+           "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>%
   pivot_longer(matches("_note_o[nf]f?$"),
                names_to = c(".value", "type"),
                names_pattern = "(.+?)_(.*)") %>% 
-  arrange(i_track, t)
+  mutate(meta = FALSE) 
 
-df_notes_out <- 
-  df_notes_out %>% 
-  group_by(i_track) %>% 
-  mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>% 
+
+df_notes_out <-
+  df_notes_out %>%
+  full_join(df_meta) %>% 
+  full_join(df_not_notes) %>%
+  arrange(i_track, ticks) %>% 
+  group_by(i_track) %>%
+  mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>%
   ungroup()
 
 df_notes_out
@@ -142,10 +172,20 @@ df_notes_out
 ### Write midi dataframe back to a midi file
 
 
+```{r dfc2}
+dfc2 <- 
+  df_notes_out %>% 
+  select(names(df)) %>% 
+  # mutate_if(is_numeric, as.integer) %>% 
+  mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
+  mt$compact_df()
+```
+
+
 ```{r write_midi, eval=FALSE}
-mt$df_2_midi(df_meta %>% mutate(time = as.integer(time)), 
-             df_notes_out, 
-             ticks_per_beat, 
-             "test.mid")
+dfc2
+dfc2 %>%
+  mt$df_to_midi(ticks_per_beat,
+                "test.mid")
 ```
 
