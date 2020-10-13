@@ -257,20 +257,20 @@ p1
 ``` r
 df_notes_out <-
   df_notes_wide %>%
-  select(c("i_track", 
-           # "name", 
+  select(c("i_track",
+           # "name",
            "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>%
   pivot_longer(matches("_note_o[nf]f?$"),
                names_to = c(".value", "type"),
-               names_pattern = "(.+?)_(.*)") %>% 
-  mutate(meta = FALSE) 
+               names_pattern = "(.+?)_(.*)") %>%
+  mutate(meta = FALSE)
 
 
 df_notes_out <-
   df_notes_out %>%
-  full_join(df_meta) %>% 
+  full_join(df_meta) %>%
   full_join(df_not_notes) %>%
-  arrange(i_track, ticks) %>% 
+  arrange(i_track, ticks) %>%
   group_by(i_track) %>%
   mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>%
   ungroup()
@@ -299,10 +299,10 @@ df_notes_out
 ### Write midi dataframe back to a midi file
 
 ``` r
-dfc2 <- 
-  df_notes_out %>% 
-  select(names(df)) %>% 
-  # mutate_if(is_numeric, as.integer) %>% 
+dfc2 <-
+  df_notes_out %>%
+  select(names(df)) %>%
+  # mutate_if(is_numeric, as.integer) %>%
   mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
   mt$compact_df()
 ```

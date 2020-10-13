@@ -101,91 +101,9 @@ df_meta
 ```{r df_notes}
 df_notes %>% as_tibble()
 ```
-
-### Pivot note dataframe to wide
-
-```{r df_notes_wide}
-df_not_notes <- 
-  df_notes %>% 
-  dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$")) 
-
-df_notes_wide <-
-  df_notes %>% 
-  dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
-  # tab_measures(df_meta, df_notes, ticks_per_beat) %>%
-  widen_events() %>%
-  left_join(pyramidi::midi_defs)
-df_notes_wide
+```{r child='man/rmdhunks/piano_roll_note_date.Rmd'}
 ```
 
 
-### Plot the midi file information in a piano roll plot
-
-```{r midi_piano_roll}
-p1 <- df_notes_wide %>%
-  ggplot() +
-  geom_segment(
-    aes(
-      x = m_note_on,
-      y = note_name,
-      xend = m_note_off,
-      yend = note_name,
-      color = velocity_note_on
-    )
-  ) +
-  # each midi track is printed into its own facet:
-  facet_wrap( ~ i_track,
-              ncol = 1,
-              scales = "free_y")
-p1
-
+```{r child='man/rmdhunks/midi_df_to_file.Rmd'}
 ```
-
-
-
-### Pivot note data frame back to long format
-
-```{r pivot_long}
-df_notes_out <-
-  df_notes_wide %>%
-  select(c("i_track", 
-           # "name", 
-           "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>%
-  pivot_longer(matches("_note_o[nf]f?$"),
-               names_to = c(".value", "type"),
-               names_pattern = "(.+?)_(.*)") %>% 
-  mutate(meta = FALSE) 
-
-
-df_notes_out <-
-  df_notes_out %>%
-  full_join(df_meta) %>% 
-  full_join(df_not_notes) %>%
-  arrange(i_track, ticks) %>% 
-  group_by(i_track) %>%
-  mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>%
-  ungroup()
-
-df_notes_out
-```
-
-### Write midi dataframe back to a midi file
-
-
-```{r dfc2}
-dfc2 <- 
-  df_notes_out %>% 
-  select(names(df)) %>% 
-  # mutate_if(is_numeric, as.integer) %>% 
-  mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
-  mt$compact_df()
-```
-
-
-```{r write_midi, eval=FALSE}
-dfc2
-dfc2 %>%
-  mt$df_to_midi(ticks_per_beat,
-                "test.mid")
-```
-
