@@ -6,16 +6,9 @@
 #'
 #' @export
 #'
+#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
-#' mt <- reticulate::import("miditapyr")
-#' mido <- reticulate::import("mido")
-#' mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' mido_mid_file <- mido$MidiFile(mid_file_str)
-#' dfc <- mt$midi_to_df(mido_mid_file)
-#' ticks_per_beat = mido_mid_file$ticks_per_beat
-#' dfm <- dfc %>%
-#'   mt$tidy_df() %>%
-#'   tab_measures(ticks_per_beat)
+#' dfm <- tab_measures(df, ticks_per_beat)
 #' dfm %>% widen_events()
 widen_events <- function(df_measures) {
   df_measures %>%

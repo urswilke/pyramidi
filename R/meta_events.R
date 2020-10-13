@@ -5,17 +5,10 @@
 #' @return time signature data.frame
 #' @importFrom rlang .data
 #'
+#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt <- reticulate::import("miditapyr")
-#' mido <- reticulate::import("mido")
-#' mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' mido_mid_file <- mido$MidiFile(mid_file_str)
-#' dfc <- mt$midi_to_df(mido_mid_file)
-#' ticks_per_beat = mido_mid_file$ticks_per_beat
-#' dfm <- dfc %>%
-#'   mt$tidy_df() %>%
-#'   tab_measures(ticks_per_beat)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' pyramidi:::tab_time_sig(df_meta)
 tab_time_sig <- function(df_meta) {
@@ -32,17 +25,10 @@ tab_time_sig <- function(df_meta) {
 #' @export
 #' @return tempo integer
 #'
+#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt <- reticulate::import("miditapyr")
-#' mido <- reticulate::import("mido")
-#' mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' mido_mid_file <- mido$MidiFile(mid_file_str)
-#' dfc <- mt$midi_to_df(mido_mid_file)
-#' ticks_per_beat = mido_mid_file$ticks_per_beat
-#' dfm <- dfc %>%
-#'   mt$tidy_df() %>%
-#'   tab_measures(ticks_per_beat)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_tempo(df_meta)
 get_tempo <- function(df_meta) {
@@ -61,17 +47,10 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #' @return integer of beats per minute
 #' @export
 #'
+#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt <- reticulate::import("miditapyr")
-#' mido <- reticulate::import("mido")
-#' mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' mido_mid_file <- mido$MidiFile(mid_file_str)
-#' dfc <- mt$midi_to_df(mido_mid_file)
-#' ticks_per_beat = mido_mid_file$ticks_per_beat
-#' dfm <- dfc %>%
-#'   mt$tidy_df() %>%
-#'   tab_measures(ticks_per_beat)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_bpm(df_meta)
 get_bpm <- function(df_meta) {
