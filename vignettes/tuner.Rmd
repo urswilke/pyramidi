@@ -22,7 +22,9 @@ disc. However, for other midi files the code might probably adapted a bit.
 ```{r setup}
 library(pyramidi)
 library(zeallot)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
 ```
@@ -76,7 +78,6 @@ rename_type_vec <-
 
 
 df2 <- dft %>%
-  #    filter(str_detect(event, "^Note")) %>%
   mutate(event = as.character(event)) %>%
   as_tibble() %>%
   mutate(meta = !is.na(type)) %>%
@@ -100,8 +101,6 @@ df2 <- dft %>%
   group_by(i_track) %>%
   mutate(time = time - lag(time) %>% {.[1] = 0; .}) %>%
   ungroup() %>%
-  # mutate(channel = as.integer(channel)) %>%
-  # mutate_if(is_numeric, as.integer) %>%
   mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
   mutate(name = ifelse(is.na(name), list(NULL), name))
 
@@ -112,7 +111,7 @@ df2 <- dft %>%
 
 ```{r }
 dfm2 <- tab_measures(df2, ticks_per_beat)
-widen_events(dfm2 %>% filter(str_detect(type, "^note")))
+widen_events(dfm2 %>% filter(stringr::str_detect(type, "^note")))
 
 
 dfm2 %>%
