@@ -29,5 +29,6 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
-    tuneR
+    tuneR,
+    testthat
 VignetteBuilder: knitr
