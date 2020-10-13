@@ -9,3 +9,5 @@ removed/*
 ^docs$
 ^pkgdown$
 ^\.github$
+^\.travis\.yml$
+^codecov\.yml$

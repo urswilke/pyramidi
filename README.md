@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.com/urswilke/pyramidi.svg?branch=master)](https://travis-ci.com/urswilke/pyramidi)
+[![Codecov test
+coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://codecov.io/gh/urswilke/pyramidi?branch=master)
 <!-- badges: end -->
 
 **Work in progress\!**
