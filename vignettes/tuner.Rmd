@@ -42,7 +42,9 @@ mido_mid_file <- mido$MidiFile(mid_file_str)
 dfc <- mt$midi_to_df(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc %>%
-  mt$tidy_df()
+  mt$tidy_df() %>% 
+  as_tibble()
+df
 ```
 
 ### tuneR
@@ -110,8 +112,13 @@ df2 <- dft %>%
 
 
 ```{r }
-dfm2 <- tab_measures(df2, ticks_per_beat)
-widen_events(dfm2 %>% filter(stringr::str_detect(type, "^note")))
+dfm2 <- tab_measures(df2, ticks_per_beat) %>%
+  # create a variable `track` with the track name (in order to have it in the plot below)
+  mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
+                        list(NA_character_), 
+                        name)) %>%
+  unnest(cols = track) %>% 
+  fill(track)
 
 
 dfm2 %>%

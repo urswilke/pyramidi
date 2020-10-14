@@ -82,12 +82,18 @@ ticks_per_beat
 
 
 ```{r}
-df = mt$tidy_df(dfc)
+df <- mt$tidy_df(dfc) %>% as_tibble()
 head(df, 20)
 ```
 
 ```{r}
-dfm <- tab_measures(df, ticks_per_beat)
+dfm <- tab_measures(df, ticks_per_beat) %>%
+  # create a variable `track` with the track name (in order to have it in the plot below)
+  mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
+                        list(NA_character_), 
+                        name)) %>%
+  unnest(cols = track) %>% 
+  fill(track)
 ```
 
 ```{r}
@@ -96,7 +102,7 @@ dfm %>%
 ```
 
 ```{r df_meta}
-df_meta
+df_meta %>% as_tibble()
 ```
 
 

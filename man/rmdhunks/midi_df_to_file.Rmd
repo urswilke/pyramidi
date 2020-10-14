@@ -4,20 +4,28 @@
 df_notes_out <-
   df_notes_wide %>%
   select(c("i_track",
-           # "name",
            "channel", "note", "i_note"), matches("_note_o[nf]f?$")) %>%
   pivot_longer(matches("_note_o[nf]f?$"),
                names_to = c(".value", "type"),
                names_pattern = "(.+?)_(.*)") %>%
+  # note events are not meta events (cf.
+  # https://mido.readthedocs.io/en/latest/midi_files.html?highlight=meta#meta-messages):
   mutate(meta = FALSE)
+```
 
 
+### Join non note events
+
+```{r join_non_note_events}
 df_notes_out <-
   df_notes_out %>%
   full_join(df_meta) %>%
   full_join(df_not_notes) %>%
+  # It is important to put the events in the right order:
   arrange(i_track, ticks) %>%
   group_by(i_track) %>%
+  # Now we can calculate the time increments between events;
+  # The first event of each track is set to 0:
   mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>%
   ungroup()
 
@@ -30,15 +38,18 @@ df_notes_out
 ```{r dfc2}
 dfc2 <-
   df_notes_out %>%
+  # For midi export the new columns are removed:
   select(names(df)) %>%
-  # mutate_if(is_numeric, as.integer) %>%
-  mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
-  mt$compact_df()
+  # When reticulate converts R dataframes to pandas, there are complications
+  # with character columns containing missing values.
+  # repair_reticulate_conversion = TRUE, repairs that in the miditapyr python
+  # code:
+  mt$compact_df(repair_reticulate_conversion = TRUE)
+dfc2 %>% as_tibble()
 ```
 
 
 ```{r write_midi, eval=FALSE}
-dfc2
 dfc2 %>%
   mt$df_to_midi(ticks_per_beat,
                 "test.mid")
