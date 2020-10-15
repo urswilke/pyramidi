@@ -3,6 +3,11 @@
 language: R
 # cache: packages
 
+addons:
+  apt:
+    packages:
+      - python3-pip
+
 before_install:
   - pip install numpy pandas mido setuptools pathlib
 
