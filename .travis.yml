@@ -9,16 +9,25 @@ r:
   - 3.5
   - 3.6
   - 4.0
+  - devel
+
+r_github_packages:
+  - r-lib/covr
+  - r-lib/pkgdown
 
 addons:
   apt:
+    update: true
     packages:
       # - python3-pip
+      # - libgs-dev
+      # - qpdf
+      # - ghostscript
       - python3-setuptools
       - python-pathlib
-      - python-mido
-      - python-pandas
-      - python-numpy
+      # - python-mido
+      # - python-pandas
+      # - python-numpy
 
 
 
@@ -29,3 +38,4 @@ before_install:
 
 after_success:
   - Rscript -e 'covr::codecov()'
+  - Rscript -e 'pkgdown::build_site()'
