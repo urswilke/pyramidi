@@ -12,7 +12,8 @@ r:
 addons:
   apt:
     packages:
-      - python3-pip
+      # - python3-pip
+      - python3-setuptools
 
 before_install:
   - pip install --upgrade --user pip
