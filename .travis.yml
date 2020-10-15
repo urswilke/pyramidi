@@ -14,10 +14,17 @@ addons:
     packages:
       # - python3-pip
       - python3-setuptools
+      - python-pathlib
+      - python3-mido
+      - python3-pandas
+      - python3-numpy
+
+
 
 before_install:
   # - pip install --upgrade --user pip
-  - pip install --user numpy pandas mido pathlib miditapyr
+  - pip install --user miditapyr
+  # - pip install --user numpy pandas mido pathlib miditapyr
 
 after_success:
   - Rscript -e 'covr::codecov()'
