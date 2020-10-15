@@ -5,3 +5,7 @@ cache: packages
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+before_install:
+  - pip install --upgrade pip
+  - pip install --user miditapyr
