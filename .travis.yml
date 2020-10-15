@@ -16,9 +16,9 @@ addons:
       # - python3-pip
       - python3-setuptools
       - python-pathlib
-      - python3-mido
-      - python3-pandas
-      - python3-numpy
+      - python-mido
+      - python-pandas
+      - python-numpy
 
 
 
