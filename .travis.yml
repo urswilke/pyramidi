@@ -1,7 +1,12 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-# cache: packages
+cache: packages
+
+r:
+  - 3.4
+  - 3.5
+  - 3.6
 
 addons:
   apt:
@@ -9,7 +14,7 @@ addons:
       - python3-pip
 
 before_install:
-  - pip install --use-feature=2020-resolver --user numpy pandas mido setuptools pathlib
+  - pip3 install --user numpy pandas mido setuptools pathlib miditapyr
 
 after_success:
   - Rscript -e 'covr::codecov()'
