@@ -12,12 +12,12 @@ r:
 addons:
   apt:
     packages:
-      - python3-pip
+      # - python3-pip
       - python3-setuptools
 
 before_install:
-  - pip install --upgrade --user pip
-  - pip3 install --user numpy pandas mido pathlib miditapyr
+  # - pip install --upgrade --user pip
+  - pip install --user numpy pandas mido pathlib miditapyr
 
 after_success:
   - Rscript -e 'covr::codecov()'
