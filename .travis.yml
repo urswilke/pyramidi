@@ -7,7 +7,17 @@ after_success:
   - Rscript -e 'covr::codecov()'
 
 before_install:
+  - sudo apt-get update
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
+  - conda install -c conda-forge limix
   - pip install --upgrade --user pip
-  - pip install --user setuptools
-  - pip install --user pathlib
   - pip install --user miditapyr
