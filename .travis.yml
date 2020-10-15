@@ -8,4 +8,6 @@ after_success:
 
 before_install:
   - pip install --upgrade --user pip
+  - pip install --user setuptools
+  - pip install --user pathlib
   - pip install --user miditapyr
