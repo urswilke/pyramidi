@@ -6,7 +6,7 @@ Authors@R:
            family = "Wilke",
            role = c("aut", "cre"),
            email = "urs.wilke@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0001-7257-2524"))
 Description: This package uses the python libraries miditapyr and mido to put midi file data in pandas DataFrames. These can be imported in R via reticulate. The event-based midi data is widened to facilitate the manipulation and plotting of note-based structures as in music21. The data frame format allows for an easy implementation of many music data manipulations.
 License: MIT + file LICENSE
 Encoding: UTF-8
