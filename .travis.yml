@@ -19,7 +19,7 @@ addons:
   apt:
     update: true
     packages:
-      - python3.8
+      - python3.6
       # - python3-pip
       # - libgs-dev
       # - qpdf
