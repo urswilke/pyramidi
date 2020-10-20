@@ -46,7 +46,7 @@ before_install:
   - sudo apt-get install python3 python3-pip python3-setuptools
   - pip3 install --upgrade pip
   # - pip install --upgrade --user pip
-  - pip3 install --user miditapyr
+  - pip3 install --user miditapyr==0.0.1
   # - pip install --user numpy pandas mido pathlib miditapyr
 
 after_success:
