@@ -28,6 +28,8 @@ addons:
       # - ghostscript
       - python3-setuptools
       - python-pathlib
+      - libharfbuzz-dev
+      - libfribidi-dev
       # - python-mido
       # - python-pandas
       # - python-numpy
