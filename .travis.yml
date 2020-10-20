@@ -5,11 +5,11 @@ sudo: false
 cache: packages
 
 r:
-  - 3.4
-  - 3.5
+  # - 3.4
+  # - 3.5
   - 3.6
-  - 4.0
-  - devel
+  # - 4.0
+  # - devel
 
 r_github_packages:
   - r-lib/covr
@@ -20,7 +20,7 @@ addons:
     update: true
     packages:
       - python3.5
-      # - python3-pip
+      - python3-pip
       # - libgs-dev
       # - qpdf
       # - ghostscript
