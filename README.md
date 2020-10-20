@@ -9,6 +9,8 @@
 status](https://travis-ci.com/urswilke/pyramidi.svg?branch=master)](https://travis-ci.com/urswilke/pyramidi)
 [![Codecov test
 coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://codecov.io/gh/urswilke/pyramidi?branch=master)
+[![R build
+status](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
 <!-- badges: end -->
 
 **Work in progress\!**
