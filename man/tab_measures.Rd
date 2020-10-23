@@ -30,5 +30,4 @@ dfc <- mt$midi_to_df(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc \%>\%
   mt$tidy_df()
-tab_measures(df, ticks_per_beat)
 }

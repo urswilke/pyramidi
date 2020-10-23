@@ -25,8 +25,4 @@ dfc <- mt$midi_to_df(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc \%>\%
   mt$tidy_df()
-dfm <- tab_measures(df, ticks_per_beat)
-library(zeallot)
-mt$split_df(dfm)  \%->\% c(df_meta, df_notes)
-pyramidi:::tab_time_sig(df_meta)
 }

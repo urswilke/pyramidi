@@ -5,12 +5,14 @@
 #' @return time signature data.frame
 #' @importFrom rlang .data
 #'
+#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' pyramidi:::tab_time_sig(df_meta)
+#' }
 tab_time_sig <- function(df_meta) {
   df_meta %>%
     tibble::as_tibble() %>%
@@ -25,12 +27,14 @@ tab_time_sig <- function(df_meta) {
 #' @export
 #' @return tempo integer
 #'
+#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_tempo(df_meta)
+#' }
 get_tempo <- function(df_meta) {
   df_meta %>%
     tibble::as_tibble() %>%
@@ -47,12 +51,14 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #' @return integer of beats per minute
 #' @export
 #'
+#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_bpm(df_meta)
+#' }
 get_bpm <- function(df_meta) {
   60 * 1e6 / get_tempo(df_meta)
 }

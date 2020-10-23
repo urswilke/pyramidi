@@ -6,10 +6,12 @@
 #'
 #' @export
 #'
+#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' dfm %>% widen_events()
+#' }
 widen_events <- function(df_measures) {
   df_measures %>%
     # dplyr::select(c("i_track", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note")) %>%
