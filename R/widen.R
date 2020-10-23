@@ -6,9 +6,9 @@
 #'
 #' @export
 #'
-#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' dfm %>% widen_events()
 #' }

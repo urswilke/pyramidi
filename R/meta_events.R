@@ -5,9 +5,9 @@
 #' @return time signature data.frame
 #' @importFrom rlang .data
 #'
-#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
@@ -27,9 +27,9 @@ tab_time_sig <- function(df_meta) {
 #' @export
 #' @return tempo integer
 #'
-#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)
@@ -51,9 +51,9 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #' @return integer of beats per minute
 #' @export
 #'
-#' \dontrun{
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
+#' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
 #' mt$split_df(dfm)  %->% c(df_meta, df_notes)

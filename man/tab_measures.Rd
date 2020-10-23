@@ -22,6 +22,7 @@ Tabulate measure related data in the midi event data
 }
 \examples{
 ## test
+\dontrun{
 mt <- reticulate::import("miditapyr")
 mido <- reticulate::import("mido")
 mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
@@ -30,4 +31,8 @@ dfc <- mt$midi_to_df(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc \%>\%
   mt$tidy_df()
+}
+\dontrun{
+tab_measures(df, ticks_per_beat)
+}
 }
