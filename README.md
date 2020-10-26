@@ -326,3 +326,21 @@ dfc2 %>%
   mt$df_to_midi(ticks_per_beat,
                 "test.mid")
 ```
+
+## Related R packages
+
+  - The [noon package](https://github.com/ColinFay/noon) wraps node.js
+    libraries and can be used to read live midi input port data. I wrote
+    a small [blog
+    post](https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/)
+    how reading a midi port can also be done in R with
+    [mido](https://mido.readthedocs.io/en/latest/ports.html).
+    Interestingly, the node.js libraries and mido rely on a the same C++
+    library
+    [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
+  - The [tuneR](https://cran.r-project.org/package=tuneR) package can
+    also read in midi data. See the
+    [vignette](https://urswilke.github.io/pyramidi/articles/tuner.html),
+    for an example how you can transform the tuner format into the
+    pyramidi format (or run `vignette("tuner", package = "pyramidi")` to
+    load the vignette on your machine).
