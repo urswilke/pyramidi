@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 This vignette shows how  a midi file can also be read in by the [tuneR](https://cran.r-project.org/package=tuneR) package and then written to 
-disc. However, for other midi files the code might probably adapted a bit.
+disc. However, for other midi files the code might need to be adapted a bit.
 
 ### Load libraries
 
@@ -50,12 +50,14 @@ df
 
 ### tuneR
 
-With tuneR this could be done for this file in the following way (**for other midi files the cleaning code would have to be adapted**):
+With tuneR this could be done for this file in the following way:
 
 ```{r read}
 # tuneR:
 dft <- tuneR::readMidi(mid_file_str)
 ```
+
+ (*for other midi files the cleaning code would have to be adapted*)
 
 
 
@@ -64,6 +66,10 @@ dft <- tuneR::readMidi(mid_file_str)
 * to make compatible with pyramidi
 
 ```{r dataformat}
+# vector according to which we'll
+# rename the event types to the names given by mido, cf.:
+# https://mido.readthedocs.io/en/latest/message_types.html &
+# https://mido.readthedocs.io/en/latest/meta_message_types.html
 rename_type_vec <-
   c(
     "Set Tempo"           = "set_tempo",
@@ -79,20 +85,20 @@ rename_type_vec <-
   )
 
 
-
+# transform the tuneR data.frame to the pyramidi format :
 df2 <- dft %>%
   mutate(event = as.character(event)) %>%
   as_tibble() %>%
   mutate(meta = !is.na(type)) %>%
   select(-type) %>%
-  rename(type = event,
-         note = parameter1,
+  rename(type     = event,
+         note     = parameter1,
          velocity = parameter2,
-         i_track = track) %>%
-  mutate(type = recode(type, !!!rename_type_vec)) %>%
+         i_track  = track) %>%
+  mutate(type  = recode(type, !!!rename_type_vec)) %>%
   mutate(tempo = ifelse(type == "set_tempo", as.integer(parameterMetaSystem), NA)) %>%
-  mutate(name = ifelse(type == "track_name", parameterMetaSystem, NA)) %>%
-  mutate(temp = ifelse(type == "time_signature", parameterMetaSystem, NA)) %>%
+  mutate(name  = ifelse(type == "track_name", parameterMetaSystem, NA)) %>%
+  mutate(temp  = ifelse(type == "time_signature", parameterMetaSystem, NA)) %>%
   separate(temp, c("numerator", 
                    "denominator", 
                    "clocks_per_click", 
@@ -102,6 +108,7 @@ df2 <- dft %>%
   select(-temp1, -temp2) %>%
   arrange(i_track, time) %>%
   group_by(i_track) %>%
+  # calculate time increments instead of total time:
   mutate(time = time - lag(time) %>% {.[1] = 0; .}) %>%
   ungroup() %>%
   mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
@@ -114,7 +121,8 @@ df2 <- dft %>%
 
 ```{r }
 dfm2 <- tab_measures(df2, ticks_per_beat) %>%
-  # create a variable `track` with the track name (in order to have it in the plot below)
+  # create a variable `track` with the track name (in order to have it in the
+  # plot below)
   mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
                         list(NA_character_), 
                         name)) %>%
