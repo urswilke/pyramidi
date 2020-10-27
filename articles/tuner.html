@@ -90,7 +90,7 @@
 
     
     
-<p>This vignette shows how a midi file can also be read in by the <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package and then written to disc. However, for other midi files the code might probably adapted a bit.</p>
+<p>This vignette shows how a midi file can also be read in by the <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package and then written to disc. However, for other midi files the code might need to be adapted a bit.</p>
 <div id="load-libraries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-libraries" class="anchor"></a>Load libraries</h3>
@@ -124,10 +124,11 @@
 <div id="tuner" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tuner" class="anchor"></a>tuneR</h3>
-<p>With tuneR this could be done for this file in the following way (<strong>for other midi files the cleaning code would have to be adapted</strong>):</p>
+<p>With tuneR this could be done for this file in the following way:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="co"># tuneR:</span>
 <span class="va">dft</span> <span class="op">&lt;-</span> <span class="fu">tuneR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMidi.html">readMidi</a></span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span></pre></div>
+<p>(<em>for other midi files the cleaning code would have to be adapted</em>)</p>
 <div id="changing-format-in-dataframe" class="section level4">
 <h4 class="hasAnchor">
 <a href="#changing-format-in-dataframe" class="anchor"></a>Changing format in dataframe</h4>
@@ -135,6 +136,10 @@
 <li>to make compatible with pyramidi</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># vector according to which we'll</span>
+<span class="co"># rename the event types to the names given by mido, cf.:</span>
+<span class="co"># https://mido.readthedocs.io/en/latest/message_types.html &amp;</span>
+<span class="co"># https://mido.readthedocs.io/en/latest/meta_message_types.html</span>
 <span class="va">rename_type_vec</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
     <span class="st">"Set Tempo"</span>           <span class="op">=</span> <span class="st">"set_tempo"</span>,
@@ -150,20 +155,20 @@
   <span class="op">)</span>
 
 
-
+<span class="co"># transform the tuneR data.frame to the pyramidi format :</span>
 <span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">dft</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">event</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>meta <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>type <span class="op">=</span> <span class="va">event</span>,
-         note <span class="op">=</span> <span class="va">parameter1</span>,
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>type     <span class="op">=</span> <span class="va">event</span>,
+         note     <span class="op">=</span> <span class="va">parameter1</span>,
          velocity <span class="op">=</span> <span class="va">parameter2</span>,
-         i_track <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">type</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rename_type_vec</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         i_track  <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type  <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">type</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rename_type_vec</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>tempo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"set_tempo"</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">parameterMetaSystem</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"track_name"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"time_signature"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"track_name"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>temp  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"time_signature"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">temp</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"numerator"</span>, 
                    <span class="st">"denominator"</span>, 
                    <span class="st">"clocks_per_click"</span>, 
@@ -173,6 +178,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">temp1</span>, <span class="op">-</span><span class="va">temp2</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">i_track</span>, <span class="va">time</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">i_track</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="co"># calculate time increments instead of total time:</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">time</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="cn">NaN</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -184,7 +190,8 @@
 <a href="#apply-pyramidi-functions" class="anchor"></a>Apply pyramidi functions</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">dfm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df2</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="co"># create a variable `track` with the track name (in order to have it in the plot below)</span>
+  <span class="co"># create a variable `track` with the track name (in order to have it in the</span>
+  <span class="co"># plot below)</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
                         <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
                         <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
