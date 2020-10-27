@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# pyramidi
+# pyramidi <a href='https://github.com/urswilke/pyramidi/'><img src='man/figures/hex-pyramidi_compact.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
