@@ -3,7 +3,7 @@ test_that("applying mt$compact_df() and then mt$tidy_df() is roundtripping to th
   # (error:
   # "Attributemodule 'miditapyr' has no attribute 'midi_to_df'
   # but it should have)
-  skip_on_ci()
+  # skip_on_ci()
   content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
   mido <- reticulate::import("mido")
   mt <- reticulate::import("miditapyr")
