@@ -70,6 +70,8 @@ jobs:
           sudo apt-get upgrade
           sudo apt-get install python3-virtualenv
           sudo apt-get install python3-venv
+          pip install miditapyr
+          pip install mido
         shell: /bin/bash {0}
 
       - name: Install dependencies
@@ -77,6 +79,19 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+
+
+      - name: Install Miniconda
+        run: |
+          Rscript -e "remotes::install_github('rstudio/reticulate')"
+          Rscript -e "reticulate::install_miniconda()"
+      - if: runner.os == 'macOS'
+        run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
+      - name: Install packages
+        run: |
+          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.7', 'numpy==1.19'))"
+          Rscript -e "remotes::install_local()"
+          Rscript -e "reticulate::virtualenv_install('r-reticulate', 'miditapyr')"
 
       - name: Check
         env:
