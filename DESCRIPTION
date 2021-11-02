@@ -1,5 +1,5 @@
 Package: pyramidi
-Title: Read & write midi data via python and manipulate in R
+Title: Read & Write Midi Data via Python and Manipulate in R
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Urs",
