@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/urswilke/pyramidi/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,14 +91,14 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install pyramidi from <a href="https://github.com/urswilke/pyramidi">github</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## install remotes package if it's not already</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## install remotes package if it's not already</span>
 <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co">## install dev version of rtweettree from github</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></code></pre></div>
 <p>The python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> also needs to be installed via</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
 <p>in your virtual environment.</p>
@@ -109,18 +109,18 @@
 <div id="load-libraries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-libraries" class="anchor"></a>Load libraries</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
 <span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
-<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span></pre></div>
+<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="extract-midi-file-information-into-dataframe" class="section level3">
 <h3 class="hasAnchor">
 <a href="#extract-midi-file-information-into-dataframe" class="anchor"></a>Extract midi file information into dataframe</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 
 <span class="va">midifile</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">midi_file_str</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">midifile</span><span class="op">$</span><span class="va">ticks_per_beat</span>
@@ -147,12 +147,12 @@
 <span class="co">#&gt; 17       0 FALSE      note_off, 240, 36, 101, 9</span>
 <span class="co">#&gt; 18       0 FALSE        note_on, 240, 43, 60, 9</span>
 <span class="co">#&gt; 19       0 FALSE         note_on, 0, 42, 101, 9</span>
-<span class="co">#&gt; 20       0 FALSE       note_off, 240, 43, 60, 9</span></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">ticks_per_beat</span>
-<span class="co">#&gt; [1] 960</span></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mt</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 20       0 FALSE       note_off, 240, 43, 60, 9</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ticks_per_beat</span>
+<span class="co">#&gt; [1] 960</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mt</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 x 13</span>
 <span class="co">#&gt;    i_track meta  type  name   time  note velocity channel  tempo numerator</span>
@@ -178,20 +178,20 @@
 <span class="co">#&gt; 19       0 FALSE note… &lt;dbl…     0    42      101       9    NaN       NaN</span>
 <span class="co">#&gt; 20       0 FALSE note… &lt;dbl…   240    43       60       9    NaN       NaN</span>
 <span class="co">#&gt; # … with 3 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;</span></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># create a variable `track` with the track name (in order to have it in the plot below)</span>
   <span class="fu">mutate</span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
                         <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
-                        <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">dfm</span> <span class="op">%&gt;%</span> 
-    <span class="va">mt</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op">%-&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">df_meta</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
+                        <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="va">mt</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 8 x 16</span>
 <span class="co">#&gt;   i_track meta  type  name   time  tempo numerator denominator clocks_per_click</span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lis&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;</span>
@@ -204,9 +204,9 @@
 <span class="co">#&gt; 7       2 TRUE  trac… &lt;chr…     0    NaN       NaN         NaN              NaN</span>
 <span class="co">#&gt; 8       2 TRUE  end_… &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
 <span class="co">#&gt; # … with 7 more variables: notated_32nd_notes_per_beat &lt;dbl&gt;, ticks &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   t &lt;dbl&gt;, m &lt;dbl&gt;, b &lt;dbl&gt;, i_note &lt;int&gt;, track &lt;chr&gt;</span></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">df_notes</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; #   t &lt;dbl&gt;, m &lt;dbl&gt;, b &lt;dbl&gt;, i_note &lt;int&gt;, track &lt;chr&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 260 x 13</span>
 <span class="co">#&gt;    i_track meta  type   time  note velocity channel ticks     t     m     b</span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -220,21 +220,21 @@
 <span class="co">#&gt;  8       0 FALSE note…     0    38      101       9   480 0.333  0.5      2</span>
 <span class="co">#&gt;  9       0 FALSE note…   240    43       64       9   720 0.500  0.75     3</span>
 <span class="co">#&gt; 10       0 FALSE note…     0    42      101       9   720 0.500  0.75     3</span>
-<span class="co">#&gt; # … with 250 more rows, and 2 more variables: i_note &lt;int&gt;, track &lt;chr&gt;</span></pre></div>
+<span class="co">#&gt; # … with 250 more rows, and 2 more variables: i_note &lt;int&gt;, track &lt;chr&gt;</span></code></pre></div>
 </div>
 <div id="pivot-note-dataframe-to-wide" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-dataframe-to-wide" class="anchor"></a>Pivot note dataframe to wide</h3>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">df_not_notes</span> <span class="op">&lt;-</span> 
-  <span class="va">df_notes</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_not_notes</span> <span class="op">&lt;-</span> 
+  <span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> 
 
 <span class="va">df_notes_wide</span> <span class="op">&lt;-</span>
-  <span class="va">df_notes</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># tab_measures(df_meta, df_notes, ticks_per_beat) %&gt;%</span>
-  <span class="fu"><a href="reference/widen_events.html">widen_events</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/widen_events.html">widen_events</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">left_join</span><span class="op">(</span><span class="fu">pyramidi</span><span class="fu">::</span><span class="va"><a href="reference/midi_defs.html">midi_defs</a></span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "note"</span>
 <span class="va">df_notes_wide</span>
@@ -254,13 +254,13 @@
 <span class="co">#&gt; # … with 120 more rows, and 10 more variables: b_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   ticks_note_off &lt;dbl&gt;, time_note_on &lt;dbl&gt;, time_note_off &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   velocity_note_on &lt;dbl&gt;, velocity_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></pre></div>
+<span class="co">#&gt; #   velocity_note_on &lt;dbl&gt;, velocity_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></code></pre></div>
 </div>
 <div id="plot-the-midi-file-information-in-a-piano-roll-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-the-midi-file-information-in-a-piano-roll-plot" class="anchor"></a>Plot the midi file information in a piano roll plot</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="va">df_notes_wide</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_segment</span><span class="op">(</span>
     <span class="fu">aes</span><span class="op">(</span>
@@ -281,38 +281,38 @@
   <span class="fu">scale_x_continuous</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">16</span>, <span class="fl">4</span><span class="op">)</span>,
                      minor_breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_colour_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-midi_piano_roll-1.png" width="100%"></p>
 </div>
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-data-frame-back-to-long-format" class="anchor"></a>Pivot note data frame back to long format</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="va">df_notes_out</span> <span class="op">&lt;-</span>
-  <span class="va">df_notes_wide</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
+  <span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"i_track"</span>,
-           <span class="st">"channel"</span>, <span class="st">"note"</span>, <span class="st">"i_note"</span><span class="op">)</span>, <span class="fu">matches</span><span class="op">(</span><span class="st">"_note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+           <span class="st">"channel"</span>, <span class="st">"note"</span>, <span class="st">"i_note"</span><span class="op">)</span>, <span class="fu">matches</span><span class="op">(</span><span class="st">"_note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">pivot_longer</span><span class="op">(</span><span class="fu">matches</span><span class="op">(</span><span class="st">"_note_o[nf]f?$"</span><span class="op">)</span>,
                names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".value"</span>, <span class="st">"type"</span><span class="op">)</span>,
-               names_pattern <span class="op">=</span> <span class="st">"(.+?)_(.*)"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+               names_pattern <span class="op">=</span> <span class="st">"(.+?)_(.*)"</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># note events are not meta events (cf.</span>
   <span class="co"># https://mido.readthedocs.io/en/latest/midi_files.html?highlight=meta#meta-messages):</span>
-  <span class="fu">mutate</span><span class="op">(</span>meta <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+  <span class="fu">mutate</span><span class="op">(</span>meta <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="join-non-note-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#join-non-note-events" class="anchor"></a>Join non note events</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="va">df_notes_out</span> <span class="op">&lt;-</span>
-  <span class="va">df_notes_out</span> <span class="op">%&gt;%</span>
-  <span class="fu">full_join</span><span class="op">(</span><span class="va">df_meta</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">full_join</span><span class="op">(</span><span class="va">df_not_notes</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
+  <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu">full_join</span><span class="op">(</span><span class="va">df_meta</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu">full_join</span><span class="op">(</span><span class="va">df_not_notes</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># It is important to put the events in the right order:</span>
-  <span class="fu">arrange</span><span class="op">(</span><span class="va">i_track</span>, <span class="va">ticks</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">i_track</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span><span class="op">(</span><span class="va">i_track</span>, <span class="va">ticks</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">i_track</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># Now we can calculate the time increments between events;</span>
   <span class="co"># The first event of each track is set to 0:</span>
-  <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="va">ticks</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">ticks</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>time <span class="op">=</span> <span class="va">ticks</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">ticks</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "m", "b", "t", "ticks", "time", "meta")</span>
 <span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "m", "b", "t", "ticks", "time", "velocity", "meta", "track")</span>
@@ -333,22 +333,22 @@
 <span class="co">#&gt; 10       0       9    42      1 note…  0.5      2 0.333   480   240      101</span>
 <span class="co">#&gt; # … with 258 more rows, and 8 more variables: meta &lt;lgl&gt;, name &lt;list&gt;,</span>
 <span class="co">#&gt; #   tempo &lt;dbl&gt;, numerator &lt;dbl&gt;, denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></pre></div>
+<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></code></pre></div>
 </div>
 <div id="write-midi-dataframe-back-to-a-midi-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-midi-dataframe-back-to-a-midi-file" class="anchor"></a>Write midi dataframe back to a midi file</h3>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="va">dfc2</span> <span class="op">&lt;-</span>
-  <span class="va">df_notes_out</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfc2</span> <span class="op">&lt;-</span>
+  <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># For midi export the new columns are removed:</span>
-  <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># When reticulate converts R dataframes to pandas, there are complications</span>
   <span class="co"># with character columns containing missing values.</span>
   <span class="co"># repair_reticulate_conversion = TRUE, repairs that in the miditapyr python</span>
   <span class="co"># code:</span>
   <span class="va">mt</span><span class="op">$</span><span class="fu">compact_df</span><span class="op">(</span>repair_reticulate_conversion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">dfc2</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
+<span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 268 x 3</span>
 <span class="co">#&gt;    i_track meta  msg             </span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;list&gt;          </span>
@@ -362,11 +362,11 @@
 <span class="co">#&gt;  8       0 FALSE &lt;named list [5]&gt;</span>
 <span class="co">#&gt;  9       0 FALSE &lt;named list [5]&gt;</span>
 <span class="co">#&gt; 10       0 FALSE &lt;named list [5]&gt;</span>
-<span class="co">#&gt; # … with 258 more rows</span></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="va">dfc2</span> <span class="op">%&gt;%</span>
+<span class="co">#&gt; # … with 258 more rows</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="va">mt</span><span class="op">$</span><span class="fu">df_to_midi</span><span class="op">(</span><span class="va">ticks_per_beat</span>,
-                <span class="st">"test.mid"</span><span class="op">)</span></pre></div>
+                <span class="st">"test.mid"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="related-r-packages" class="section level2">
