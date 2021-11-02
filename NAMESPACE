@@ -3,6 +3,8 @@
 export("%>%")
 export(get_bpm)
 export(get_tempo)
+export(miditapyr)
+export(mido)
 export(tab_measures)
 export(widen_events)
 importFrom(magrittr,"%>%")
