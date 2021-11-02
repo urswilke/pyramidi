@@ -12,7 +12,8 @@ Description: This package uses the python libraries miditapyr and mido to put mi
 Config/reticulate:
   list(
     packages = list(
-      list(package = "miditapyr", pip = TRUE)
+      list(package = "miditapyr", pip = TRUE),
+      list(package = "mido", pip = TRUE)
     )
   )
 License: MIT + file LICENSE
