@@ -78,19 +78,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-
-      - name: Install Miniconda
-        run: |
-          Rscript -e "remotes::install_github('rstudio/reticulate')"
-          Rscript -e "reticulate::install_miniconda()"
-      - if: runner.os == 'macOS'
-        run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
-      - name: Install packages
-        run: |
-          Rscript -e "reticulate::use_python('/home/runner/.local/share/r-miniconda/bin/python')"
-          Rscript -e "print(reticulate::py_config())"
-          Rscript -e "reticulate::virtualenv_install('r-miniconda', 'miditapyr')"
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
