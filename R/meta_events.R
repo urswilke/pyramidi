@@ -54,8 +54,10 @@ get_tempo <- function(df_meta) {
     tibble::as_tibble() %>%
     dplyr::filter(.data$type =="set_tempo")
   if (nrow(df_tempo > 0)) {
-    return(df_tempo) %>%
-      dplyr::pull(.data$tempo)
+    return(
+      df_tempo %>%
+        dplyr::pull(.data$tempo)
+    )
   }
   else {
     # https://mido.readthedocs.io/en/latest/midi_files.html#midi-tempo-vs-bpm
