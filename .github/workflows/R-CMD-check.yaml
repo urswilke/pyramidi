@@ -70,8 +70,6 @@ jobs:
           sudo apt-get upgrade
           sudo apt-get install python3-virtualenv
           sudo apt-get install python3-venv
-          pip install miditapyr
-          pip install mido
         shell: /bin/bash {0}
 
       - name: Install dependencies
@@ -89,7 +87,8 @@ jobs:
         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Install packages
         run: |
-          Rscript -e "reticulate::virtualenv_install('r-miniconda', 'miditapyr')"
+          pip install miditapyr
+          pip install mido
 
       - name: Check
         env:
