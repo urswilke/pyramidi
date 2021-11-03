@@ -11,9 +11,10 @@ status](https://travis-ci.org/urswilke/pyramidi.svg?branch=master)](https://trav
 coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://codecov.io/gh/urswilke/pyramidi?branch=master)
 [![R build
 status](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
+[![R-CMD-check](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
 <!-- badges: end -->
 
-**Work in progress\!**
+**Work in progress!**
 
 ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬
 
@@ -101,29 +102,29 @@ ticks_per_beat
 ``` r
 df <- mt$tidy_df(dfc) %>% as_tibble()
 head(df, 20)
-#> # A tibble: 20 x 13
-#>    i_track meta  type  name   time  note velocity channel  tempo numerator
-#>      <dbl> <lgl> <chr> <lis> <dbl> <dbl>    <dbl>   <dbl>  <dbl>     <dbl>
-#>  1       0 TRUE  trac… <chr…     0   NaN      NaN     NaN    NaN       NaN
-#>  2       0 FALSE note… <dbl…     0    43       72       9    NaN       NaN
-#>  3       0 FALSE note… <dbl…     0    39       64       9    NaN       NaN
-#>  4       0 FALSE note… <dbl…     0    36      101       9    NaN       NaN
-#>  5       0 TRUE  set_… <dbl…     0   NaN      NaN     NaN 666666       NaN
-#>  6       0 TRUE  time… <dbl…     0   NaN      NaN     NaN    NaN         4
-#>  7       0 FALSE note… <dbl…   240    43       72       9    NaN       NaN
-#>  8       0 FALSE note… <dbl…     0    39       64       9    NaN       NaN
-#>  9       0 FALSE note… <dbl…     0    36      101       9    NaN       NaN
-#> 10       0 FALSE note… <dbl…   240    42      101       9    NaN       NaN
-#> 11       0 FALSE note… <dbl…     0    38      101       9    NaN       NaN
-#> 12       0 FALSE note… <dbl…   240    43       64       9    NaN       NaN
-#> 13       0 FALSE note… <dbl…     0    42      101       9    NaN       NaN
-#> 14       0 FALSE note… <dbl…     0    38      101       9    NaN       NaN
-#> 15       0 FALSE note… <dbl…   240    43       64       9    NaN       NaN
-#> 16       0 FALSE note… <dbl…     0    36      101       9    NaN       NaN
-#> 17       0 FALSE note… <dbl…   240    36      101       9    NaN       NaN
-#> 18       0 FALSE note… <dbl…   240    43       60       9    NaN       NaN
-#> 19       0 FALSE note… <dbl…     0    42      101       9    NaN       NaN
-#> 20       0 FALSE note… <dbl…   240    43       60       9    NaN       NaN
+#> # A tibble: 20 × 13
+#>    i_track meta  type           name   time  note velocity channel  tempo numerator
+#>      <dbl> <lgl> <chr>          <lis> <dbl> <dbl>    <dbl>   <dbl>  <dbl>     <dbl>
+#>  1       0 TRUE  track_name     <chr…     0   NaN      NaN     NaN    NaN       NaN
+#>  2       0 FALSE note_on        <dbl…     0    43       72       9    NaN       NaN
+#>  3       0 FALSE note_on        <dbl…     0    39       64       9    NaN       NaN
+#>  4       0 FALSE note_on        <dbl…     0    36      101       9    NaN       NaN
+#>  5       0 TRUE  set_tempo      <dbl…     0   NaN      NaN     NaN 666666       NaN
+#>  6       0 TRUE  time_signature <dbl…     0   NaN      NaN     NaN    NaN         4
+#>  7       0 FALSE note_off       <dbl…   240    43       72       9    NaN       NaN
+#>  8       0 FALSE note_off       <dbl…     0    39       64       9    NaN       NaN
+#>  9       0 FALSE note_off       <dbl…     0    36      101       9    NaN       NaN
+#> 10       0 FALSE note_on        <dbl…   240    42      101       9    NaN       NaN
+#> 11       0 FALSE note_on        <dbl…     0    38      101       9    NaN       NaN
+#> 12       0 FALSE note_on        <dbl…   240    43       64       9    NaN       NaN
+#> 13       0 FALSE note_off       <dbl…     0    42      101       9    NaN       NaN
+#> 14       0 FALSE note_off       <dbl…     0    38      101       9    NaN       NaN
+#> 15       0 FALSE note_off       <dbl…   240    43       64       9    NaN       NaN
+#> 16       0 FALSE note_on        <dbl…     0    36      101       9    NaN       NaN
+#> 17       0 FALSE note_off       <dbl…   240    36      101       9    NaN       NaN
+#> 18       0 FALSE note_on        <dbl…   240    43       60       9    NaN       NaN
+#> 19       0 FALSE note_on        <dbl…     0    42      101       9    NaN       NaN
+#> 20       0 FALSE note_off       <dbl…   240    43       60       9    NaN       NaN
 #> # … with 3 more variables: denominator <dbl>, clocks_per_click <dbl>,
 #> #   notated_32nd_notes_per_beat <dbl>
 ```
@@ -145,36 +146,36 @@ dfm %>%
 
 ``` r
 df_meta %>% as_tibble()
-#> # A tibble: 8 x 16
-#>   i_track meta  type  name   time  tempo numerator denominator clocks_per_click
-#>     <dbl> <lgl> <chr> <lis> <dbl>  <dbl>     <dbl>       <dbl>            <dbl>
-#> 1       0 TRUE  trac… <chr…     0    NaN       NaN         NaN              NaN
-#> 2       0 TRUE  set_… <dbl…     0 666666       NaN         NaN              NaN
-#> 3       0 TRUE  time… <dbl…     0    NaN         4           4               24
-#> 4       0 TRUE  end_… <dbl…     1    NaN       NaN         NaN              NaN
-#> 5       1 TRUE  trac… <chr…     0    NaN       NaN         NaN              NaN
-#> 6       1 TRUE  end_… <dbl…     1    NaN       NaN         NaN              NaN
-#> 7       2 TRUE  trac… <chr…     0    NaN       NaN         NaN              NaN
-#> 8       2 TRUE  end_… <dbl…     1    NaN       NaN         NaN              NaN
+#> # A tibble: 8 × 16
+#>   i_track meta  type           name   time  tempo numerator denominator clocks_per_click
+#>     <dbl> <lgl> <chr>          <lis> <dbl>  <dbl>     <dbl>       <dbl>            <dbl>
+#> 1       0 TRUE  track_name     <chr…     0    NaN       NaN         NaN              NaN
+#> 2       0 TRUE  set_tempo      <dbl…     0 666666       NaN         NaN              NaN
+#> 3       0 TRUE  time_signature <dbl…     0    NaN         4           4               24
+#> 4       0 TRUE  end_of_track   <dbl…     1    NaN       NaN         NaN              NaN
+#> 5       1 TRUE  track_name     <chr…     0    NaN       NaN         NaN              NaN
+#> 6       1 TRUE  end_of_track   <dbl…     1    NaN       NaN         NaN              NaN
+#> 7       2 TRUE  track_name     <chr…     0    NaN       NaN         NaN              NaN
+#> 8       2 TRUE  end_of_track   <dbl…     1    NaN       NaN         NaN              NaN
 #> # … with 7 more variables: notated_32nd_notes_per_beat <dbl>, ticks <dbl>,
 #> #   t <dbl>, m <dbl>, b <dbl>, i_note <int>, track <chr>
 ```
 
 ``` r
 df_notes %>% as_tibble()
-#> # A tibble: 260 x 13
-#>    i_track meta  type   time  note velocity channel ticks     t     m     b
-#>      <dbl> <lgl> <chr> <dbl> <dbl>    <dbl>   <dbl> <dbl> <dbl> <dbl> <dbl>
-#>  1       0 FALSE note…     0    43       72       9     0 0      0        0
-#>  2       0 FALSE note…     0    39       64       9     0 0      0        0
-#>  3       0 FALSE note…     0    36      101       9     0 0      0        0
-#>  4       0 FALSE note…   240    43       72       9   240 0.167  0.25     1
-#>  5       0 FALSE note…     0    39       64       9   240 0.167  0.25     1
-#>  6       0 FALSE note…     0    36      101       9   240 0.167  0.25     1
-#>  7       0 FALSE note…   240    42      101       9   480 0.333  0.5      2
-#>  8       0 FALSE note…     0    38      101       9   480 0.333  0.5      2
-#>  9       0 FALSE note…   240    43       64       9   720 0.500  0.75     3
-#> 10       0 FALSE note…     0    42      101       9   720 0.500  0.75     3
+#> # A tibble: 260 × 13
+#>    i_track meta  type      time  note velocity channel ticks     t     m     b
+#>      <dbl> <lgl> <chr>    <dbl> <dbl>    <dbl>   <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1       0 FALSE note_on      0    43       72       9     0 0      0        0
+#>  2       0 FALSE note_on      0    39       64       9     0 0      0        0
+#>  3       0 FALSE note_on      0    36      101       9     0 0      0        0
+#>  4       0 FALSE note_off   240    43       72       9   240 0.167  0.25     1
+#>  5       0 FALSE note_off     0    39       64       9   240 0.167  0.25     1
+#>  6       0 FALSE note_off     0    36      101       9   240 0.167  0.25     1
+#>  7       0 FALSE note_on    240    42      101       9   480 0.333  0.5      2
+#>  8       0 FALSE note_on      0    38      101       9   480 0.333  0.5      2
+#>  9       0 FALSE note_on    240    43       64       9   720 0.500  0.75     3
+#> 10       0 FALSE note_off     0    42      101       9   720 0.500  0.75     3
 #> # … with 250 more rows, and 2 more variables: i_note <int>, track <chr>
 ```
 
@@ -193,23 +194,23 @@ df_notes_wide <-
   left_join(pyramidi::midi_defs)
 #> Joining, by = "note"
 df_notes_wide
-#> # A tibble: 130 x 19
-#>    i_track meta   note channel i_note track m_note_on m_note_off b_note_on
-#>      <dbl> <lgl> <dbl>   <dbl>  <int> <chr>     <dbl>      <dbl>     <dbl>
-#>  1       0 FALSE    43       9      1 drum…      0          0.25         0
-#>  2       0 FALSE    39       9      1 drum…      0          0.25         0
-#>  3       0 FALSE    36       9      1 drum…      0          0.25         0
-#>  4       0 FALSE    42       9      1 drum…      0.5        0.75         2
-#>  5       0 FALSE    38       9      1 drum…      0.5        0.75         2
-#>  6       0 FALSE    43       9      2 drum…      0.75       1            3
-#>  7       0 FALSE    36       9      2 drum…      1          1.25         4
-#>  8       0 FALSE    43       9      3 drum…      1.5        1.75         6
-#>  9       0 FALSE    42       9      2 drum…      1.5        1.75         6
-#> 10       0 FALSE    43       9      4 drum…      2          2.25         8
-#> # … with 120 more rows, and 10 more variables: b_note_off <dbl>,
-#> #   t_note_on <dbl>, t_note_off <dbl>, ticks_note_on <dbl>,
-#> #   ticks_note_off <dbl>, time_note_on <dbl>, time_note_off <dbl>,
-#> #   velocity_note_on <dbl>, velocity_note_off <dbl>, note_name <fct>
+#> # A tibble: 130 × 19
+#>    i_track meta   note channel i_note track        time_note_on time_note_off
+#>      <dbl> <lgl> <dbl>   <dbl>  <int> <chr>               <dbl>         <dbl>
+#>  1       0 FALSE    43       9      1 drum-t1-1-t1            0           240
+#>  2       0 FALSE    39       9      1 drum-t1-1-t1            0             0
+#>  3       0 FALSE    36       9      1 drum-t1-1-t1            0             0
+#>  4       0 FALSE    42       9      1 drum-t1-1-t1          240             0
+#>  5       0 FALSE    38       9      1 drum-t1-1-t1            0             0
+#>  6       0 FALSE    43       9      2 drum-t1-1-t1          240           240
+#>  7       0 FALSE    36       9      2 drum-t1-1-t1            0           240
+#>  8       0 FALSE    43       9      3 drum-t1-1-t1          240           240
+#>  9       0 FALSE    42       9      2 drum-t1-1-t1            0             0
+#> 10       0 FALSE    43       9      4 drum-t1-1-t1          240           240
+#> # … with 120 more rows, and 11 more variables: velocity_note_on <dbl>,
+#> #   velocity_note_off <dbl>, ticks_note_on <dbl>, ticks_note_off <dbl>,
+#> #   t_note_on <dbl>, t_note_off <dbl>, m_note_on <dbl>, m_note_off <dbl>,
+#> #   b_note_on <dbl>, b_note_off <dbl>, note_name <fct>
 ```
 
 ### Plot the midi file information in a piano roll plot
@@ -270,23 +271,23 @@ df_notes_out <-
   # The first event of each track is set to 0:
   mutate(time = ticks - lag(ticks) %>% {.[1] = 0; .}) %>%
   ungroup()
-#> Joining, by = c("i_track", "i_note", "type", "m", "b", "t", "ticks", "time", "meta")
-#> Joining, by = c("i_track", "channel", "note", "i_note", "type", "m", "b", "t", "ticks", "time", "velocity", "meta", "track")
+#> Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")
+#> Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta", "track")
 
 df_notes_out
-#> # A tibble: 268 x 19
-#>    i_track channel  note i_note type      m     b     t ticks  time velocity
-#>      <dbl>   <dbl> <dbl>  <int> <chr> <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>
-#>  1       0       9    43      1 note…  0        0 0         0     0       72
-#>  2       0       9    39      1 note…  0        0 0         0     0       64
-#>  3       0       9    36      1 note…  0        0 0         0     0      101
-#>  4       0      NA    NA      0 trac…  0        0 0         0     0       NA
-#>  5       0      NA    NA      0 set_…  0        0 0         0     0       NA
-#>  6       0      NA    NA      0 time…  0        0 0         0     0       NA
-#>  7       0       9    43      1 note…  0.25     1 0.167   240   240       72
-#>  8       0       9    39      1 note…  0.25     1 0.167   240     0       64
-#>  9       0       9    36      1 note…  0.25     1 0.167   240     0      101
-#> 10       0       9    42      1 note…  0.5      2 0.333   480   240      101
+#> # A tibble: 268 × 19
+#>    i_track channel  note i_note type       time velocity ticks     t     m     b
+#>      <dbl>   <dbl> <dbl>  <int> <chr>     <dbl>    <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1       0       9    43      1 note_on       0       72     0 0      0        0
+#>  2       0       9    39      1 note_on       0       64     0 0      0        0
+#>  3       0       9    36      1 note_on       0      101     0 0      0        0
+#>  4       0      NA    NA      0 track_na…     0       NA     0 0      0        0
+#>  5       0      NA    NA      0 set_tempo     0       NA     0 0      0        0
+#>  6       0      NA    NA      0 time_sig…     0       NA     0 0      0        0
+#>  7       0       9    43      1 note_off    240       72   240 0.167  0.25     1
+#>  8       0       9    39      1 note_off      0       64   240 0.167  0.25     1
+#>  9       0       9    36      1 note_off      0      101   240 0.167  0.25     1
+#> 10       0       9    42      1 note_on     240      101   480 0.333  0.5      2
 #> # … with 258 more rows, and 8 more variables: meta <lgl>, name <list>,
 #> #   tempo <dbl>, numerator <dbl>, denominator <dbl>, clocks_per_click <dbl>,
 #> #   notated_32nd_notes_per_beat <dbl>, track <chr>
@@ -305,7 +306,7 @@ dfc2 <-
   # code:
   mt$compact_df(repair_reticulate_conversion = TRUE)
 dfc2 %>% as_tibble()
-#> # A tibble: 268 x 3
+#> # A tibble: 268 × 3
 #>    i_track meta  msg             
 #>      <dbl> <lgl> <list>          
 #>  1       0 FALSE <named list [5]>
@@ -329,7 +330,7 @@ dfc2 %>%
 
 ## Related R packages
 
-  - The [noon package](https://github.com/ColinFay/noon) wraps node.js
+-   The [noon package](https://github.com/ColinFay/noon) wraps node.js
     libraries and can be used to read live midi input port data. I wrote
     a small [blog
     post](https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/)
@@ -338,7 +339,7 @@ dfc2 %>%
     Interestingly, the node.js libraries and mido rely on a the same C++
     library
     [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
-  - The [tuneR](https://cran.r-project.org/package=tuneR) package can
+-   The [tuneR](https://cran.r-project.org/package=tuneR) package can
     also read in midi data. See the
     [vignette](https://urswilke.github.io/pyramidi/articles/tuner.html),
     for an example how you can transform the tuner format into the
