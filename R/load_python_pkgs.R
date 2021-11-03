@@ -1,9 +1,19 @@
-# global reference to scipy (will be initialized in .onLoad)
+# global reference to miditapyr (will be initialized in .onLoad)
+#' Miditapyr python module
+#'
+#' @return reticulate python module
 #' @export
+#' @examples
+#' miditapyr$mido_io$midi_to_df
 miditapyr <- NULL
 
-# global reference to scipy (will be initialized in .onLoad)
+# global reference to mido (will be initialized in .onLoad)
+#' Mido python module
+#'
+#' @return reticulate python module
 #' @export
+#' @examples
+#' mido$MidiFile
 mido <- NULL
 
 .onLoad <- function(libname, pkgname) {
