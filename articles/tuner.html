@@ -98,9 +98,12 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
-<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<!-- ```{r, echo=FALSE} -->
+<!-- # needed as long as the python modules of the package are not loaded correctly: -->
+<!-- miditapyr <- reticulate::import("miditapyr") -->
+<!-- mido <- reticulate::import("mido") -->
+<!-- ``` -->
 </div>
 <div id="read-midi-in-tidy-format" class="section level2">
 <h2 class="hasAnchor">
@@ -113,10 +116,10 @@
 <code class="sourceCode R">
 <span class="va">mid_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mido_mid_file</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span>
-<span class="va">dfc</span> <span class="op">&lt;-</span> <span class="va">mt</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">mido_mid_file</span><span class="op">)</span>
+<span class="va">dfc</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">mido_mid_file</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">=</span> <span class="va">mido_mid_file</span><span class="op">$</span><span class="va">ticks_per_beat</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">dfc</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">mt</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">df</span></code></pre></div>
 </div>
@@ -199,7 +202,7 @@
 
 
 <span class="va">dfm2</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">mt</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span>
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span>
 
 <span class="co"># small correction of transforming "NA" strings into real NA values:</span>
 <span class="va">df_meta</span> <span class="op">&lt;-</span>

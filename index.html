@@ -112,9 +112,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
-<span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
-<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="extract-midi-file-information-into-dataframe" class="section level3">
 <h3 class="hasAnchor">
@@ -125,7 +123,7 @@
 <span class="va">midifile</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">midi_file_str</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">midifile</span><span class="op">$</span><span class="va">ticks_per_beat</span>
 
-<span class="va">dfc</span> <span class="op">=</span> <span class="va">mt</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">midifile</span><span class="op">)</span>
+<span class="va">dfc</span> <span class="op">=</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">midifile</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dfc</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt;    i_track  meta                            msg</span>
 <span class="co">#&gt; 1        0  TRUE    track_name, drum-t1-1-t1, 0</span>
@@ -152,7 +150,7 @@
 <code class="sourceCode R"><span class="va">ticks_per_beat</span>
 <span class="co">#&gt; [1] 960</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mt</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 × 13</span>
 <span class="co">#&gt;    i_track meta  type           name   time  note velocity channel  tempo numerator</span>
@@ -189,7 +187,7 @@
   <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="va">mt</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
+    <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 8 × 16</span>
@@ -347,7 +345,7 @@
   <span class="co"># with character columns containing missing values.</span>
   <span class="co"># repair_reticulate_conversion = TRUE, repairs that in the miditapyr python</span>
   <span class="co"># code:</span>
-  <span class="va">mt</span><span class="op">$</span><span class="fu">compact_df</span><span class="op">(</span>repair_reticulate_conversion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">compact_df</span><span class="op">(</span>repair_reticulate_conversion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 268 × 3</span>
 <span class="co">#&gt;    i_track meta  msg             </span>
@@ -365,7 +363,7 @@
 <span class="co">#&gt; # … with 258 more rows</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">mt</span><span class="op">$</span><span class="fu">df_to_midi</span><span class="op">(</span><span class="va">ticks_per_beat</span>,
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">df_to_midi</span><span class="op">(</span><span class="va">ticks_per_beat</span>,
                 <span class="st">"test.mid"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
