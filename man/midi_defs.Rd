@@ -18,4 +18,8 @@ midi_defs
 \description{
 A table containing the midi pitches and their note names
 }
+\examples{
+midi_defs
+
+}
 \keyword{datasets}

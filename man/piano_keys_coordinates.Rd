@@ -25,6 +25,8 @@ the midi note value it represents.
 }
 \examples{
 library(ggplot2)
+# Print dataframe:
+piano_keys_coordinates
 # Plot the keyboard:
 piano_keys_coordinates \%>\%
   # plot white keys first that they don't cover half of the black keys:

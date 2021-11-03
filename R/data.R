@@ -2,6 +2,9 @@
 #'
 #' A table containing the midi pitches and their note names
 #'
+#' @examples
+#' midi_defs
+#'
 #' @format A data frame with 127 rows and 2 variables:
 #' \describe{
 #'   \item{note}{integer from 0 - 127 containing the midi pitches}
@@ -18,6 +21,8 @@
 #'
 #' @examples
 #' library(ggplot2)
+#' # Print dataframe:
+#' piano_keys_coordinates
 #' # Plot the keyboard:
 #' piano_keys_coordinates %>%
 #'   # plot white keys first that they don't cover half of the black keys:
