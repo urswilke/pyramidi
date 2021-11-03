@@ -10,7 +10,7 @@
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt$split_df(dfm)  %->% c(df_meta, df_notes)
+#' miditapyr$split_df(dfm)  %->% c(df_meta, df_notes)
 #' pyramidi:::tab_time_sig(df_meta)
 #' }
 tab_time_sig <- function(df_meta) {
@@ -46,7 +46,7 @@ tab_time_sig <- function(df_meta) {
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt$split_df(dfm)  %->% c(df_meta, df_notes)
+#' miditapyr$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_tempo(df_meta)
 #' }
 get_tempo <- function(df_meta) {
@@ -79,7 +79,7 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
 #' library(zeallot)
-#' mt$split_df(dfm)  %->% c(df_meta, df_notes)
+#' miditapyr$split_df(dfm)  %->% c(df_meta, df_notes)
 #' get_bpm(df_meta)
 #' }
 get_bpm <- function(df_meta) {

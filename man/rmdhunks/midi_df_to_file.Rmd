@@ -44,14 +44,14 @@ dfc2 <-
   # with character columns containing missing values.
   # repair_reticulate_conversion = TRUE, repairs that in the miditapyr python
   # code:
-  mt$compact_df(repair_reticulate_conversion = TRUE)
+  miditapyr$compact_df(repair_reticulate_conversion = TRUE)
 dfc2 %>% as_tibble()
 ```
 
 
 ```{r write_midi, eval=FALSE}
 dfc2 %>%
-  mt$df_to_midi(ticks_per_beat,
+  miditapyr$df_to_midi(ticks_per_beat,
                 "test.mid")
 ```
 

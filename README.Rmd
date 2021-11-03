@@ -65,8 +65,6 @@ reticulate::use_python("/home/chief/anaconda3/bin/python")
 library(pyramidi)
 library(tidyverse)
 library(zeallot)
-mt <- reticulate::import("miditapyr")
-mido <- reticulate::import("mido")
 ```
 
 ### Extract midi file information into dataframe
@@ -77,7 +75,7 @@ midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramid
 midifile <- mido$MidiFile(midi_file_str)
 ticks_per_beat <- midifile$ticks_per_beat
 
-dfc = mt$midi_to_df(midifile)
+dfc = miditapyr$midi_to_df(midifile)
 head(dfc, 20)
 ```
 
@@ -88,7 +86,7 @@ ticks_per_beat
 
 
 ```{r}
-df <- mt$tidy_df(dfc) %>% as_tibble()
+df <- miditapyr$tidy_df(dfc) %>% as_tibble()
 head(df, 20)
 ```
 
@@ -104,7 +102,7 @@ dfm <- tab_measures(df, ticks_per_beat) %>%
 
 ```{r}
 dfm %>% 
-    mt$split_df()  %->% c(df_meta, df_notes)
+    miditapyr$split_df()  %->% c(df_meta, df_notes)
 ```
 
 ```{r df_meta}

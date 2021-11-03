@@ -26,8 +26,6 @@ library(zeallot)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-mt <- reticulate::import("miditapyr")
-mido <- reticulate::import("mido")
 ```
 
 ## Read midi in tidy format
@@ -40,10 +38,10 @@ With pyramidi data can be loaded into a tidy dataframe like this:
 
 mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido_mid_file <- mido$MidiFile(mid_file_str)
-dfc <- mt$midi_to_df(mido_mid_file)
+dfc <- miditapyr$midi_to_df(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc %>%
-  mt$tidy_df() %>% 
+  miditapyr$tidy_df() %>% 
   as_tibble()
 df
 ```
@@ -131,7 +129,7 @@ dfm2 <- tab_measures(df2, ticks_per_beat) %>%
 
 
 dfm2 %>%
-  mt$split_df()  %->% c(df_meta, df_notes)
+  miditapyr$split_df()  %->% c(df_meta, df_notes)
 
 # small correction of transforming "NA" strings into real NA values:
 df_meta <-

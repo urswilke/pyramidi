@@ -55,8 +55,6 @@ in your virtual environment.
 library(pyramidi)
 library(tidyverse)
 library(zeallot)
-mt <- reticulate::import("miditapyr")
-mido <- reticulate::import("mido")
 ```
 
 ### Extract midi file information into dataframe
@@ -67,7 +65,7 @@ midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramid
 midifile <- mido$MidiFile(midi_file_str)
 ticks_per_beat <- midifile$ticks_per_beat
 
-dfc = mt$midi_to_df(midifile)
+dfc = miditapyr$midi_to_df(midifile)
 head(dfc, 20)
 #>    i_track  meta                            msg
 #> 1        0  TRUE    track_name, drum-t1-1-t1, 0
@@ -98,7 +96,7 @@ ticks_per_beat
 ```
 
 ``` r
-df <- mt$tidy_df(dfc) %>% as_tibble()
+df <- miditapyr$tidy_df(dfc) %>% as_tibble()
 head(df, 20)
 #> # A tibble: 20 × 13
 #>    i_track meta  type           name   time  note velocity channel  tempo numerator
@@ -139,7 +137,7 @@ dfm <- tab_measures(df, ticks_per_beat) %>%
 
 ``` r
 dfm %>% 
-    mt$split_df()  %->% c(df_meta, df_notes)
+    miditapyr$split_df()  %->% c(df_meta, df_notes)
 ```
 
 ``` r
@@ -302,7 +300,7 @@ dfc2 <-
   # with character columns containing missing values.
   # repair_reticulate_conversion = TRUE, repairs that in the miditapyr python
   # code:
-  mt$compact_df(repair_reticulate_conversion = TRUE)
+  miditapyr$compact_df(repair_reticulate_conversion = TRUE)
 dfc2 %>% as_tibble()
 #> # A tibble: 268 × 3
 #>    i_track meta  msg             
@@ -322,7 +320,7 @@ dfc2 %>% as_tibble()
 
 ``` r
 dfc2 %>%
-  mt$df_to_midi(ticks_per_beat,
+  miditapyr$df_to_midi(ticks_per_beat,
                 "test.mid")
 ```
 
