@@ -4,7 +4,10 @@
 #' @return reticulate python module
 #' @export
 #' @examples
-#' miditapyr$mido_io$midi_to_df
+#' \dontrun{
+#' content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
+#' miditapyr$MidiFile(content)
+#' }
 miditapyr <- NULL
 
 # global reference to mido (will be initialized in .onLoad)
@@ -13,7 +16,10 @@ miditapyr <- NULL
 #' @return reticulate python module
 #' @export
 #' @examples
-#' mido$MidiFile
+#' \dontrun{
+#' content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
+#' mido$MidiFile(content)
+#' }
 mido <- NULL
 
 .onLoad <- function(libname, pkgname) {

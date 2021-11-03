@@ -17,6 +17,9 @@ reticulate python module
 Mido python module
 }
 \examples{
-mido$MidiFile
+\dontrun{
+content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
+mido$MidiFile(content)
+}
 }
 \keyword{datasets}

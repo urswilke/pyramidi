@@ -17,6 +17,9 @@ reticulate python module
 Miditapyr python module
 }
 \examples{
-miditapyr$mido_io$midi_to_df
+\dontrun{
+content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
+miditapyr$MidiFile(content)
+}
 }
 \keyword{datasets}
