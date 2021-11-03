@@ -89,8 +89,8 @@ jobs:
         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Install packages
         run: |
-          Rscript -e "reticulate::conda_create(reticulate::miniconda_path(), packages = c('python==3.7', 'numpy==1.19'))"
-          Rscript -e "remotes::install_local()"
+#          Rscript -e "reticulate::conda_create(reticulate::miniconda_path(), packages = c('python==3.7', 'numpy==1.19'))"
+#          Rscript -e "remotes::install_local()"
           Rscript -e "reticulate::virtualenv_install(reticulate::miniconda_path(), 'miditapyr')"
 
       - name: Check
