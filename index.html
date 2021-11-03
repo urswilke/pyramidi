@@ -305,7 +305,10 @@
               ncol <span class="op">=</span> <span class="fl">1</span>,
               scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="fu">guide_colorbar</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Note velocity"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Piano roll of the note events in the midi file"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Piano roll of the note events in the midi file"</span>,
+    subtitle <span class="op">=</span> <span class="st">"Only notes played are shown."</span>
+  <span class="op">)</span> <span class="op">+</span>
   <span class="fu">xlab</span><span class="op">(</span><span class="st">"Measures"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_x_continuous</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">16</span>, <span class="fl">4</span><span class="op">)</span>,
                      minor_breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
@@ -326,7 +329,25 @@
       <span class="fl">127</span>, 
       <span class="va">velocity_note_on</span> <span class="op">/</span> <span class="fl">2</span>
     <span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
+  <span class="op">)</span>
+<span class="va">df_notes_wide</span>
+<span class="co">#&gt; # A tibble: 130 × 19</span>
+<span class="co">#&gt;    i_track meta   note channel i_note track        time_note_on time_note_off</span>
+<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;               &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       0 FALSE    43       9      1 drum-t1-1-t1            0           240</span>
+<span class="co">#&gt;  2       0 FALSE    39       9      1 drum-t1-1-t1            0             0</span>
+<span class="co">#&gt;  3       0 FALSE    36       9      1 drum-t1-1-t1            0             0</span>
+<span class="co">#&gt;  4       0 FALSE    42       9      1 drum-t1-1-t1          240             0</span>
+<span class="co">#&gt;  5       0 FALSE    38       9      1 drum-t1-1-t1            0             0</span>
+<span class="co">#&gt;  6       0 FALSE    43       9      2 drum-t1-1-t1          240           240</span>
+<span class="co">#&gt;  7       0 FALSE    36       9      2 drum-t1-1-t1            0           240</span>
+<span class="co">#&gt;  8       0 FALSE    43       9      3 drum-t1-1-t1          240           240</span>
+<span class="co">#&gt;  9       0 FALSE    42       9      2 drum-t1-1-t1            0             0</span>
+<span class="co">#&gt; 10       0 FALSE    43       9      4 drum-t1-1-t1          240           240</span>
+<span class="co">#&gt; # … with 120 more rows, and 11 more variables: velocity_note_on &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></code></pre></div>
 </div>
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
