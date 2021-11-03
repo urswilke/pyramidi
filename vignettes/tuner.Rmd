@@ -28,6 +28,13 @@ library(tidyr)
 library(ggplot2)
 ```
 
+<!-- ```{r, echo=FALSE} -->
+<!-- # needed as long as the python modules of the package are not loaded correctly: -->
+<!-- miditapyr <- reticulate::import("miditapyr") -->
+<!-- mido <- reticulate::import("mido") -->
+
+<!-- ``` -->
+
 ## Read midi in tidy format
 
 ### pyramidi
