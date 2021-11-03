@@ -89,7 +89,7 @@ jobs:
         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Install packages
         run: |
-          Rscript -e "reticulate::py_install('miditapyr')"
+          Rscript -e "reticulate::virtualenv_install('r-miniconda', 'miditapyr')"
 
       - name: Check
         env:
