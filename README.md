@@ -290,6 +290,25 @@ df_notes_wide %>%
 
 <img src="man/figures/README-midi_piano_roll-1.png" width="100%" />
 
+### Manipulation of the midi data
+
+The wide format also allows to easily manipulate the midi data. For
+instance, let’s put the volume (called `velocity` in midi) of the first
+beat in every bar to the maximum (127), and to half of its original
+value otherwise:
+
+``` r
+df_notes_wide <- df_notes_wide %>% 
+  mutate(
+    velocity_note_on = ifelse(
+      # As it's a 4/4 beat, the first beat of each bar is a multiple of 4:
+      b_note_on %% 4 == 0, 
+      127, 
+      velocity_note_on / 2
+    )
+  )
+```
+
 ### Pivot note data frame back to long format
 
 We can transform the wide midi data back to the long format:
@@ -330,16 +349,16 @@ df_notes_out
 #> # A tibble: 268 × 19
 #>    i_track channel  note i_note type       time velocity ticks     t     m     b
 #>      <dbl>   <dbl> <dbl>  <int> <chr>     <dbl>    <dbl> <dbl> <dbl> <dbl> <dbl>
-#>  1       0       9    43      1 note_on       0       72     0 0      0        0
-#>  2       0       9    39      1 note_on       0       64     0 0      0        0
-#>  3       0       9    36      1 note_on       0      101     0 0      0        0
-#>  4       0      NA    NA      0 track_na…     0       NA     0 0      0        0
-#>  5       0      NA    NA      0 set_tempo     0       NA     0 0      0        0
-#>  6       0      NA    NA      0 time_sig…     0       NA     0 0      0        0
-#>  7       0       9    43      1 note_off    240       72   240 0.167  0.25     1
-#>  8       0       9    39      1 note_off      0       64   240 0.167  0.25     1
-#>  9       0       9    36      1 note_off      0      101   240 0.167  0.25     1
-#> 10       0       9    42      1 note_on     240      101   480 0.333  0.5      2
+#>  1       0       9    43      1 note_on       0    127       0 0      0        0
+#>  2       0       9    39      1 note_on       0    127       0 0      0        0
+#>  3       0       9    36      1 note_on       0    127       0 0      0        0
+#>  4       0      NA    NA      0 track_na…     0     NA       0 0      0        0
+#>  5       0      NA    NA      0 set_tempo     0     NA       0 0      0        0
+#>  6       0      NA    NA      0 time_sig…     0     NA       0 0      0        0
+#>  7       0       9    43      1 note_off    240     72     240 0.167  0.25     1
+#>  8       0       9    39      1 note_off      0     64     240 0.167  0.25     1
+#>  9       0       9    36      1 note_off      0    101     240 0.167  0.25     1
+#> 10       0       9    42      1 note_on     240     50.5   480 0.333  0.5      2
 #> # … with 258 more rows, and 8 more variables: meta <lgl>, name <list>,
 #> #   tempo <dbl>, numerator <dbl>, denominator <dbl>, clocks_per_click <dbl>,
 #> #   notated_32nd_notes_per_beat <dbl>, track <chr>
