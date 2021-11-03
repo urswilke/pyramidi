@@ -307,6 +307,24 @@ df_notes_wide <- df_notes_wide %>%
       velocity_note_on / 2
     )
   )
+df_notes_wide
+#> # A tibble: 130 × 19
+#>    i_track meta   note channel i_note track        time_note_on time_note_off
+#>      <dbl> <lgl> <dbl>   <dbl>  <int> <chr>               <dbl>         <dbl>
+#>  1       0 FALSE    43       9      1 drum-t1-1-t1            0           240
+#>  2       0 FALSE    39       9      1 drum-t1-1-t1            0             0
+#>  3       0 FALSE    36       9      1 drum-t1-1-t1            0             0
+#>  4       0 FALSE    42       9      1 drum-t1-1-t1          240             0
+#>  5       0 FALSE    38       9      1 drum-t1-1-t1            0             0
+#>  6       0 FALSE    43       9      2 drum-t1-1-t1          240           240
+#>  7       0 FALSE    36       9      2 drum-t1-1-t1            0           240
+#>  8       0 FALSE    43       9      3 drum-t1-1-t1          240           240
+#>  9       0 FALSE    42       9      2 drum-t1-1-t1            0             0
+#> 10       0 FALSE    43       9      4 drum-t1-1-t1          240           240
+#> # … with 120 more rows, and 11 more variables: velocity_note_on <dbl>,
+#> #   velocity_note_off <dbl>, ticks_note_on <dbl>, ticks_note_off <dbl>,
+#> #   t_note_on <dbl>, t_note_off <dbl>, m_note_on <dbl>, m_note_off <dbl>,
+#> #   b_note_on <dbl>, b_note_off <dbl>, note_name <fct>
 ```
 
 ### Pivot note data frame back to long format

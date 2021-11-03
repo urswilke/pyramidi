@@ -162,6 +162,7 @@ df_notes_wide <- df_notes_wide %>%
       velocity_note_on / 2
     )
   )
+df_notes_wide
 ```
 
 
