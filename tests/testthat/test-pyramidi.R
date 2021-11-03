@@ -6,8 +6,13 @@ df <- dfc %>%
   miditapyr$tidy_df()
 miditapyr$split_df(df)  %->% c(df_meta, df_notes)
 
+dfm <- tab_measures(df, ticks_per_beat)
+dfw <- dfm %>% widen_events()
+
 test_that("meta events work", {
   testthat::expect_snapshot(tab_time_sig(df_meta))
+  testthat::expect_snapshot(dfm)
+  testthat::expect_snapshot(dfw)
   expect_equal(get_tempo(df_meta), 666666)
   expect_equal(round(get_bpm(df_meta), 2), 90)
 })
