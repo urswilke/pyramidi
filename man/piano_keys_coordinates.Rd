@@ -31,11 +31,10 @@ piano_keys_coordinates
 piano_keys_coordinates \%>\%
   # plot white keys first that they don't cover half of the black keys:
   dplyr::arrange(layer) \%>\%
-  ggplot(aes(xmin = -ymin, xmax = -ymax, ymin = xmin, ymax = xmax, fill = factor(layer))) +
+  ggplot(aes(ymin = ymin, ymax = ymax, xmin = xmin, xmax = xmax, fill = factor(layer))) +
   geom_rect(color = "black", show.legend = FALSE) +
   scale_fill_manual(values = c("#ffffdd", "#113300")) +
-  theme_void() +
-  coord_fixed(ratio = 0.1)
+  coord_fixed(ratio = 10)
 
 }
 \keyword{datasets}
