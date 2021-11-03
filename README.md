@@ -280,7 +280,10 @@ df_notes_wide %>%
               ncol = 1,
               scales = "free_y") + 
   guides(color=guide_colorbar(title="Note velocity")) +
-  labs(title = "Piano roll of the note events in the midi file") +
+  labs(
+    title = "Piano roll of the note events in the midi file",
+    subtitle = "Only notes played are shown."
+  ) +
   xlab("Measures") +
   scale_x_continuous(breaks = seq(0, 16, 4),
                      minor_breaks = 0:16) +
