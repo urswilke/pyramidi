@@ -101,7 +101,7 @@
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></code></pre></div>
 <p>The python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> also needs to be installed via</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
-<p>in your virtual environment.</p>
+<p>in your python environment used by R.</p>
 </div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
@@ -109,6 +109,7 @@
 <div id="load-libraries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-libraries" class="anchor"></a>Load libraries</h3>
+<p>First load some libraries:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
@@ -121,9 +122,10 @@
 <code class="sourceCode R"><span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 
 <span class="va">midifile</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">midi_file_str</span><span class="op">)</span>
-<span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">midifile</span><span class="op">$</span><span class="va">ticks_per_beat</span>
-
-<span class="va">dfc</span> <span class="op">=</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">midifile</span><span class="op">)</span>
+<span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">midifile</span><span class="op">$</span><span class="va">ticks_per_beat</span></code></pre></div>
+<p>Now we can load the information of the <code>midifile</code> into a dataframe:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfc</span> <span class="op">=</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">midifile</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dfc</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt;    i_track  meta                            msg</span>
 <span class="co">#&gt; 1        0  TRUE    track_name, drum-t1-1-t1, 0</span>
@@ -146,10 +148,13 @@
 <span class="co">#&gt; 18       0 FALSE        note_on, 240, 43, 60, 9</span>
 <span class="co">#&gt; 19       0 FALSE         note_on, 0, 42, 101, 9</span>
 <span class="co">#&gt; 20       0 FALSE       note_off, 240, 43, 60, 9</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>This dataframe contains the columns of the track index <code>i_track</code>, <code>meta</code> (whether the midi event is a note event), and <code>msg</code> containing named lists of further midi event information.</p>
+<p>The <code>MidiFile()</code> function of <code>mido</code> also yields the <a href="https://mido.readthedocs.io/en/latest/midi_files.html#tempo-and-beat-resolution"><code>ticks_per_beat</code></a> of the file:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ticks_per_beat</span>
 <span class="co">#&gt; [1] 960</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>The <code>miditapyr$tidy_df()</code> function transforms the <code>msg</code> column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in <code>msg</code> (like <code>purrr::unnest_wider()</code>):</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 × 13</span>
@@ -177,7 +182,12 @@
 <span class="co">#&gt; 20       0 FALSE note_off       &lt;dbl…   240    43       60       9    NaN       NaN</span>
 <span class="co">#&gt; # … with 3 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+</div>
+<div id="translate-midi-time-information" class="section level3">
+<h3 class="hasAnchor">
+<a href="#translate-midi-time-information" class="anchor"></a>Translate midi time information</h3>
+<p>In the midi format, time is treated as relative increments between events (measured in ticks). In order to derive the total time passed, you can use the function <code><a href="reference/tab_measures.html">tab_measures()</a></code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># create a variable `track` with the track name (in order to have it in the plot below)</span>
   <span class="fu">mutate</span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
@@ -185,10 +195,28 @@
                         <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
+<p>This function adds further columns:</p>
+<ul>
+<li>
+<code>ticks</code>: specifying the total ticks passed,</li>
+<li>
+<code>t</code>: specifying the total time in seconds passed,</li>
+<li>
+<code>m</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Bar_(music)">measures</a> passed,</li>
+<li>
+<code>b</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Beat_(music)">beats</a> passed,</li>
+<li>
+<code>i_note</code>: unique ascending index for every track and midi note in the midi file.</li>
+</ul>
+</div>
+<div id="further-processing-of-the-midi-events" class="section level3">
+<h3 class="hasAnchor">
+<a href="#further-processing-of-the-midi-events" class="anchor"></a>Further processing of the midi events</h3>
+<p>You can split the dataframe in two by whether the events are <a href="https://mido.readthedocs.io/en/latest/meta_message_types.html">meta</a> or not:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 8 × 16</span>
 <span class="co">#&gt;   i_track meta  type           name   time  tempo numerator denominator clocks_per_click</span>
@@ -203,7 +231,7 @@
 <span class="co">#&gt; 8       2 TRUE  end_of_track   &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
 <span class="co">#&gt; # … with 7 more variables: notated_32nd_notes_per_beat &lt;dbl&gt;, ticks &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t &lt;dbl&gt;, m &lt;dbl&gt;, b &lt;dbl&gt;, i_note &lt;int&gt;, track &lt;chr&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 260 × 13</span>
 <span class="co">#&gt;    i_track meta  type      time  note velocity channel ticks     t     m     b</span>
@@ -223,7 +251,8 @@
 <div id="pivot-note-dataframe-to-wide" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-dataframe-to-wide" class="anchor"></a>Pivot note dataframe to wide</h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>Each note in the midi file is characterized by a <code>note_on</code> and a <code>note_off</code> event. In order to generate a piano roll plot with ggplot2, we need to <code>pivot_wider()</code> those events. This can be done with the function <code><a href="reference/widen_events.html">widen_events()</a></code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_not_notes</span> <span class="op">&lt;-</span> 
   <span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> 
@@ -253,11 +282,13 @@
 <span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></code></pre></div>
+<p>In the new format, the data has half the number of rows. The columns <code>m</code>, <code>b</code>, <code>t</code>, <code>ticks</code>, <code>time</code> and <code>velocity</code> are each replaced by two columns with the suffix <code>_note_on</code> and <code>_note_off</code>.</p>
 </div>
 <div id="plot-the-midi-file-information-in-a-piano-roll-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-the-midi-file-information-in-a-piano-roll-plot" class="anchor"></a>Plot the midi file information in a piano roll plot</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p>Now we have the midi data in the right format for the piano roll plot:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_segment</span><span class="op">(</span>
@@ -285,7 +316,8 @@
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-data-frame-back-to-long-format" class="anchor"></a>Pivot note data frame back to long format</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<p>We can transform the wide midi data back to the long format:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"i_track"</span>,
@@ -300,7 +332,8 @@
 <div id="join-non-note-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#join-non-note-events" class="anchor"></a>Join non note events</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<p>We can now add the non note events:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">full_join</span><span class="op">(</span><span class="va">df_meta</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
@@ -336,7 +369,8 @@
 <div id="write-midi-dataframe-back-to-a-midi-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-midi-dataframe-back-to-a-midi-file" class="anchor"></a>Write midi dataframe back to a midi file</h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p>Now we can transform the data back to a dataframe of the same format as the one we got with <code>miditapyr$midi_to_df()</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># For midi export the new columns are removed:</span>
@@ -361,7 +395,8 @@
 <span class="co">#&gt;  9       0 FALSE &lt;named list [5]&gt;</span>
 <span class="co">#&gt; 10       0 FALSE &lt;named list [5]&gt;</span>
 <span class="co">#&gt; # … with 258 more rows</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p>And we can save it back to a midi file:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="va">miditapyr</span><span class="op">$</span><span class="fu">df_to_midi</span><span class="op">(</span><span class="va">ticks_per_beat</span>,
                 <span class="st">"test.mid"</span><span class="op">)</span></code></pre></div>
