@@ -45,11 +45,13 @@ needs to be installed via
 pip install miditapyr
 ```
 
-in your virtual environment.
+in your python environment used by R.
 
 ## Basic usage
 
 ### Load libraries
+
+First load some libraries:
 
 ``` r
 library(pyramidi)
@@ -64,7 +66,11 @@ midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramid
 
 midifile <- mido$MidiFile(midi_file_str)
 ticks_per_beat <- midifile$ticks_per_beat
+```
 
+Now we can load the information of the `midifile` into a dataframe:
+
+``` r
 dfc = miditapyr$midi_to_df(midifile)
 head(dfc, 20)
 #>    i_track  meta                            msg
@@ -90,10 +96,22 @@ head(dfc, 20)
 #> 20       0 FALSE       note_off, 240, 43, 60, 9
 ```
 
+This dataframe contains the columns of the track index `i_track`, `meta`
+(whether the midi event is a note event), and `msg` containing named
+lists of further midi event information.
+
+The `MidiFile()` function of `mido` also yields the
+[`ticks_per_beat`](https://mido.readthedocs.io/en/latest/midi_files.html#tempo-and-beat-resolution)
+of the file:
+
 ``` r
 ticks_per_beat
 #> [1] 960
 ```
+
+The `miditapyr$tidy_df()` function transforms the `msg` column of the
+dataframe to a wide format, where every new column name corresponds to
+the names in the lists in `msg` (like `purrr::unnest_wider()`):
 
 ``` r
 df <- miditapyr$tidy_df(dfc) %>% as_tibble()
@@ -125,6 +143,12 @@ head(df, 20)
 #> #   notated_32nd_notes_per_beat <dbl>
 ```
 
+### Translate midi time information
+
+In the midi format, time is treated as relative increments between
+events (measured in ticks). In order to derive the total time passed,
+you can use the function `tab_measures()`:
+
 ``` r
 dfm <- tab_measures(df, ticks_per_beat) %>%
   # create a variable `track` with the track name (in order to have it in the plot below)
@@ -135,9 +159,26 @@ dfm <- tab_measures(df, ticks_per_beat) %>%
   fill(track)
 ```
 
+This function adds further columns:
+
+-   `ticks`: specifying the total ticks passed,
+-   `t`: specifying the total time in seconds passed,
+-   `m`: specifying the total
+    [measures](https://en.wikipedia.org/wiki/Bar_(music)) passed,
+-   `b`: specifying the total
+    [beats](https://en.wikipedia.org/wiki/Beat_(music)) passed,
+-   `i_note`: unique ascending index for every track and midi note in
+    the midi file.
+
+### Further processing of the midi events
+
+You can split the dataframe in two by whether the events are
+[meta](https://mido.readthedocs.io/en/latest/meta_message_types.html) or
+not:
+
 ``` r
 dfm %>% 
-    miditapyr$split_df()  %->% c(df_meta, df_notes)
+    miditapyr$split_df() %->% c(df_meta, df_notes)
 ```
 
 ``` r
@@ -177,6 +218,11 @@ df_notes %>% as_tibble()
 
 ### Pivot note dataframe to wide
 
+Each note in the midi file is characterized by a `note_on` and a
+`note_off` event. In order to generate a piano roll plot with ggplot2,
+we need to `pivot_wider()` those events. This can be done with the
+function `widen_events()`:
+
 ``` r
 df_not_notes <- 
   df_notes %>% 
@@ -209,7 +255,13 @@ df_notes_wide
 #> #   b_note_on <dbl>, b_note_off <dbl>, note_name <fct>
 ```
 
+In the new format, the data has half the number of rows. The columns
+`m`, `b`, `t`, `ticks`, `time` and `velocity` are each replaced by two
+columns with the suffix `_note_on` and `_note_off`.
+
 ### Plot the midi file information in a piano roll plot
+
+Now we have the midi data in the right format for the piano roll plot:
 
 ``` r
 df_notes_wide %>%
@@ -240,6 +292,8 @@ df_notes_wide %>%
 
 ### Pivot note data frame back to long format
 
+We can transform the wide midi data back to the long format:
+
 ``` r
 df_notes_out <-
   df_notes_wide %>%
@@ -254,6 +308,8 @@ df_notes_out <-
 ```
 
 ### Join non note events
+
+We can now add the non note events:
 
 ``` r
 df_notes_out <-
@@ -291,6 +347,9 @@ df_notes_out
 
 ### Write midi dataframe back to a midi file
 
+Now we can transform the data back to a dataframe of the same format as
+the one we got with `miditapyr$midi_to_df()`:
+
 ``` r
 dfc2 <-
   df_notes_out %>%
@@ -317,6 +376,8 @@ dfc2 %>% as_tibble()
 #> 10       0 FALSE <named list [5]>
 #> # … with 258 more rows
 ```
+
+And we can save it back to a midi file:
 
 ``` r
 dfc2 %>%

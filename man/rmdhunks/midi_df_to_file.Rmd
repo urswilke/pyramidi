@@ -1,5 +1,7 @@
 ### Pivot note data frame back to long format
 
+We can transform the wide midi data back to the long format:
+
 ```{r pivot_long}
 df_notes_out <-
   df_notes_wide %>%
@@ -15,6 +17,8 @@ df_notes_out <-
 
 
 ### Join non note events
+
+We can now add the non note events:
 
 ```{r join_non_note_events}
 df_notes_out <-
@@ -34,7 +38,7 @@ df_notes_out
 
 ### Write midi dataframe back to a midi file
 
-
+Now we can transform the data back to a dataframe of the same format as the one we got with `miditapyr$midi_to_df()`:
 ```{r dfc2}
 dfc2 <-
   df_notes_out %>%
@@ -48,6 +52,7 @@ dfc2 <-
 dfc2 %>% as_tibble()
 ```
 
+And we can save it back to a midi file:
 
 ```{r write_midi, eval=FALSE}
 dfc2 %>%
