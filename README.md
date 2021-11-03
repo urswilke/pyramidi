@@ -45,7 +45,7 @@ needs to be installed via
 pip install miditapyr
 ```
 
-in your python environment used by R.
+in your python environment used by reticulate.
 
 ## Basic usage
 
@@ -111,7 +111,7 @@ ticks_per_beat
 
 The `miditapyr$tidy_df()` function transforms the `msg` column of the
 dataframe to a wide format, where every new column name corresponds to
-the names in the lists in `msg` (like `purrr::unnest_wider()`):
+the names in the lists in `msg` (like `tidyr::unnest_wider()`):
 
 ``` r
 df <- miditapyr$tidy_df(dfc) %>% as_tibble()
@@ -220,8 +220,8 @@ df_notes %>% as_tibble()
 
 Each note in the midi file is characterized by a `note_on` and a
 `note_off` event. In order to generate a piano roll plot with ggplot2,
-we need to `pivot_wider()` those events. This can be done with the
-function `widen_events()`:
+we need to `tidyr::pivot_wider()` those events. This can be done with
+the function `widen_events()`:
 
 ``` r
 df_not_notes <- 

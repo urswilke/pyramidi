@@ -51,7 +51,7 @@ The python package [miditapyr](https://pypi.org/project/miditapyr/) also needs t
 pip install miditapyr
 ```
 
-in your python environment used by R.
+in your python environment used by reticulate.
 
 ## Basic usage
 
@@ -94,7 +94,7 @@ The `MidiFile()` function of `mido` also yields the [`ticks_per_beat`](https://m
 ticks_per_beat
 ```
 
-The `miditapyr$tidy_df()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `purrr::unnest_wider()`):
+The `miditapyr$tidy_df()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `tidyr::unnest_wider()`):
 
 ```{r}
 df <- miditapyr$tidy_df(dfc) %>% as_tibble()

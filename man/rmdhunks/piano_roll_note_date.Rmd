@@ -1,7 +1,7 @@
 ### Pivot note dataframe to wide
 
 Each note in the midi file is characterized by a `note_on` and a `note_off` event.
-In order to generate a piano roll plot with ggplot2, we need to `pivot_wider()` those events.
+In order to generate a piano roll plot with ggplot2, we need to `tidyr::pivot_wider()` those events.
 This can be done with the function `widen_events()`:
 
 ```{r df_notes_wide}
