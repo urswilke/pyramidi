@@ -101,7 +101,7 @@
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></code></pre></div>
 <p>The python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> also needs to be installed via</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
-<p>in your python environment used by R.</p>
+<p>in your python environment used by reticulate.</p>
 </div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
@@ -153,7 +153,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ticks_per_beat</span>
 <span class="co">#&gt; [1] 960</span></code></pre></div>
-<p>The <code>miditapyr$tidy_df()</code> function transforms the <code>msg</code> column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in <code>msg</code> (like <code>purrr::unnest_wider()</code>):</p>
+<p>The <code>miditapyr$tidy_df()</code> function transforms the <code>msg</code> column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in <code>msg</code> (like <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::unnest_wider()</a></code>):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
@@ -251,7 +251,7 @@
 <div id="pivot-note-dataframe-to-wide" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-dataframe-to-wide" class="anchor"></a>Pivot note dataframe to wide</h3>
-<p>Each note in the midi file is characterized by a <code>note_on</code> and a <code>note_off</code> event. In order to generate a piano roll plot with ggplot2, we need to <code>pivot_wider()</code> those events. This can be done with the function <code><a href="reference/widen_events.html">widen_events()</a></code>:</p>
+<p>Each note in the midi file is characterized by a <code>note_on</code> and a <code>note_off</code> event. In order to generate a piano roll plot with ggplot2, we need to <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> those events. This can be done with the function <code><a href="reference/widen_events.html">widen_events()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_not_notes</span> <span class="op">&lt;-</span> 
   <span class="va">df_notes</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
@@ -313,11 +313,26 @@
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-midi_piano_roll-1.png" width="100%"></p>
 </div>
+<div id="manipulation-of-the-midi-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#manipulation-of-the-midi-data" class="anchor"></a>Manipulation of the midi data</h3>
+<p>The wide format also allows to easily manipulate the midi data. For instance, let’s put the volume (called <code>velocity</code> in midi) of the first beat in every bar to the maximum (127), and to half of its original value otherwise:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op">&lt;-</span> <span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    velocity_note_on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
+      <span class="co"># As it's a 4/4 beat, the first beat of each bar is a multiple of 4:</span>
+      <span class="va">b_note_on</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">4</span> <span class="op">==</span> <span class="fl">0</span>, 
+      <span class="fl">127</span>, 
+      <span class="va">velocity_note_on</span> <span class="op">/</span> <span class="fl">2</span>
+    <span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+</div>
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pivot-note-data-frame-back-to-long-format" class="anchor"></a>Pivot note data frame back to long format</h3>
 <p>We can transform the wide midi data back to the long format:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"i_track"</span>,
@@ -333,7 +348,7 @@
 <h3 class="hasAnchor">
 <a href="#join-non-note-events" class="anchor"></a>Join non note events</h3>
 <p>We can now add the non note events:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_out</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">full_join</span><span class="op">(</span><span class="va">df_meta</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
@@ -352,16 +367,16 @@
 <span class="co">#&gt; # A tibble: 268 × 19</span>
 <span class="co">#&gt;    i_track channel  note i_note type       time velocity ticks     t     m     b</span>
 <span class="co">#&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0       9    43      1 note_on       0       72     0 0      0        0</span>
-<span class="co">#&gt;  2       0       9    39      1 note_on       0       64     0 0      0        0</span>
-<span class="co">#&gt;  3       0       9    36      1 note_on       0      101     0 0      0        0</span>
-<span class="co">#&gt;  4       0      NA    NA      0 track_na…     0       NA     0 0      0        0</span>
-<span class="co">#&gt;  5       0      NA    NA      0 set_tempo     0       NA     0 0      0        0</span>
-<span class="co">#&gt;  6       0      NA    NA      0 time_sig…     0       NA     0 0      0        0</span>
-<span class="co">#&gt;  7       0       9    43      1 note_off    240       72   240 0.167  0.25     1</span>
-<span class="co">#&gt;  8       0       9    39      1 note_off      0       64   240 0.167  0.25     1</span>
-<span class="co">#&gt;  9       0       9    36      1 note_off      0      101   240 0.167  0.25     1</span>
-<span class="co">#&gt; 10       0       9    42      1 note_on     240      101   480 0.333  0.5      2</span>
+<span class="co">#&gt;  1       0       9    43      1 note_on       0    127       0 0      0        0</span>
+<span class="co">#&gt;  2       0       9    39      1 note_on       0    127       0 0      0        0</span>
+<span class="co">#&gt;  3       0       9    36      1 note_on       0    127       0 0      0        0</span>
+<span class="co">#&gt;  4       0      NA    NA      0 track_na…     0     NA       0 0      0        0</span>
+<span class="co">#&gt;  5       0      NA    NA      0 set_tempo     0     NA       0 0      0        0</span>
+<span class="co">#&gt;  6       0      NA    NA      0 time_sig…     0     NA       0 0      0        0</span>
+<span class="co">#&gt;  7       0       9    43      1 note_off    240     72     240 0.167  0.25     1</span>
+<span class="co">#&gt;  8       0       9    39      1 note_off      0     64     240 0.167  0.25     1</span>
+<span class="co">#&gt;  9       0       9    36      1 note_off      0    101     240 0.167  0.25     1</span>
+<span class="co">#&gt; 10       0       9    42      1 note_on     240     50.5   480 0.333  0.5      2</span>
 <span class="co">#&gt; # … with 258 more rows, and 8 more variables: meta &lt;lgl&gt;, name &lt;list&gt;,</span>
 <span class="co">#&gt; #   tempo &lt;dbl&gt;, numerator &lt;dbl&gt;, denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></code></pre></div>
@@ -370,7 +385,7 @@
 <h3 class="hasAnchor">
 <a href="#write-midi-dataframe-back-to-a-midi-file" class="anchor"></a>Write midi dataframe back to a midi file</h3>
 <p>Now we can transform the data back to a dataframe of the same format as the one we got with <code>miditapyr$midi_to_df()</code>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op">&lt;-</span>
   <span class="va">df_notes_out</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="co"># For midi export the new columns are removed:</span>
@@ -396,7 +411,7 @@
 <span class="co">#&gt; 10       0 FALSE &lt;named list [5]&gt;</span>
 <span class="co">#&gt; # … with 258 more rows</span></code></pre></div>
 <p>And we can save it back to a midi file:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="va">miditapyr</span><span class="op">$</span><span class="fu">df_to_midi</span><span class="op">(</span><span class="va">ticks_per_beat</span>,
                 <span class="st">"test.mid"</span><span class="op">)</span></code></pre></div>
