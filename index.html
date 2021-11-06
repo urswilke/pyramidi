@@ -80,7 +80,7 @@
   <div class="contents col-md-9">
 <div id="pyramidi-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#pyramidi-" class="anchor"></a>pyramidi <a href="https://github.com/urswilke/pyramidi/"><img src="reference/figures/hex-pyramidi_compact.png" align="right" height="139"></a>
+<a href="#pyramidi-" class="anchor"></a>pyramidi <a href="https://github.com/urswilke/pyramidi/"><img src="reference/figures/hex_logo_pyramidi.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -319,7 +319,7 @@
 <div id="manipulation-of-the-midi-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#manipulation-of-the-midi-data" class="anchor"></a>Manipulation of the midi data</h3>
-<p>The wide format also allows to easily manipulate the midi data. For instance, let’s put the volume (called <code>velocity</code> in midi) of the first beat in every bar to the maximum (127), and to half of its original value otherwise:</p>
+<p>The new format also allows to easily manipulate the midi data. For instance, let’s put the volume (called <code>velocity</code> in midi) of the first beat in every bar to the maximum (127), and to half of its original value otherwise:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op">&lt;-</span> <span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">mutate</span><span class="op">(</span>
@@ -477,6 +477,7 @@
 <li><a href="https://travis-ci.org/github/urswilke/pyramidi"><img src="https://travis-ci.org/urswilke/pyramidi.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://codecov.io/gh/urswilke/pyramidi?branch=master"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/urswilke/pyramidi/actions"><img src="https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 </div>
