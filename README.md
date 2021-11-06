@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# pyramidi <a href='https://github.com/urswilke/pyramidi/'><img src='man/figures/hex-pyramidi_compact.png' align="right" height="139" /></a>
+# pyramidi <a href='https://github.com/urswilke/pyramidi/'><img src='man/figures/hex_logo_pyramidi.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -295,7 +295,7 @@ df_notes_wide %>%
 
 ### Manipulation of the midi data
 
-The wide format also allows to easily manipulate the midi data. For
+The new format also allows to easily manipulate the midi data. For
 instance, let’s put the volume (called `velocity` in midi) of the first
 beat in every bar to the maximum (127), and to half of its original
 value otherwise:
