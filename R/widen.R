@@ -21,7 +21,7 @@ widen_events <- function(df_measures) {
   df_measures %>%
     # dplyr::select(c("i_track", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note")) %>%
     # dplyr::select(c("i_track", "name", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note")) %>%
-    tidyr::pivot_wider(names_from = c("type"), values_from = values_from_vector) %>%
+    tidyr::pivot_wider(names_from = c("type"), values_from = !!values_from_vector) %>%
     # as.data.frame() %>%
     dplyr::arrange(.data$i_track, .data$b_note_on)
 }
