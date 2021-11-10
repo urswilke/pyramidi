@@ -158,28 +158,28 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 × 13</span>
-<span class="co">#&gt;    i_track meta  type           name   time  note velocity channel  tempo numerator</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;          &lt;lis&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_name     &lt;chr…     0   NaN      NaN     NaN    NaN       NaN</span>
-<span class="co">#&gt;  2       0 FALSE note_on        &lt;dbl…     0    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  3       0 FALSE note_on        &lt;dbl…     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  4       0 FALSE note_on        &lt;dbl…     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt;  5       0 TRUE  set_tempo      &lt;dbl…     0   NaN      NaN     NaN 666666       NaN</span>
-<span class="co">#&gt;  6       0 TRUE  time_signature &lt;dbl…     0   NaN      NaN     NaN    NaN         4</span>
-<span class="co">#&gt;  7       0 FALSE note_off       &lt;dbl…   240    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  8       0 FALSE note_off       &lt;dbl…     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  9       0 FALSE note_off       &lt;dbl…     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 10       0 FALSE note_on        &lt;dbl…   240    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 11       0 FALSE note_on        &lt;dbl…     0    38      101       9    NaN       NaN</span>
-<span class="co">#&gt; 12       0 FALSE note_on        &lt;dbl…   240    43       64       9    NaN       NaN</span>
-<span class="co">#&gt; 13       0 FALSE note_off       &lt;dbl…     0    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 14       0 FALSE note_off       &lt;dbl…     0    38      101       9    NaN       NaN</span>
-<span class="co">#&gt; 15       0 FALSE note_off       &lt;dbl…   240    43       64       9    NaN       NaN</span>
-<span class="co">#&gt; 16       0 FALSE note_on        &lt;dbl…     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 17       0 FALSE note_off       &lt;dbl…   240    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 18       0 FALSE note_on        &lt;dbl…   240    43       60       9    NaN       NaN</span>
-<span class="co">#&gt; 19       0 FALSE note_on        &lt;dbl…     0    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 20       0 FALSE note_off       &lt;dbl…   240    43       60       9    NaN       NaN</span>
+<span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
+<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
+<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
+<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
+<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
+<span class="co">#&gt; 11       0 FALSE note_on    &lt;dbl …     0    38      101       9    NaN       NaN</span>
+<span class="co">#&gt; 12       0 FALSE note_on    &lt;dbl …   240    43       64       9    NaN       NaN</span>
+<span class="co">#&gt; 13       0 FALSE note_off   &lt;dbl …     0    42      101       9    NaN       NaN</span>
+<span class="co">#&gt; 14       0 FALSE note_off   &lt;dbl …     0    38      101       9    NaN       NaN</span>
+<span class="co">#&gt; 15       0 FALSE note_off   &lt;dbl …   240    43       64       9    NaN       NaN</span>
+<span class="co">#&gt; 16       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt; 17       0 FALSE note_off   &lt;dbl …   240    36      101       9    NaN       NaN</span>
+<span class="co">#&gt; 18       0 FALSE note_on    &lt;dbl …   240    43       60       9    NaN       NaN</span>
+<span class="co">#&gt; 19       0 FALSE note_on    &lt;dbl …     0    42      101       9    NaN       NaN</span>
+<span class="co">#&gt; 20       0 FALSE note_off   &lt;dbl …   240    43       60       9    NaN       NaN</span>
 <span class="co">#&gt; # … with 3 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
 </div>
@@ -194,7 +194,25 @@
                         <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
                         <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span></code></pre></div>
+  <span class="fu">fill</span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
+
+<span class="va">dfm</span>
+<span class="co">#&gt; # A tibble: 268 × 19</span>
+<span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
+<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
+<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
+<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
+<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
+<span class="co">#&gt; # … with 258 more rows, and 9 more variables: denominator &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;, ticks &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   t &lt;dbl&gt;, m &lt;dbl&gt;, b &lt;dbl&gt;, i_note &lt;int&gt;, track &lt;chr&gt;</span></code></pre></div>
 <p>This function adds further columns:</p>
 <ul>
 <li>
@@ -219,16 +237,16 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 8 × 16</span>
-<span class="co">#&gt;   i_track meta  type           name   time  tempo numerator denominator clocks_per_click</span>
-<span class="co">#&gt;     &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;          &lt;lis&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt; 1       0 TRUE  track_name     &lt;chr…     0    NaN       NaN         NaN              NaN</span>
-<span class="co">#&gt; 2       0 TRUE  set_tempo      &lt;dbl…     0 666666       NaN         NaN              NaN</span>
-<span class="co">#&gt; 3       0 TRUE  time_signature &lt;dbl…     0    NaN         4           4               24</span>
-<span class="co">#&gt; 4       0 TRUE  end_of_track   &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
-<span class="co">#&gt; 5       1 TRUE  track_name     &lt;chr…     0    NaN       NaN         NaN              NaN</span>
-<span class="co">#&gt; 6       1 TRUE  end_of_track   &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
-<span class="co">#&gt; 7       2 TRUE  track_name     &lt;chr…     0    NaN       NaN         NaN              NaN</span>
-<span class="co">#&gt; 8       2 TRUE  end_of_track   &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt;   i_track meta  type   name   time  tempo numerator denominator clocks_per_click</span>
+<span class="co">#&gt;     &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;  &lt;lis&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;</span>
+<span class="co">#&gt; 1       0 TRUE  track… &lt;chr…     0    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt; 2       0 TRUE  set_t… &lt;dbl…     0 666666       NaN         NaN              NaN</span>
+<span class="co">#&gt; 3       0 TRUE  time_… &lt;dbl…     0    NaN         4           4               24</span>
+<span class="co">#&gt; 4       0 TRUE  end_o… &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt; 5       1 TRUE  track… &lt;chr…     0    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt; 6       1 TRUE  end_o… &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt; 7       2 TRUE  track… &lt;chr…     0    NaN       NaN         NaN              NaN</span>
+<span class="co">#&gt; 8       2 TRUE  end_o… &lt;dbl…     1    NaN       NaN         NaN              NaN</span>
 <span class="co">#&gt; # … with 7 more variables: notated_32nd_notes_per_beat &lt;dbl&gt;, ticks &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t &lt;dbl&gt;, m &lt;dbl&gt;, b &lt;dbl&gt;, i_note &lt;int&gt;, track &lt;chr&gt;</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
