@@ -1,4 +1,3 @@
-library(magrittr)
 library(zeallot)
 if (!testthat:::on_ci()) {
   reticulate::use_python("/home/chief/anaconda3/bin/python", required = TRUE)
