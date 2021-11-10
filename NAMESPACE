@@ -3,6 +3,7 @@
 export("%>%")
 export(get_bpm)
 export(get_tempo)
+export(install_miditapyr)
 export(miditapyr)
 export(mido)
 export(tab_measures)
