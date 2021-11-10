@@ -23,8 +23,8 @@ miditapyr <- NULL
 mido <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  # found in https://github.com/kevinushey/usespandas/blob/master/R/zzz.R
-  reticulate::configure_environment(pkgname, force = TRUE)
+  # # found in https://github.com/kevinushey/usespandas/blob/master/R/zzz.R
+  # reticulate::configure_environment(pkgname, force = TRUE)
   # use superassignment to update global reference to miditapyr
   miditapyr <<- reticulate::import("miditapyr", delay_load = TRUE)
   # use superassignment to update global reference to mido
@@ -63,5 +63,11 @@ install_miditapyr <- function(
   pip = TRUE
 ) {
   # try to install miditapyr
-  try(reticulate::py_install("miditapyr", envname = envname, method = method, conda = conda, pip = pip))
+  reticulate::py_install(
+    "miditapyr",
+    envname = envname,
+    method = method,
+    conda = conda,
+    pip = pip
+  )
 }
