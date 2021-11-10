@@ -116,6 +116,8 @@ dfm <- tab_measures(df, ticks_per_beat) %>%
                         name)) %>%
   unnest(cols = track) %>% 
   fill(track)
+
+dfm
 ```
 
 This function adds further columns:
