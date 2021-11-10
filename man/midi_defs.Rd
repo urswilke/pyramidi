@@ -5,7 +5,7 @@
 \alias{midi_defs}
 \title{Table of midi notes}
 \format{
-A data frame with 127 rows and 2 variables:
+A data frame with 128 rows and 2 variables:
 \describe{
   \item{note}{integer from 0 - 127 containing the midi pitches}
   \item{note_name}{name of the note and the octave}
