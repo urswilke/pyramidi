@@ -13,7 +13,7 @@
 #'
 #' @example man/rmdhunks/examples/generate_tidy_df.Rmd
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' tab_measures(df, ticks_per_beat)
 #' }
 tab_measures <- function(df, ticks_per_beat) {
