@@ -79,7 +79,10 @@ First load some libraries:
 
 ```{r load_libs, message=FALSE}
 library(pyramidi)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(ggplot2)
 library(zeallot)
 ```
 

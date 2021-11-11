@@ -1,6 +1,7 @@
 ## code to prepare `save_piano_keys_coord_table` dataset goes here
 
-library(tidyverse)
+library(purrr)
+library(dplyr)
 library(rvest)
 x <- read_html("https://upload.wikimedia.org/wikipedia/commons/1/15/PianoKeyboard.svg")
 n <- x %>% html_nodes("rect")
