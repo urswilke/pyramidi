@@ -32,6 +32,10 @@ line per event) can be translated into a wide format (one line per note). This
 facilitates plotting piano roll plots. These dataframes can then be written back
 to midi files (again using miditapyr).
 
+Thus you can manipulate these dataframes at all steps and write midi files from R. You need to make sure yourself that the midi files you write can be understood by your softsynth; but [mido](https://github.com/mido/mido) (used by miditapyr) already catches some of the possible inconsistencies.
+
+*I started to write these packages quite some time ago. They are sometimes not very well designed. For now `miditapyr` only contains one module with functions. And the functionality of `pyramidi` is quite limited and necessitates a lot of manual intermediate steps. But the loose structure allows you to generate & manipulate midi data on many different levels.* 
+
 ## Installation
 
 You can install pyramidi from [github](https://github.com/urswilke/pyramidi) with:
@@ -52,15 +56,23 @@ The python package [miditapyr](https://pypi.org/project/miditapyr/) also needs t
 pip install miditapyr
 ```
 
-in your python environment used by reticulate.
+in your python environment used by [reticulate](https://github.com/rstudio/reticulate).
+
+But if everything works as it should 🤞😅, miditapyr is automatically installed
+if you install pyramidi, as soon as you access the module for the first time.
+
+Otherwise, you can also install it
+in your reticulate python environment
+with the included helper function:
+
+```{r, eval=FALSE}
+pyramidi::install_miditapyr()
+```
+
 
 ## Basic usage
 
 ### Load libraries
-```{r, reticulate_local, echo=FALSE}
-reticulate::use_python("/home/chief/anaconda3/bin/python")
-
-```
 
 First load some libraries:
 
@@ -73,7 +85,7 @@ library(zeallot)
 ### Extract midi file information into dataframe
 
 
-```{r midi_df, message=FALSE}
+```{r midi_df}
 midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 
 midifile <- mido$MidiFile(midi_file_str)
@@ -100,6 +112,11 @@ The `miditapyr$tidy_df()` function transforms the `msg` column of the dataframe 
 ```{r}
 df <- miditapyr$tidy_df(dfc) %>% as_tibble()
 head(df, 20)
+```
+
+Except the `name` column this seems to be the same as 
+```{r}
+dfc %>% unnest_wider(msg)
 ```
 
 ### Translate midi time information
@@ -157,7 +174,7 @@ The new format also allows to easily manipulate the midi data. For instance, let
 
 
 ```{r}
-df_notes_wide <- df_notes_wide %>% 
+df_notes_wide_mod <- df_notes_wide %>% 
   mutate(
     velocity_note_on = ifelse(
       # As it's a 4/4 beat, the first beat of each bar is a multiple of 4:
@@ -165,8 +182,17 @@ df_notes_wide <- df_notes_wide %>%
       127, 
       velocity_note_on / 2
     )
-  )
-df_notes_wide
+)
+```
+
+Let's compare the modified value to the original one:
+
+```{r}
+tibble(
+  old = df_notes_wide$velocity_note_on,
+  new = df_notes_wide_mod$velocity_note_on
+)
+
 ```
 
 

@@ -25,6 +25,19 @@ event) can be translated into a wide format (one line per note). This
 facilitates plotting piano roll plots. These dataframes can then be
 written back to midi files (again using miditapyr).
 
+Thus you can manipulate these dataframes at all steps and write midi
+files from R. You need to make sure yourself that the midi files you
+write can be understood by your softsynth; but
+[mido](https://github.com/mido/mido) (used by miditapyr) already catches
+some of the possible inconsistencies.
+
+*I started to write these packages quite some time ago. They are
+sometimes not very well designed. For now `miditapyr` only contains one
+module with functions. And the functionality of `pyramidi` is quite
+limited and necessitates a lot of manual intermediate steps. But the
+loose structure allows you to generate & manipulate midi data on many
+different levels.*
+
 ## Installation
 
 You can install pyramidi from
@@ -47,7 +60,19 @@ needs to be installed via
 pip install miditapyr
 ```
 
-in your python environment used by reticulate.
+in your python environment used by
+[reticulate](https://github.com/rstudio/reticulate).
+
+But if everything works as it should 🤞😅, miditapyr is automatically
+installed if you install pyramidi, as soon as you access the module for
+the first time.
+
+Otherwise, you can also install it in your reticulate python environment
+with the included helper function:
+
+``` r
+pyramidi::install_miditapyr()
+```
 
 ## Basic usage
 
@@ -143,6 +168,27 @@ head(df, 20)
 #> 20       0 FALSE note_off   <dbl …   240    43       60       9    NaN       NaN
 #> # … with 3 more variables: denominator <dbl>, clocks_per_click <dbl>,
 #> #   notated_32nd_notes_per_beat <dbl>
+```
+
+Except the `name` column this seems to be the same as
+
+``` r
+dfc %>% unnest_wider(msg)
+#> # A tibble: 268 × 13
+#>    i_track meta  type      name     time  note velocity channel  tempo numerator
+#>      <dbl> <lgl> <chr>     <chr>   <int> <int>    <int>   <int>  <int>     <int>
+#>  1       0 TRUE  track_na… drum-t…     0    NA       NA      NA     NA        NA
+#>  2       0 FALSE note_on   <NA>        0    43       72       9     NA        NA
+#>  3       0 FALSE note_on   <NA>        0    39       64       9     NA        NA
+#>  4       0 FALSE note_on   <NA>        0    36      101       9     NA        NA
+#>  5       0 TRUE  set_tempo <NA>        0    NA       NA      NA 666666        NA
+#>  6       0 TRUE  time_sig… <NA>        0    NA       NA      NA     NA         4
+#>  7       0 FALSE note_off  <NA>      240    43       72       9     NA        NA
+#>  8       0 FALSE note_off  <NA>        0    39       64       9     NA        NA
+#>  9       0 FALSE note_off  <NA>        0    36      101       9     NA        NA
+#> 10       0 FALSE note_on   <NA>      240    42      101       9     NA        NA
+#> # … with 258 more rows, and 3 more variables: denominator <int>,
+#> #   clocks_per_click <int>, notated_32nd_notes_per_beat <int>
 ```
 
 ### Translate midi time information
@@ -321,7 +367,7 @@ beat in every bar to the maximum (127), and to half of its original
 value otherwise:
 
 ``` r
-df_notes_wide <- df_notes_wide %>% 
+df_notes_wide_mod <- df_notes_wide %>% 
   mutate(
     velocity_note_on = ifelse(
       # As it's a 4/4 beat, the first beat of each bar is a multiple of 4:
@@ -329,25 +375,30 @@ df_notes_wide <- df_notes_wide %>%
       127, 
       velocity_note_on / 2
     )
-  )
-df_notes_wide
-#> # A tibble: 130 × 19
-#>    i_track meta   note channel i_note track        time_note_on time_note_off
-#>      <dbl> <lgl> <dbl>   <dbl>  <int> <chr>               <dbl>         <dbl>
-#>  1       0 FALSE    43       9      1 drum-t1-1-t1            0           240
-#>  2       0 FALSE    39       9      1 drum-t1-1-t1            0             0
-#>  3       0 FALSE    36       9      1 drum-t1-1-t1            0             0
-#>  4       0 FALSE    42       9      1 drum-t1-1-t1          240             0
-#>  5       0 FALSE    38       9      1 drum-t1-1-t1            0             0
-#>  6       0 FALSE    43       9      2 drum-t1-1-t1          240           240
-#>  7       0 FALSE    36       9      2 drum-t1-1-t1            0           240
-#>  8       0 FALSE    43       9      3 drum-t1-1-t1          240           240
-#>  9       0 FALSE    42       9      2 drum-t1-1-t1            0             0
-#> 10       0 FALSE    43       9      4 drum-t1-1-t1          240           240
-#> # … with 120 more rows, and 11 more variables: velocity_note_on <dbl>,
-#> #   velocity_note_off <dbl>, ticks_note_on <dbl>, ticks_note_off <dbl>,
-#> #   t_note_on <dbl>, t_note_off <dbl>, m_note_on <dbl>, m_note_off <dbl>,
-#> #   b_note_on <dbl>, b_note_off <dbl>, note_name <fct>
+)
+```
+
+Let’s compare the modified value to the original one:
+
+``` r
+tibble(
+  old = df_notes_wide$velocity_note_on,
+  new = df_notes_wide_mod$velocity_note_on
+)
+#> # A tibble: 130 × 2
+#>      old   new
+#>    <dbl> <dbl>
+#>  1    72 127  
+#>  2    64 127  
+#>  3   101 127  
+#>  4   101  50.5
+#>  5   101  50.5
+#>  6    64  32  
+#>  7   101 127  
+#>  8    60  30  
+#>  9   101  50.5
+#> 10    60 127  
+#> # … with 120 more rows
 ```
 
 ### Pivot note data frame back to long format
@@ -390,20 +441,23 @@ df_notes_out
 #> # A tibble: 268 × 19
 #>    i_track channel  note i_note type       time velocity ticks     t     m     b
 #>      <dbl>   <dbl> <dbl>  <int> <chr>     <dbl>    <dbl> <dbl> <dbl> <dbl> <dbl>
-#>  1       0       9    43      1 note_on       0    127       0 0      0        0
-#>  2       0       9    39      1 note_on       0    127       0 0      0        0
-#>  3       0       9    36      1 note_on       0    127       0 0      0        0
-#>  4       0      NA    NA      0 track_na…     0     NA       0 0      0        0
-#>  5       0      NA    NA      0 set_tempo     0     NA       0 0      0        0
-#>  6       0      NA    NA      0 time_sig…     0     NA       0 0      0        0
-#>  7       0       9    43      1 note_off    240     72     240 0.167  0.25     1
-#>  8       0       9    39      1 note_off      0     64     240 0.167  0.25     1
-#>  9       0       9    36      1 note_off      0    101     240 0.167  0.25     1
-#> 10       0       9    42      1 note_on     240     50.5   480 0.333  0.5      2
+#>  1       0       9    43      1 note_on       0       72     0 0      0        0
+#>  2       0       9    39      1 note_on       0       64     0 0      0        0
+#>  3       0       9    36      1 note_on       0      101     0 0      0        0
+#>  4       0      NA    NA      0 track_na…     0       NA     0 0      0        0
+#>  5       0      NA    NA      0 set_tempo     0       NA     0 0      0        0
+#>  6       0      NA    NA      0 time_sig…     0       NA     0 0      0        0
+#>  7       0       9    43      1 note_off    240       72   240 0.167  0.25     1
+#>  8       0       9    39      1 note_off      0       64   240 0.167  0.25     1
+#>  9       0       9    36      1 note_off      0      101   240 0.167  0.25     1
+#> 10       0       9    42      1 note_on     240      101   480 0.333  0.5      2
 #> # … with 258 more rows, and 8 more variables: meta <lgl>, name <list>,
 #> #   tempo <dbl>, numerator <dbl>, denominator <dbl>, clocks_per_click <dbl>,
 #> #   notated_32nd_notes_per_beat <dbl>, track <chr>
 ```
+
+The `time` value in midi format is given by the number of ticks passed
+between events.
 
 ### Write midi dataframe back to a midi file
 

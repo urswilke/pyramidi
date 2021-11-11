@@ -36,6 +36,8 @@ df_notes_out <-
 df_notes_out
 ```
 
+The `time` value in midi format is given by the number of ticks passed between events.
+
 ### Write midi dataframe back to a midi file
 
 Now we can transform the data back to a dataframe of the same format as the one we got with `miditapyr$midi_to_df()`:
