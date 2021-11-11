@@ -382,23 +382,24 @@ df_notes_wide_mod <- df_notes_wide %>%
 Let’s compare the modified value to the original one:
 
 ``` r
-tibble(
-  old = df_notes_wide$velocity_note_on,
-  new = df_notes_wide_mod$velocity_note_on
-)
-#> # A tibble: 130 × 2
-#>      old   new
-#>    <dbl> <dbl>
-#>  1    72 127  
-#>  2    64 127  
-#>  3   101 127  
-#>  4   101  50.5
-#>  5   101  50.5
-#>  6    64  32  
-#>  7   101 127  
-#>  8    60  30  
-#>  9   101  50.5
-#> 10    60 127  
+df_notes_wide %>% 
+  select(b_note_on, velocity_note_on) %>% 
+  bind_cols(
+    new = df_notes_wide_mod$velocity_note_on
+  )
+#> # A tibble: 130 × 3
+#>    b_note_on velocity_note_on   new
+#>        <dbl>            <dbl> <dbl>
+#>  1         0               72 127  
+#>  2         0               64 127  
+#>  3         0              101 127  
+#>  4         2              101  50.5
+#>  5         2              101  50.5
+#>  6         3               64  32  
+#>  7         4              101 127  
+#>  8         6               60  30  
+#>  9         6              101  50.5
+#> 10         8               60 127  
 #> # … with 120 more rows
 ```
 
@@ -457,7 +458,7 @@ df_notes_out
 #> #   notated_32nd_notes_per_beat <dbl>, track <chr>
 ```
 
-The `time` value in midi format is given by the number of ticks passed
+The `time` value in midi format is given by the number of `ticks` passed
 between events.
 
 ### Write midi dataframe back to a midi file

@@ -36,7 +36,7 @@ df_notes_out <-
 df_notes_out
 ```
 
-The `time` value in midi format is given by the number of ticks passed between events.
+The `time` value in midi format is given by the number of `ticks` passed between events.
 
 ### Write midi dataframe back to a midi file
 

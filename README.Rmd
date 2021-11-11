@@ -189,10 +189,13 @@ df_notes_wide_mod <- df_notes_wide %>%
 Let's compare the modified value to the original one:
 
 ```{r}
-tibble(
-  old = df_notes_wide$velocity_note_on,
-  new = df_notes_wide_mod$velocity_note_on
-)
+df_notes_wide %>% 
+  select(b_note_on, velocity_note_on) %>% 
+  bind_cols(
+    new = df_notes_wide_mod$velocity_note_on
+  )
+            
+
 
 ```
 
