@@ -516,3 +516,216 @@ dfc2 %>%
     for an example how you can transform the tuner format into the
     pyramidi format (or run `vignette("tuner", package = "pyramidi")` to
     load the vignette on your machine).
+
+<!-- 
+The following as well as the bibtex file "pkg-refs.bib" were automatically
+created with the commands:
+library(grateful)
+pkgs <- scan_packages()
+# don't know why including "R" gives an error ??
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")]
+cites <- get_citations(pkgs)
+rmd <- create_rmd(cites)
+
+-> then copy the list in the created refs.Rmd below
+
+-->
+
+## R packages used
+
+This package stands on the shoulders of giants. It was only possible
+thanks to the following libraries:
+
+-   base (R Core Team 2021)
+-   pkgdown (Wickham and Hesselberth 2020)
+-   usethis (Wickham, Bryan, and Barrett 2021)
+-   dplyr (Wickham et al. 2021)
+-   forcats (Wickham 2021a)
+-   tibble (Müller and Wickham 2021)
+-   tidyr (Wickham 2021c)
+-   pichor (Andersen 2021)
+-   rvest (Wickham 2021b)
+-   tidyverse (Wickham et al. 2019)
+-   reticulate (Ushey, Allaire, and Tang 2021)
+-   purrr (Henry and Wickham 2020)
+-   stringr (Wickham 2019)
+-   ggplot2 (Wickham 2016)
+-   zeallot (Teetor 2018)
+-   magrittr (Bache and Wickham 2020)
+-   rlang (Henry and Wickham 2021)
+-   knitr (Xie 2014)
+-   rmarkdown (Xie, Dervieux, and Riederer 2020)
+-   tuneR (Ligges et al. 2018)
+-   testthat (Wickham 2011)
+-   covr (Hester 2020)
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-pichor" class="csl-entry">
+
+Andersen, Mikkel Meyer. 2021. *Pichor: Piano Chords in r*.
+
+</div>
+
+<div id="ref-magrittr" class="csl-entry">
+
+Bache, Stefan Milton, and Hadley Wickham. 2020. *Magrittr: A
+Forward-Pipe Operator for r*.
+<https://CRAN.R-project.org/package=magrittr>.
+
+</div>
+
+<div id="ref-purrr" class="csl-entry">
+
+Henry, Lionel, and Hadley Wickham. 2020. *Purrr: Functional Programming
+Tools*. <https://CRAN.R-project.org/package=purrr>.
+
+</div>
+
+<div id="ref-rlang" class="csl-entry">
+
+———. 2021. *Rlang: Functions for Base Types and Core r and ’Tidyverse’
+Features*. <https://CRAN.R-project.org/package=rlang>.
+
+</div>
+
+<div id="ref-covr" class="csl-entry">
+
+Hester, Jim. 2020. *Covr: Test Coverage for Packages*.
+<https://CRAN.R-project.org/package=covr>.
+
+</div>
+
+<div id="ref-tuneR" class="csl-entry">
+
+Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
+2018. *<span class="nocase">tuneR</span>: Analysis of Music and Speech*.
+<https://CRAN.R-project.org/package=tuneR>.
+
+</div>
+
+<div id="ref-tibble" class="csl-entry">
+
+Müller, Kirill, and Hadley Wickham. 2021. *Tibble: Simple Data Frames*.
+<https://CRAN.R-project.org/package=tibble>.
+
+</div>
+
+<div id="ref-base" class="csl-entry">
+
+R Core Team. 2021. *R: A Language and Environment for Statistical
+Computing*. Vienna, Austria: R Foundation for Statistical Computing.
+<https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-zeallot" class="csl-entry">
+
+Teetor, Nathan. 2018. *Zeallot: Multiple, Unpacking, and Destructuring
+Assignment*. <https://CRAN.R-project.org/package=zeallot>.
+
+</div>
+
+<div id="ref-reticulate" class="csl-entry">
+
+Ushey, Kevin, JJ Allaire, and Yuan Tang. 2021. *Reticulate: Interface to
+’Python’*. <https://CRAN.R-project.org/package=reticulate>.
+
+</div>
+
+<div id="ref-testthat" class="csl-entry">
+
+Wickham, Hadley. 2011. “Testthat: Get Started with Testing.” *The R
+Journal* 3: 5–10.
+<https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.
+
+</div>
+
+<div id="ref-ggplot2" class="csl-entry">
+
+———. 2016. *Ggplot2: Elegant Graphics for Data Analysis*.
+Springer-Verlag New York. <https://ggplot2.tidyverse.org>.
+
+</div>
+
+<div id="ref-stringr" class="csl-entry">
+
+———. 2019. *Stringr: Simple, Consistent Wrappers for Common String
+Operations*. <https://CRAN.R-project.org/package=stringr>.
+
+</div>
+
+<div id="ref-forcats" class="csl-entry">
+
+———. 2021a. *Forcats: Tools for Working with Categorical Variables
+(Factors)*. <https://CRAN.R-project.org/package=forcats>.
+
+</div>
+
+<div id="ref-rvest" class="csl-entry">
+
+———. 2021b. *Rvest: Easily Harvest (Scrape) Web Pages*.
+<https://CRAN.R-project.org/package=rvest>.
+
+</div>
+
+<div id="ref-tidyr" class="csl-entry">
+
+———. 2021c. *Tidyr: Tidy Messy Data*.
+<https://CRAN.R-project.org/package=tidyr>.
+
+</div>
+
+<div id="ref-tidyverse" class="csl-entry">
+
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
+D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
+“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
+Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
+
+</div>
+
+<div id="ref-usethis" class="csl-entry">
+
+Wickham, Hadley, Jennifer Bryan, and Malcolm Barrett. 2021. *Usethis:
+Automate Package and Project Setup*.
+<https://CRAN.R-project.org/package=usethis>.
+
+</div>
+
+<div id="ref-dplyr" class="csl-entry">
+
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2021.
+*Dplyr: A Grammar of Data Manipulation*.
+<https://CRAN.R-project.org/package=dplyr>.
+
+</div>
+
+<div id="ref-pkgdown" class="csl-entry">
+
+Wickham, Hadley, and Jay Hesselberth. 2020. *Pkgdown: Make Static HTML
+Documentation for a Package*.
+<https://CRAN.R-project.org/package=pkgdown>.
+
+</div>
+
+<div id="ref-knitr" class="csl-entry">
+
+Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research
+in R.” In *Implementing Reproducible Computational Research*, edited by
+Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman;
+Hall/CRC. <http://www.crcpress.com/product/isbn/9781466561595>.
+
+</div>
+
+<div id="ref-rmarkdown" class="csl-entry">
+
+Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
+Cookbook*. Boca Raton, Florida: Chapman; Hall/CRC.
+<https://bookdown.org/yihui/rmarkdown-cookbook>.
+
+</div>
+
+</div>
