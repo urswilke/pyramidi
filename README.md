@@ -65,7 +65,8 @@ in your python environment used by
 
 But if everything works as it should 🤞😅, miditapyr is automatically
 installed if you install pyramidi, as soon as you access the module for
-the first time.
+the first time. (I’m not sure if that works on windows too. Perhaps
+there you have to configure your reticulate environment manually.)
 
 Otherwise, you can also install it in your reticulate python environment
 with the included helper function:
