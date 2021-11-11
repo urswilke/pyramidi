@@ -21,7 +21,6 @@ A data.frame with the following columns added: c("m", "b", "t", "ticks", "time")
 Tabulate measure related data in the midi event data
 }
 \examples{
-## test
 \dontrun{
 mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido_mid_file <- mido$MidiFile(mid_file_str)

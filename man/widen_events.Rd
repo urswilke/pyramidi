@@ -16,7 +16,6 @@ A data.frame with the following columns pivoted to wide: c("m", "b", "t", "ticks
 write note_on and _off events in the same line (long to wide)
 }
 \examples{
-## test
 \dontrun{
 mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido_mid_file <- mido$MidiFile(mid_file_str)
