@@ -533,8 +533,8 @@ rmd <- create_rmd(cites)
 
 ## R packages used
 
-This package stands on the shoulders of giants. It was only possible
-thanks to the following libraries:
+This package stands on the shoulders of giants. A big thank you to the
+authors of the following libraries!
 
 -   base (R Core Team 2021)
 -   pkgdown (Wickham and Hesselberth 2020)
