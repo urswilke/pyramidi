@@ -1,8 +1,5 @@
 library(zeallot)
-if (!testthat:::on_ci()) {
-  # reticulate::use_python("/home/chief/anaconda3/bin/python", required = TRUE)
-  reticulate::use_virtualenv("r-reticulate", required = TRUE)
-}
+install_miditapyr()
 
 
 skip_if_no_miditapyr <- function() {
