@@ -374,23 +374,24 @@
 <span class="op">)</span></code></pre></div>
 <p>Let’s compare the modified value to the original one:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  old <span class="op">=</span> <span class="va">df_notes_wide</span><span class="op">$</span><span class="va">velocity_note_on</span>,
-  new <span class="op">=</span> <span class="va">df_notes_wide_mod</span><span class="op">$</span><span class="va">velocity_note_on</span>
-<span class="op">)</span>
-<span class="co">#&gt; # A tibble: 130 × 2</span>
-<span class="co">#&gt;      old   new</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1    72 127  </span>
-<span class="co">#&gt;  2    64 127  </span>
-<span class="co">#&gt;  3   101 127  </span>
-<span class="co">#&gt;  4   101  50.5</span>
-<span class="co">#&gt;  5   101  50.5</span>
-<span class="co">#&gt;  6    64  32  </span>
-<span class="co">#&gt;  7   101 127  </span>
-<span class="co">#&gt;  8    60  30  </span>
-<span class="co">#&gt;  9   101  50.5</span>
-<span class="co">#&gt; 10    60 127  </span>
+<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">select</span><span class="op">(</span><span class="va">b_note_on</span>, <span class="va">velocity_note_on</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">bind_cols</span><span class="op">(</span>
+    new <span class="op">=</span> <span class="va">df_notes_wide_mod</span><span class="op">$</span><span class="va">velocity_note_on</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 130 × 3</span>
+<span class="co">#&gt;    b_note_on velocity_note_on   new</span>
+<span class="co">#&gt;        &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1         0               72 127  </span>
+<span class="co">#&gt;  2         0               64 127  </span>
+<span class="co">#&gt;  3         0              101 127  </span>
+<span class="co">#&gt;  4         2              101  50.5</span>
+<span class="co">#&gt;  5         2              101  50.5</span>
+<span class="co">#&gt;  6         3               64  32  </span>
+<span class="co">#&gt;  7         4              101 127  </span>
+<span class="co">#&gt;  8         6               60  30  </span>
+<span class="co">#&gt;  9         6              101  50.5</span>
+<span class="co">#&gt; 10         8               60 127  </span>
 <span class="co">#&gt; # … with 120 more rows</span></code></pre></div>
 </div>
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
@@ -445,7 +446,7 @@
 <span class="co">#&gt; # … with 258 more rows, and 8 more variables: meta &lt;lgl&gt;, name &lt;list&gt;,</span>
 <span class="co">#&gt; #   tempo &lt;dbl&gt;, numerator &lt;dbl&gt;, denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></code></pre></div>
-<p>The <code>time</code> value in midi format is given by the number of ticks passed between events.</p>
+<p>The <code>time</code> value in midi format is given by the number of <code>ticks</code> passed between events.</p>
 </div>
 <div id="write-midi-dataframe-back-to-a-midi-file" class="section level3">
 <h3 class="hasAnchor">
