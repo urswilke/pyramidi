@@ -1,5 +1,5 @@
 library(zeallot)
-install_miditapyr()
+install_miditapyr(envname = "r-reticulate")
 
 
 skip_if_no_miditapyr <- function() {
