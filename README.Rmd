@@ -215,7 +215,7 @@ created with the commands:
 library(grateful)
 pkgs <- scan_packages()
 # don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")]
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")] %>% c("rayrender", "magick")
 cites <- get_citations(pkgs)
 rmd <- create_rmd(cites)
 
@@ -249,5 +249,7 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - tuneR [@tuneR]
 - testthat [@testthat]
 - covr [@covr]
+- rayrender [@rayrender]
+- magick [@magick]
 
 ## References

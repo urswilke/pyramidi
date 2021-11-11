@@ -525,7 +525,7 @@ created with the commands:
 library(grateful)
 pkgs <- scan_packages()
 # don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")]
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")] %>% c("rayrender", "magick")
 cites <- get_citations(pkgs)
 rmd <- create_rmd(cites)
 
@@ -560,6 +560,8 @@ authors of the following libraries!
 -   tuneR (Ligges et al. 2018)
 -   testthat (Wickham 2011)
 -   covr (Hester 2020)
+-   rayrender (Morgan-Wall 2021)
+-   magick (Ooms 2021)
 
 ## References
 
@@ -608,10 +610,24 @@ Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
 
 </div>
 
+<div id="ref-rayrender" class="csl-entry">
+
+Morgan-Wall, Tyler. 2021. *Rayrender: Build and Raytrace 3d Scenes*.
+<https://CRAN.R-project.org/package=rayrender>.
+
+</div>
+
 <div id="ref-tibble" class="csl-entry">
 
 Müller, Kirill, and Hadley Wickham. 2021. *Tibble: Simple Data Frames*.
 <https://CRAN.R-project.org/package=tibble>.
+
+</div>
+
+<div id="ref-magick" class="csl-entry">
+
+Ooms, Jeroen. 2021. *Magick: Advanced Graphics and Image-Processing in
+r*. <https://CRAN.R-project.org/package=magick>.
 
 </div>
 
