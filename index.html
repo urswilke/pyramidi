@@ -497,7 +497,7 @@ created with the commands:
 library(grateful)
 pkgs <- scan_packages()
 # don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")]
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")] %>% c("rayrender", "magick")
 cites <- get_citations(pkgs)
 rmd <- create_rmd(cites)
 
@@ -532,6 +532,8 @@ rmd <- create_rmd(cites)
 <li>tuneR (Ligges et al. 2018)</li>
 <li>testthat (Wickham 2011)</li>
 <li>covr (Hester 2020)</li>
+<li>rayrender (Morgan-Wall 2021)</li>
+<li>magick (Ooms 2021)</li>
 </ul>
 </div>
 <div id="references" class="section level2">
@@ -560,8 +562,14 @@ rmd <- create_rmd(cites)
 <em><span class="nocase">tuneR</span>: Analysis of Music and Speech</em>. <a href="https://CRAN.R-project.org/package=tuneR" class="uri">https://CRAN.R-project.org/package=tuneR</a>.</li>
 </ol>
 </div>
+<div id="ref-rayrender" class="csl-entry">
+<p>Morgan-Wall, Tyler. 2021. <em>Rayrender: Build and Raytrace 3d Scenes</em>. <a href="https://CRAN.R-project.org/package=rayrender" class="uri">https://CRAN.R-project.org/package=rayrender</a>.</p>
+</div>
 <div id="ref-tibble" class="csl-entry">
 <p>Müller, Kirill, and Hadley Wickham. 2021. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>.</p>
+</div>
+<div id="ref-magick" class="csl-entry">
+<p>Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>. <a href="https://CRAN.R-project.org/package=magick" class="uri">https://CRAN.R-project.org/package=magick</a>.</p>
 </div>
 <div id="ref-base" class="csl-entry">
 <p>R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
