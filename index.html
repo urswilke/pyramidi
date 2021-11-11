@@ -244,7 +244,7 @@
 <li>
 <code>t</code>: specifying the total time in seconds passed,</li>
 <li>
-<code>m</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Bar_(music)">measures</a> passed,</li>
+<code>m</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Bar_(music)">measures</a> (bars) passed,</li>
 <li>
 <code>b</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Beat_(music)">beats</a> passed,</li>
 <li>
@@ -393,6 +393,14 @@
 <span class="co">#&gt;  9         6              101  50.5</span>
 <span class="co">#&gt; 10         8               60 127  </span>
 <span class="co">#&gt; # … with 120 more rows</span></code></pre></div>
+<p>With an <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> statement, we modified the volume of the midi notes, depending on if they’re the first beat in the measure or not.</p>
+<p>Other possible manipulations could be for instance:</p>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Quantization_(music)">Quantization</a> by <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code>ing the <code>note_on</code>/<code>note_off</code> times,</li>
+<li>Chord generation, e.g. by applying a <code>group_by(floor(m_note_on))</code>-<code>summarize()</code> logic, or</li>
+<li>Arpeggiating chords by a <code>group_by(floor(m_note_on))</code> - <code>mutate()</code> logic.</li>
+</ul>
 </div>
 <div id="pivot-note-data-frame-back-to-long-format" class="section level3">
 <h3 class="hasAnchor">
