@@ -231,7 +231,7 @@ This function adds further columns:
 -   `ticks`: specifying the total ticks passed,
 -   `t`: specifying the total time in seconds passed,
 -   `m`: specifying the total
-    [measures](https://en.wikipedia.org/wiki/Bar_(music)) passed,
+    [measures](https://en.wikipedia.org/wiki/Bar_(music)) (bars) passed,
 -   `b`: specifying the total
     [beats](https://en.wikipedia.org/wiki/Beat_(music)) passed,
 -   `i_note`: unique ascending index for every track and midi note in
@@ -402,6 +402,18 @@ df_notes_wide %>%
 #> 10         8               60 127  
 #> # … with 120 more rows
 ```
+
+With an `ifelse()` statement, we modified the volume of the midi notes,
+depending on if they’re the first beat in the measure or not.
+
+Other possible manipulations could be for instance:
+
+-   [Quantization](https://en.wikipedia.org/wiki/Quantization_(music))
+    by `round()`ing the `note_on`/`note_off` times,
+-   Chord generation, e.g. by applying a
+    `group_by(floor(m_note_on))`-`summarize()` logic, or
+-   Arpeggiating chords by a `group_by(floor(m_note_on))` - `mutate()`
+    logic.
 
 ### Pivot note data frame back to long format
 
