@@ -2,7 +2,7 @@
 
 #' Construct a midi frame object
 #'
-#' Constructor of an object of class "midi_framer".
+#' Constructor of an object of class "r_midi_frames".
 #'
 #' @param midi_file_string Path to the midi file
 #'
@@ -12,8 +12,8 @@
 #' @examples
 #' midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' new_midi_framer(midi_file_string)
-new_midi_framer <- function(midi_file_string) {
+#' r_midi_frames(midi_file_string)
+r_midi_frames <- function(midi_file_string) {
   mf <- miditapyr$MidiFrames(midi_file_string)
 
   dfm <- tab_measures(mf$midi_frame_tidy$midi_frame_tidy, ticks_per_beat = mf$midi_file$ticks_per_beat)
@@ -34,27 +34,27 @@ new_midi_framer <- function(midi_file_string) {
       df_notes_long,
       df_long_mod
     ),
-    class = "midi_framer"
+    class = c("r_midi_frames", "list")
   )
 }
 
 
 #' Modify notes in wide format and trigger updates of observers
 #'
-#' For a "midi_framer" object  \code{mfr}, this method replaces
+#' For a "r_midi_frames" object  \code{mfr}, this method replaces
 #' mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
 #' derived dataframes.
 #'
-#' @param mfr midi_framer object
+#' @param mfr r_midi_frames object
 #' @param mod Function modifying or dataframe replacing
 #'
-#' @return Updated midi_framer object.
+#' @return Updated r_midi_frames object.
 #' @export
 #'
 #' @examples
 #' midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' mfr <- new_midi_framer(midi_file_string)
+#' mfr <- r_midi_frames(midi_file_string)
 #' # Function to replace every note with a random midi note between 60 & 71:
 #' mod <- function(dfn) {
 #'   n_notes <- sum(!is.na(dfn$note))
@@ -75,14 +75,14 @@ mod_notes <- function(mfr, mod) {
   UseMethod("mod_notes")
 }
 #' @export
-mod_notes.midi_framer <- function(mfr, mod) {
+mod_notes.r_midi_frames <- function(mfr, mod) {
   if (is.function(mod)) {
     mod <- mod(mfr$df_notes_wide)
   }
 
   mfr$df_notes_wide <- mod
 
-  # recalculate the dataframes resulting from df_notes_wide in midi_framer:
+  # recalculate the dataframes resulting from df_notes_wide in r_midi_frames:
   mfr$df_notes_long <- pivot_long_notes(mfr$df_notes_wide)
 
   mfr$df_long_mod <- merge_long_events(mfr$df_meta, mfr$df_notes_long, mfr$df_not_notes)
@@ -90,3 +90,6 @@ mod_notes.midi_framer <- function(mfr, mod) {
   mfr$mf$midi_frame_tidy$update_tidy_mf(mfr$df_long_mod)
   mfr
 }
+
+
+

@@ -7,22 +7,22 @@
 mod_notes(mfr, mod)
 }
 \arguments{
-\item{mfr}{midi_framer object}
+\item{mfr}{r_midi_frames object}
 
 \item{mod}{Function modifying or dataframe replacing}
 }
 \value{
-Updated midi_framer object.
+Updated r_midi_frames object.
 }
 \description{
-For a "midi_framer" object  \code{mfr}, this method replaces
+For a "r_midi_frames" object  \code{mfr}, this method replaces
 mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
 derived dataframes.
 }
 \examples{
 midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- new_midi_framer(midi_file_string)
+mfr <- r_midi_frames(midi_file_string)
 # Function to replace every note with a random midi note between 60 & 71:
 mod <- function(dfn) {
   n_notes <- sum(!is.na(dfn$note))
