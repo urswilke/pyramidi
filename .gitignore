@@ -5,3 +5,4 @@ removed/*
 inst/doc
 docs/
 playground
+*.wav
