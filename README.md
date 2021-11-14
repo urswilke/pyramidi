@@ -572,7 +572,6 @@ authors of the following libraries!
 -   rlang (Henry and Wickham 2021)
 -   knitr (Xie 2014)
 -   rmarkdown (Xie, Dervieux, and Riederer 2020)
--   tuneR (Ligges et al. 2018)
 -   testthat (Wickham 2011)
 -   covr (Hester 2020)
 -   rayrender (Morgan-Wall 2021)
@@ -614,14 +613,6 @@ Features*. <https://CRAN.R-project.org/package=rlang>.
 
 Hester, Jim. 2020. *Covr: Test Coverage for Packages*.
 <https://CRAN.R-project.org/package=covr>.
-
-</div>
-
-<div id="ref-tuneR" class="csl-entry">
-
-Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
-2018. *<span class="nocase">tuneR</span>: Analysis of Music and Speech*.
-<https://CRAN.R-project.org/package=tuneR>.
 
 </div>
 

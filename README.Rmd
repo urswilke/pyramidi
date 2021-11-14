@@ -256,7 +256,6 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - rlang [@rlang]
 - knitr [@knitr]
 - rmarkdown [@rmarkdown]
-- tuneR [@tuneR]
 - testthat [@testthat]
 - covr [@covr]
 - rayrender [@rayrender]

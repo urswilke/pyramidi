@@ -37,7 +37,6 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
-    tuneR,
     testthat,
     covr
 Remotes: 
