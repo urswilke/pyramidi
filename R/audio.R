@@ -11,7 +11,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' mfr <- r_midi_frames(midi_file_string)
 #' mfr %>% play_midi_frame()

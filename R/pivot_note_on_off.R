@@ -78,7 +78,6 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' @examples
 #'
-#' midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' mf <- miditapyr$MidiFrames(midi_file_string)
 #'
