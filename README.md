@@ -32,11 +32,7 @@ write can be understood by your softsynth; but
 some of the possible inconsistencies.
 
 *I started to write these packages quite some time ago. They are
-sometimes not very well designed. For now `miditapyr` only contains one
-module with functions. And the functionality of `pyramidi` is quite
-limited and necessitates a lot of manual intermediate steps. But the
-loose structure allows you to generate & manipulate midi data on many
-different levels.*
+sometimes not very well designed.*
 
 ## Installation
 
@@ -65,8 +61,7 @@ in your python environment used by
 
 But if everything works as it should 🤞😅, miditapyr is automatically
 installed if you install pyramidi, as soon as you access the module for
-the first time. (I’m not sure if that works on windows too. Perhaps
-there you have to configure your reticulate environment manually.)
+the first time.
 
 Otherwise, you can also install it in your reticulate python environment
 with the included helper function:
@@ -74,6 +69,9 @@ with the included helper function:
 ``` r
 pyramidi::install_miditapyr()
 ```
+
+*I’m not sure if that works on windows too. Perhaps there you have to
+configure your reticulate environment manually.*
 
 ## Usage
 
@@ -93,7 +91,7 @@ mfr <- r_midi_frames(midi_file_string)
 The object contains the midi data in various dataframe formats and an
 interface to the miditapyr
 [miditapyr.MidiFrames](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html)
-object `mfr$mf`. You can write the midi file resulting of the MidiFrame
+object `mfr$mf`. You can write the midi file resulting of the MidiFrames
 object to disk:
 
 ``` r

@@ -35,7 +35,7 @@ to midi files (again using miditapyr).
 
 Thus you can manipulate these dataframes at all steps and write midi files from R. You need to make sure yourself that the midi files you write can be understood by your softsynth; but [mido](https://github.com/mido/mido) (used by miditapyr) already catches some of the possible inconsistencies.
 
-*I started to write these packages quite some time ago. They are sometimes not very well designed. For now `miditapyr` only contains one module with functions. And the functionality of `pyramidi` is quite limited and necessitates a lot of manual intermediate steps. But the loose structure allows you to generate & manipulate midi data on many different levels.* 
+*I started to write these packages quite some time ago. They are sometimes not very well designed.* 
 
 ## Installation
 
@@ -60,7 +60,7 @@ pip install miditapyr
 in your python environment used by [reticulate](https://github.com/rstudio/reticulate).
 
 But if everything works as it should 🤞😅, miditapyr is automatically installed
-if you install pyramidi, as soon as you access the module for the first time. (I'm not sure if that works on windows too. Perhaps there you have to configure your reticulate environment manually.)
+if you install pyramidi, as soon as you access the module for the first time. 
 
 Otherwise, you can also install it
 in your reticulate python environment
@@ -70,6 +70,7 @@ with the included helper function:
 pyramidi::install_miditapyr()
 ```
 
+*I'm not sure if that works on windows too. Perhaps there you have to configure your reticulate environment manually.*
 
 ## Usage 
 
@@ -90,7 +91,7 @@ mfr <- r_midi_frames(midi_file_string)
 The object contains the midi data in various dataframe formats and an interface
 to the miditapyr
 [miditapyr.MidiFrames](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html)
-object `mfr$mf`.  You can write the midi file resulting of the MidiFrame object to disk:
+object `mfr$mf`. You can write the midi file resulting of the MidiFrames object to disk:
 
 ```{r, eval=FALSE}
 mfr$mf$write_file("/path/to/your/midifile.mid")
