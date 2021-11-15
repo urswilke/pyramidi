@@ -1,8 +1,8 @@
 ---
-title: "Basic midi file manipulations with midi_framer objects"
+title: "Midi manipulation with pyramidi"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Basic midi file manipulations with midi_framer objects}
+  %\VignetteIndexEntry{Midi manipulation with pyramidi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -30,14 +30,15 @@ library(tibble)
 library(raudiomate) # see https://github.com/urswilke/raudiomate
 ```
 
-## Generate R midi_frames object
+## Generate R midi frames object
 
-We can create an R midi frames object by passing the file file path to the  
-constructor. 
+We can create an R midi object of class `"r_midi_frames"` by passing the midi file path to the  
+constructor function `r_midi_frames()` of the same name. 
 
 ```{r, message=FALSE}
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- r_midi_frames(midi_file_string)
+class(mfr)
 ```
 
 It is a list object that contains the following objects:
@@ -46,7 +47,7 @@ It is a list object that contains the following objects:
 enframe(mfr)
 ```
 
-The first object `mf` is the `midi_frame` object from `miditapyr.MidiFrame()`. After the [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data there are the 3 dataframes:
+The first object `mf` is the `midi_frame` object from `miditapyr.MidiFrames()`. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
 
 ```{r}
 list(
