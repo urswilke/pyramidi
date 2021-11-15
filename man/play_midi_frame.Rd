@@ -4,12 +4,20 @@
 \alias{play_midi_frame}
 \title{Play midi from midi frame}
 \usage{
-play_midi_frame(mfr, audiofile = tempfile("mf_out_", fileext = ".wav"))
+play_midi_frame(
+  mfr,
+  audiofile = tempfile("mf_out_", fileext = ".wav"),
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{mfr}{r_midi_frames object}
 
 \item{audiofile}{audiofile}
+
+\item{overwrite}{logical; defaults to FALSE;
+if file exists and overwrite = FALSE, the existing files will be used and nothing
+is synthesized/ocnverted to audio files.}
 }
 \value{
 

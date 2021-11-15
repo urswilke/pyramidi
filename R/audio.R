@@ -5,6 +5,9 @@
 #'
 #' @param mfr r_midi_frames object
 #' @param audiofile audiofile
+#' @param overwrite logical; defaults to FALSE;
+#' if file exists and overwrite = FALSE, the existing files will be used and nothing
+#' is synthesized/ocnverted to audio files.
 #'
 #' @return
 #' @export
@@ -17,7 +20,8 @@
 #' }
 play_midi_frame <- function(
   mfr,
-  audiofile = tempfile("mf_out_", fileext = ".wav")
+  audiofile = tempfile("mf_out_", fileext = ".wav"),
+  overwrite = FALSE
 ) {
   filetype <- audiofile %>%
     stringr::str_sub(-3L) %>%
@@ -29,14 +33,17 @@ play_midi_frame <- function(
   mp3file <- paste0(filestem, ".mp3")
   midfile <- paste0(filestem, ".mid")
 
-  mfr$mf$write_file(midfile)
-  raudiomate::synthesize_midi(midfile, wavfile)
-  message("(Hopefully) created midi and audio file ", midfile, " and synthesized ", wavfile, ".")
-
-  if (filetype == "mp3") {
+  if (overwrite | !file.exists(midfile)) {
+    mfr$mf$write_file(midfile)
+  }
+  if (overwrite | !file.exists(wavfile)) {
+    raudiomate::synthesize_midi(midfile, wavfile)
+  }
+  if ((overwrite | !file.exists(mp3file)) & filetype == "mp3") {
     raudiomate::convert_to_mp3(wavfile)
     message("(Hopefully) created mp3 file ", mp3file, ".")
   }
+  message("(Hopefully) created midi and audio file ", midfile, " and synthesized ", wavfile, ".")
 
 
   raudiomate::play_button(audiofile, filetype)
