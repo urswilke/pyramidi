@@ -98,14 +98,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools">htmltools</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
@@ -119,9 +111,7 @@
 constructor.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
-<span class="va">mfr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/r_midi_frames.html">r_midi_frames</a></span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span></code></pre></div>
+<span class="va">mfr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/r_midi_frames.html">r_midi_frames</a></span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></code></pre></div>
 <p>It is a list object that contains the following objects:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="va">mfr</span><span class="op">)</span>
@@ -216,16 +206,16 @@ constructor.</p>
 <span class="co">#&gt; # A tibble: 130 × 17</span>
 <span class="co">#&gt;    i_track meta   note channel i_note time_note_on time_note_off</span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 FALSE    63       9      1            0           240</span>
-<span class="co">#&gt;  2       0 FALSE    67       9      1            0             0</span>
-<span class="co">#&gt;  3       0 FALSE    63       9      1            0             0</span>
-<span class="co">#&gt;  4       0 FALSE    71       9      1          240             0</span>
+<span class="co">#&gt;  1       0 FALSE    67       9      1            0           240</span>
+<span class="co">#&gt;  2       0 FALSE    62       9      1            0             0</span>
+<span class="co">#&gt;  3       0 FALSE    67       9      1            0             0</span>
+<span class="co">#&gt;  4       0 FALSE    62       9      1          240             0</span>
 <span class="co">#&gt;  5       0 FALSE    69       9      1            0             0</span>
-<span class="co">#&gt;  6       0 FALSE    62       9      2          240           240</span>
+<span class="co">#&gt;  6       0 FALSE    66       9      2          240           240</span>
 <span class="co">#&gt;  7       0 FALSE    69       9      2            0           240</span>
-<span class="co">#&gt;  8       0 FALSE    68       9      3          240           240</span>
-<span class="co">#&gt;  9       0 FALSE    71       9      2            0             0</span>
-<span class="co">#&gt; 10       0 FALSE    60       9      4          240           240</span>
+<span class="co">#&gt;  8       0 FALSE    62       9      3          240           240</span>
+<span class="co">#&gt;  9       0 FALSE    67       9      2            0             0</span>
+<span class="co">#&gt; 10       0 FALSE    69       9      4          240           240</span>
 <span class="co">#&gt; # … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
@@ -234,16 +224,14 @@ constructor.</p>
 <p>When we call <code><a href="../reference/mod_notes.html">mod_notes()</a></code>, all the depending list elements are also automatically updated.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Apply the modification to mfr$df_notes_wide and all depending dataframes:</span>
-<span class="va">mfr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mod_notes.html">mod_notes</a></span><span class="op">(</span><span class="va">mfr</span>, <span class="va">mod</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span></code></pre></div>
+<span class="va">mfr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mod_notes.html">mod_notes</a></span><span class="op">(</span><span class="va">mfr</span>, <span class="va">mod</span><span class="op">)</span></code></pre></div>
 <p>The data has also been changed in <code>mfr$mf</code> the miditapyr midi_frames object in mfr:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_compact</span><span class="op">$</span><span class="va">midi_frame_compact</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   i_track  meta                            msg</span>
-<span class="co">#&gt; 1       0 FALSE          9, 62, note_on, 0, 72</span>
-<span class="co">#&gt; 2       0 FALSE          9, 65, note_on, 0, 64</span>
-<span class="co">#&gt; 3       0 FALSE         9, 70, note_on, 0, 101</span>
+<span class="co">#&gt; 1       0 FALSE          9, 69, note_on, 0, 72</span>
+<span class="co">#&gt; 2       0 FALSE          9, 63, note_on, 0, 64</span>
+<span class="co">#&gt; 3       0 FALSE         9, 69, note_on, 0, 101</span>
 <span class="co">#&gt; 4       0  TRUE    track_name, 0, drum-t1-1-t1</span>
 <span class="co">#&gt; 5       0  TRUE           set_tempo, 0, 666666</span>
 <span class="co">#&gt; 6       0  TRUE time_signature, 0, 4, 4, 24, 8</span></code></pre></div>
@@ -278,11 +266,7 @@ constructor.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">l_mfr</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/mod_notes.html">mod_notes</a></span><span class="op">(</span><span class="va">mfr</span>, <span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"test"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">".mp3"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span></code></pre></div>
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"test"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">".mp3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tagList.html">tagList</a></span><span class="op">(</span>
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span>
