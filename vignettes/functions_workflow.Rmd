@@ -21,6 +21,11 @@ knitr::opts_chunk$set(
 
 First load some libraries:
 
+```{r, include=FALSE, message=FALSE}
+pyramidi::install_miditapyr()
+```
+
+
 ```{r setup, message=FALSE}
 library(pyramidi)
 library(dplyr)
