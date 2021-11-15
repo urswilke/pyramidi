@@ -1,6 +1,8 @@
 pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-11-15T03:45Z
+articles:
+  functions_workflow: functions_workflow.html
+  midi_framer: midi_framer.html
+last_built: 2021-11-15T04:17Z
 

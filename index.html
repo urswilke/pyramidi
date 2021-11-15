@@ -46,6 +46,21 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/functions_workflow.html">Package Workflow and Functions</a>
+    </li>
+    <li>
+      <a href="articles/midi_framer.html">Basic midi file manipulations with midi_framer objects</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -143,7 +158,7 @@ constructor.</p>
 <div id="synthesizing-and-playing-audio" class="section level2">
 <h2 class="hasAnchor">
 <a href="#synthesizing-and-playing-audio" class="anchor"></a>Synthesizing and playing audio</h2>
-<p>See the <code>vignette("midi_framer", package = "pyramidi")</code> to see how you can synthesize the midi data to wav, convert to mp3 if you want, and then embed a player in your rmarkdown html document with</p>
+<p>See the <code><a href="articles/midi_framer.html">vignette("midi_framer", package = "pyramidi")</a></code> to see how you can synthesize the midi data to wav, convert to mp3 if you want, and then embed a player in your rmarkdown html document with</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/play_midi_frame.html">play_midi_frame</a></span><span class="op">(</span><span class="va">mfr</span><span class="op">)</span>
 <span class="co">#&gt; (Hopefully) created midi and audio file /tmp/RtmpzYP5QV/mf_out_351c95c34bf3b.mid and synthesized /tmp/RtmpzYP5QV/mf_out_351c95c34bf3b.wav.</span></code></pre></div>
@@ -154,7 +169,7 @@ constructor.</p>
 <a href="#related-r-packages" class="anchor"></a>Related R packages</h2>
 <ul>
 <li>The <a href="https://github.com/ColinFay/noon">noon package</a> wraps node.js libraries and can be used to read live midi input port data. I wrote a small <a href="https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/">blog post</a> how reading a midi port can also be done in R with <a href="https://mido.readthedocs.io/en/latest/ports.html">mido</a>. Interestingly, the node.js libraries and mido rely on a the same C++ library <a href="http://www.music.mcgill.ca/~gary/rtmidi/index.html">RtMidi</a>.</li>
-<li>The <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package can also read in midi data. See the <a href="https://urswilke.github.io/pyramidi/articles/tuner.html">vignette</a>, for an example how you can transform the tuner format into the pyramidi format (or run <code><a href="https://urswilke.github.io/pyramidi/articles/tuner.html">vignette("tuner", package = "pyramidi")</a></code> to load the vignette on your machine).</li>
+<li>The <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package can also read in midi data. See the <a href="https://urswilke.github.io/pyramidi/articles/tuner.html">vignette</a>, for an example how you can transform the tuner format into the pyramidi format (or run <code>vignette("tuner", package = "pyramidi")</code> to load the vignette on your machine).</li>
 </ul>
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
