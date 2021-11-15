@@ -160,11 +160,10 @@ play_midi_frame(mfr)
     library
     [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
 -   The [tuneR](https://cran.r-project.org/package=tuneR) package can
-    also read in midi data. See the
-    [vignette](https://urswilke.github.io/pyramidi/articles/tuner.html),
+    also read in midi data. See this
+    [article](https://urswilke.github.io/pyramidi/articles/tuner.html),
     for an example how you can transform the tuner format into the
-    pyramidi format (or run `vignette("tuner", package = "pyramidi")` to
-    load the vignette on your machine).
+    pyramidi format.
 
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
