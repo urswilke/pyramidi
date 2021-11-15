@@ -16,7 +16,7 @@ Updated r_midi_frames object.
 }
 \description{
 For a "r_midi_frames" object  \code{mfr}, this method replaces
-mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
+mfr$mf$midi_frame_unnested$df, and all other
 derived dataframes.
 }
 \examples{
@@ -34,7 +34,7 @@ mod <- function(dfn) {
 # Apply the modification to mfr$df_notes_wide and all depending dataframes:
 mfr <- mod_notes(mfr, mod)
 # The data has also been changed in `mf` the miditapyr midi_frame object in mfr:
-mfr$mf$midi_frame_compact$midi_frame_compact
+mfr$mf$midi_frame_nested$df
 
 # You can save the modified midi data back to a file:
 mfr$mf$write_file("mod_test_midi_file.mid")

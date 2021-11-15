@@ -15,9 +15,9 @@
 r_midi_frames <- function(midi_file_string) {
   mf <- miditapyr$MidiFrames(midi_file_string)
 
-  dfm <- tab_measures(mf$midi_frame_tidy$midi_frame_tidy, ticks_per_beat = mf$midi_file$ticks_per_beat)
+  dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 
-  c(df_meta, df_not_notes, df_notes_wide) %<-% triage_measured_tidy(dfm)
+  c(df_meta, df_not_notes, df_notes_wide) %<-% triage_measured_unnested(dfm)
 
   df_notes_long <- pivot_long_notes(df_notes_wide)
 
@@ -41,7 +41,7 @@ r_midi_frames <- function(midi_file_string) {
 #' Modify notes in wide format and trigger updates of observers
 #'
 #' For a "r_midi_frames" object  \code{mfr}, this method replaces
-#' mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
+#' mfr$mf$midi_frame_unnested$df, and all other
 #' derived dataframes.
 #'
 #' @param mfr r_midi_frames object
@@ -65,7 +65,7 @@ r_midi_frames <- function(midi_file_string) {
 #' # Apply the modification to mfr$df_notes_wide and all depending dataframes:
 #' mfr <- mod_notes(mfr, mod)
 #' # The data has also been changed in `mf` the miditapyr midi_frame object in mfr:
-#' mfr$mf$midi_frame_compact$midi_frame_compact
+#' mfr$mf$midi_frame_nested$df
 #'
 #' # You can save the modified midi data back to a file:
 #' mfr$mf$write_file("mod_test_midi_file.mid")
@@ -85,7 +85,7 @@ mod_notes.r_midi_frames <- function(mfr, mod) {
 
   mfr$df_long_mod <- merge_long_events(mfr$df_meta, mfr$df_notes_long, mfr$df_not_notes)
 
-  mfr$mf$midi_frame_tidy$update_tidy_mf(mfr$df_long_mod)
+  mfr$mf$midi_frame_unnested$update_unnested_mf(mfr$df_long_mod)
   mfr
 }
 

@@ -116,8 +116,8 @@
 ---
 
     Code
-      list(mfr$mf$midi_frame_raw, mfr$mf$midi_frame_tidy$midi_frame_tidy, mfr$mf$
-        midi_frame_compact$midi_frame_compact)
+      list(mfr$mf$midi_frame_raw, mfr$mf$midi_frame_unnested$df, mfr$mf$
+        midi_frame_nested$df)
     Output
       [[1]]
           i_track  meta                            msg

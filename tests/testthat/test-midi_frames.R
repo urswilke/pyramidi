@@ -5,7 +5,7 @@ test_that("print of r_midi_frames() correct", {
   expect_snapshot(mfr)
   expect_snapshot(list(
     mfr$mf$midi_frame_raw,
-    mfr$mf$midi_frame_tidy$midi_frame_tidy,
-    mfr$mf$midi_frame_compact$midi_frame_compact
+    mfr$mf$midi_frame_unnested$df,
+    mfr$mf$midi_frame_nested$df
   ))
 })

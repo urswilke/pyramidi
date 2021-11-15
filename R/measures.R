@@ -1,6 +1,6 @@
 #' Tabulate measure related data in the midi event data
 #'
-#' @param df Note event data.frame resulting of miditapyr$tidy_df()
+#' @param df Note event data.frame resulting of miditapyr$unnest_midi()
 #' @param ticks_per_beat integer resulting of miditapyr$mido_midi_df()
 #'
 #' @return A data.frame with the following columns added: c("m", "b", "t", "ticks", "time"). \cr
@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
+#' @example man/rmdhunks/examples/generate_unnest_midi.Rmd
 #' @examples
 #' \dontrun{
 #' tab_measures(df, ticks_per_beat)

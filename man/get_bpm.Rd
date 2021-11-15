@@ -17,14 +17,6 @@ Get beats per minute
 }
 \examples{
 \dontrun{
-mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mido_mid_file <- mido$MidiFile(mid_file_str)
-dfc <- miditapyr$midi_to_df(mido_mid_file)
-ticks_per_beat = mido_mid_file$ticks_per_beat
-df <- dfc \%>\%
-  miditapyr$tidy_df()
-}
-\dontrun{
 dfm <- tab_measures(df, ticks_per_beat)
 library(zeallot)
 miditapyr$split_df(dfm)  \%->\% c(df_meta, df_notes)

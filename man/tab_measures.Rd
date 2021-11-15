@@ -7,7 +7,7 @@
 tab_measures(df, ticks_per_beat)
 }
 \arguments{
-\item{df}{Note event data.frame resulting of miditapyr$tidy_df()}
+\item{df}{Note event data.frame resulting of miditapyr$unnest_midi()}
 
 \item{ticks_per_beat}{integer resulting of miditapyr$mido_midi_df()}
 }
@@ -21,14 +21,6 @@ A data.frame with the following columns added: c("m", "b", "t", "ticks", "time")
 Tabulate measure related data in the midi event data
 }
 \examples{
-\dontrun{
-mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mido_mid_file <- mido$MidiFile(mid_file_str)
-dfc <- miditapyr$midi_to_df(mido_mid_file)
-ticks_per_beat = mido_mid_file$ticks_per_beat
-df <- dfc \%>\%
-  miditapyr$tidy_df()
-}
 \dontrun{
 tab_measures(df, ticks_per_beat)
 }

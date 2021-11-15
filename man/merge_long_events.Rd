@@ -15,16 +15,16 @@ merge_long_events(df_meta, df_notes_long, df_not_notes)
 \description{
 Merge dataframes transformed back to long format, remove added columns and
 transform to the right chronological order in order to replace the original
-midi_frame_tidy object.
+midi_frame_unnested object.
 }
 \examples{
 
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mf <- miditapyr$MidiFrames(midi_file_string)
 
-dfm <- tab_measures(mf$midi_frame_tidy$midi_frame_tidy, ticks_per_beat = mf$midi_file$ticks_per_beat)
+dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 
-l <- triage_measured_tidy(dfm)
+l <- triage_measured_unnested(dfm)
 
 df_notes_long <- pivot_long_notes(l$df_notes_wide)
 

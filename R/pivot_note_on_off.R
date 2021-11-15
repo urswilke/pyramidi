@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
+#' @example man/rmdhunks/examples/generate_unnest_midi.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
@@ -37,7 +37,7 @@ pivot_wide_notes <- function(df_measures) {
 #' @return
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
+#' @example man/rmdhunks/examples/generate_unnest_midi.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
@@ -69,7 +69,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' Merge dataframes transformed back to long format, remove added columns and
 #' transform to the right chronological order in order to replace the original
-#' midi_frame_tidy object.
+#' midi_frame_unnested object.
 #'
 #' @param df_meta,df_notes_long,df_not_notes Results of `miditapyr$split_df()`.
 #'
@@ -81,9 +81,9 @@ pivot_long_notes <- function(df_notes_wide) {
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' mf <- miditapyr$MidiFrames(midi_file_string)
 #'
-#' dfm <- tab_measures(mf$midi_frame_tidy$midi_frame_tidy, ticks_per_beat = mf$midi_file$ticks_per_beat)
+#' dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 #'
-#' l <- triage_measured_tidy(dfm)
+#' l <- triage_measured_unnested(dfm)
 #'
 #' df_notes_long <- pivot_long_notes(l$df_notes_wide)
 #'
@@ -103,9 +103,9 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 
 
 
-#' Split tidy midi dataframe into parts
+#' Split unnested midi dataframe into parts
 #'
-#' Tidy midi frame from `\code{tab_measures()} is split into 3 parts:
+#' Unnested midi frame with time data from `\code{tab_measures()} is split into 3 parts:
 #' df_meta, df_not_notes & df_notes_wide.
 #'
 #' @param dfm result of \code{tab_measures()}
@@ -113,13 +113,13 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #' @return
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_tidy_df.Rmd
+#' @example man/rmdhunks/examples/generate_unnest_midi.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' triage_measured_tidy(dfm)
+#' triage_measured_unnested(dfm)
 #' }
-triage_measured_tidy <- function(dfm) {
+triage_measured_unnested <- function(dfm) {
   c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
 
   df_not_notes <- df_notes %>%

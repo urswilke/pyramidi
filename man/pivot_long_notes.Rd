@@ -17,14 +17,6 @@ Write note_on and _off events in two lines (wide to long)
 }
 \examples{
 \dontrun{
-mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mido_mid_file <- mido$MidiFile(mid_file_str)
-dfc <- miditapyr$midi_to_df(mido_mid_file)
-ticks_per_beat = mido_mid_file$ticks_per_beat
-df <- dfc \%>\%
-  miditapyr$tidy_df()
-}
-\dontrun{
 dfm <- tab_measures(df, ticks_per_beat)
 dfw <- dfm \%>\% pivot_wide_notes()
 

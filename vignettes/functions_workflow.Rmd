@@ -48,7 +48,7 @@ ticks_per_beat <- midifile$ticks_per_beat
 Now we can load the information of the `midifile` into a dataframe:
 
 ```{r midi_df2, message=FALSE}
-dfc = miditapyr$midi_to_df(midifile)
+dfc = miditapyr$frame_midi(midifile)
 head(dfc, 20)
 ```
 
@@ -60,10 +60,10 @@ The `MidiFile()` function of `mido` also yields the [`ticks_per_beat`](https://m
 ticks_per_beat
 ```
 
-The `miditapyr$tidy_df()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `tidyr::unnest_wider()`):
+The `miditapyr$unnest_midi()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `tidyr::unnest_wider()`):
 
 ```{r}
-df <- miditapyr$tidy_df(dfc) %>% as_tibble()
+df <- miditapyr$unnest_midi(dfc) %>% as_tibble()
 head(df, 20)
 ```
 
@@ -233,7 +233,7 @@ The `time` value in midi format is given by the number of `ticks` passed between
 
 ### Write midi dataframe back to a midi file
 
-Now we can transform the data back to a dataframe of the same format as the one we got with `miditapyr$midi_to_df()`:
+Now we can transform the data back to a dataframe of the same format as the one we got with `miditapyr$frame_midi()`:
 ```{r dfc2}
 dfc2 <-
   df_midi_out %>%
@@ -241,12 +241,12 @@ dfc2 <-
   # with character columns containing missing values.
   # repair_reticulate_conversion = TRUE, repairs that in the miditapyr python
   # code:
-  miditapyr$compact_df(repair_reticulate_conversion = TRUE)
+  miditapyr$nest_midi(repair_reticulate_conversion = TRUE)
 as_tibble(dfc2)
 ```
 
 And we can save it back to a midi file:
 
 ```{r write_midi, eval=FALSE}
-miditapyr$df_to_midi(dfc2, ticks_per_beat, "test.mid")
+miditapyr$write_midi(dfc2, ticks_per_beat, "test.mid")
 ```
