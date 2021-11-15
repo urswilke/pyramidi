@@ -7,10 +7,10 @@ test_that("meta events work", {
   ticks_per_beat = mido_mid_file$ticks_per_beat
   df <- dfc %>%
     miditapyr$tidy_df()
-  miditapyr$split_df(df)  %->% c(df_meta, df_notes)
+  miditapyr$split_df(df) %->% c(df_meta, df_notes)
 
   dfm <- tab_measures(df, ticks_per_beat)
-  dfw <- dfm %>% widen_events()
+  dfw <- dfm %>% pivot_wide_notes()
   testthat::expect_snapshot(tab_time_sig(df_meta))
   testthat::expect_snapshot(dfm)
   testthat::expect_snapshot(dfw)

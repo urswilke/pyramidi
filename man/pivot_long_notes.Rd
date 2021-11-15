@@ -26,7 +26,7 @@ df <- dfc \%>\%
 }
 \dontrun{
 dfm <- tab_measures(df, ticks_per_beat)
-dfw <- dfm \%>\% widen_events()
+dfw <- dfm \%>\% pivot_wide_notes()
 
 
 library(zeallot)

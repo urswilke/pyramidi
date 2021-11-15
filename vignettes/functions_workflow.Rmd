@@ -122,7 +122,7 @@ df_notes %>% as_tibble()
 
 Each note in the midi file is characterized by a `note_on` and a `note_off` event.
 In order to generate a piano roll plot with ggplot2, we need to `tidyr::pivot_wider()` those events.
-This can be done with the function `widen_events()`:
+This can be done with the function `pivot_wide_notes()`:
 
 ```{r df_notes_wide}
 df_not_notes <- 
@@ -133,7 +133,7 @@ df_notes_wide <-
   df_notes %>% 
   dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
   # tab_measures(df_meta, df_notes, ticks_per_beat) %>%
-  widen_events() %>%
+  pivot_wide_notes() %>%
   left_join(pyramidi::midi_defs)
 df_notes_wide
 ```

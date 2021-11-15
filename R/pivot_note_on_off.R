@@ -10,9 +10,9 @@
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' dfm %>% widen_events()
+#' dfm %>% pivot_wide_notes()
 #' }
-widen_events <- function(df_measures) {
+pivot_wide_notes <- function(df_measures) {
   values_from_vector <-
   dplyr::intersect(
     names(df_measures),
@@ -41,7 +41,7 @@ widen_events <- function(df_measures) {
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' dfw <- dfm %>% widen_events()
+#' dfw <- dfm %>% pivot_wide_notes()
 #'
 #'
 #' library(zeallot)
@@ -127,7 +127,7 @@ triage_measured_tidy <- function(dfm) {
 
   df_notes_wide <- df_notes %>%
     dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
-    widen_events()
+    pivot_wide_notes()
 
   tibble::lst(df_meta, df_not_notes, df_notes_wide)
 }
