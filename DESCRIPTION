@@ -38,6 +38,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
+    htmltools,
     covr
 Remotes: 
     urswilke/raudiomate
