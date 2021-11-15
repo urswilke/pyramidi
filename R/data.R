@@ -9,7 +9,6 @@
 #' \describe{
 #'   \item{note}{integer from 0 - 127 containing the midi pitches}
 #'   \item{note_name}{name of the note and the octave}
-#'   ...
 #' }
 "midi_defs"
 
