@@ -216,16 +216,16 @@ constructor.</p>
 <span class="co">#&gt; # A tibble: 130 × 17</span>
 <span class="co">#&gt;    i_track meta   note channel i_note time_note_on time_note_off</span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 FALSE    67       9      1            0           240</span>
-<span class="co">#&gt;  2       0 FALSE    69       9      1            0             0</span>
-<span class="co">#&gt;  3       0 FALSE    61       9      1            0             0</span>
-<span class="co">#&gt;  4       0 FALSE    60       9      1          240             0</span>
-<span class="co">#&gt;  5       0 FALSE    71       9      1            0             0</span>
-<span class="co">#&gt;  6       0 FALSE    65       9      2          240           240</span>
-<span class="co">#&gt;  7       0 FALSE    65       9      2            0           240</span>
-<span class="co">#&gt;  8       0 FALSE    67       9      3          240           240</span>
-<span class="co">#&gt;  9       0 FALSE    67       9      2            0             0</span>
-<span class="co">#&gt; 10       0 FALSE    68       9      4          240           240</span>
+<span class="co">#&gt;  1       0 FALSE    70       9      1            0           240</span>
+<span class="co">#&gt;  2       0 FALSE    70       9      1            0             0</span>
+<span class="co">#&gt;  3       0 FALSE    62       9      1            0             0</span>
+<span class="co">#&gt;  4       0 FALSE    71       9      1          240             0</span>
+<span class="co">#&gt;  5       0 FALSE    65       9      1            0             0</span>
+<span class="co">#&gt;  6       0 FALSE    68       9      2          240           240</span>
+<span class="co">#&gt;  7       0 FALSE    61       9      2            0           240</span>
+<span class="co">#&gt;  8       0 FALSE    62       9      3          240           240</span>
+<span class="co">#&gt;  9       0 FALSE    65       9      2            0             0</span>
+<span class="co">#&gt; 10       0 FALSE    60       9      4          240           240</span>
 <span class="co">#&gt; # … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
@@ -241,9 +241,9 @@ constructor.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_compact</span><span class="op">$</span><span class="va">midi_frame_compact</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   i_track  meta                            msg</span>
-<span class="co">#&gt; 1       0 FALSE          9, 60, note_on, 0, 72</span>
-<span class="co">#&gt; 2       0 FALSE          9, 69, note_on, 0, 64</span>
-<span class="co">#&gt; 3       0 FALSE         9, 60, note_on, 0, 101</span>
+<span class="co">#&gt; 1       0 FALSE          9, 70, note_on, 0, 72</span>
+<span class="co">#&gt; 2       0 FALSE          9, 70, note_on, 0, 64</span>
+<span class="co">#&gt; 3       0 FALSE         9, 63, note_on, 0, 101</span>
 <span class="co">#&gt; 4       0  TRUE    track_name, 0, drum-t1-1-t1</span>
 <span class="co">#&gt; 5       0  TRUE           set_tempo, 0, 666666</span>
 <span class="co">#&gt; 6       0  TRUE time_signature, 0, 4, 4, 24, 8</span></code></pre></div>
@@ -259,22 +259,23 @@ constructor.</p>
 <h2 class="hasAnchor">
 <a href="#playing-audio" class="anchor"></a>Playing audio</h2>
 <p><strong>You need to install fluidsynth if you want to do that on your computer.</strong></p>
-<p>If you want to produce audio files from the midi files you can synthesize them with the convencience function <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">synthesize_midi()</a></code></p>
+<p>If you want to produce audio files from the midi files you can synthesize them with the convenience function <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">synthesize_midi()</a></code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">midifile</span> <span class="op">&lt;-</span> <span class="st">"mod_test_midi_file.mid"</span>
 <span class="va">mp3file</span> <span class="op">&lt;-</span> <span class="st">"mod_test_midi_file.mp3"</span>
-<span class="va">wavfile</span> <span class="op">&lt;-</span> <span class="st">"mod_test_midi_file.wav"</span>
-<span class="fu"><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">synthesize_midi</a></span><span class="op">(</span><span class="va">midifile</span>, <span class="va">wavfile</span><span class="op">)</span></code></pre></div>
-<p>You can also listen to your synthesized files by embedding a play button for the <code>r_midi_frames</code> object:</p>
+<span class="va">wavfile</span> <span class="op">&lt;-</span> <span class="st">"mod_test_midi_file.wav"</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">synthesize_midi</a></span><span class="op">(</span><span class="va">midifile</span>, <span class="va">wavfile</span><span class="op">)</span></code></pre></div>
+<p>You can also listen to your synthesized files by embedding a play button for the <code>r_midi_frames</code> object:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/play_midi_frame.html">play_midi_frame</a></span><span class="op">(</span><span class="va">mp3file</span><span class="op">)</span></code></pre></div>
-<p>To play the audio, this saves the synthesized file under the path specified in <code>mp3file</code>.</p>
+<audio controls=""><source src="mod_test_midi_file.mp3" type="audio/mp3"></source></audio><p>To play the audio, this saves the synthesized file under the path specified in <code>mp3file</code>.</p>
 </div>
 <div id="multiple-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-results" class="anchor"></a>Multiple results</h2>
 <p>You could also embed multiple audio files in one call using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> functions:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">l_mfr</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/mod_notes.html">mod_notes</a></span><span class="op">(</span><span class="va">mfr</span>, <span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"test"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">".mp3"</span><span class="op">)</span><span class="op">)</span>
@@ -282,7 +283,7 @@ constructor.</p>
 <span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span>
 <span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
 <span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tagList.html">tagList</a></span><span class="op">(</span>
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span><span class="op">(</span>
     <span class="va">l_mfr</span>, 
