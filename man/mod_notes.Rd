@@ -20,7 +20,6 @@ mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
 derived dataframes.
 }
 \examples{
-midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- r_midi_frames(midi_file_string)
 # Function to replace every note with a random midi note between 60 & 71:

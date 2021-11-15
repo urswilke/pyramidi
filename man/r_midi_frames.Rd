@@ -16,7 +16,6 @@ Midi frames S3 object
 Constructor of an object of class "r_midi_frames".
 }
 \examples{
-midi_file_string <- system.file("example_files", "Bass_sample.mid", package="tuneR")
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 r_midi_frames(midi_file_string)
 }
