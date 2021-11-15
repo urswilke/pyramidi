@@ -5,8 +5,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
-#' miditapyr$MidiFile(content)
+#' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+#' miditapyr$MidiFile(midi_file_string)
 #' }
 miditapyr <- NULL
 
@@ -17,8 +17,8 @@ miditapyr <- NULL
 #' @export
 #' @examples
 #' \dontrun{
-#' content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
-#' mido$MidiFile(content)
+#' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+#' mido$MidiFile(midi_file_string)
 #' }
 mido <- NULL
 

@@ -71,147 +71,78 @@ pyramidi::install_miditapyr()
 ```
 
 
-## Basic usage
+## Usage 
 
-### Load libraries
+### Generate R midi_frames object
 
-First load some libraries:
+We can create an R midi frames object by passing the file file path to the  
+constructor. 
 
-```{r load_libs, message=FALSE}
+```{r, message=FALSE}
 library(pyramidi)
 library(dplyr)
-library(tidyr)
-library(purrr)
-library(ggplot2)
-library(zeallot)
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- r_midi_frames(midi_file_string)
 ```
 
-### Extract midi file information into dataframe
 
 
-```{r midi_df}
-midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+The object contains the midi data in various dataframe formats and an interface
+to the miditapyr
+[miditapyr.MidiFrames](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html)
+object `mfr$mf`.  You can write the midi file resulting of the MidiFrame object to disk:
 
-midifile <- mido$MidiFile(midi_file_str)
-ticks_per_beat <- midifile$ticks_per_beat
+```{r, eval=FALSE}
+mfr$mf$write_file("/path/to/your/midifile.mid")
 ```
 
-Now we can load the information of the `midifile` into a dataframe:
 
-```{r midi_df2, message=FALSE}
-dfc = miditapyr$midi_to_df(midifile)
-head(dfc, 20)
-```
+## Modifying midi data
 
-This dataframe contains the columns of the track index `i_track`, `meta` (whether the midi event is a note event), and `msg` containing named lists of further midi event information.
+In the R midi frames object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+(`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
+midi events belong together
 
-The `MidiFile()` function of `mido` also yields the [`ticks_per_beat`](https://mido.readthedocs.io/en/latest/midi_files.html#tempo-and-beat-resolution) of the file:
-
-```{r ticksperbeat}
-ticks_per_beat
-```
-
-The `miditapyr$tidy_df()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `tidyr::unnest_wider()`):
+Let's look at a small example. We'll define a function to replace every 
+note with a random midi note between 60 & 71::
 
 ```{r}
-df <- miditapyr$tidy_df(dfc) %>% as_tibble()
-head(df, 20)
+mod <- function(dfn, seed) {
+  n_notes <- sum(!is.na(dfn$note))
+  dfn %>% mutate(note = ifelse(
+    !is.na(note),
+    sample(60:71, n_notes, TRUE),
+    note
+  ))
+}
 ```
 
-Except the `name` column this seems to be the same as 
-```{r}
-dfc %>% unnest_wider(msg)
+
+When we call `mod_notes()`, the midi data in `mfr` is updated:
+
+```{r, message=FALSE}
+mfr <- mod_notes(mfr, mod)
 ```
 
-### Translate midi time information
 
-In the midi format, time is treated as relative increments between events (measured in ticks). 
-In order to derive the total time passed, you can use the function `tab_measures()`:
+## Writing modified midi files
 
-
-```{r}
-dfm <- tab_measures(df, ticks_per_beat) %>%
-  # create a variable `track` with the track name (in order to have it in the plot below)
-  mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
-                        list(NA_character_), 
-                        name)) %>%
-  unnest(cols = track) %>% 
-  fill(track)
-
-dfm
-```
-
-This function adds further columns:
-
-* `ticks`: specifying the total ticks passed,
-* `t`: specifying the total time in seconds passed,
-* `m`: specifying the total [measures](https://en.wikipedia.org/wiki/Bar_(music)) (bars) passed,
-* `b`: specifying the total [beats](https://en.wikipedia.org/wiki/Beat_(music)) passed,
-* `i_note`: unique ascending index for every track and midi note in the midi file.
-
-### Further processing of the midi events
-
-You can split the dataframe in two by whether the events are [meta](https://mido.readthedocs.io/en/latest/meta_message_types.html) or not:
+Thus, we can now save the modifications to a midi file:
 
 ```{r}
-dfm %>% 
-    miditapyr$split_df() %->% c(df_meta, df_notes)
+mfr$mf$write_file("mod_test_midi_file.mid")
 ```
 
-```{r df_meta}
-df_meta %>% as_tibble()
-```
+## Synthesizing and playing audio
 
-
-```{r df_notes}
-df_notes %>% as_tibble()
-```
-
-
-
-```{r child='man/rmdhunks/piano_roll_note_date.Rmd'}
-```
-
-### Manipulation of the midi data
-
-The new format also allows to easily manipulate the midi data. For instance, let's put the volume (called `velocity` in midi) of the first beat in every bar to the maximum (127), and to half of its original value otherwise:
-
-
+See the `vignette("midi_framer", package = "pyramidi")` to see how you can
+synthesize the midi data to wav, convert to mp3 if you want, and then 
+embed a player in your rmarkdown html document with
 ```{r}
-df_notes_wide_mod <- df_notes_wide %>% 
-  mutate(
-    velocity_note_on = ifelse(
-      # As it's a 4/4 beat, the first beat of each bar is a multiple of 4:
-      b_note_on %% 4 == 0, 
-      127, 
-      velocity_note_on / 2
-    )
-)
+play_midi_frame(mfr)
 ```
 
-Let's compare the modified value to the original one:
 
-```{r}
-df_notes_wide %>% 
-  select(b_note_on, velocity_note_on) %>% 
-  bind_cols(
-    new = df_notes_wide_mod$velocity_note_on
-  )
-            
-
-
-```
-
-With an `ifelse()` statement, we modified the volume of the midi notes, depending on if they're the first beat in the measure or not. 
-
-Other possible manipulations could be for instance:
-
-* [Quantization](https://en.wikipedia.org/wiki/Quantization_(music)) by `round()`ing the `note_on`/`note_off` times,
-* Chord generation, e.g. by applying a `group_by(floor(m_note_on))`-`summarize()` logic, or
-* Arpeggiating chords by a `group_by(floor(m_note_on))` - `mutate()` logic.
-
-```{r child='man/rmdhunks/midi_df_to_file.Rmd'}
-```
 
 ## Related R packages
 
@@ -256,7 +187,6 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - rlang [@rlang]
 - knitr [@knitr]
 - rmarkdown [@rmarkdown]
-- tuneR [@tuneR]
 - testthat [@testthat]
 - covr [@covr]
 - rayrender [@rayrender]
