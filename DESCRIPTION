@@ -1,6 +1,6 @@
 Package: pyramidi
 Title: Read & Write Midi Data via Python and Manipulate in R
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Urs",
            family = "Wilke",
@@ -12,7 +12,7 @@ Description: Import the python libraries miditapyr and mido to read in midi file
 Config/reticulate:
   list(
     packages = list(
-      list(package = "miditapyr", version = "0.0.2", pip = TRUE)
+      list(package = "miditapyr", version = "0.0.3", pip = TRUE)
     )
   )
 License: MIT + file LICENSE
