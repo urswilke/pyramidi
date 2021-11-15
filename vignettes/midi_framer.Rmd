@@ -121,12 +121,16 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 **You need to install fluidsynth if you want to do that on your computer.**
 
 If you want to produce audio files from the midi files you can synthesize them
-with the convencience function `synthesize_midi()`
+with the convenience function `synthesize_midi()`
 
-```{r, eval=FALSE}
+```{r}
 midifile <- "mod_test_midi_file.mid"
 mp3file <- "mod_test_midi_file.mp3"
 wavfile <- "mod_test_midi_file.wav"
+```
+
+
+```{r, eval=FALSE}
 synthesize_midi(midifile, wavfile)
 ```
 
@@ -136,6 +140,17 @@ You can also listen to your synthesized files by embedding a play button for the
 ```{r, eval=FALSE}
 mfr %>% play_midi_frame(mp3file)
 ```
+
+```{r echo=FALSE}
+htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = mp3file,
+      type = "audio/mp3"
+    )
+  )
+```
+
 
 To play the audio, this saves the synthesized file under the path specified in `mp3file`.
 
