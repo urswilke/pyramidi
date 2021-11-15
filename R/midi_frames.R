@@ -56,7 +56,7 @@ r_midi_frames <- function(midi_file_string) {
 #' # Function to replace every note with a random midi note between 60 & 71:
 #' mod <- function(dfn) {
 #'   n_notes <- sum(!is.na(dfn$note))
-#'   dfn %>% mutate(note = ifelse(
+#'   dfn %>% dplyr::mutate(note = ifelse(
 #'     !is.na(note),
 #'     sample(60:71, n_notes, TRUE),
 #'     note
