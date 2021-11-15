@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write note_on and _off events in two lines (wide to long) — pivot_long_notes • pyramidi</title>
+<title>Write note_on and _off events in the same line (long to wide) — pivot_wide_notes • pyramidi</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Write note_on and _off events in two lines (wide to long) — pivot_long_notes" />
-<meta property="og:description" content="Write note_on and _off events in two lines (wide to long)" />
+<meta property="og:title" content="Write note_on and _off events in the same line (long to wide) — pivot_wide_notes" />
+<meta property="og:description" content="Write note_on and _off events in the same line (long to wide)" />
 
 
 
@@ -123,31 +123,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write note_on and _off events in two lines (wide to long)</h1>
+    <h1>Write note_on and _off events in the same line (long to wide)</h1>
     <small class="dont-index">Source: <a href='https://github.com/urswilke/pyramidi/blob/master/R/pivot_note_on_off.R'><code>R/pivot_note_on_off.R</code></a></small>
-    <div class="hidden name"><code>pivot_long_notes.Rd</code></div>
+    <div class="hidden name"><code>pivot_wide_notes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Write note_on and _off events in two lines (wide to long)</p>
+    <p>Write note_on and _off events in the same line (long to wide)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pivot_long_notes</span><span class='op'>(</span><span class='va'>df_notes_wide</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>pivot_wide_notes</span><span class='op'>(</span><span class='va'>df_measures</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df_notes_wide</th>
-      <td><p>notes dataframe in wide format</p></td>
+      <th>df_measures</th>
+      <td><p>data.frame resulting of miditapyr$mido_midi_df() and then running tab_measures() (see example)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>A data.frame with the following columns pivoted to wide: c("m", "b", "t", "ticks", "time", "velocity"). Every column is pivoted to wide with the suffix "_note_on" &amp; "_note_off" showing the values of the original column as a prefix. See <code><a href='tab_measures.html'>?tab_measures</a></code> for an explanation of the meaning of these columns.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -160,11 +158,7 @@
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tab_measures.html'>tab_measures</a></span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>ticks_per_beat</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>dfw</span> <span class='op'>&lt;-</span> <span class='va'>dfm</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='pivot_wide_notes.html'>pivot_wide_notes</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/nteetor/zeallot'>zeallot</a></span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>df_meta</span>, <span class='va'>df_notes</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/pkg/zeallot/man/operator.html'>%&lt;-%</a></span> <span class='va'>miditapyr</span><span class='op'>$</span><span class='fu'>split_df</span><span class='op'>(</span><span class='va'>dfm</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dfm</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>pivot_wide_notes</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>
