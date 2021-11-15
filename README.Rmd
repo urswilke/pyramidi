@@ -71,6 +71,77 @@ pyramidi::install_miditapyr()
 ```
 
 
+## Usage 
+
+### Generate R midi_frames object
+
+We can create an R midi frames object by passing the file file path to the  
+constructor. 
+
+```{r, message=FALSE}
+library(pyramidi)
+library(dplyr)
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- r_midi_frames(midi_file_string)
+```
+
+
+
+The object contains the midi data in various dataframe formats and an interface
+to the miditapyr
+[miditapyr.MidiFrames](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html)
+object `mfr$mf`.  You can write the midi file resulting of the MidiFrame object to disk:
+
+```{r, eval=FALSE}
+mfr$mf$write_file("/path/to/your/midifile.mid")
+```
+
+
+## Modifying midi data
+
+In the R midi frames object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+(`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
+midi events belong together
+
+Let's look at a small example. We'll define a function to replace every 
+note with a random midi note between 60 & 71::
+
+```{r}
+mod <- function(dfn, seed) {
+  n_notes <- sum(!is.na(dfn$note))
+  dfn %>% mutate(note = ifelse(
+    !is.na(note),
+    sample(60:71, n_notes, TRUE),
+    note
+  ))
+}
+```
+
+
+When we call `mod_notes()`, the midi data in `mfr` is updated:
+
+```{r, message=FALSE}
+mfr <- mod_notes(mfr, mod)
+```
+
+
+## Writing modified midi files
+
+Thus, we can now save the modifications to a midi file:
+
+```{r}
+mfr$mf$write_file("mod_test_midi_file.mid")
+```
+
+## Synthesizing and playing audio
+
+See the `vignette("midi_framer", package = "pyramidi")` to see how you can
+synthesize the midi data to wav, convert to mp3 if you want, and then 
+embed a player in your rmarkdown html document with
+```{r}
+play_midi_frame(mfr)
+```
+
 
 
 ## Related R packages
