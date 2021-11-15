@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 First load some libraries:
 
 ```{r, include=FALSE, message=FALSE}
-install_miditapyr(envname = "r-reticulate")
+pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
 
 
