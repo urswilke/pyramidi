@@ -206,16 +206,16 @@ constructor.</p>
 <span class="co">#&gt; # A tibble: 130 × 17</span>
 <span class="co">#&gt;    i_track meta   note channel i_note time_note_on time_note_off</span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 FALSE    67       9      1            0           240</span>
-<span class="co">#&gt;  2       0 FALSE    62       9      1            0             0</span>
-<span class="co">#&gt;  3       0 FALSE    67       9      1            0             0</span>
-<span class="co">#&gt;  4       0 FALSE    62       9      1          240             0</span>
-<span class="co">#&gt;  5       0 FALSE    69       9      1            0             0</span>
-<span class="co">#&gt;  6       0 FALSE    66       9      2          240           240</span>
-<span class="co">#&gt;  7       0 FALSE    69       9      2            0           240</span>
-<span class="co">#&gt;  8       0 FALSE    62       9      3          240           240</span>
-<span class="co">#&gt;  9       0 FALSE    67       9      2            0             0</span>
-<span class="co">#&gt; 10       0 FALSE    69       9      4          240           240</span>
+<span class="co">#&gt;  1       0 FALSE    68       9      1            0           240</span>
+<span class="co">#&gt;  2       0 FALSE    65       9      1            0             0</span>
+<span class="co">#&gt;  3       0 FALSE    65       9      1            0             0</span>
+<span class="co">#&gt;  4       0 FALSE    69       9      1          240             0</span>
+<span class="co">#&gt;  5       0 FALSE    70       9      1            0             0</span>
+<span class="co">#&gt;  6       0 FALSE    70       9      2          240           240</span>
+<span class="co">#&gt;  7       0 FALSE    66       9      2            0           240</span>
+<span class="co">#&gt;  8       0 FALSE    64       9      3          240           240</span>
+<span class="co">#&gt;  9       0 FALSE    65       9      2            0             0</span>
+<span class="co">#&gt; 10       0 FALSE    61       9      4          240           240</span>
 <span class="co">#&gt; # … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
@@ -229,9 +229,9 @@ constructor.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_compact</span><span class="op">$</span><span class="va">midi_frame_compact</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   i_track  meta                            msg</span>
-<span class="co">#&gt; 1       0 FALSE          9, 69, note_on, 0, 72</span>
-<span class="co">#&gt; 2       0 FALSE          9, 63, note_on, 0, 64</span>
-<span class="co">#&gt; 3       0 FALSE         9, 69, note_on, 0, 101</span>
+<span class="co">#&gt; 1       0 FALSE          9, 64, note_on, 0, 72</span>
+<span class="co">#&gt; 2       0 FALSE          9, 69, note_on, 0, 64</span>
+<span class="co">#&gt; 3       0 FALSE         9, 67, note_on, 0, 101</span>
 <span class="co">#&gt; 4       0  TRUE    track_name, 0, drum-t1-1-t1</span>
 <span class="co">#&gt; 5       0  TRUE           set_tempo, 0, 666666</span>
 <span class="co">#&gt; 6       0  TRUE time_signature, 0, 4, 4, 24, 8</span></code></pre></div>
