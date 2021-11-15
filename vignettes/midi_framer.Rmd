@@ -133,15 +133,15 @@ synthesize_midi(midifile, wavfile)
 You can also listen to your synthesized files by embedding a play button for the 
 `r_midi_frames` object:
 
-```{r}
+```{r, eval=FALSE}
 mfr %>% play_midi_frame(mp3file)
 ```
 
-(This saves the synthesized file in the /tmp folder.)
+To play the audio, this saves the synthesized file under the path specified in `mp3file`.
 
 ## Multiple results
 
-You can also embed multiple audio files in one call using `purrr::map()` functions:
+You could also embed multiple audio files in one call using `purrr::map()` functions:
 
 ```{r}
 l_mfr <- 1:2 %>%
