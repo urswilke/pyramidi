@@ -83,11 +83,11 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' dfm <- tab_measures(mf$midi_frame_tidy$midi_frame_tidy, ticks_per_beat = mf$midi_file$ticks_per_beat)
 #'
-#' c(df_meta, df_not_notes, df_notes_wide) %<-% triage_measured_tidy(dfm)
+#' l <- triage_measured_tidy(dfm)
 #'
-#' df_notes_long <- pivot_long_notes(df_notes_wide)
+#' df_notes_long <- pivot_long_notes(l$df_notes_wide)
 #'
-#' merge_long_events(df_meta, df_notes_long, df_not_notes)
+#' merge_long_events(l$df_meta, df_notes_long, l$df_not_notes)
 merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
   cols_to_remove <- c("i_note", "ticks", "t", "m", "b")
 
