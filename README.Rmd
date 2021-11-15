@@ -138,9 +138,22 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 See the `vignette("midi_framer", package = "pyramidi")` to see how you can
 synthesize the midi data to wav, convert to mp3 if you want, and then 
 embed a player in your rmarkdown html document with
-```{r}
+```{r, eval=FALSE}
 play_midi_frame(mfr)
 ```
+
+
+```{r echo=FALSE}
+htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = "https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3",
+      type = "audio/mp3"
+    )
+  )
+```
+
+
 
 
 

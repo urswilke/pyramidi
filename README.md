@@ -142,11 +142,10 @@ then embed a player in your rmarkdown html document with
 
 ``` r
 play_midi_frame(mfr)
-#> (Hopefully) created midi and audio file /tmp/RtmpzYP5QV/mf_out_351c95c34bf3b.mid and synthesized /tmp/RtmpzYP5QV/mf_out_351c95c34bf3b.wav.
 ```
 
 <audio controls="">
-<source src="/tmp/RtmpzYP5QV/mf_out_351c95c34bf3b.wav" type="audio/wav"/>
+<source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"/>
 </audio>
 
 ## Related R packages
