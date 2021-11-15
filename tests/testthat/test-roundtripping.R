@@ -5,10 +5,10 @@ test_that("applying miditapyr$compact_df() and then miditapyr$tidy_df() is round
   # but it should have)
   # skip_on_ci()
   skip_if_no_miditapyr()
-  content <- system.file("example_files", "Bass_sample.mid", package="tuneR")
+  midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
   # mido <- reticulate::import("mido")
   # miditapyr <- reticulate::import("miditapyr")
-  a <- mido$MidiFile(content) %>% miditapyr$midi_to_df() %>% miditapyr$tidy_df()
+  a <- mido$MidiFile(midi_file_string) %>% miditapyr$midi_to_df() %>% miditapyr$tidy_df()
   attr(a, "pandas.index") <- NULL
   b <- a %>% miditapyr$compact_df() %>% miditapyr$tidy_df()
   attr(b, "pandas.index") <- NULL

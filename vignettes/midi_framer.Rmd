@@ -1,0 +1,167 @@
+---
+title: "Basic midi file manipulations with midi_framer objects"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic midi file manipulations with midi_framer objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, include=FALSE, message=FALSE}
+pyramidi::install_miditapyr()
+```
+
+## Load libraries
+
+```{r setup}
+library(pyramidi)
+library(dplyr)
+library(purrr)
+library(htmltools)
+library(tibble)
+# This is a small helper package, that allows to synthesize & play midi files:
+library(raudiomate) # see https://github.com/urswilke/raudiomate
+```
+
+## Generate R midi_frames object
+
+We can create an R midi frames object by passing the file file path to the  
+constructor. 
+
+```{r}
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- r_midi_frames(midi_file_string)
+```
+
+It is a list object that contains the following objects:
+
+```{r}
+enframe(mfr)
+```
+
+The first object `mf` is the `midi_frame` object from `miditapyr.MidiFrame()`. After the [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data there are the 3 dataframes:
+
+```{r}
+list(
+    mfr$mf$midi_frame_raw,
+    mfr$mf$midi_frame_tidy$midi_frame_tidy,
+    mfr$mf$midi_frame_compact$midi_frame_compact
+  ) %>% 
+  # for prettier printing:
+  map(as_tibble)
+```
+
+And you can write the midi file resulting of the MidiFrame object to disk:
+
+```{r, eval=FALSE}
+mfr$mf$write_file("/path/to/your/midifile.mid")
+```
+
+
+## Modifying midi data
+
+In the R midi frames object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+(`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
+midi events belong together
+
+Let's look at a small example. We'll define a function to replace every 
+note with a random midi note between 60 & 71::
+
+```{r}
+mod <- function(dfn, seed) {
+  n_notes <- sum(!is.na(dfn$note))
+  dfn %>% mutate(note = ifelse(
+    !is.na(note),
+    sample(60:71, n_notes, TRUE),
+    note
+  ))
+}
+```
+
+We could modify the notes in wide format like this:
+
+```{r}
+mod(mfr$df_notes_wide)
+```
+
+Then we would have to adapt all the following elements of `mfr` that depend on `mfr$df_notes_wide`.
+
+When we call `mod_notes()`, all the depending list elements are also automatically updated.
+
+```{r}
+# Apply the modification to mfr$df_notes_wide and all depending dataframes:
+mfr <- mod_notes(mfr, mod)
+```
+
+The data has also been changed in `mfr$mf` the miditapyr midi_frames object in mfr:
+
+```{r}
+mfr$mf$midi_frame_compact$midi_frame_compact %>% head()
+```
+
+
+## Writing modified midi files
+
+Thus we can now directly save the modifications to a midi file:
+
+```{r}
+mfr$mf$write_file("mod_test_midi_file.mid")
+```
+
+
+## Playing audio
+
+**You need to install fluidsynth if you want to do that on your computer.**
+
+If you want to produce audio files from the midi files you can synthesize them
+with the convencience function `synthesize_midi()`
+
+```{r}
+midifile <- "mod_test_midi_file.mid"
+mp3file <- "mod_test_midi_file.mp3"
+wavfile <- "mod_test_midi_file.wav"
+synthesize_midi(midifile, wavfile)
+```
+
+You can also listen to your synthesized files by embedding a play button for the 
+`r_midi_frames` object:
+
+```{r}
+mfr %>% play_midi_frame(mp3file)
+```
+
+(This saves the synthesized file in the /tmp folder.)
+
+## Multiple results
+
+You can also embed multiple audio files in one call using `purrr::map()` functions:
+
+```{r}
+l_mfr <- 1:2 %>%
+  map(~mod_notes(mfr, mod)) %>% 
+  set_names(paste0("test", 1:length(.), ".mp3"))
+```
+
+
+
+```{r, eval=FALSE}
+tagList(
+  imap(
+    l_mfr, 
+    ~ div(
+      h4(paste("audio result", .y)),
+      play_midi_frame(.x, mp3file = .y),
+      br(), 
+      br()
+    )
+  )
+)
+```
+
