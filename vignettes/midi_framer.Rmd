@@ -123,7 +123,7 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 If you want to produce audio files from the midi files you can synthesize them
 with the convencience function `synthesize_midi()`
 
-```{r}
+```{r, eval=FALSE}
 midifile <- "mod_test_midi_file.mid"
 mp3file <- "mod_test_midi_file.mp3"
 wavfile <- "mod_test_midi_file.wav"
