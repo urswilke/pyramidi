@@ -1,0 +1,19 @@
+---
+title: "Using mido directly from R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using mido directly from R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(pyramidi)
+```
