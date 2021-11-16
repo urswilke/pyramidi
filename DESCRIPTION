@@ -23,6 +23,7 @@ Imports:
     raudiomate,
     reticulate,
     tibble,
+    details,
     purrr,
     dplyr,
     stringr,
@@ -42,4 +43,6 @@ Suggests:
     covr
 Remotes: 
     urswilke/raudiomate
+Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+RdMacros: details
