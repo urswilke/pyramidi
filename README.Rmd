@@ -185,7 +185,7 @@ created with the commands:
 library(grateful)
 pkgs <- scan_packages()
 # don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")] %>% c("rayrender", "magick")
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi", "raudiomate")] %>% c("rayrender", "magick")
 cites <- get_citations(pkgs)
 rmd <- create_rmd(cites)
 
@@ -199,16 +199,16 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 
 - base [@base]
 - pkgdown [@pkgdown]
-- usethis [@usethis]
 - dplyr [@dplyr]
 - forcats [@forcats]
 - tibble [@tibble]
 - tidyr [@tidyr]
+- usethis [@usethis]
 - pichor [@pichor]
-- rvest [@rvest]
-- tidyverse [@tidyverse]
-- reticulate [@reticulate]
 - purrr [@purrr]
+- rvest [@rvest]
+- reticulate [@reticulate]
+- details [@details]
 - stringr [@stringr]
 - ggplot2 [@ggplot2]
 - zeallot [@zeallot]
@@ -217,6 +217,7 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - knitr [@knitr]
 - rmarkdown [@rmarkdown]
 - testthat [@testthat]
+- htmltools [@htmltools]
 - covr [@covr]
 - rayrender [@rayrender]
 - magick [@magick]

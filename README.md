@@ -184,7 +184,7 @@ created with the commands:
 library(grateful)
 pkgs <- scan_packages()
 # don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi")] %>% c("rayrender", "magick")
+pkgs <- pkgs[!pkgs %in% c("R", "pyramidi", "raudiomate")] %>% c("rayrender", "magick")
 cites <- get_citations(pkgs)
 rmd <- create_rmd(cites)
 
@@ -199,16 +199,16 @@ authors of the following libraries!
 
 -   base (R Core Team 2021)
 -   pkgdown (Wickham and Hesselberth 2020)
--   usethis (Wickham, Bryan, and Barrett 2021)
 -   dplyr (Wickham et al. 2021)
 -   forcats (Wickham 2021a)
 -   tibble (Müller and Wickham 2021)
 -   tidyr (Wickham 2021c)
+-   usethis (Wickham, Bryan, and Barrett 2021)
 -   pichor (Andersen 2021)
--   rvest (Wickham 2021b)
--   tidyverse (Wickham et al. 2019)
--   reticulate (Ushey, Allaire, and Tang 2021)
 -   purrr (Henry and Wickham 2020)
+-   rvest (Wickham 2021b)
+-   reticulate (Ushey, Allaire, and Tang 2021)
+-   details (Sidi 2020)
 -   stringr (Wickham 2019)
 -   ggplot2 (Wickham 2016)
 -   zeallot (Teetor 2018)
@@ -217,6 +217,7 @@ authors of the following libraries!
 -   knitr (Xie 2014)
 -   rmarkdown (Xie, Dervieux, and Riederer 2020)
 -   testthat (Wickham 2011)
+-   htmltools (Cheng et al. 2021)
 -   covr (Hester 2020)
 -   rayrender (Morgan-Wall 2021)
 -   magick (Ooms 2021)
@@ -236,6 +237,14 @@ Andersen, Mikkel Meyer. 2021. *Pichor: Piano Chords in r*.
 Bache, Stefan Milton, and Hadley Wickham. 2020. *Magrittr: A
 Forward-Pipe Operator for r*.
 <https://CRAN.R-project.org/package=magrittr>.
+
+</div>
+
+<div id="ref-htmltools" class="csl-entry">
+
+Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie,
+and Jeff Allen. 2021. *Htmltools: Tools for HTML*.
+<https://CRAN.R-project.org/package=htmltools>.
 
 </div>
 
@@ -286,6 +295,13 @@ r*. <https://CRAN.R-project.org/package=magick>.
 R Core Team. 2021. *R: A Language and Environment for Statistical
 Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-details" class="csl-entry">
+
+Sidi, Jonathan. 2020. *Details: Create Details HTML Tag for Markdown and
+Package Documentation*. <https://CRAN.R-project.org/package=details>.
 
 </div>
 
@@ -343,15 +359,6 @@ Operations*. <https://CRAN.R-project.org/package=stringr>.
 
 ———. 2021c. *Tidyr: Tidy Messy Data*.
 <https://CRAN.R-project.org/package=tidyr>.
-
-</div>
-
-<div id="ref-tidyverse" class="csl-entry">
-
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
-D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
-“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
-Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
