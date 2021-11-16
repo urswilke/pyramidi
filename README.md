@@ -35,15 +35,15 @@ some of the possible inconsistencies. And the mido’s
 [documentation](https://mido.readthedocs.io/en/latest/) is also a good
 place to learn about midi.
 
-Via the small helper
-package[raudiomate](https://github.com/urswilke/raudiomate) the midi
-data can be
+Via the small helper package
+[raudiomate](https://github.com/urswilke/raudiomate) the midi data can
+be
 
 -   synthesized to wav files with `raudiomate::synthesize_midi()` (needs
     [fluidsynth](https://www.fluidsynth.org/) installed),
 -   converted to mp3 files with `raudiomate::convert_to_mp3()` (needs
     [ffmpeg](https://www.ffmpeg.org/)),
--   and played in rmarkdown with `play_midi_frame()` (using
+-   and played in rmarkdown documents with `play_midi_frame()` (using
     `raudiomate::player()`).
 
 ## Installation
@@ -62,14 +62,12 @@ remotes::install_github("UrsWilke/pyramidi")
 ```
 
 The python package [miditapyr](https://pypi.org/project/miditapyr/) also
-needs to be installed via
+needs to be installed in your python environment used by
+[reticulate](https://github.com/rstudio/reticulate).
 
 ``` sh
 pip install miditapyr
 ```
-
-in your python environment used by
-[reticulate](https://github.com/rstudio/reticulate).
 
 But if everything works as it should 🤞😅, miditapyr is automatically
 installed if you install pyramidi, as soon as you access the module for
