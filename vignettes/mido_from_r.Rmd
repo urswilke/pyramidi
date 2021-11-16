@@ -29,9 +29,10 @@ The loading of `import_builtins()` into `pb` will allow to work with python obje
 
 ```{r setup}
 library(reticulate)
+library(pyramidi)
 library(tidyr)
 library(purrr)
-library(pyramidi)
+library(details)
 mido <- import("mido")
 mt <- import("miditapyr")
 pb <- import_builtins()
@@ -44,7 +45,11 @@ Here we'll load the midi file included in the package into a  [`mido.MidiFile`](
 ```{r}
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 midi_file <- mido$MidiFile(midi_file_string)
-midi_file %>% details::details(summary = "Click here to show the printed mido `MidiFile()` object")
+```
+
+
+```{details, details.summary = "Click here to show the printed mido `MidiFile()` object"}
+midi_file
 ```
 
 This object is a list object, containing besides some meta information
@@ -63,7 +68,11 @@ from the miditapyr package:
 track1 <- midi_file$tracks[[1]]
 # transform MidiTrack() object to an R list of mido Message()s and MetaMessage()s:
 track1list <- pb$list(track1)
-track1list %>% details::details(summary = "Show details of list in R")
+```
+
+
+```{details, details.summary = "Show details of list in R"}
+track1list
 ```
 
 The list contains mido `Message()` & `MetaMessage()` objects.
@@ -74,7 +83,11 @@ event into a named R list:
 ```{r}
 track1Rlist <- track1list %>% 
   map(pb$vars)
-track1Rlist %>% details::details(summary = "Show details of list in R")
+```
+
+
+```{details, details.summary = "Show details of first 10 elements of track events list in R"}
+track1Rlist[1:10]
 
 ```
 
@@ -100,3 +113,4 @@ mt$unnest_midi(dfc = mfr$mf$midi_frame_raw) %>%
   as_tibble()
 ```
 
+There are some differences in the types.
