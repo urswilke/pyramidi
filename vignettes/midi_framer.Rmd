@@ -135,7 +135,7 @@ wavfile <- "mod_test_midi_file.wav"
 synthesize_midi(midifile, wavfile)
 ```
 
-You can also listen to your synthesized files by embedding a play button for the 
+You can also listen to your synthesized files by embedding an audio player for the 
 `r_midi_frames` object:
 
 ```{r, eval=FALSE}
