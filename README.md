@@ -18,22 +18,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬
 
+# Introduction
+
 The goal of pyramidi is to reproducibly manipulate midi data from R.
 Midi data is read into dataframes, using the python package
 [miditapyr](https://pypi.org/project/miditapyr/) under the hood (which
 itself uses [mido](https://github.com/mido/mido)). Then the midi
-information (one line per event) is translated into a wide format (one
-line per note). The wide format facilitates some manipulations of the
-notes’ data and also plotting piano roll plots. Finally, the modified
-dataframes can be written back to midi files (again using miditapyr).
-
-Thus you can manipulate these dataframes at all steps and write midi
-files from R. However, you need to make sure yourself that the midi
-files you write can be understood by your softsynth; but
-[mido](https://github.com/mido/mido) (used by miditapyr) already catches
-some of the possible inconsistencies. And the mido’s
-[documentation](https://mido.readthedocs.io/en/latest/) is also a good
-place to learn about midi.
+information (one line per midi event) is translated into a wide format
+(one line per note). The wide format facilitates some manipulations of
+the notes’ data and also plotting them in piano roll plots. Finally, the
+modified dataframes can be written back to midi files (again using
+miditapyr).
 
 Via the small helper package
 [raudiomate](https://github.com/urswilke/raudiomate) the midi data can
@@ -45,6 +40,16 @@ be
     [ffmpeg](https://www.ffmpeg.org/)),
 -   and played in rmarkdown documents with `play_midi_frame()` (using
     `raudiomate::player()`).
+
+Thus you can manipulate these dataframes at all steps and write midi
+files from R. However, you need to make sure yourself that the midi
+files you write can be understood by your softsynth; but
+[mido](https://github.com/mido/mido) (used by miditapyr) already catches
+some of the possible inconsistencies.
+
+If you’re new to midi, [mido’s
+documentation](https://mido.readthedocs.io/en/latest/) might be a good
+start.
 
 ## Installation
 
