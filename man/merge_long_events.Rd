@@ -7,7 +7,7 @@
 merge_long_events(df_meta, df_notes_long, df_not_notes)
 }
 \arguments{
-\item{df_meta, df_notes_long, df_not_notes}{Results of `miditapyr$split_df()`.}
+\item{df_meta, df_notes_long, df_not_notes}{Results of \code{miditapyr$split_df()}.}
 }
 \value{
 

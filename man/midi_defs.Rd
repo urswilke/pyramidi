@@ -7,8 +7,8 @@
 \format{
 A data frame with 128 rows and 2 variables:
 \describe{
-  \item{note}{integer from 0 - 127 containing the midi pitches}
-  \item{note_name}{name of the note and the octave}
+\item{note}{integer from 0 - 127 containing the midi pitches}
+\item{note_name}{name of the note and the octave}
 }
 }
 \usage{

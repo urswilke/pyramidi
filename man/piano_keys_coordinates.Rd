@@ -7,13 +7,12 @@
 \format{
 A data frame with 127 rows and 6 variables:
 \describe{
-  \item{midi}{integer from 0 - 127 containing the midi pitches}
-  \item{layer}{integer 1 or 2 depending on whether key is white (1) or black (2)}
-  \item{xmin}{xmin coordinate of the key}
-  \item{ymin}{ymin coordinate of the key}
-  \item{xmax}{xmax coordinate of the key}
-  \item{ymax}{ymax coordinate of the key}
-  ...
+\item{midi}{integer from 0 - 127 containing the midi pitches}
+\item{layer}{integer 1 or 2 depending on whether key is white (1) or black (2)}
+\item{xmin}{xmin coordinate of the key}
+\item{ymin}{ymin coordinate of the key}
+\item{xmax}{xmax coordinate of the key}
+\item{ymax}{ymax coordinate of the key}
 }
 }
 \usage{

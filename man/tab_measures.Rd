@@ -13,14 +13,22 @@ tab_measures(df, ticks_per_beat)
 }
 \value{
 A data.frame with the following columns added: c("m", "b", "t", "ticks", "time"). \cr
-  m: measure \cr
-  b: beat \cr
-  t: time in seconds \cr
+m: measure \cr
+b: beat \cr
+t: time in seconds \cr
 }
 \description{
 Tabulate measure related data in the midi event data
 }
 \examples{
+\dontrun{
+mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mido_mid_file <- mido$MidiFile(mid_file_str)
+dfc <- miditapyr$frame_midi(mido_mid_file)
+ticks_per_beat = mido_mid_file$ticks_per_beat
+df <- dfc \%>\%
+  miditapyr$unnest_midi()
+}
 \dontrun{
 tab_measures(df, ticks_per_beat)
 }

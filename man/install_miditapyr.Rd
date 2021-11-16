@@ -8,9 +8,9 @@ install_miditapyr(envname = NULL, method = "auto", conda = "auto", pip = TRUE)
 }
 \arguments{
 \item{envname}{The name, or full path, of the environment in which python
-packages are to be installed. When `NULL` (default), the active environment
-(`RETICULATE_PYTHON_ENV` variable) will be used; if that is unset, then the
-`"r-reticulate"` environment will be used.}
+packages are to be installed. When \code{NULL} (default), the active environment
+(\code{RETICULATE_PYTHON_ENV} variable) will be used; if that is unset, then the
+\code{"r-reticulate"} environment will be used.}
 
 \item{method}{Installation method. By default, "auto" automatically finds a
 method that will work in the local environment. Change the default to force
@@ -26,10 +26,10 @@ when Conda environments are used, as otherwise packages will be installed
 from the Conda repositories.}
 }
 \description{
-Wrapper around `reticulate::py_install()` to install the miditapyr python package
+Wrapper around \code{reticulate::py_install()} to install the miditapyr python package
 }
 \details{
-From `reticulate::py_install()`: On Linux and OS X the "virtualenv"
-  method will be used by default ("conda" will be used if virtualenv isn't
-  available). On Windows, the "conda" method is always used.
+From \code{reticulate::py_install()}: On Linux and OS X the "virtualenv"
+method will be used by default ("conda" will be used if virtualenv isn't
+available). On Windows, the "conda" method is always used.
 }

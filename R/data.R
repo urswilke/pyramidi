@@ -39,7 +39,6 @@
 #'   \item{ymin}{ymin coordinate of the key}
 #'   \item{xmax}{xmax coordinate of the key}
 #'   \item{ymax}{ymax coordinate of the key}
-#'   ...
 #' }
 "piano_keys_coordinates"
 
