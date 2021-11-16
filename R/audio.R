@@ -46,6 +46,6 @@ play_midi_frame <- function(
   message("(Hopefully) created midi and audio file ", midfile, " and synthesized ", wavfile, ".")
 
 
-  raudiomate::play_button(audiofile, filetype)
+  raudiomate::player(audiofile, filetype)
 }
 
