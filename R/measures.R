@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_unnested_midi.Rmd
+#' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
 #' \dontrun{
 #' tab_measures(df, ticks_per_beat)

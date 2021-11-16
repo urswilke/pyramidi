@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_unnested_midi.Rmd
+#' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
@@ -37,7 +37,7 @@ pivot_wide_notes <- function(df_measures) {
 #' @return
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_unnested_midi.Rmd
+#' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
@@ -113,7 +113,7 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #' @return
 #' @export
 #'
-#' @example man/rmdhunks/examples/generate_unnested_midi.Rmd
+#' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
