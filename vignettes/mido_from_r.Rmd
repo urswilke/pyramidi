@@ -14,6 +14,89 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(pyramidi)
+## Setup
+
+By using `install_miditapyr()`, this should also install [mido](https://github.com/mido/mido) which is a 
+dependency of miditapyr:
+
+```{r, message=FALSE}
+pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
+
+Now we'll load some R and the python mido & miditapyr libraries with the `reticulate::import()` function.
+The loading of `import_builtins()` into `pb` will allow to work with python objects from R:
+
+
+```{r setup}
+library(reticulate)
+library(tidyr)
+library(purrr)
+library(pyramidi)
+mido <- import("mido")
+mt <- import("miditapyr")
+pb <- import_builtins()
+```
+
+## Load file
+
+Here we'll load the midi file included in the package into a  [`mido.MidiFile`](https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile) object:
+
+```{r}
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+midi_file <- mido$MidiFile(midi_file_string)
+midi_file %>% details::details(summary = "Click here to show the printed mido `MidiFile()` object")
+```
+
+This object is a list object, containing besides some meta information
+multiple `MidiTrack()`s which are themselves also lists containing the midi event
+messages.
+
+## Transform to unnested dataframe 
+
+We can transform the midi data to a data.frame similar to the one returned by
+[`unnest_midi()`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi)
+from the miditapyr package:
+
+
+```{r}
+# access first track:
+track1 <- midi_file$tracks[[1]]
+# transform MidiTrack() object to an R list of mido Message()s and MetaMessage()s:
+track1list <- pb$list(track1)
+track1list %>% details::details(summary = "Show details of list in R")
+```
+
+The list contains mido `Message()` & `MetaMessage()` objects.
+
+With the function `pb$vars()` we can extract all variables for every 
+event into a named R list:
+
+```{r}
+track1Rlist <- track1list %>% 
+  map(pb$vars)
+track1Rlist %>% details::details(summary = "Show details of list in R")
+
+```
+
+We can put this list of message lists in a dataframe and write the values of 
+each key in their own column:
+
+
+```{r}
+track1Rlist %>% 
+  tibble(temp = .) %>% 
+  unnest_wider(temp)
+```
+
+
+## Compare with pyramidi
+
+For comparison, we plot the results of [`unnest_midi()`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi)
+
+
+```{r}
+mfr <- r_midi_frames(midi_file_string)
+mt$unnest_midi(dfc = mfr$mf$midi_frame_raw) %>% 
+  as_tibble()
+```
+
