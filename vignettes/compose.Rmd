@@ -1,0 +1,312 @@
+---
+title: "Composing from R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Composing from R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Setup
+
+```{r, message=FALSE, echo=FALSE}
+# pyramidi::install_miditapyr(envname = "r-reticulate")
+```
+
+We'll load some libraries in R:
+
+
+```{r setup, message=FALSE}
+library(pyramidi)
+library(tidyr)
+library(dplyr)
+library(purrr)
+library(details)
+```
+
+
+For the moment there is no proper constructor to generate an empty `r_midi_frames()` object. Therefore, we just load our package midi file to have some scaffolding to put our notes in:
+
+```{r, message=FALSE}
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- r_midi_frames(midi_file_string)
+```
+
+We will compose our data by generating a dataframe as the one on the example midi file.
+
+```{details, details.summary = "Click here to show the format of the dataframe we need to have."}
+midi_unnested <- mfr$mf$midi_frame_unnested$df %>% 
+  as_tibble()
+midi_unnested
+```
+
+We will measure our time in `b_note_on` and `b_note_off` being the absolute times 
+(in quarter notes) when the notes are played.
+
+
+In sf2 soundfonts midi channel 10 (which is channel 9 in pythonista world :) is 
+usually used for drums. Let's try this out. 36 is the bass drum and 38 the snare
+
+```{r}
+n_notes <- 32
+ticks_per_beat <- 960
+drum <- tibble(
+  i_track = 0,
+  meta = FALSE,
+  # This is just a repetition of a classical rock beat:
+  note = rep(c(36, 38), n_notes / 2),
+  channel = 9,
+  i_note = 1:n_notes,
+  velocity_note_on = 100,
+  velocity_note_off = 0,
+  b_note_on = 0:(n_notes-1),
+  b_note_off = b_note_on + 1 / 2,
+)
+```
+
+
+```{details, details.summary = "Show `drum` dataframe"}
+drum
+```
+
+We'll just define a small helper function to calculate the absolute midi ticks 
+passed from the time measured in beats, because when we generate the format to save the data to 
+midi we need to calculate the relative time increments in ticks.
+
+```{r}
+beats_to_ticks <- function(notes_wide) {
+  notes_wide %>%
+    mutate(
+      ticks_note_on  = b_note_on  * ticks_per_beat,
+      ticks_note_off = b_note_off * ticks_per_beat
+    )
+}
+```
+
+Ok we are ready to pass these modified notes to our `r_midi_frames` object
+
+```{r echo = T, results = 'hide'}
+mod_notes(mfr, beats_to_ticks(drum))
+```
+
+and listen to the drums of our first composition:
+
+```{r}
+mfr %>% play_midi_frame("drum.wav")
+```
+
+Now we'll add notes. Channel 1 should be grand piano. We will play major chords 
+
+```{r}
+notes <- tibble(
+  i_track = 0,
+  meta = FALSE,
+  note = rep(c(60, 64, 67, 72), n_notes / 4),
+  channel = 1,
+  i_note = 1:n_notes,
+  velocity_note_on = 100,
+  velocity_note_off = 0,
+  # here we define that all the 4 notes in the chord are played at the same time:
+  b_note_on = (0:(n_notes-1) %/% 4) * 4,
+  b_note_off = b_note_on + 1 * 2,
+)
+```
+
+
+```{details, details.summary = "click to show `notes` frame"}
+notes
+```
+
+With a small helper function, we can change the notes played depending on the measure we're in:
+```{r}
+# We play the tonic for 2 bars, 
+  # and the subdominant (+5) and dominant (+7) for one each:
+change_notes_on_measures <- function(notes) {
+  notes %>% 
+    mutate(
+      note = case_when(
+        floor(b_note_on/4) %% 4 == 0 ~ note, 
+        floor(b_note_on/4) %% 4 == 1 ~ note, 
+        floor(b_note_on/4) %% 4 == 2 ~ note + 5, 
+        floor(b_note_on/4) %% 4 == 3 ~ note + 7 
+      )
+    )
+}
+
+notes <- notes %>% 
+  change_notes_on_measures()
+```
+
+When we join the `drum` and `notes` dataframes together:
+```{r}
+midi_note_events_wide <- bind_rows(drum, notes) %>% beats_to_ticks()
+```
+
+We can apply the same as above:
+```{r echo = T, results = 'hide'}
+mod_notes(mfr, midi_note_events_wide)
+```
+
+And play it:
+
+```{r}
+mfr %>% play_midi_frame("combine.wav")
+```
+
+Let's rock! 🤟🥳
+
+## Write functions to compose midi frames
+
+Instead of defining a whole dataframe as in the section before, we'll now write a 
+small helper function writing single notes to the needed dataframe format:
+
+```{r}
+frame_notes <- function(
+  b,
+  dur,
+  note,
+  velocity = 100,
+  channel = 1,
+  i_track = 0,
+  meta = FALSE,
+  velocity_note_off = 0,
+  ...
+) {
+  tibble(
+    i_track = i_track,
+    meta = meta,
+    note = note,
+    channel = channel,
+    velocity_note_on = velocity,
+    velocity_note_off = velocity_note_off,
+    b_note_on = b,
+    b_note_off = b + dur,
+  )
+}
+```
+
+It outputs one line of a dataframe for each midi in the `note` vector. We'll design a
+repeating bass pattern of a C major chord:
+
+```{r}
+bass <- frame_notes(
+  b = 1:n_notes - 1 + 0.5, 
+  dur = 1, 
+  note = rep(c(36, 43, 41, 48), n_notes / 4)
+)
+```
+
+
+```{details, details.summary = "Show output"}
+bass
+```
+
+In order to avoid repetitive typing we'll also define a small helper function for chords:
+```{r}
+frame_chords <- function(...) {
+  frame_notes(...) %>% 
+    unnest(note)
+}
+```
+
+Now we can pass a list of chord vectors to the function. We'll repeat the same C major chord:
+
+```{r}
+chords_list <- rep(list(c(60, 64, 67, 72)), n_notes)
+```
+
+
+```{details, details.summary = "Show list of chords passed"}
+chords_list
+```
+
+frame them:
+
+```{r}
+chords <- frame_chords(
+  b = 1:n_notes - 1, 
+  dur = 1,
+  velocity = 70,
+  note = chords_list
+)
+```
+
+
+```{details, details.summary = "Show framed chords"}
+chords
+```
+
+Now let's write a simple rising arpeggiatator function:
+
+```{r}
+arpeggiate <- function(
+  b,
+  chords_list,
+  dur = 1,
+  pattern = "rising",
+  n_beat = 4,
+  octave = 1,
+  ...
+) {
+  times <- tibble(b) %>%
+    rowwise() %>% 
+    summarise(c(b + seq(0, 1, length.out = n_beat + 1)[-(n_beat + 1)])) %>% 
+    pull()
+  notes <- 
+    tibble(temp = chords_list) %>% 
+    unnest(temp) %>% 
+    pull() %>% 
+    {. + octave * 12; .}
+  frame_notes(
+    dur = dur/n_beat,
+    b = times,
+    note = notes,
+    ...
+  )
+    
+}
+arp <- arpeggiate(
+  b = 1:n_notes - 1, 
+  velocity = 90,
+  chords_list = chords_list
+)
+```
+
+
+```{details, details.summary = "Show arpeggio function output"}
+arp
+```
+
+
+We can concatenate these different parts into one dataframe by also changing the chords played
+with our small function `change_notes_on_measures()`:
+
+```{r}
+composition <- bind_rows(
+  # We'll add our note variation 
+  # of a major chord to tonic, subdominant and dominant:
+  bass %>% change_notes_on_measures(),
+  chords %>% change_notes_on_measures(),
+  arp %>% change_notes_on_measures(),
+  # But not on the drum :)
+  drum
+) %>% 
+  beats_to_ticks()
+```
+
+```{r echo = T, results = 'hide'}
+mod_notes(mfr, composition)
+```
+
+
+```{r}
+mfr %>% play_midi_frame("composition.wav")
+```
+
