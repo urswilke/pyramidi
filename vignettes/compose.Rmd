@@ -17,9 +17,7 @@ knitr::opts_chunk$set(
 ## Setup
 
 ```{r, message=FALSE, echo=FALSE}
-# reticulate::use_python("/home/chief/anaconda3/bin/python", required = T)
-# reticulate::use_virtualenv("r-reticulate", required = TRUE)
-# pyramidi::install_miditapyr(envname = "r-reticulate")
+pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
 
 We'll load some libraries in R:
@@ -55,18 +53,18 @@ In sf2 soundfonts midi channel 10 (which is channel 9 in pythonista world :) is
 usually used for drums. Let's try this out. 36 is the bass drum and 38 the snare
 
 ```{r}
-n_notes <- 32
+n_beats <- 16
 ticks_per_beat <- 960
 drum <- tibble(
   i_track = 0,
   meta = FALSE,
   # This is just a repetition of a classical rock beat:
-  note = rep(c(36, 38), n_notes / 2),
+  note = rep(c(36, 38), n_beats / 2),
   channel = 9,
-  i_note = 1:n_notes,
+  i_note = 1:n_beats,
   velocity_note_on = 100,
   velocity_note_off = 0,
-  b_note_on = 0:(n_notes-1),
+  b_note_on = 0:(n_beats-1),
   b_note_off = b_note_on + 1 / 2,
 )
 ```
@@ -99,7 +97,7 @@ mfr$update_notes_wide(beats_to_ticks(drum))
 and listen to the drums of our first composition:
 
 ```{r}
-mfr$play("drum.wav")
+mfr$play("drum.mp3")
 ```
 
 Now we'll add notes. Channel 1 should be grand piano. We will play major chords 
@@ -108,13 +106,13 @@ Now we'll add notes. Channel 1 should be grand piano. We will play major chords
 notes <- tibble(
   i_track = 0,
   meta = FALSE,
-  note = rep(c(60, 64, 67, 72), n_notes / 4),
+  note = rep(c(60, 64, 67, 72), n_beats / 4),
   channel = 0,
-  i_note = 1:n_notes,
+  i_note = 1:n_beats,
   velocity_note_on = 100,
   velocity_note_off = 0,
   # here we define that all the 4 notes in the chord are played at the same time:
-  b_note_on = (0:(n_notes-1) %/% 4) * 4,
+  b_note_on = (0:(n_beats-1) %/% 4) * 4,
   b_note_off = b_note_on + 1 * 2,
 )
 ```
@@ -157,7 +155,7 @@ mfr$update_notes_wide(midi_note_events_wide)
 And play it:
 
 ```{r}
-mfr$play("combine.wav")
+mfr$play("combine.mp3")
 ```
 
 Let's rock! 🤟🥳
@@ -197,9 +195,9 @@ repeating bass pattern of a C major chord:
 
 ```{r}
 bass <- frame_notes(
-  b = 1:n_notes - 1 + 0.5, 
+  b = 1:n_beats - 1 + 0.5, 
   dur = 1, 
-  note = rep(c(36, 43, 41, 48), n_notes / 4)
+  note = rep(c(36, 43, 41, 48), n_beats / 4)
 )
 ```
 
@@ -219,7 +217,7 @@ frame_chords <- function(...) {
 Now we can pass a list of chord vectors to the function. We'll repeat the same C major chord:
 
 ```{r}
-chords_list <- rep(list(c(60, 64, 67, 72)), n_notes)
+chords_list <- rep(list(c(60, 64, 67, 72)), n_beats)
 ```
 
 
@@ -231,7 +229,7 @@ frame them:
 
 ```{r}
 chords <- frame_chords(
-  b = 1:n_notes - 1, 
+  b = 1:n_beats - 1, 
   dur = 1,
   velocity = 70,
   note = chords_list
@@ -273,7 +271,7 @@ arpeggiate <- function(
     
 }
 arp <- arpeggiate(
-  b = 1:n_notes - 1, 
+  b = 1:n_beats - 1, 
   velocity = 90,
   chords_list = chords_list
 )
@@ -307,6 +305,6 @@ mfr$update_notes_wide(composition)
 
 
 ```{r}
-mfr$play("composition.wav")
+mfr$play("composition.mp3")
 ```
 
