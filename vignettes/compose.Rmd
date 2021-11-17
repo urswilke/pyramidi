@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 ## Setup
 
 ```{r, message=FALSE, echo=FALSE}
+# reticulate::use_python("/home/chief/anaconda3/bin/python", required = T)
+# reticulate::use_virtualenv("r-reticulate", required = TRUE)
 # pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
 
@@ -32,19 +34,17 @@ library(details)
 ```
 
 
-For the moment there is no proper constructor to generate an empty `r_midi_frames()` object. Therefore, we just load our package midi file to have some scaffolding to put our notes in:
+For the moment, there is no proper constructor to generate an empty `MidiFramer()` object. Therefore, we just load our package midi file to have some scaffolding to put our notes in:
 
 ```{r, message=FALSE}
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- r_midi_frames(midi_file_string)
+mfr <- MidiFramer$new(midi_file_string)
 ```
 
 We will compose our data by generating a dataframe as the one on the example midi file.
 
 ```{details, details.summary = "Click here to show the format of the dataframe we need to have."}
-midi_unnested <- mfr$mf$midi_frame_unnested$df %>% 
-  as_tibble()
-midi_unnested
+mfr$df_notes_wide
 ```
 
 We will measure our time in `b_note_on` and `b_note_off` being the absolute times 
@@ -90,16 +90,16 @@ beats_to_ticks <- function(notes_wide) {
 }
 ```
 
-Ok we are ready to pass these modified notes to our `r_midi_frames` object
+Ok we are ready to pass these modified notes to our `MidiFramer` object
 
 ```{r echo = T, results = 'hide'}
-mod_notes(mfr, beats_to_ticks(drum))
+mfr$update_notes_wide(beats_to_ticks(drum))
 ```
 
 and listen to the drums of our first composition:
 
 ```{r}
-mfr %>% play_midi_frame("drum.wav")
+mfr$play("drum.wav")
 ```
 
 Now we'll add notes. Channel 1 should be grand piano. We will play major chords 
@@ -109,7 +109,7 @@ notes <- tibble(
   i_track = 0,
   meta = FALSE,
   note = rep(c(60, 64, 67, 72), n_notes / 4),
-  channel = 1,
+  channel = 0,
   i_note = 1:n_notes,
   velocity_note_on = 100,
   velocity_note_off = 0,
@@ -151,13 +151,13 @@ midi_note_events_wide <- bind_rows(drum, notes) %>% beats_to_ticks()
 
 We can apply the same as above:
 ```{r echo = T, results = 'hide'}
-mod_notes(mfr, midi_note_events_wide)
+mfr$update_notes_wide(midi_note_events_wide)
 ```
 
 And play it:
 
 ```{r}
-mfr %>% play_midi_frame("combine.wav")
+mfr$play("combine.wav")
 ```
 
 Let's rock! 🤟🥳
@@ -173,7 +173,7 @@ frame_notes <- function(
   dur,
   note,
   velocity = 100,
-  channel = 1,
+  channel = 0,
   i_track = 0,
   meta = FALSE,
   velocity_note_off = 0,
@@ -302,11 +302,11 @@ composition <- bind_rows(
 ```
 
 ```{r echo = T, results = 'hide'}
-mod_notes(mfr, composition)
+mfr$update_notes_wide(composition)
 ```
 
 
 ```{r}
-mfr %>% play_midi_frame("composition.wav")
+mfr$play("composition.wav")
 ```
 
