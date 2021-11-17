@@ -31,7 +31,8 @@ Imports:
     ggplot2,
     zeallot,
     magrittr,
-    rlang
+    rlang,
+    R6
 URL: https://github.com/urswilke/pyramidi, https://urswilke.github.io/pyramidi/
 Depends: 
     R (>= 2.10)
