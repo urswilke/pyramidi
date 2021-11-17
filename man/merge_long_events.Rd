@@ -10,7 +10,8 @@ merge_long_events(df_meta, df_notes_long, df_not_notes)
 \item{df_meta, df_notes_long, df_not_notes}{Results of \code{miditapyr$split_df()}.}
 }
 \value{
-
+Merges the input dataframes, arranges by \code{i_track} & (absolute) \code{ticks}, and
+calculates \code{time} (in relative ticks since the last event).
 }
 \description{
 Merge dataframes transformed back to long format, remove added columns and

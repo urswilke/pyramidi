@@ -10,7 +10,7 @@ pivot_long_notes(df_notes_wide)
 \item{df_notes_wide}{notes dataframe in wide format}
 }
 \value{
-
+Transforms notes in wide dataframe format to long format.
 }
 \description{
 Write note_on and _off events in two lines (wide to long)

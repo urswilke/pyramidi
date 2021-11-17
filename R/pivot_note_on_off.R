@@ -34,7 +34,7 @@ pivot_wide_notes <- function(df_measures) {
 #'
 #' @param df_notes_wide notes dataframe in wide format
 #'
-#' @return
+#' @return Transforms notes in wide dataframe format to long format.
 #' @export
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
@@ -73,7 +73,8 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' @param df_meta,df_notes_long,df_not_notes Results of `miditapyr$split_df()`.
 #'
-#' @return
+#' @return Merges the input dataframes, arranges by \code{i_track} & (absolute) \code{ticks}, and
+#'   calculates \code{time} (in relative ticks since the last event).
 #' @export
 #'
 #' @examples
@@ -94,9 +95,9 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
   df_notes_long %>%
     dplyr::full_join(df_meta) %>%
     dplyr::full_join(df_not_notes) %>%
-    dplyr::arrange(i_track, ticks) %>%
-    dplyr::group_by(i_track) %>%
-    dplyr::mutate(time = ticks - dplyr::lag(ticks) %>% {.[1] = 0; .}) %>%
+    dplyr::arrange(.data$i_track, .data$ticks) %>%
+    dplyr::group_by(.data$i_track) %>%
+    dplyr::mutate(time = .data$ticks - dplyr::lag(.data$ticks) %>% {.[1] = 0; .}) %>%
     dplyr::ungroup() %>%
     dplyr::select(-!!cols_to_remove)
 }
@@ -110,7 +111,7 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #'
 #' @param dfm result of \code{tab_measures()}
 #'
-#' @return
+#' @return df_meta, df_not_notes & df_notes_wide
 #' @export
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
@@ -120,7 +121,10 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #' triage_measured_unnested(dfm)
 #' }
 triage_measured_unnested <- function(dfm) {
-  c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
+  # c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
+  l <- miditapyr$split_df(dfm)
+  df_meta <- l[["df_meta"]]
+  df_notes <- l[["df_notes"]]
 
   df_not_notes <- df_notes %>%
     dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$"))

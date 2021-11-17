@@ -92,8 +92,8 @@ MidiFramer <- R6::R6Class("MidiFramer", list(
   ) {
     play_midi_frame(
       self,
-      audiofile = tempfile("mf_out_", fileext = ".wav"),
-      overwrite = FALSE
+      audiofile = audiofile,
+      overwrite = overwrite
     )
   }
 ))

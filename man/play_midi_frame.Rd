@@ -20,7 +20,8 @@ if file exists and overwrite = FALSE, the existing files will be used and nothin
 is synthesized/ocnverted to audio files.}
 }
 \value{
-
+Retuns an audio html tag that can be embeded in (rmarkdown) html
+documents to play the midi data.
 }
 \description{
 Transform the midi file to fileext format and provide a play button for html

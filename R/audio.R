@@ -9,7 +9,8 @@
 #' if file exists and overwrite = FALSE, the existing files will be used and nothing
 #' is synthesized/ocnverted to audio files.
 #'
-#' @return
+#' @return Retuns an audio html tag that can be embeded in (rmarkdown) html
+#'   documents to play the midi data.
 #' @export
 #'
 #' @examples

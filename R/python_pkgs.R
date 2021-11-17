@@ -22,6 +22,8 @@ miditapyr <- NULL
 #' }
 mido <- NULL
 
+copy <- NULL
+
 .onLoad <- function(libname, pkgname) {
   # # found in https://github.com/kevinushey/usespandas/blob/master/R/zzz.R
   reticulate::configure_environment(pkgname, force = TRUE)
@@ -29,6 +31,9 @@ mido <- NULL
   miditapyr <<- reticulate::import("miditapyr", delay_load = TRUE)
   # use superassignment to update global reference to mido
   mido <<- reticulate::import("mido", delay_load = TRUE)
+
+  copy <<- reticulate::import("copy", delay_load = TRUE)
+
 }
 
 

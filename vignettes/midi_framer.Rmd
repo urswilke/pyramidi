@@ -32,22 +32,22 @@ library(raudiomate) # see https://github.com/urswilke/raudiomate
 
 ## Generate R midi frames object
 
-We can create an R midi object of class `"r_midi_frames"` by passing the midi file path to the  
-constructor function `r_midi_frames()` of the same name. 
+We can create an R6 object of class `"MidiFramer"` by passing the midi file path to the  
+constructor function `MidiFramer$new()`: 
 
 ```{r, message=FALSE}
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- r_midi_frames(midi_file_string)
+mfr <- MidiFramer$new(midi_file_string)
 class(mfr)
 ```
 
-It is a list object that contains the following objects:
+It is an R6 object that contains the following fields:
 
 ```{r}
-enframe(mfr)
+enframe(as.list(mfr))
 ```
 
-The first object `mf` is the `midi_frame` object from `miditapyr.MidiFrames()`. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
+`mf` is a `miditapyr.MidiFrames()` object. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
 
 ```{r}
 list(
@@ -59,7 +59,7 @@ list(
   map(as_tibble)
 ```
 
-And you can write the midi file resulting of the MidiFrame object to disk:
+And you can write the midi file resulting of the `MidiFrames` object to disk:
 
 ```{r, eval=FALSE}
 mfr$mf$write_file("/path/to/your/midifile.mid")
@@ -94,14 +94,14 @@ mod(mfr$df_notes_wide)
 
 Then we would have to adapt all the following elements of `mfr` that depend on `mfr$df_notes_wide`.
 
-When we call `mod_notes()`, all the depending list elements are also automatically updated.
+When we call the method `mfr$update_notes_wide()`, all the depending list elements are also automatically updated.
 
 ```{r, message=FALSE}
 # Apply the modification to mfr$df_notes_wide and all depending dataframes:
-mfr <- mod_notes(mfr, mod)
+mfr$update_notes_wide(mod)
 ```
 
-The data has also been changed in `mfr$mf` the miditapyr midi_frames object in mfr:
+The data has also been changed in `mfr$mf` the miditapyr `MidiFrames` object in mfr:
 
 ```{r}
 mfr$mf$midi_frame_nested$df %>% head()
@@ -139,7 +139,7 @@ You can also listen to your synthesized files by embedding an audio player for t
 `r_midi_frames` object:
 
 ```{r, eval=FALSE}
-mfr %>% play_midi_frame(mp3file)
+mfr$play(mp3file)
 ```
 
 ```{r echo=FALSE}
@@ -157,23 +157,24 @@ To play the audio, this saves the synthesized file under the path specified in `
 
 ## Multiple results
 
-You could also embed multiple audio files in one call using `purrr::map()` functions:
+You can also embed multiple (in this case 2) audio files in one call using `purrr::map()` functions:
 
 ```{r, message=FALSE}
 l_mfr <- 1:2 %>%
-  map(~mod_notes(mfr, mod)) %>% 
-  set_names(paste0("test", 1:length(.), ".mp3"))
+  set_names(paste0("test", ., ".mp3")) %>% 
+  imap(~mfr$update_notes_wide(mod)$play(audiofile = .y))
 ```
 
 
 
-```{r, eval=FALSE}
+```{r}
 tagList(
   imap(
     l_mfr, 
     ~ div(
       h4(paste("audio result", .y)),
-      play_midi_frame(.x, mp3file = .y),
+      .x,
+      # add 2 line breaks to vertically separate a bit:
       br(), 
       br()
     )

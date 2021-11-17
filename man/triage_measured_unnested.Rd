@@ -10,7 +10,7 @@ triage_measured_unnested(dfm)
 \item{dfm}{result of \code{tab_measures()}}
 }
 \value{
-
+df_meta, df_not_notes & df_notes_wide
 }
 \description{
 Unnested midi frame with time data from `\code{tab_measures()} is split into 3 parts:
