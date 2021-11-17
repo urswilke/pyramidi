@@ -108,7 +108,7 @@ For comparison, we plot the results of [`unnest_midi()`](https://miditapyr.readt
 
 
 ```{r}
-mfr <- r_midi_frames(midi_file_string)
+mfr <- MidiFramer$new(midi_file_string)
 mt$unnest_midi(dfc = mfr$mf$midi_frame_raw) %>% 
   as_tibble()
 ```
