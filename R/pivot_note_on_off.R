@@ -123,8 +123,8 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 triage_measured_unnested <- function(dfm) {
   # c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
   l <- miditapyr$split_df(dfm)
-  df_meta <- l[["df_meta"]]
-  df_notes <- l[["df_notes"]]
+  df_meta <- l[[1]]
+  df_notes <- l[[2]]
 
   df_not_notes <- df_notes %>%
     dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$"))

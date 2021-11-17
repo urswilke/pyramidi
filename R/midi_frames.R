@@ -19,9 +19,9 @@ r_midi_frames <- function(midi_file_string) {
 
   # c(df_meta, df_not_notes, df_notes_wide) %<-% triage_measured_unnested(dfm)
   l <- triage_measured_unnested(dfm)
-  df_meta <- l[["df_meta"]]
-  df_not_notes <- l[["df_not_notes"]]
-  df_notes_wide <- l[["df_notes_wide"]]
+  df_meta <- l[[1]]
+  df_not_notes <- l[[2]]
+  df_notes_wide <- l[[3]]
 
 
   df_notes_long <- pivot_long_notes(df_notes_wide)
