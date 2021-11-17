@@ -100,7 +100,7 @@ constructor.
 library(pyramidi)
 library(dplyr)
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- r_midi_frames(midi_file_string)
+mfr <- MidiFramer$new(midi_file_string)
 ```
 
 The object contains the midi data in various dataframe formats and an
@@ -136,7 +136,7 @@ mod <- function(dfn, seed) {
 When we call `mod_notes()`, the midi data in `mfr` is updated:
 
 ``` r
-mfr <- mod_notes(mfr, mod)
+mfr$update_notes_wide(mod)
 ```
 
 ## Writing modified midi files
@@ -154,7 +154,7 @@ can synthesize the midi data to wav, convert to mp3 if you want, and
 then embed a player in your rmarkdown html document with
 
 ``` r
-play_midi_frame(mfr)
+mfr$play()
 ```
 
 <audio controls="">
