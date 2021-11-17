@@ -214,6 +214,7 @@ authors of the following libraries!
 -   zeallot (Teetor 2018)
 -   magrittr (Bache and Wickham 2020)
 -   rlang (Henry and Wickham 2021)
+-   R6 (Chang 2021)
 -   knitr (Xie 2014)
 -   rmarkdown (Xie, Dervieux, and Riederer 2020)
 -   testthat (Wickham 2011)
@@ -237,6 +238,13 @@ Andersen, Mikkel Meyer. 2021. *Pichor: Piano Chords in r*.
 Bache, Stefan Milton, and Hadley Wickham. 2020. *Magrittr: A
 Forward-Pipe Operator for r*.
 <https://CRAN.R-project.org/package=magrittr>.
+
+</div>
+
+<div id="ref-R6" class="csl-entry">
+
+Chang, Winston. 2021. *R6: Encapsulated Classes with Reference
+Semantics*. <https://CRAN.R-project.org/package=R6>.
 
 </div>
 

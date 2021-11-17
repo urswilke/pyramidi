@@ -214,6 +214,7 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - zeallot [@zeallot]
 - magrittr [@magrittr]
 - rlang [@rlang]
+- R6 [@R6]
 - knitr [@knitr]
 - rmarkdown [@rmarkdown]
 - testthat [@testthat]
