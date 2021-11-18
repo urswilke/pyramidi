@@ -42,7 +42,7 @@
 <meta property="og:title" content="Merge dataframes transformed back to long format — merge_long_events" />
 <meta property="og:description" content="Merge dataframes transformed back to long format, remove added columns and
 transform to the right chronological order in order to replace the original
-midi_frame_tidy object." />
+midi_frame_unnested object." />
 
 
 
@@ -97,10 +97,16 @@ midi_frame_tidy object." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
       <a href="../articles/functions_workflow.html">Package Workflow and Functions</a>
     </li>
     <li>
       <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
+    </li>
+    <li>
+      <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
   </ul>
 </li>
@@ -133,7 +139,7 @@ midi_frame_tidy object." />
     <div class="ref-description">
     <p>Merge dataframes transformed back to long format, remove added columns and
 transform to the right chronological order in order to replace the original
-midi_frame_tidy object.</p>
+midi_frame_unnested object.</p>
     </div>
 
     <pre class="usage"><span class='fu'>merge_long_events</span><span class='op'>(</span><span class='va'>df_meta</span>, <span class='va'>df_notes_long</span>, <span class='va'>df_not_notes</span><span class='op'>)</span></pre>
@@ -143,15 +149,14 @@ midi_frame_tidy object.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df_meta, df_notes_long, df_not_notes</th>
-      <td><p>Results of `miditapyr$split_df()`.</p></td>
+      <td><p>Results of <code>miditapyr$split_df()</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>Merges the input dataframes, arranges by <code>i_track</code> &amp; (absolute) <code>ticks</code>, and
+calculates <code>time</code> (in relative ticks since the last event).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'></span>
@@ -184,10 +189,10 @@ midi_frame_tidy object.</p>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-in'></span>
-<span class='r-in'><span class='va'>dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tab_measures.html'>tab_measures</a></span><span class='op'>(</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_frame_tidy</span><span class='op'>$</span><span class='va'>midi_frame_tidy</span>, ticks_per_beat <span class='op'>=</span> <span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_file</span><span class='op'>$</span><span class='va'>ticks_per_beat</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tab_measures.html'>tab_measures</a></span><span class='op'>(</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_frame_unnested</span><span class='op'>$</span><span class='va'>df</span>, ticks_per_beat <span class='op'>=</span> <span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_file</span><span class='op'>$</span><span class='va'>ticks_per_beat</span><span class='op'>)</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in tibble::as_tibble(.):</span> object 'mf' not found</span>
 <span class='r-in'></span>
-<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='triage_measured_tidy.html'>triage_measured_tidy</a></span><span class='op'>(</span><span class='va'>dfm</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='triage_measured_unnested.html'>triage_measured_unnested</a></span><span class='op'>(</span><span class='va'>dfm</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> List of 19</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  $ python              : chr "/usr/bin/python3"</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  $ libpython           : chr "/usr/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.so"</span>

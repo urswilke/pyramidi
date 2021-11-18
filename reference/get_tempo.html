@@ -95,10 +95,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
       <a href="../articles/functions_workflow.html">Package Workflow and Functions</a>
     </li>
     <li>
       <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
+    </li>
+    <li>
+      <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
   </ul>
 </li>
@@ -151,10 +157,10 @@
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>mid_file_str</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"test_midi_file.mid"</span>, package <span class='op'>=</span> <span class='st'>"pyramidi"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>mido_mid_file</span> <span class='op'>&lt;-</span> <span class='va'>mido</span><span class='op'>$</span><span class='fu'>MidiFile</span><span class='op'>(</span><span class='va'>mid_file_str</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>dfc</span> <span class='op'>&lt;-</span> <span class='va'>miditapyr</span><span class='op'>$</span><span class='fu'>midi_to_df</span><span class='op'>(</span><span class='va'>mido_mid_file</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dfc</span> <span class='op'>&lt;-</span> <span class='va'>miditapyr</span><span class='op'>$</span><span class='fu'>frame_midi</span><span class='op'>(</span><span class='va'>mido_mid_file</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>ticks_per_beat</span> <span class='op'>=</span> <span class='va'>mido_mid_file</span><span class='op'>$</span><span class='va'>ticks_per_beat</span></span>
 <span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>dfc</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
-<span class='r-in'>  <span class='va'>miditapyr</span><span class='op'>$</span><span class='fu'>tidy_df</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>miditapyr</span><span class='op'>$</span><span class='fu'>unnest_midi</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tab_measures.html'>tab_measures</a></span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>ticks_per_beat</span><span class='op'>)</span></span>

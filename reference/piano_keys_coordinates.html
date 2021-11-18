@@ -96,10 +96,16 @@ the midi note value it represents." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
       <a href="../articles/functions_workflow.html">Package Workflow and Functions</a>
     </li>
     <li>
       <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
+    </li>
+    <li>
+      <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
   </ul>
 </li>
@@ -140,13 +146,12 @@ the midi note value it represents.</p>
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame with 127 rows and 6 variables:</p><dl>
-  <dt>midi</dt><dd><p>integer from 0 - 127 containing the midi pitches</p></dd>
-  <dt>layer</dt><dd><p>integer 1 or 2 depending on whether key is white (1) or black (2)</p></dd>
-  <dt>xmin</dt><dd><p>xmin coordinate of the key</p></dd>
-  <dt>ymin</dt><dd><p>ymin coordinate of the key</p></dd>
-  <dt>xmax</dt><dd><p>xmax coordinate of the key</p></dd>
-  <dt>ymax</dt><dd><p>ymax coordinate of the key</p></dd>
-  ...
+<dt>midi</dt><dd><p>integer from 0 - 127 containing the midi pitches</p></dd>
+<dt>layer</dt><dd><p>integer 1 or 2 depending on whether key is white (1) or black (2)</p></dd>
+<dt>xmin</dt><dd><p>xmin coordinate of the key</p></dd>
+<dt>ymin</dt><dd><p>ymin coordinate of the key</p></dd>
+<dt>xmax</dt><dd><p>xmax coordinate of the key</p></dd>
+<dt>ymax</dt><dd><p>ymax coordinate of the key</p></dd>
 
 </dl>
 

@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Modify notes in wide format and trigger updates of observers — mod_notes" />
 <meta property="og:description" content="For a &quot;r_midi_frames&quot; object  mfr, this method replaces
-mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
+mfr$mf$midi_frame_unnested$df, and all other
 derived dataframes." />
 
 
@@ -97,10 +97,16 @@ derived dataframes." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
       <a href="../articles/functions_workflow.html">Package Workflow and Functions</a>
     </li>
     <li>
       <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
+    </li>
+    <li>
+      <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
   </ul>
 </li>
@@ -132,7 +138,7 @@ derived dataframes." />
 
     <div class="ref-description">
     <p>For a "r_midi_frames" object  <code>mfr</code>, this method replaces
-mfr$mf$midi_frame_tidy$midi_frame_tidy, and all other
+mfr$mf$midi_frame_unnested$df, and all other
 derived dataframes.</p>
     </div>
 
@@ -197,7 +203,7 @@ derived dataframes.</p>
 <span class='r-in'><span class='va'>mfr</span> <span class='op'>&lt;-</span> <span class='fu'>mod_notes</span><span class='op'>(</span><span class='va'>mfr</span>, <span class='va'>mod</span><span class='op'>)</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in mod_notes(mfr, mod):</span> object 'mfr' not found</span>
 <span class='r-in'><span class='co'># The data has also been changed in `mf` the miditapyr midi_frame object in mfr:</span></span>
-<span class='r-in'><span class='va'>mfr</span><span class='op'>$</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_frame_compact</span><span class='op'>$</span><span class='va'>midi_frame_compact</span></span>
+<span class='r-in'><span class='va'>mfr</span><span class='op'>$</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_frame_nested</span><span class='op'>$</span><span class='va'>df</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(expr, envir, enclos):</span> object 'mfr' not found</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># You can save the modified midi data back to a file:</span></span>
