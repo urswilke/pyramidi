@@ -30,6 +30,12 @@ the notes’ data and also plotting them in piano roll plots. Finally, the
 modified dataframes can be written back to midi files (again using
 miditapyr).
 
+Thus, you can manipulate all the intermediate dataframes and write midi
+files from R. However, you need to make sure yourself that the midi
+files you write can be understood by your softsynth. The data is not yet
+validated, but [mido](https://github.com/mido/mido) (also used to write
+midi files) already catches some of the possible inconsistencies.
+
 Via the small helper package
 [raudiomate](https://github.com/urswilke/raudiomate) the midi data can
 be
@@ -38,14 +44,8 @@ be
     [fluidsynth](https://www.fluidsynth.org/) installed),
 -   converted to mp3 files with `raudiomate::convert_to_mp3()` (needs
     [ffmpeg](https://www.ffmpeg.org/)),
--   and played in rmarkdown documents with `play_midi_frame()` (using
-    `raudiomate::player()`).
-
-Thus you can manipulate these dataframes at all steps and write midi
-files from R. However, you need to make sure yourself that the midi
-files you write can be understood by your softsynth; but
-[mido](https://github.com/mido/mido) (used by miditapyr) already catches
-some of the possible inconsistencies.
+-   and played in rmarkdown documents with the `play()` method of
+    `MidiFramer` (using `raudiomate::player()`).
 
 If you’re new to midi, [mido’s
 documentation](https://mido.readthedocs.io/en/latest/) might be a good
@@ -90,9 +90,9 @@ configure your reticulate environment manually.*
 
 ## Usage
 
-### Generate R midi\_frames object
+### Generate a `MidiFramer` object
 
-We can create an R midi frames object by passing the file file path to
+We can create an `MidiFramer` object by passing the file file path to
 the  
 constructor.
 
@@ -106,14 +106,14 @@ mfr <- MidiFramer$new(midi_file_string)
 The object contains the midi data in various dataframe formats and an
 interface to the miditapyr
 [miditapyr.MidiFrames](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html)
-object `mfr$mf`. You can write the midi file resulting of the MidiFrames
-object to disk:
+object `mfr$mf`. You can write the midi file resulting of the
+`MidiFramer` object to disk:
 
 ``` r
 mfr$mf$write_file("/path/to/your/midifile.mid")
 ```
 
-## Modifying midi data
+### Modifying midi data
 
 In the R midi frames object, we can modify `mfr$df_notes_wide`, the
 notes in notewise wide format (`note_on` & `note_off` events in the same
@@ -140,7 +140,7 @@ updated:
 mfr$update_notes_wide(mod)
 ```
 
-## Writing modified midi files
+### Writing modified midi files
 
 Thus, we can now save the modifications to a midi file:
 
@@ -148,7 +148,7 @@ Thus, we can now save the modifications to a midi file:
 mfr$mf$write_file("mod_test_midi_file.mid")
 ```
 
-## Synthesizing and playing audio
+### Synthesizing and playing audio
 
 See the `vignette("midi_framer", package = "pyramidi")` to see how you
 can synthesize the midi data to wav, convert to mp3 if you want, and
