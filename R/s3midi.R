@@ -57,6 +57,7 @@ r_midi_frames <- function(midi_file_string) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' mfr <- r_midi_frames(midi_file_string)
 #' # Function to replace every note with a random midi note between 60 & 71:
@@ -75,6 +76,7 @@ r_midi_frames <- function(midi_file_string) {
 #'
 #' # You can save the modified midi data back to a file:
 #' mfr$mf$write_file("mod_test_midi_file.mid")
+#' }
 mod_notes <- function(mfr, mod) {
   UseMethod("mod_notes")
 }

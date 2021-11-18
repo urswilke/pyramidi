@@ -20,6 +20,7 @@ mfr$mf$midi_frame_unnested$df, and all other
 derived dataframes.
 }
 \examples{
+\dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- r_midi_frames(midi_file_string)
 # Function to replace every note with a random midi note between 60 & 71:
@@ -38,4 +39,5 @@ mfr$mf$midi_frame_nested$df
 
 # You can save the modified midi data back to a file:
 mfr$mf$write_file("mod_test_midi_file.mid")
+}
 }
