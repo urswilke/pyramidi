@@ -33,8 +33,9 @@ miditapyr).
 Thus, you can manipulate all the intermediate dataframes and write midi
 files from R. However, you need to make sure yourself that the midi
 files you write can be understood by your softsynth. The data is not yet
-validated, but [mido](https://github.com/mido/mido) (also used to write
-midi files) already catches some of the possible inconsistencies.
+validated by pyramidi, but [mido](https://github.com/mido/mido) (also
+used to write midi files by miditapyr) already catches some of the
+possible inconsistencies.
 
 Via the small helper package
 [raudiomate](https://github.com/urswilke/raudiomate) the midi data can
