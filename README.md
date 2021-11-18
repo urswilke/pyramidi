@@ -133,7 +133,8 @@ mod <- function(dfn, seed) {
 }
 ```
 
-When we call `mod_notes()`, the midi data in `mfr` is updated:
+When we call the `update_notes_wide()` method, the midi data in `mfr` is
+updated:
 
 ``` r
 mfr$update_notes_wide(mod)
