@@ -31,3 +31,8 @@ df_notes_long <- pivot_long_notes(l$df_notes_wide)
 
 merge_long_events(l$df_meta, df_notes_long, l$df_not_notes)
 }
+\seealso{
+Other Split/merge meta/notes/non-note events: 
+\code{\link{triage_measured_unnested}()}
+}
+\concept{Split/merge meta/notes/non-note events}

@@ -78,6 +78,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #' @return Merges the input dataframes, arranges by \code{i_track} & (absolute) \code{ticks}, and
 #'   calculates \code{time} (in relative ticks since the last event).
 #' @export
+#' @family Split/merge meta/notes/non-note events
 #'
 #' @examples
 #'
@@ -115,6 +116,7 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #'
 #' @return df_meta, df_not_notes & df_notes_wide
 #' @export
+#' @family Split/merge meta/notes/non-note events
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples

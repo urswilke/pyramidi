@@ -30,3 +30,8 @@ dfm <- tab_measures(df, ticks_per_beat)
 triage_measured_unnested(dfm)
 }
 }
+\seealso{
+Other Split/merge meta/notes/non-note events: 
+\code{\link{merge_long_events}()}
+}
+\concept{Split/merge meta/notes/non-note events}
