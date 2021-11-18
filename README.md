@@ -86,15 +86,14 @@ pyramidi::install_miditapyr()
 ```
 
 *I’m not sure if that works on windows too. Perhaps there you have to
-configure your reticulate environment manually.*
+manually configure your reticulate environment.*
 
 ## Usage
 
 ### Generate a `MidiFramer` object
 
-We can create an `MidiFramer` object by passing the file file path to
-the  
-constructor.
+We can create an `MidiFramer` object by passing the file path to the  
+constructor method (`$new()`).
 
 ``` r
 library(pyramidi)
