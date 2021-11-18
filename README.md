@@ -178,6 +178,14 @@ mfr$play()
     [article](https://urswilke.github.io/pyramidi/articles/tuner.html),
     for an example how you can transform the tuner format into the
     pyramidi format.
+-   The [tabr](https://github.com/leonawicz/tabr) package is a massive
+    music notation, transcription and analysis program allowing to
+    create musical scores (using Lilypond). It allows to read midi files
+    (wrapping tuneR) and also to export them (also using Lilypond).
+-   The [gm](https://github.com/flujoo/gm) package also allows to create
+    and show musical scores using musescore. It also allows to export
+    the music to audio (also using musescore) and to embed the players
+    in html documents.
 
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
