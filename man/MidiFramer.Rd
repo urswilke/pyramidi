@@ -15,13 +15,16 @@ Construct a midi frame R6 object
 Constructor of an object of class "MidiFramer".
 }
 \examples{
+\dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 MidiFramer$new(midi_file_string)
+}
 
 ## ------------------------------------------------
 ## Method `MidiFramer$update_notes_wide`
 ## ------------------------------------------------
 
+\dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 # Function to replace every note with a random midi note between 60 & 71:
@@ -43,6 +46,7 @@ set.seed(123)
 df_mod <- mod(mfr$df_notes_wide)
 mfr$update_notes_wide(df_mod)
 mfr$play()
+}
 
 ## ------------------------------------------------
 ## Method `MidiFramer$play`
@@ -122,7 +126,8 @@ Update a MidiFramer object with modified notes
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+\preformatted{\dontrun{
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 # Function to replace every note with a random midi note between 60 & 71:
 mod <- function(dfn) {
@@ -143,6 +148,7 @@ set.seed(123)
 df_mod <- mod(mfr$df_notes_wide)
 mfr$update_notes_wide(df_mod)
 mfr$play()
+}
 }
 \if{html}{\out{</div>}}
 

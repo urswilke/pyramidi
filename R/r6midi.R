@@ -13,8 +13,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' MidiFramer$new(midi_file_string)
+#' }
 MidiFramer <- R6::R6Class("MidiFramer", list(
   midi_file_string = NULL,
   mf = NULL,
@@ -46,6 +48,7 @@ MidiFramer <- R6::R6Class("MidiFramer", list(
   #'
   #' @param mod Dataframe or function returning a dataframe of the format of \code{df_notes_wide}.
   #' @examples
+  #' \dontrun{
   #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
   #' mfr <- MidiFramer$new(midi_file_string)
   #' # Function to replace every note with a random midi note between 60 & 71:
@@ -67,6 +70,7 @@ MidiFramer <- R6::R6Class("MidiFramer", list(
   #' df_mod <- mod(mfr$df_notes_wide)
   #' mfr$update_notes_wide(df_mod)
   #' mfr$play()
+  #' }
   update_notes_wide = function(mod) {
     mod_notes.r_midi_frames(self, mod)
     invisible(self)
