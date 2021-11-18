@@ -54,7 +54,7 @@ r_midi_frames <- function(midi_file_string) {
 #' @param mod Function modifying or dataframe replacing
 #'
 #' @return Updated r_midi_frames object.
-#' @export
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -80,7 +80,6 @@ r_midi_frames <- function(midi_file_string) {
 mod_notes <- function(mfr, mod) {
   UseMethod("mod_notes")
 }
-#' @export
 mod_notes.r_midi_frames <- function(mfr, mod) {
   if (is.function(mod)) {
     mod <- mod(mfr$df_notes_wide)
