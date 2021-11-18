@@ -1,13 +1,14 @@
 `%<-%` <- zeallot::`%<-%`
 
-#' Construct a midi frame object
+#' Construct an \code{r_midi_frames} object
 #'
 #' Constructor of an object of class "r_midi_frames".
 #'
 #' @param midi_file_string Path to the midi file
 #'
-#' @return Midi frames S3 object
-#' @export
+#' @return S3 object
+#'
+#' @noRd
 #'
 #' @examples
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
