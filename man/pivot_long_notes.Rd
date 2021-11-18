@@ -2,7 +2,7 @@
 % Please edit documentation in R/pivot_note_on_off.R
 \name{pivot_long_notes}
 \alias{pivot_long_notes}
-\title{Write note_on and _off events in two lines (wide to long)}
+\title{Write \code{note_on} and \code{note_off} events in two lines (wide to long)}
 \usage{
 pivot_long_notes(df_notes_wide)
 }
@@ -13,7 +13,7 @@ pivot_long_notes(df_notes_wide)
 Transforms notes in wide dataframe format to long format.
 }
 \description{
-Write note_on and _off events in two lines (wide to long)
+Write \code{note_on} and \code{note_off} events in two lines (wide to long)
 }
 \examples{
 \dontrun{
@@ -33,3 +33,8 @@ library(zeallot)
 c(df_meta, df_notes) \%<-\% miditapyr$split_df(dfm)
 }
 }
+\seealso{
+Other Pivot midi frame functions: 
+\code{\link{pivot_wide_notes}()}
+}
+\concept{Pivot midi frame functions}

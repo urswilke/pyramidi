@@ -1,8 +1,9 @@
-#' Write note_on and _off events in the same line (long to wide)
+#' Write \code{note_on} and \code{note_off} events in the same line (long to wide)
 #'
 #' @param df_measures data.frame resulting of miditapyr$mido_midi_df() and then running tab_measures() (see example)
 #'
 #' @return A data.frame with the following columns pivoted to wide: c("m", "b", "t", "ticks", "time", "velocity"). Every column is pivoted to wide with the suffix "_note_on" & "_note_off" showing the values of the original column as a prefix. See \code{?tab_measures} for an explanation of the meaning of these columns.
+#' @family Pivot midi frame functions
 #'
 #' @export
 #'
@@ -30,11 +31,12 @@ pivot_wide_notes <- function(df_measures) {
 
 
 
-#' Write note_on and _off events in two lines (wide to long)
+#' Write \code{note_on} and \code{note_off} events in two lines (wide to long)
 #'
 #' @param df_notes_wide notes dataframe in wide format
 #'
 #' @return Transforms notes in wide dataframe format to long format.
+#' @family Pivot midi frame functions
 #' @export
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd

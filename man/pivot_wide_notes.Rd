@@ -2,7 +2,7 @@
 % Please edit documentation in R/pivot_note_on_off.R
 \name{pivot_wide_notes}
 \alias{pivot_wide_notes}
-\title{Write note_on and _off events in the same line (long to wide)}
+\title{Write \code{note_on} and \code{note_off} events in the same line (long to wide)}
 \usage{
 pivot_wide_notes(df_measures)
 }
@@ -13,7 +13,7 @@ pivot_wide_notes(df_measures)
 A data.frame with the following columns pivoted to wide: c("m", "b", "t", "ticks", "time", "velocity"). Every column is pivoted to wide with the suffix "_note_on" & "_note_off" showing the values of the original column as a prefix. See \code{?tab_measures} for an explanation of the meaning of these columns.
 }
 \description{
-Write note_on and _off events in the same line (long to wide)
+Write \code{note_on} and \code{note_off} events in the same line (long to wide)
 }
 \examples{
 \dontrun{
@@ -29,3 +29,8 @@ dfm <- tab_measures(df, ticks_per_beat)
 dfm \%>\% pivot_wide_notes()
 }
 }
+\seealso{
+Other Pivot midi frame functions: 
+\code{\link{pivot_long_notes}()}
+}
+\concept{Pivot midi frame functions}
