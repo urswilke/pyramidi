@@ -31,3 +31,9 @@ miditapyr$split_df(dfm)  \%->\% c(df_meta, df_notes)
 pyramidi:::tab_time_sig(df_meta)
 }
 }
+\seealso{
+Other Time information functions: 
+\code{\link{get_bpm}()},
+\code{\link{get_tempo}()}
+}
+\concept{Time information functions}

@@ -31,3 +31,9 @@ miditapyr$split_df(dfm)  \%->\% c(df_meta, df_notes)
 get_tempo(df_meta)
 }
 }
+\seealso{
+Other Time information functions: 
+\code{\link{get_bpm}()},
+\code{\link{tab_time_sig}()}
+}
+\concept{Time information functions}

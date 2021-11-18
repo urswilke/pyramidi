@@ -4,6 +4,7 @@
 #'
 #' @return time signature data.frame
 #' @importFrom rlang .data
+#' @family Time information functions
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
@@ -40,6 +41,7 @@ tab_time_sig <- function(df_meta) {
 #'
 #' @export
 #' @return tempo integer
+#' @family Time information functions
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
@@ -73,6 +75,7 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #'
 #' @return integer of beats per minute
 #' @export
+#' @family Time information functions
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
 #' @examples
