@@ -60,7 +60,7 @@ messages.
 
 We can transform the midi data to a data.frame similar to the one returned by
 [`unnest_midi()`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi)
-from the miditapyr package:
+from the miditapyr package. We'll only use the data of the first track of the midi file:
 
 
 ```{r}
@@ -75,10 +75,10 @@ track1list <- pb$list(track1)
 track1list
 ```
 
-The list contains mido `Message()` & `MetaMessage()` objects.
+The list contains mido `Message()` & `MetaMessage()` objects (`Message()`s seem to have a special print method).
 
 With the function `pb$vars()` we can extract all variables for every 
-event into a named R list:
+event into a list of named R lists:
 
 ```{r}
 track1Rlist <- track1list %>% 
@@ -113,4 +113,4 @@ mt$unnest_midi(dfc = mfr$mf$midi_frame_raw) %>%
   as_tibble()
 ```
 
-There are some differences in the types.
+There are some differences in the types and `track1Rlist` only contains the data of track 1, but you can see that apart from that, the output is the same.
