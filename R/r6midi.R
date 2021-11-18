@@ -17,7 +17,7 @@
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' MidiFramer$new(midi_file_string)
 #' }
-MidiFramer <- R6::R6Class("MidiFramer", list(
+MidiFramer <- R6::R6Class("MidiFramer", public = list(
   midi_file_string = NULL,
   mf = NULL,
   dfm = NULL,
@@ -100,4 +100,21 @@ MidiFramer <- R6::R6Class("MidiFramer", list(
       overwrite = overwrite
     )
   }
-))
+  ),
+  # for doing deep copies, we also need to deepcopy the python object.
+  # See here, for the inspiration of this code:
+  # https://jangorecki.gitlab.io/data.cube/library/R6/doc/Introduction.html#cloning-objects
+  private = list(
+    deep_clone = function(name, value) {
+      # With x$clone(deep=TRUE) is called, the deep_clone gets invoked once for
+      # each field, with the name and value.
+      if (name == "mf") {
+        # We are doing a deep copy with the python copy module:
+        copy$deepcopy(value)
+      } else {
+        # For all other fields, just return the value
+        value
+      }
+    }
+  )
+)
