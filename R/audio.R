@@ -11,7 +11,7 @@
 #'
 #' @return Retuns an audio html tag that can be embeded in (rmarkdown) html
 #'   documents to play the midi data.
-#' @export
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
