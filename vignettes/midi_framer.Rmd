@@ -153,13 +153,14 @@ htmltools::tags$audio(
 ```
 
 
-To play the audio, this saves the synthesized file under the path specified in `mp3file`.
+To play the audio, this saves the synthesized file under the path specified in `mp3file`. 
+As you can hear, the `sample()` function in `mod()` changed all midi notes randomly.
 
 ## Multiple results
 
 You can also embed multiple (in this case 2) audio files in one call using `purrr::map()` functions:
 
-```{r, message=FALSE}
+```{r, eval=FALSE}
 l_mfr <- 1:2 %>%
   set_names(paste0("test", ., ".mp3")) %>% 
   imap(~mfr$update_notes_wide(mod)$play(audiofile = .y))
@@ -167,7 +168,7 @@ l_mfr <- 1:2 %>%
 
 
 
-```{r}
+```{r, eval=FALSE}
 tagList(
   imap(
     l_mfr, 
@@ -180,5 +181,31 @@ tagList(
     )
   )
 )
+```
+
+```{r, echo=FALSE}
+tagList(list(
+  div(
+    htmltools::tags$audio(
+      controls = "",
+      htmltools::tags$source(
+        src = "test1.mp3",
+        type = "audio/mp3"
+      )
+    ),
+    br(),
+    br()
+  ),
+  div(
+    htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = "test2.mp3",
+      type = "audio/mp3"
+    )
+  )
+
+  )
+))
 ```
 
