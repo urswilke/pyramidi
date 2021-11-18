@@ -7,7 +7,7 @@
 #' @param audiofile audiofile
 #' @param overwrite logical; defaults to FALSE;
 #' if file exists and overwrite = FALSE, the existing files will be used and nothing
-#' is synthesized/ocnverted to audio files.
+#' is synthesized/converted to audio files.
 #'
 #' @return Retuns an audio html tag that can be embeded in (rmarkdown) html
 #'   documents to play the midi data.

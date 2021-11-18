@@ -176,7 +176,7 @@ documents.
 
 \item{\code{overwrite}}{logical; defaults to FALSE;
 if file exists and overwrite = FALSE, the existing files will be used and nothing
-is synthesized/ocnverted to audio files.}
+is synthesized/converted to audio files.}
 }
 \if{html}{\out{</div>}}
 }

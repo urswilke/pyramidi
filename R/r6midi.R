@@ -82,7 +82,7 @@ MidiFramer <- R6::R6Class("MidiFramer", list(
   #' @param audiofile Path to the audiofile to be synthesized
   #' @param overwrite logical; defaults to FALSE;
   #' if file exists and overwrite = FALSE, the existing files will be used and nothing
-  #' is synthesized/ocnverted to audio files.
+  #' is synthesized/converted to audio files.
   #'
   #' @examples
   #' \dontrun{
