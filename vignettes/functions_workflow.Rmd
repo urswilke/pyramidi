@@ -15,7 +15,12 @@ knitr::opts_chunk$set(
 ```
 
 
-## Basic usage
+## Introduction
+
+I started to write this vignette a while ago, before I new object-oriented programming in R. 
+So this might be interesting for you if you don't know OOP but want to learn more about all the internals of pyramidi. 
+If you just want to see some use cases or if you know well R6, the other vignettes might be a better place to start. 
+
 
 ### Load libraries
 
@@ -35,8 +40,9 @@ library(ggplot2)
 library(zeallot)
 ```
 
-### Extract midi file information into dataframe
+### Extract midi into dataframe
 
+We'll extract the information of a midi file into dataframe. We'll use the package internal midi file:
 
 ```{r midi_df}
 midi_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
@@ -60,7 +66,7 @@ The `MidiFile()` function of `mido` also yields the [`ticks_per_beat`](https://m
 ticks_per_beat
 ```
 
-The `miditapyr$unnest_midi()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg`  (like `tidyr::unnest_wider()`):
+The `miditapyr$unnest_midi()` function transforms the `msg` column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in `msg` (like `tidyr::unnest_wider()`):
 
 ```{r}
 df <- miditapyr$unnest_midi(dfc) %>% as_tibble()
@@ -142,7 +148,7 @@ The columns `m`, `b`, `t`, `ticks`, `time` and `velocity` are each replaced by
 two columns with the suffix `_note_on` and `_note_off`.
 
 
-### Plot the midi file information in a piano roll plot
+### Plot midi information in piano roll plot
 
 Now we have the midi data in the right format for the piano roll plot:
 
