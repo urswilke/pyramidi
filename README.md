@@ -93,7 +93,7 @@ manually configure your reticulate environment.*
 
 ### Generate a `MidiFramer` object
 
-We can create an `MidiFramer` object by passing the file path to the  
+We can create an `MidiFramer` object by passing the file path to the
 constructor method (`$new()`).
 
 ``` r
@@ -161,6 +161,9 @@ mfr$play()
 <audio controls="">
 <source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"/>
 </audio>
+
+Even if that sounds very weird, I was very happy not having to listen to
+the package midi file over and over again. :)
 
 ## Related R packages
 

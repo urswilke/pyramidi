@@ -90,8 +90,7 @@ pyramidi::install_miditapyr()
 
 ### Generate a `MidiFramer` object
 
-We can create an `MidiFramer` object by passing the file path to the  
-constructor method (`$new()`). 
+We can create an `MidiFramer` object by passing the file path to the constructor method (`$new()`). 
 
 ```{r, message=FALSE}
 library(pyramidi)
@@ -168,7 +167,7 @@ htmltools::tags$audio(
   )
 ```
 
-
+Even if that sounds very weird, I was very happy not having to listen to the package midi file over and over again. :)
 
 
 
