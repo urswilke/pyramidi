@@ -405,7 +405,7 @@
 <div id="transform-to-unnested-dataframe" class="section level2">
 <h2 class="hasAnchor">
 <a href="#transform-to-unnested-dataframe" class="anchor"></a>Transform to unnested dataframe</h2>
-<p>We can transform the midi data to a data.frame similar to the one returned by <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi"><code>unnest_midi()</code></a> from the miditapyr package:</p>
+<p>We can transform the midi data to a data.frame similar to the one returned by <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi"><code>unnest_midi()</code></a> from the miditapyr package. We’ll only use the data of the first track of the midi file:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># access first track:</span>
 <span class="va">track1</span> <span class="op">&lt;-</span> <span class="va">midi_file</span><span class="op">$</span><span class="va">tracks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
@@ -894,8 +894,8 @@
 <span id="cb8-479"><a href="#cb8-479"></a>[[<span class="dv">160</span>]]</span>
 <span id="cb8-480"><a href="#cb8-480"></a><span class="kw">MetaMessage</span>(<span class="st">'end_of_track'</span>, <span class="dt">time=</span><span class="dv">1</span>)</span></code></pre></div>
 </details><p><br></p>
-<p>The list contains mido <code>Message()</code> &amp; <code>MetaMessage()</code> objects.</p>
-<p>With the function <code>pb$vars()</code> we can extract all variables for every event into a named R list:</p>
+<p>The list contains mido <code>Message()</code> &amp; <code>MetaMessage()</code> objects (<code>Message()</code>s seem to have a special print method).</p>
+<p>With the function <code>pb$vars()</code> we can extract all variables for every event into a list of named R lists:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">track1Rlist</span> <span class="op">&lt;-</span> <span class="va">track1list</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">pb</span><span class="op">$</span><span class="va">vars</span><span class="op">)</span></code></pre></div>
@@ -1109,7 +1109,7 @@
 <span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
 <span class="co">#&gt; # … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
-<p>There are some differences in the types.</p>
+<p>There are some differences in the types and <code>track1Rlist</code> only contains the data of track 1, but you can see that apart from that, the output is the same.</p>
 </div>
   </div>
 

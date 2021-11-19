@@ -101,47 +101,42 @@
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<pre><code>#&gt; Using Python: /usr/bin/python3.8
-#&gt; Creating virtual environment 'r-reticulate' ... Done!
-#&gt; Installing packages: 'pip', 'wheel', 'setuptools', 'numpy'
-#&gt; Virtual environment 'r-reticulate' successfully created.
-#&gt; Using virtual environment 'r-reticulate' ...</code></pre>
 <p>We’ll load some libraries in R:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yonicd/details">details</a></span><span class="op">)</span></code></pre></div>
 <p>For the moment, there is no proper constructor to generate an empty <code><a href="../reference/MidiFramer.html">MidiFramer()</a></code> object. Therefore, we just load our package midi file to have some scaffolding to put our notes in:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></code></pre></div>
 <p>We will compose our data by generating a dataframe as the one on the example midi file.</p>
 <pre class="details"><code>mfr$df_notes_wide</code></pre>
 <details closed><p><summary><span title="Click to Open"> Click here to show the format of the dataframe we need to have. </span> </summary></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># A tibble: 130 × 17</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>   i_track meta   note channel i_note time_note_on time_note_off</span>
-<span id="cb5-4"><a href="#cb5-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>           <span class="dv">240</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">39</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">42</span>       <span class="dv">9</span>      <span class="dv">1</span>          <span class="dv">240</span>             <span class="dv">0</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">2</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">2</span>            <span class="dv">0</span>           <span class="dv">240</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">3</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">42</span>       <span class="dv">9</span>      <span class="dv">2</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">4</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co"># … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># A tibble: 130 × 17</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>   i_track meta   note channel i_note time_note_on time_note_off</span>
+<span id="cb4-4"><a href="#cb4-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>           <span class="dv">240</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">39</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">42</span>       <span class="dv">9</span>      <span class="dv">1</span>          <span class="dv">240</span>             <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">1</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">2</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">2</span>            <span class="dv">0</span>           <span class="dv">240</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">3</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">42</span>       <span class="dv">9</span>      <span class="dv">2</span>            <span class="dv">0</span>             <span class="dv">0</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">9</span>      <span class="dv">4</span>          <span class="dv">240</span>           <span class="dv">240</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co"># … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>We will measure our time in <code>b_note_on</code> and <code>b_note_off</code> being the absolute times (in quarter notes) when the notes are played.</p>
 <p>In sf2 soundfonts midi channel 10 (which is channel 9 in pythonista world :) is usually used for drums. Let’s try this out. 36 is the bass drum and 38 the snare</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_beats</span> <span class="op">&lt;-</span> <span class="fl">16</span>
 <span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="fl">960</span>
 <span class="va">drum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
@@ -158,30 +153,30 @@
 <span class="op">)</span></code></pre></div>
 <pre class="details"><code>drum</code></pre>
 <details closed><p><summary><span title="Click to Open"> Show <code>drum</code> dataframe </span> </summary></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># A tibble: 16 × 9</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>   i_track meta   note channel i_note velocity_note_on velocity_note_off</span>
-<span id="cb8-4"><a href="#cb8-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">1</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">2</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">3</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">4</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">5</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">6</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">7</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">8</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">9</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">10</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">11</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">12</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">13</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">14</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">15</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">16</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co"># … with 2 more variables: b_note_on &lt;int&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># A tibble: 16 × 9</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>   i_track meta   note channel i_note velocity_note_on velocity_note_off</span>
+<span id="cb7-4"><a href="#cb7-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">1</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">2</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">3</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">4</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">5</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">6</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">7</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>      <span class="dv">8</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>      <span class="dv">9</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">10</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">11</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">12</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">13</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">14</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">9</span>     <span class="dv">15</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">38</span>       <span class="dv">9</span>     <span class="dv">16</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># … with 2 more variables: b_note_on &lt;int&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>We’ll just define a small helper function to calculate the absolute midi ticks passed from the time measured in beats, because when we generate the format to save the data to midi we need to calculate the relative time increments in ticks.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">beats_to_ticks</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">notes_wide</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">notes_wide</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
@@ -190,15 +185,13 @@
     <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Ok we are ready to pass these modified notes to our <code>MidiFramer</code> object</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="fu">beats_to_ticks</span><span class="op">(</span><span class="va">drum</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "b", "ticks", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "velocity", "b", "ticks", "meta", "time", "t", "m")</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="fu">beats_to_ticks</span><span class="op">(</span><span class="va">drum</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>and listen to the drums of our first composition:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="st">"drum.mp3"</span><span class="op">)</span></code></pre></div>
 <audio controls=""><source src="drum.mp3" type="audio/mp3"></source></audio><p>Now we’ll add notes. Channel 1 should be grand piano. We will play major chords</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   i_track <span class="op">=</span> <span class="fl">0</span>,
   meta <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -213,30 +206,30 @@
 <span class="op">)</span></code></pre></div>
 <pre class="details"><code>notes</code></pre>
 <details closed><p><summary><span title="Click to Open"> click to show <code>notes</code> frame </span> </summary></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># A tibble: 16 × 9</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>   i_track meta   note channel i_note velocity_note_on velocity_note_off</span>
-<span id="cb14-4"><a href="#cb14-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">1</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>      <span class="dv">2</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>      <span class="dv">3</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>      <span class="dv">4</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">5</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>      <span class="dv">6</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>      <span class="dv">7</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>      <span class="dv">8</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">9</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>     <span class="dv">10</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>     <span class="dv">11</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>     <span class="dv">12</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>     <span class="dv">13</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>     <span class="dv">14</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>     <span class="dv">15</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>     <span class="dv">16</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a><span class="co"># … with 2 more variables: b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># A tibble: 16 × 9</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>   i_track meta   note channel i_note velocity_note_on velocity_note_off</span>
+<span id="cb13-4"><a href="#cb13-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">1</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>      <span class="dv">2</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>      <span class="dv">3</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>      <span class="dv">4</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">5</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>      <span class="dv">6</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>      <span class="dv">7</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>      <span class="dv">8</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>      <span class="dv">9</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>     <span class="dv">10</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>     <span class="dv">11</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>     <span class="dv">12</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>     <span class="dv">13</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>     <span class="dv">14</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>     <span class="dv">15</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>     <span class="dv">16</span>              <span class="dv">100</span>                 <span class="dv">0</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co"># … with 2 more variables: b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>With a small helper function, we can change the notes played depending on the measure we’re in:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># We play the tonic for 2 bars, </span>
   <span class="co"># and the subdominant (+5) and dominant (+7) for one each:</span>
 <span class="va">change_notes_on_measures</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">{</span>
@@ -254,15 +247,13 @@
 <span class="va">notes</span> <span class="op">&lt;-</span> <span class="va">notes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">change_notes_on_measures</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>When we join the <code>drum</code> and <code>notes</code> dataframes together:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">midi_note_events_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">drum</span>, <span class="va">notes</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu">beats_to_ticks</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>We can apply the same as above:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">midi_note_events_wide</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "b", "ticks", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "velocity", "b", "ticks", "meta", "time", "t", "m")</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">midi_note_events_wide</span><span class="op">)</span></code></pre></div>
 <p>And play it:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="st">"combine.mp3"</span><span class="op">)</span></code></pre></div>
 <audio controls=""><source src="combine.mp3" type="audio/mp3"></source></audio><p>Let’s rock! 🤟🥳</p>
 </div>
@@ -270,7 +261,7 @@
 <h2 class="hasAnchor">
 <a href="#write-functions-to-compose-midi-frames" class="anchor"></a>Write functions to compose midi frames</h2>
 <p>Instead of defining a whole dataframe as in the section before, we’ll now write a small helper function writing single notes to the needed dataframe format:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">frame_notes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span>
   <span class="va">b</span>,
   <span class="va">dur</span>,
@@ -294,7 +285,7 @@
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>It outputs one line of a dataframe for each midi in the <code>note</code> vector. We’ll design a repeating bass pattern of a C major chord:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bass</span> <span class="op">&lt;-</span> <span class="fu">frame_notes</span><span class="op">(</span>
   b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_beats</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">0.5</span>, 
   dur <span class="op">=</span> <span class="fl">1</span>, 
@@ -302,90 +293,90 @@
 <span class="op">)</span></code></pre></div>
 <pre class="details"><code>bass</code></pre>
 <details closed><p><summary><span title="Click to Open"> Show output </span> </summary></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># A tibble: 16 × 8</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
-<span id="cb22-4"><a href="#cb22-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">0.5</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">1.5</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">2.5</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">3.5</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">4.5</span></span>
-<span id="cb22-10"><a href="#cb22-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">5.5</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">6.5</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">7.5</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">8.5</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">9.5</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">10.5</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">11.5</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">12.5</span></span>
-<span id="cb22-18"><a href="#cb22-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">13.5</span></span>
-<span id="cb22-19"><a href="#cb22-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">14.5</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">15.5</span></span>
-<span id="cb22-21"><a href="#cb22-21"></a><span class="co"># … with 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># A tibble: 16 × 8</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
+<span id="cb21-4"><a href="#cb21-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">0.5</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">1.5</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">2.5</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">3.5</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">4.5</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">5.5</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">6.5</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">7.5</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">8.5</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>       <span class="fl">9.5</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="dv">11</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">10.5</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="dv">12</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">11.5</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="dv">13</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">36</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">12.5</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="dv">14</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">43</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">13.5</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="dv">15</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">41</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">14.5</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="dv">16</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">48</span>       <span class="dv">0</span>              <span class="dv">100</span>                 <span class="dv">0</span>      <span class="fl">15.5</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co"># … with 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>In order to avoid repetitive typing we’ll also define a small helper function for chords:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">frame_chords</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">frame_notes</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">note</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Now we can pass a list of chord vectors to the function. We’ll repeat the same C major chord:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chords_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">64</span>, <span class="fl">67</span>, <span class="fl">72</span><span class="op">)</span><span class="op">)</span>, <span class="va">n_beats</span><span class="op">)</span></code></pre></div>
 <pre class="details"><code>chords_list</code></pre>
 <details closed><p><summary><span title="Click to Open"> Show list of chords passed </span> </summary></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2"></a>[[<span class="dv">1</span>]]</span>
-<span id="cb26-3"><a href="#cb26-3"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a></span>
-<span id="cb26-5"><a href="#cb26-5"></a>[[<span class="dv">2</span>]]</span>
-<span id="cb26-6"><a href="#cb26-6"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a></span>
-<span id="cb26-8"><a href="#cb26-8"></a>[[<span class="dv">3</span>]]</span>
-<span id="cb26-9"><a href="#cb26-9"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a></span>
-<span id="cb26-11"><a href="#cb26-11"></a>[[<span class="dv">4</span>]]</span>
-<span id="cb26-12"><a href="#cb26-12"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a></span>
-<span id="cb26-14"><a href="#cb26-14"></a>[[<span class="dv">5</span>]]</span>
-<span id="cb26-15"><a href="#cb26-15"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a></span>
-<span id="cb26-17"><a href="#cb26-17"></a>[[<span class="dv">6</span>]]</span>
-<span id="cb26-18"><a href="#cb26-18"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-19"><a href="#cb26-19"></a></span>
-<span id="cb26-20"><a href="#cb26-20"></a>[[<span class="dv">7</span>]]</span>
-<span id="cb26-21"><a href="#cb26-21"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-22"><a href="#cb26-22"></a></span>
-<span id="cb26-23"><a href="#cb26-23"></a>[[<span class="dv">8</span>]]</span>
-<span id="cb26-24"><a href="#cb26-24"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-25"><a href="#cb26-25"></a></span>
-<span id="cb26-26"><a href="#cb26-26"></a>[[<span class="dv">9</span>]]</span>
-<span id="cb26-27"><a href="#cb26-27"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-28"><a href="#cb26-28"></a></span>
-<span id="cb26-29"><a href="#cb26-29"></a>[[<span class="dv">10</span>]]</span>
-<span id="cb26-30"><a href="#cb26-30"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-31"><a href="#cb26-31"></a></span>
-<span id="cb26-32"><a href="#cb26-32"></a>[[<span class="dv">11</span>]]</span>
-<span id="cb26-33"><a href="#cb26-33"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-34"><a href="#cb26-34"></a></span>
-<span id="cb26-35"><a href="#cb26-35"></a>[[<span class="dv">12</span>]]</span>
-<span id="cb26-36"><a href="#cb26-36"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-37"><a href="#cb26-37"></a></span>
-<span id="cb26-38"><a href="#cb26-38"></a>[[<span class="dv">13</span>]]</span>
-<span id="cb26-39"><a href="#cb26-39"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-40"><a href="#cb26-40"></a></span>
-<span id="cb26-41"><a href="#cb26-41"></a>[[<span class="dv">14</span>]]</span>
-<span id="cb26-42"><a href="#cb26-42"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-43"><a href="#cb26-43"></a></span>
-<span id="cb26-44"><a href="#cb26-44"></a>[[<span class="dv">15</span>]]</span>
-<span id="cb26-45"><a href="#cb26-45"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
-<span id="cb26-46"><a href="#cb26-46"></a></span>
-<span id="cb26-47"><a href="#cb26-47"></a>[[<span class="dv">16</span>]]</span>
-<span id="cb26-48"><a href="#cb26-48"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2"></a>[[<span class="dv">1</span>]]</span>
+<span id="cb25-3"><a href="#cb25-3"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a>[[<span class="dv">2</span>]]</span>
+<span id="cb25-6"><a href="#cb25-6"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a></span>
+<span id="cb25-8"><a href="#cb25-8"></a>[[<span class="dv">3</span>]]</span>
+<span id="cb25-9"><a href="#cb25-9"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a></span>
+<span id="cb25-11"><a href="#cb25-11"></a>[[<span class="dv">4</span>]]</span>
+<span id="cb25-12"><a href="#cb25-12"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a></span>
+<span id="cb25-14"><a href="#cb25-14"></a>[[<span class="dv">5</span>]]</span>
+<span id="cb25-15"><a href="#cb25-15"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a></span>
+<span id="cb25-17"><a href="#cb25-17"></a>[[<span class="dv">6</span>]]</span>
+<span id="cb25-18"><a href="#cb25-18"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a></span>
+<span id="cb25-20"><a href="#cb25-20"></a>[[<span class="dv">7</span>]]</span>
+<span id="cb25-21"><a href="#cb25-21"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a></span>
+<span id="cb25-23"><a href="#cb25-23"></a>[[<span class="dv">8</span>]]</span>
+<span id="cb25-24"><a href="#cb25-24"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-25"><a href="#cb25-25"></a></span>
+<span id="cb25-26"><a href="#cb25-26"></a>[[<span class="dv">9</span>]]</span>
+<span id="cb25-27"><a href="#cb25-27"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-28"><a href="#cb25-28"></a></span>
+<span id="cb25-29"><a href="#cb25-29"></a>[[<span class="dv">10</span>]]</span>
+<span id="cb25-30"><a href="#cb25-30"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-31"><a href="#cb25-31"></a></span>
+<span id="cb25-32"><a href="#cb25-32"></a>[[<span class="dv">11</span>]]</span>
+<span id="cb25-33"><a href="#cb25-33"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-34"><a href="#cb25-34"></a></span>
+<span id="cb25-35"><a href="#cb25-35"></a>[[<span class="dv">12</span>]]</span>
+<span id="cb25-36"><a href="#cb25-36"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-37"><a href="#cb25-37"></a></span>
+<span id="cb25-38"><a href="#cb25-38"></a>[[<span class="dv">13</span>]]</span>
+<span id="cb25-39"><a href="#cb25-39"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-40"><a href="#cb25-40"></a></span>
+<span id="cb25-41"><a href="#cb25-41"></a>[[<span class="dv">14</span>]]</span>
+<span id="cb25-42"><a href="#cb25-42"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-43"><a href="#cb25-43"></a></span>
+<span id="cb25-44"><a href="#cb25-44"></a>[[<span class="dv">15</span>]]</span>
+<span id="cb25-45"><a href="#cb25-45"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span>
+<span id="cb25-46"><a href="#cb25-46"></a></span>
+<span id="cb25-47"><a href="#cb25-47"></a>[[<span class="dv">16</span>]]</span>
+<span id="cb25-48"><a href="#cb25-48"></a>[<span class="dv">1</span>] <span class="dv">60</span> <span class="dv">64</span> <span class="dv">67</span> <span class="dv">72</span></span></code></pre></div>
 </details><p><br></p>
 <p>frame them:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chords</span> <span class="op">&lt;-</span> <span class="fu">frame_chords</span><span class="op">(</span>
   b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_beats</span> <span class="op">-</span> <span class="fl">1</span>, 
   dur <span class="op">=</span> <span class="fl">1</span>,
@@ -394,24 +385,24 @@
 <span class="op">)</span></code></pre></div>
 <pre class="details"><code>chords</code></pre>
 <details closed><p><summary><span title="Click to Open"> Show framed chords </span> </summary></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># A tibble: 64 × 8</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
-<span id="cb29-4"><a href="#cb29-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
-<span id="cb29-10"><a href="#cb29-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
-<span id="cb29-11"><a href="#cb29-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
-<span id="cb29-12"><a href="#cb29-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
-<span id="cb29-13"><a href="#cb29-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">2</span></span>
-<span id="cb29-14"><a href="#cb29-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">2</span></span>
-<span id="cb29-15"><a href="#cb29-15"></a><span class="co"># … with 54 more rows, and 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="co"># A tibble: 64 × 8</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
+<span id="cb28-4"><a href="#cb28-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">0</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">1</span></span>
+<span id="cb28-13"><a href="#cb28-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">2</span></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">70</span>                 <span class="dv">0</span>         <span class="dv">2</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="co"># … with 54 more rows, and 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>Now let’s write a simple rising arpeggiatator function:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arpeggiate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span>
   <span class="va">b</span>,
   <span class="va">chords_list</span>,
@@ -445,24 +436,24 @@
 <span class="op">)</span></code></pre></div>
 <pre class="details"><code>arp</code></pre>
 <details closed><p><summary><span title="Click to Open"> Show arpeggio function output </span> </summary></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># A tibble: 64 × 8</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
-<span id="cb32-4"><a href="#cb32-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">0</span>   </span>
-<span id="cb32-6"><a href="#cb32-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.25</span></span>
-<span id="cb32-7"><a href="#cb32-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.5</span> </span>
-<span id="cb32-8"><a href="#cb32-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.75</span></span>
-<span id="cb32-9"><a href="#cb32-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">1</span>   </span>
-<span id="cb32-10"><a href="#cb32-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.25</span></span>
-<span id="cb32-11"><a href="#cb32-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.5</span> </span>
-<span id="cb32-12"><a href="#cb32-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.75</span></span>
-<span id="cb32-13"><a href="#cb32-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">2</span>   </span>
-<span id="cb32-14"><a href="#cb32-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">2.25</span></span>
-<span id="cb32-15"><a href="#cb32-15"></a><span class="co"># … with 54 more rows, and 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="co"># A tibble: 64 × 8</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>   i_track meta   note channel velocity_note_on velocity_note_off b_note_on</span>
+<span id="cb31-4"><a href="#cb31-4"></a>     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="st"> </span><span class="dv">1</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">0</span>   </span>
+<span id="cb31-6"><a href="#cb31-6"></a> <span class="dv">2</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.25</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a> <span class="dv">3</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.5</span> </span>
+<span id="cb31-8"><a href="#cb31-8"></a> <span class="dv">4</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">0.75</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a> <span class="dv">5</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">1</span>   </span>
+<span id="cb31-10"><a href="#cb31-10"></a> <span class="dv">6</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.25</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a> <span class="dv">7</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">67</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.5</span> </span>
+<span id="cb31-12"><a href="#cb31-12"></a> <span class="dv">8</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">72</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">1.75</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a> <span class="dv">9</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">60</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="dv">2</span>   </span>
+<span id="cb31-14"><a href="#cb31-14"></a><span class="dv">10</span>       <span class="dv">0</span> <span class="ot">FALSE</span>    <span class="dv">64</span>       <span class="dv">0</span>               <span class="dv">90</span>                 <span class="dv">0</span>      <span class="fl">2.25</span></span>
+<span id="cb31-15"><a href="#cb31-15"></a><span class="co"># … with 54 more rows, and 1 more variable: b_note_off &lt;dbl&gt;</span></span></code></pre></div>
 </details><p><br></p>
 <p>We can concatenate these different parts into one dataframe by also changing the chords played with our small function <code>change_notes_on_measures()</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">composition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span>
   <span class="co"># We'll add our note variation </span>
   <span class="co"># of a major chord to tonic, subdominant and dominant:</span>
@@ -473,11 +464,9 @@
   <span class="va">drum</span>
 <span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">beats_to_ticks</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">composition</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">composition</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "b", "ticks", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "velocity", "b", "ticks", "meta", "time", "t", "m")</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="st">"composition.mp3"</span><span class="op">)</span></code></pre></div>
 <audio controls=""><source src="composition.mp3" type="audio/mp3"></source></audio>
 </div>

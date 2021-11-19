@@ -98,9 +98,10 @@
 
     
     
-<div id="basic-usage" class="section level2">
+<div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#basic-usage" class="anchor"></a>Basic usage</h2>
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>I started to write this vignette a while ago, before I new object-oriented programming in R. So this might be interesting for you if you don’t know OOP but want to learn more about all the internals of pyramidi. If you just want to see some use cases or if you know well R6, the other vignettes might be a better place to start.</p>
 <div id="load-libraries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-libraries" class="anchor"></a>Load libraries</h3>
@@ -113,9 +114,10 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="extract-midi-file-information-into-dataframe" class="section level3">
+<div id="extract-midi-into-dataframe" class="section level3">
 <h3 class="hasAnchor">
-<a href="#extract-midi-file-information-into-dataframe" class="anchor"></a>Extract midi file information into dataframe</h3>
+<a href="#extract-midi-into-dataframe" class="anchor"></a>Extract midi into dataframe</h3>
+<p>We’ll extract the information of a midi file into dataframe. We’ll use the package internal midi file:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 
@@ -318,9 +320,9 @@
 <span class="co">#&gt; #   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></code></pre></div>
 <p>In the new format, the data has half the number of rows. The columns <code>m</code>, <code>b</code>, <code>t</code>, <code>ticks</code>, <code>time</code> and <code>velocity</code> are each replaced by two columns with the suffix <code>_note_on</code> and <code>_note_off</code>.</p>
 </div>
-<div id="plot-the-midi-file-information-in-a-piano-roll-plot" class="section level3">
+<div id="plot-midi-information-in-piano-roll-plot" class="section level3">
 <h3 class="hasAnchor">
-<a href="#plot-the-midi-file-information-in-a-piano-roll-plot" class="anchor"></a>Plot the midi file information in a piano roll plot</h3>
+<a href="#plot-midi-information-in-piano-roll-plot" class="anchor"></a>Plot midi information in piano roll plot</h3>
 <p>Now we have the midi data in the right format for the piano roll plot:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
