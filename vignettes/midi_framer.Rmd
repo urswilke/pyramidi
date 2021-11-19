@@ -30,7 +30,7 @@ library(tibble)
 library(raudiomate) # see https://github.com/urswilke/raudiomate
 ```
 
-## Generate R midi frames object
+## Generate `MidiFramer` object
 
 We can create an R6 object of class `"MidiFramer"` by passing the midi file path to the  
 constructor function `MidiFramer$new()`: 
@@ -47,7 +47,7 @@ It is an R6 object that contains the following fields:
 enframe(as.list(mfr))
 ```
 
-`mf` is a `miditapyr.MidiFrames()` object. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
+The field `mf` is a `miditapyr.MidiFrames()` object. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
 
 ```{r}
 list(
@@ -68,7 +68,7 @@ mfr$mf$write_file("/path/to/your/midifile.mid")
 
 ## Modifying midi data
 
-In the R midi frames object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
 (`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
 midi events belong together
 
@@ -120,6 +120,7 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 ## Playing audio
 
 **You need to install fluidsynth if you want to do that on your computer.**
+**To generate mp3 files, you also need ffmpeg.**
 
 If you want to produce audio files from the midi files you can synthesize them
 with the convenience function `synthesize_midi()`
@@ -136,7 +137,7 @@ synthesize_midi(midifile, wavfile)
 ```
 
 You can also listen to your synthesized files by embedding an audio player for the 
-`r_midi_frames` object:
+`MidiFramer` object:
 
 ```{r, eval=FALSE}
 mfr$play(mp3file)
@@ -158,15 +159,29 @@ As you can hear, the `sample()` function in `mod()` changed all midi notes rando
 
 ## Multiple results
 
-You can also embed multiple (in this case 2) audio files in one call using `purrr::map()` functions:
+You can also generate a list of multiple `MidiFramer` objects (in this case 2) and apply different modifications to each:
+
 
 ```{r, eval=FALSE}
 l_mfr <- 1:2 %>%
   set_names(paste0("test", ., ".mp3")) %>% 
-  imap(~mfr$update_notes_wide(mod)$play(audiofile = .y))
+  map(~mfr$clone(deep = TRUE)$update_notes_wide(mod))
 ```
 
+And if you want to successively add modifications to the same object and store all intermediate results in a list, you could do it like this:
 
+```{r, eval=FALSE}
+l_mfr2 <- 1:2 %>%
+  set_names(paste0("test", ., ".mp3")) %>% 
+  accumulate(~.x$clone(deep = TRUE)$update_notes_wide(mod), .init = mfr)
+```
+
+Please note that we made deep copies (`$clone(deep = TRUE)`) of the `MidiFramer` object in the list `l_mfr`.
+Otherwise the field of the python [`miditapyr.MidiFrames`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames) object `mf` is a shallow copy. 
+This means that updates to one of these elements in `l_mfr` (for instance `l_mfr[[1]]$mf`) also change the others, because they all are references to the same object.
+
+
+This is how you can embed multiple audio files in one call using `purrr::imap()`:
 
 ```{r, eval=FALSE}
 tagList(
@@ -174,7 +189,7 @@ tagList(
     l_mfr, 
     ~ div(
       h4(paste("audio result", .y)),
-      .x,
+      .x$play(audiofile = .y),
       # add 2 line breaks to vertically separate a bit:
       br(), 
       br()
@@ -186,6 +201,7 @@ tagList(
 ```{r, echo=FALSE}
 tagList(list(
   div(
+    h4("audio result test1.mp3"),
     htmltools::tags$audio(
       controls = "",
       htmltools::tags$source(
@@ -197,6 +213,7 @@ tagList(list(
     br()
   ),
   div(
+    h4("audio result test2.mp3"),
     htmltools::tags$audio(
     controls = "",
     htmltools::tags$source(
