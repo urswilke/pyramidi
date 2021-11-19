@@ -114,7 +114,7 @@ mfr$mf$write_file("/path/to/your/midifile.mid")
 
 ### Modifying midi data
 
-In the R midi frames object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
 (`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
 midi events belong together
 
