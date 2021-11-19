@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Setup
 
-```{r, message=FALSE, echo=FALSE}
+```{r, message=FALSE, echo=FALSE, results = 'hide'}
 pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
 
@@ -90,7 +90,7 @@ beats_to_ticks <- function(notes_wide) {
 
 Ok we are ready to pass these modified notes to our `MidiFramer` object
 
-```{r echo = T, results = 'hide'}
+```{r echo = T, results = 'hide', message=FALSE}
 mfr$update_notes_wide(beats_to_ticks(drum))
 ```
 
@@ -160,7 +160,7 @@ midi_note_events_wide <- bind_rows(drum, notes) %>% beats_to_ticks()
 ```
 
 We can apply the same as above:
-```{r echo = T, results = 'hide'}
+```{r, results = 'hide', message=FALSE}
 mfr$update_notes_wide(midi_note_events_wide)
 ```
 
@@ -324,7 +324,7 @@ composition <- bind_rows(
   beats_to_ticks()
 ```
 
-```{r echo = T, results = 'hide'}
+```{r, results = 'hide', message=FALSE}
 mfr$update_notes_wide(composition)
 ```
 
