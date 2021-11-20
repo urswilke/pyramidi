@@ -34,9 +34,9 @@ digraph miditapyr_flow {
     df [label = "data\nframe"]
 
     # add invisible edges to achieve vertical alignment:
-    mfp -> pmf [style = invisible, arrowhead=none]
+    mfp -> df  [style = invisible, arrowhead=none]
+    df -> pmf  [style = invisible, arrowhead=none]
     pmf -> mtf [style = invisible, arrowhead=none]
-    mtf -> df  [style = invisible, arrowhead=none]
   }
 
 
