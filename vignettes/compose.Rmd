@@ -319,7 +319,7 @@ We can concatenate these different parts into one dataframe by also changing the
 with our small function `change_notes_on_measures()`:
 
 ```{r}
-composition <- bind_rows(
+combination <- bind_rows(
   # We'll add our note variation 
   # of a major chord to tonic, subdominant and dominant:
   bass %>% change_notes_on_measures(),
@@ -332,25 +332,25 @@ composition <- bind_rows(
 ```
 
 
-```{details, details.summary = "Show dataframe of whole composition", lang = 'none'}
-composition %>% kable()
+```{details, details.summary = "Show dataframe of whole combination", lang = 'none'}
+combination %>% kable()
 ```
 
 
 ```{r, results = 'hide', message=FALSE}
-mfr$update_notes_wide(composition)
+mfr$update_notes_wide(combination)
 ```
 
 
 ```{r, eval=FALSE}
-mfr$play("composition.mp3")
+mfr$play("combination.mp3")
 ```
 
 ```{r echo=FALSE}
 htmltools::tags$audio(
     controls = "",
     htmltools::tags$source(
-      src = "composition.mp3",
+      src = "combination.mp3",
       type = "audio/mp3"
     )
   )
