@@ -167,6 +167,8 @@ htmltools::tags$audio(
   )
 ```
 
+*The player only appears in the [docs](https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio).
+
 Even if that sounds very weird, I was very happy not having to listen to the package midi file over and over again. :)
 
 

@@ -162,6 +162,9 @@ mfr$play()
 <source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"/>
 </audio>
 
+\*The player only appears in the
+[docs](https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio).
+
 Even if that sounds very weird, I was very happy not having to listen to
 the package midi file over and over again. :)
 
