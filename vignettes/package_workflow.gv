@@ -65,6 +65,7 @@ digraph miditapyr_flow {
       mmf  [label = "mido.MidiFile", URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"]
     }
 
+
     node [shape = box, fontname = jura, peripheries=2, style=rounded]
     midi_file;
 
@@ -95,6 +96,38 @@ digraph miditapyr_flow {
     mtnm->mf_nested
 
     mf_nested->mtwm[arrowhead=none]
+
+  subgraph cluster_mf {
+    label = < <B>MidiFrames</B> >;
+    bgcolor="#33D700:#CCA6DD";
+    fontname = jura
+
+    node   [
+      style=rounded
+      shape = box,
+      style = "rounded,filled,radial",
+      gradientangle=10, fillcolor="#aacc8874:#4455662f",
+      peripheries=1
+    ]
+    mf_midi_file [
+      label = "mf.midi_file",
+      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+    ]
+    mf_mf_raw [
+      label = "mf.mf_raw",
+      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+    ]
+    mf_mf_unnested [
+      label = "mf.mf_unnested",
+      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+    ]
+    mf_mf_nested [
+      label = "mf.mf_nested",
+      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+    ]
+
+  }
+
   }
 
 
@@ -134,6 +167,26 @@ digraph miditapyr_flow {
   mtwm->midi_out
 
   {rank = same; mf_unnested; mf_wide;}
+
+    mf_midi_file -> mf_mf_raw
+    mf_mf_raw -> mf_mf_unnested
+    mf_mf_unnested -> mf_mf_nested
+
+    {rank = same; mf_midi_file; midi_file}
+    {rank = same; mf_mf_raw; mf_raw}
+    {rank = same; mf_mf_unnested; mf_unnested}
+    {rank = same; mf_mf_nested; mf_nested}
+
+  edge [style = dotted]
+mf_midi_file -> midi_file
+mf_mf_raw -> mf_raw
+mf_mf_unnested -> mf_unnested
+mf_mf_nested -> mf_nested
+
+
+
+
+
 #  {rank = same; mtum; ppwn;}
 }
 
