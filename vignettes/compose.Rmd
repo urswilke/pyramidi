@@ -29,6 +29,7 @@ library(pyramidi)
 library(tidyr)
 library(dplyr)
 library(purrr)
+library(forcats)
 library(details)
 ```
 
@@ -356,4 +357,60 @@ htmltools::tags$audio(
   )
 ```
 
+## Combine parts
 
+In `vignette("midi_framer", package = "pyramidi")` there is an example with `accumulate()` how you can 
+generate multiple midifiles while successively adding modifications to the data. Now we will also 
+successively add parts together, but in the same midifile. 
+
+```{r}
+(part_names <- c("drum", "bass", "chords", "arp") %>% accumulate(paste, sep = " + "))
+```
+
+To do this, let's first generate a list of midi frames, where at each step the accumulative former results are added to the new:
+
+
+```{r}
+augmentation <- list(
+  drum,
+  chords %>% change_notes_on_measures(),
+  bass %>% change_notes_on_measures(),
+  arp %>% change_notes_on_measures()
+) %>% 
+  accumulate(full_join) %>% 
+  set_names(part_names)
+```
+
+```{details, details.summary = "Click here to see the list of parts."}
+augmentation
+```
+
+All of these parts start at time 0. In order to make the parts start one after one another, 
+we need to shift them in time. This is what the following code does. 
+
+```{r}
+# after augmenting, we'll add parts subtracting the instruments one after one
+# another (the rev()erse):
+composition <- c(augmentation, rev(set_names(augmentation, ~paste0(., "2")))) %>% 
+  # put them in one dataframe and modify the starting time of the notes in the parts:
+  bind_rows(.id = "part") %>% 
+  # (we need as_factor() to avoid alphabetical ordering of the parts)
+  group_by(part = as_factor(part)) %>% 
+  mutate(i_part = cur_group_id()) %>% 
+  ungroup() %>% 
+  mutate_at(c("b_note_on", "b_note_off"), ~ . + (i_part - 1) * n_beats) %>%
+  # remove new columns to have the needed format for midi export:
+  select(-part, -i_part) %>% 
+  beats_to_ticks()
+```
+
+Let's have a listen to my first compostion in R:
+
+```{r, message=FALSE}
+mfr$update_notes_wide(composition)
+```
+
+
+```{r}
+mfr$play("composition.mp3")
+```

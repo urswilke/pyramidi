@@ -41,7 +41,8 @@ Suggests:
     rmarkdown,
     testthat,
     htmltools,
-    covr
+    covr,
+    forcats
 Remotes: 
     urswilke/raudiomate
 Roxygen: list(markdown = TRUE)
