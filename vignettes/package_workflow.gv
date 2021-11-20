@@ -18,6 +18,9 @@ digraph miditapyr_flow {
     fontsize = 30;
     bgcolor="#FFD7AA:#444666";
 
+    node [shape = folder, fontname = jura, peripheries=2]
+    mfp [label = "midi file\npath"]
+
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
@@ -26,12 +29,14 @@ digraph miditapyr_flow {
     pmf  [label = "pyramidi\nfunction", URL = "https://urswilke.github.io/pyramidi/reference/index.html"]
     mtf  [label = "miditapyr\nfunction", URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"]
 
-    node [shape = folder, fontname = jura, peripheries=2]
-    mfp [label = "midi file\npath"]
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
     df [label = "data\nframe"]
 
+    # add invisible edges to achieve vertical alignment:
+    mfp -> pmf [style = invisible, arrowhead=none]
+    pmf -> mtf [style = invisible, arrowhead=none]
+    mtf -> df  [style = invisible, arrowhead=none]
   }
 
 
