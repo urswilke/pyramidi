@@ -1,0 +1,35 @@
+---
+title: "Package workflow"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(pyramidi)
+library(stringr)
+library(purrr)
+library(DiagrammeR)
+
+mt_funs <- c("frame_midi", "unnest_midi", "nest_midi", "write_midi")
+
+mt_fun_descrs <- map_chr(mt_funs, ~miditapyr[[.x]]$`__doc__`) %>% 
+  str_split("\\n\\n") %>% 
+  map_chr(1) %>% 
+  str_replace_all("\\n", " ") %>% 
+  str_squish() %>% 
+  str_remove_all(":.*?:") %>% 
+  str_remove_all("[`~]") 
+
+
+grViz("package_workflow.gv")
+```

@@ -42,7 +42,8 @@ Suggests:
     testthat,
     htmltools,
     covr,
-    forcats
+    forcats,
+    DiagrammeR
 Remotes: 
     urswilke/raudiomate
 Roxygen: list(markdown = TRUE)
