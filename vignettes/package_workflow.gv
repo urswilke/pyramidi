@@ -8,12 +8,31 @@ digraph miditapyr_flow {
   # dataframes:
   node [shape = box, fontname = jura, peripheries=2, style=solid]
   mf_wide
-  df [label = "data\nframe"]
 
   # midi file paths
   node [shape = folder, fontname = jura, peripheries=2]
   midi_in; midi_out;
-  mfp [label = "midi file\npath"]
+
+  subgraph cluster_legend {
+    label = < <B>legend</B> >;
+    fontsize = 30;
+    bgcolor="#FFD7AA:#444666";
+
+    node [
+      shape = ellipse,
+      style = "rounded,filled,radial",
+      gradientangle=190, fillcolor="#88114499:#5555662f"
+    ]
+    pmf  [label = "pyramidi\nfunction", URL = "https://urswilke.github.io/pyramidi/reference/index.html"]
+    mtf  [label = "miditapyr\nfunction", URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"]
+
+    node [shape = folder, fontname = jura, peripheries=2]
+    mfp [label = "midi file\npath"]
+
+    node [shape = box, fontname = jura, peripheries=2, style=solid]
+    df [label = "data\nframe"]
+
+  }
 
 
   subgraph cluster_miditapyr {
@@ -86,8 +105,6 @@ digraph miditapyr_flow {
   ppln [label = "pivot_long_notes", URL = "@@2-2"]
 
 
-  pmf  [label = "pyramidi\nfunction", URL = "https://urswilke.github.io/pyramidi/reference/index.html"]
-  mtf  [label = "miditapyr\nfunction", URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"]
 
 
   # edges
