@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 ```{r, message=FALSE, echo=FALSE, results = 'hide'}
 pyramidi::install_miditapyr(envname = "r-reticulate")
+library(knitr)
 ```
 
 We'll load some libraries in R:
@@ -41,8 +42,8 @@ mfr <- MidiFramer$new(midi_file_string)
 
 We will compose our data by generating a dataframe as the one on the example midi file.
 
-```{details, details.summary = "Click here to show the format of the dataframe we need to have."}
-mfr$df_notes_wide
+```{details, details.summary = "Click here to show the format of the dataframe we need to have.", lang = 'none'}
+mfr$df_notes_wide %>% kable()
 ```
 
 We will measure our time in `b_note_on` and `b_note_off` being the absolute times 
@@ -70,8 +71,8 @@ drum <- tibble(
 ```
 
 
-```{details, details.summary = "Show `drum` dataframe"}
-drum
+```{details, details.summary = "Show `drum` dataframe", lang = 'none'}
+drum %>% kable()
 ```
 
 We'll just define a small helper function to calculate the absolute midi ticks 
@@ -113,6 +114,13 @@ htmltools::tags$audio(
 
 
 Now we'll add notes. Channel 1 should be grand piano. We will play major chords 
+We define that all the 4 notes in the chord are played at the same time:
+ 
+```{r}
+(b_note_on = (0:(n_beats-1) %/% 4) * 4)
+```
+
+These starting times will be used to define a `notes` dataframe.
 
 ```{r}
 notes <- tibble(
@@ -123,15 +131,14 @@ notes <- tibble(
   i_note = 1:n_beats,
   velocity_note_on = 100,
   velocity_note_off = 0,
-  # here we define that all the 4 notes in the chord are played at the same time:
-  b_note_on = (0:(n_beats-1) %/% 4) * 4,
+  b_note_on = b_note_on,
   b_note_off = b_note_on + 1 * 2,
 )
 ```
 
 
-```{details, details.summary = "click to show `notes` frame"}
-notes
+```{details, details.summary = "click to show `notes` frame", lang = 'none'}
+notes %>% kable()
 ```
 
 With a small helper function, we can change the notes played depending on the measure we're in:
@@ -228,7 +235,7 @@ bass <- frame_notes(
 
 
 ```{details, details.summary = "Show output"}
-bass
+bass %>% kable()
 ```
 
 In order to avoid repetitive typing we'll also define a small helper function for chords:
@@ -303,8 +310,8 @@ arp <- arpeggiate(
 ```
 
 
-```{details, details.summary = "Show arpeggio function output"}
-arp
+```{details, details.summary = "Show arpeggio function output", lang = 'none'}
+arp %>% kable()
 ```
 
 
@@ -323,6 +330,12 @@ composition <- bind_rows(
 ) %>% 
   beats_to_ticks()
 ```
+
+
+```{details, details.summary = "Show dataframe of whole composition", lang = 'none'}
+composition %>% kable()
+```
+
 
 ```{r, results = 'hide', message=FALSE}
 mfr$update_notes_wide(composition)
