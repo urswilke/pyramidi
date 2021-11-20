@@ -120,3 +120,12 @@ MidiFramer <- R6::R6Class(
     }
   )
 )
+
+## Would love to do that, but doesn't work...:
+# see here for inspiration: https://stackoverflow.com/a/54544769
+# MidiFramer$set("public", "clone", function(deep = TRUE, verbose = TRUE) {
+#   if (verbose) {
+#     message("By default deep cloning; turn off this notification by setting: verbose = FALSE.")
+#   }
+#   self$clone(deep = deep)
+# })
