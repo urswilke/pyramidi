@@ -125,6 +125,10 @@ digraph miditapyr_flow {
       label = "mf.mf_nested",
       URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
     ]
+    mf_write_file [
+      label = "mf.write_file",
+      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.write_file"
+    ]
 
   }
 
@@ -171,18 +175,20 @@ digraph miditapyr_flow {
     mf_midi_file -> mf_mf_raw
     mf_mf_raw -> mf_mf_unnested
     mf_mf_unnested -> mf_mf_nested
+    mf_mf_nested -> mf_write_file
 
     {rank = same; mf_midi_file; midi_file}
     {rank = same; mf_mf_raw; mf_raw}
     {rank = same; mf_mf_unnested; mf_unnested}
     {rank = same; mf_mf_nested; mf_nested}
+    {rank = same; mf_write_file; mtwm}
 
   edge [style = dotted]
 mf_midi_file -> midi_file
 mf_mf_raw -> mf_raw
 mf_mf_unnested -> mf_unnested
 mf_mf_nested -> mf_nested
-
+mf_write_file -> mtwm
 
 
 
