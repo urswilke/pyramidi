@@ -183,7 +183,7 @@ digraph miditapyr_flow {
     {rank = same; mf_mf_nested; mf_nested}
     {rank = same; mf_write_file; mtwm}
 
-  edge [style = dotted]
+  edge [style = dotted, arrowsize = 0.5]
 mf_midi_file -> midi_file
 mf_mf_raw -> mf_raw
 mf_mf_unnested -> mf_unnested
