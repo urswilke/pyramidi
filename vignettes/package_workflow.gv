@@ -4,8 +4,6 @@ digraph miditapyr_flow {
   graph [overlap = true, fontsize = 12]
 
   # define nodes:
-  node [shape = box, fontname = jura, peripheries=2, style=rounded]
-  midi_file;
 
   # dataframes:
   node [shape = box, fontname = jura, peripheries=2, style=solid]
@@ -17,15 +15,22 @@ digraph miditapyr_flow {
   midi_in; midi_out;
   mfp [label = "midi file\npath"]
 
-  # functions
   ## mido:
-  node [
-    shape = ellipse,
-    style = "rounded,filled,radial",
-    gradientangle=10, fillcolor="#aacc8874:#4455662f",
-    peripheries=1
-  ]
-  mmf  [label = "mido.MidiFile", URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"]
+  subgraph cluster_mido {
+    label = < <B>mido</B> >;
+    bgcolor="#FFD700:#CCA600";
+    node [shape = box, fontname = jura, peripheries=2, style=rounded]
+    midi_file;
+
+    node [
+      shape = ellipse,
+      style = "rounded,filled,radial",
+      gradientangle=10, fillcolor="#aacc8874:#4455662f",
+      peripheries=1
+    ]
+    mmf  [label = "mido.MidiFile", URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"]
+  }
+
 
   ## miditapyr
   node [
