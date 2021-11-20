@@ -1,13 +1,11 @@
 digraph miditapyr_flow {
 
   # define graph
-  graph [overlap = true, fontsize = 12]
-
-  # define nodes:
-
-  # dataframes:
-  node [shape = box, fontname = jura, peripheries=2, style=solid]
-  mf_wide
+  graph [
+    overlap = true,
+    newrank=true
+    fontsize = 12
+  ]
 
   # midi file paths
   node [shape = folder, fontname = jura, peripheries=2]
@@ -106,10 +104,18 @@ digraph miditapyr_flow {
     style = "rounded,filled,radial",
     gradientangle=190, fillcolor="#88114499:#5555662f"
   ]
-  ppwn [label = "pivot_wide_notes", URL = "@@2-1"]
   ppln [label = "pivot_long_notes", URL = "@@2-2"]
 
+  node [shape = box, fontname = jura, peripheries=2, style=solid]
+  mf_wide
 
+  ## pyramidi
+  node [
+    shape = ellipse,
+    style = "rounded,filled,radial",
+    gradientangle=190, fillcolor="#88114499:#5555662f"
+  ]
+  ppwn [label = "pivot_wide_notes", URL = "@@2-1"]
 
 
   # edges
@@ -127,7 +133,7 @@ digraph miditapyr_flow {
 
   mtwm->midi_out
 
-#  {rank = same; mf_unnested; mf_wide;}
+  {rank = same; mf_unnested; mf_wide;}
 #  {rank = same; mtum; ppwn;}
 }
 
