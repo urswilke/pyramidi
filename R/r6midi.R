@@ -32,12 +32,17 @@ MidiFramer <- R6::R6Class(
     #' @description Initialize a MidiFramer object
     #'
     #' @param midi_file_string Path to the midi file
-    initialize = function(midi_file_string) {
+    initialize = function(midi_file_string = NULL) {
       self$midi_file_string <- midi_file_string
 
       self$mf <- miditapyr$MidiFrames(midi_file_string)
 
-      self$dfm <- tab_measures(self$mf$midi_frame_unnested$df, ticks_per_beat = self$mf$midi_file$ticks_per_beat)
+      if (!is.null(self$mf$`_midi_frame_raw`)) {
+        self$dfm <- tab_measures(self$mf$midi_frame_unnested$df, ticks_per_beat = self$mf$midi_file$ticks_per_beat)
+      }
+      else {
+        self$dfm <- NULL
+      }
 
       c(self$df_meta, self$df_not_notes, self$df_notes_wide) %<-% triage_measured_unnested(self$dfm)
 

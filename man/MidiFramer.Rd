@@ -97,7 +97,7 @@ mfr$play()
 \subsection{Method \code{new()}}{
 Initialize a MidiFramer object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MidiFramer$new(midi_file_string)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MidiFramer$new(midi_file_string = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

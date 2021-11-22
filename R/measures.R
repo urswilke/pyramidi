@@ -17,6 +17,9 @@
 #' tab_measures(df, ticks_per_beat)
 #' }
 tab_measures <- function(df, ticks_per_beat) {
+  if (is.null(df)) {
+    return(NULL)
+  }
   df %>%
     tibble::as_tibble() %>%
     dplyr::group_by(.data$i_track) %>%

@@ -50,6 +50,9 @@ pivot_wide_notes <- function(df_measures) {
 #' c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
 #' }
 pivot_long_notes <- function(df_notes_wide) {
+  if (is.null(df_notes_wide)) {
+    return(NULL)
+  }
   df_notes_wide %>%
     dplyr::select(
       c("i_track", "channel", "note", "i_note"),
@@ -93,6 +96,9 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' merge_long_events(l$df_meta, df_notes_long, l$df_not_notes)
 merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
+  if (is.null(df_meta) & is.null(df_notes_long) & is.null(df_not_notes)) {
+    return(NULL)
+  }
   cols_to_remove <- c("i_note", "ticks", "t", "m", "b")
 
   df_notes_long %>%
@@ -125,6 +131,9 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #' triage_measured_unnested(dfm)
 #' }
 triage_measured_unnested <- function(dfm) {
+  if (is.null(dfm)) {
+    return(list(NULL, NULL, NULL))
+  }
   # c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
   l <- miditapyr$split_df(dfm)
   df_meta <- l[[1]]
