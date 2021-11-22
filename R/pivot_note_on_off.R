@@ -11,7 +11,9 @@
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' dfm %>% pivot_wide_notes()
+#' library(zeallot)
+#' c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
+#' df_notes %>% pivot_wide_notes()
 #' }
 pivot_wide_notes <- function(df_measures) {
   values_from_vector <-
@@ -43,11 +45,10 @@ pivot_wide_notes <- function(df_measures) {
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' dfw <- dfm %>% pivot_wide_notes()
-#'
-#'
 #' library(zeallot)
 #' c(df_meta, df_notes) %<-% miditapyr$split_df(dfm)
+#' dfw <- df_notes %>% pivot_wide_notes()
+#' dfw %>% pivot_long_notes()
 #' }
 pivot_long_notes <- function(df_notes_wide) {
   if (is.null(df_notes_wide)) {

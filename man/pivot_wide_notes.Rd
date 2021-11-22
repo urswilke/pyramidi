@@ -26,7 +26,9 @@ df <- dfc \%>\%
 }
 \dontrun{
 dfm <- tab_measures(df, ticks_per_beat)
-dfm \%>\% pivot_wide_notes()
+library(zeallot)
+c(df_meta, df_notes) \%<-\% miditapyr$split_df(dfm)
+df_notes \%>\% pivot_wide_notes()
 }
 }
 \seealso{
