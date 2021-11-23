@@ -194,10 +194,11 @@ digraph miditapyr_flow {
   {rank = same; merge_long_events; ppln;}
   {rank = same; ppln; mtum;}
   {rank = same; ppwn; tab_measures;}
-  {rank = same; mf_mf_unnested; mf_wide;}
   {rank = same; mf_mf_unnested; df_meta;}
   {rank = same; mf_mf_unnested; df_not_notes;}
-  {rank = same; mf_mf_unnested; update_notes_wide;}
+  {rank = same; mf_mf_unnested; mf_wide;}
+#  {rank = same; mf_mf_unnested; update_notes_wide;}
+  df_meta -> df_not_notes -> mf_wide -> update_notes_wide [ style=invis ];
 
   mf_midi_file -> mf_mf_raw
   mf_mf_raw -> mf_mf_unnested
