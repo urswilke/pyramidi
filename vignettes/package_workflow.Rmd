@@ -31,5 +31,37 @@ mt_fun_descrs <- map_chr(mt_funs, ~miditapyr[[.x]]$`__doc__`) %>%
   str_remove_all("[`~]") 
 
 
+pm_funs <- c(
+  "pivot_long_notes",
+  "pivot_wide_notes",
+  "tab_measures",
+  "merge_long_events",
+  "triage_measured_unnested"
+)
+# inspired by:
+# https://stackoverflow.com/a/8928894 &
+# https://stackoverflow.com/a/23897916
+get_help <- function(...){
+    thefile <- help(...)
+    capture.output(
+        tools:::Rd2txt(utils:::.getHelpFile(thefile))
+    )
+}
+
+
+pm_fun_descrs_raw <- map(pm_funs, get_help) %>% 
+  map(~.x[-c(1:4)])
+
+
+title_until_line_ints <- pm_fun_descrs_raw %>% 
+  map_dbl(~str_which(.x, "^$") %>% min() %>% {. - 1})
+
+pm_fun_descrs <- map2_chr(
+  pm_fun_descrs,
+  title_until_line_ints,
+  ~ .x[1:.y] %>% paste(collapse = " ") %>% str_squish()
+)
+
+
 grViz("package_workflow.gv")
 ```
