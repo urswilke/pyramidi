@@ -18,6 +18,15 @@ Constructor of an object of class "MidiFramer".
 \dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 MidiFramer$new(midi_file_string)
+
+# Create empty MidiFramer object:
+mfr <- MidiFramer$new()
+# Print default value of empty MidiFile object:
+mfr$mf$midi_file$ticks_per_beat
+# Modify it with the active binding ticks_per_beat:
+mfr$ticks_per_beat <- 960L
+# Print it again:
+mfr$mf$midi_file$ticks_per_beat
 }
 
 ## ------------------------------------------------
@@ -79,6 +88,10 @@ mfr$play()
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{triage_measured_unnested()}}
+
+\item{\code{ticks_per_beat}}{Set ticks per beat of \copy{MidiFrames()$mf$midi_file}.
+The value of ticks_per_beat passed should be integer.
+When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.}
 }
 \if{html}{\out{</div>}}
 }

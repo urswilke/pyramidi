@@ -16,6 +16,15 @@
 #' \dontrun{
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' MidiFramer$new(midi_file_string)
+#'
+#' # Create empty MidiFramer object:
+#' mfr <- MidiFramer$new()
+#' # Print default value of empty MidiFile object:
+#' mfr$mf$midi_file$ticks_per_beat
+#' # Modify it with the active binding ticks_per_beat:
+#' mfr$ticks_per_beat <- 960L
+#' # Print it again:
+#' mfr$mf$midi_file$ticks_per_beat
 #' }
 MidiFramer <- R6::R6Class(
   "MidiFramer",
@@ -122,6 +131,23 @@ MidiFramer <- R6::R6Class(
         # For all other fields, just return the value
         value
       }
+    }
+  ),
+  active = list(
+    #' @field ticks_per_beat
+    #' Set ticks per beat of \copy{MidiFrames()$mf$midi_file}.
+    #' The value of ticks_per_beat passed should be integer.
+    #' When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.
+    ticks_per_beat = function(value) {
+      if (missing(value)) return(self$mf$midi_file$ticks_per_beat)
+      if (!is.numeric(value)) {
+        stop("`ticks_per_beat` needs to be specified as an integer.")
+      }
+      if (!is.integer(value)) {
+        value = as.integer(value)
+        warning("`ticks_per_beat` was transformed to integer.")
+      }
+      reticulate::py_set_attr(self$mf$midi_file, "ticks_per_beat", value)
     }
   )
 )
