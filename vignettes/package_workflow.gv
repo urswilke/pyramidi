@@ -179,9 +179,9 @@ digraph miditapyr_flow {
   tab_measures->dfm
 
   dfm->triage_measured_unnested[arrowhead=none]
-  triage_measured_unnested->ppwn[arrowhead=none]
-  triage_measured_unnested->df_meta[arrowhead=none]
-  triage_measured_unnested->df_not_notes[arrowhead=none]
+  triage_measured_unnested->ppwn
+  triage_measured_unnested->df_meta
+  triage_measured_unnested->df_not_notes
 
   df_meta->merge_long_events
   df_not_notes->merge_long_events
