@@ -134,25 +134,32 @@ digraph miditapyr_flow {
 
   }
 
+  subgraph cluster_pyramidi {
+    label = < <B>pyramidi</B> >;
+    fontsize = 30;
+    bgcolor="#33D7AA:#CC4488";
+    fontname = jura
 
-  ## pyramidi
-  node [
-    shape = ellipse,
-    style = "rounded,filled,radial",
-    gradientangle=190, fillcolor="#88114499:#5555662f"
-  ]
-  ppln [label = "pivot_long_notes", URL = "@@2-2"]
+    node [
+      shape = ellipse,
+      style = "rounded,filled,radial",
+      gradientangle=190, fillcolor="#88114499:#5555662f"
+    ]
+    ppln [label = "pivot_long_notes", URL = "@@2-2"]
 
-  node [shape = box, fontname = jura, peripheries=2, style=solid]
-  mf_wide
+    node [shape = box, fontname = jura, peripheries=2, style=solid]
+    mf_wide
 
-  ## pyramidi
-  node [
-    shape = ellipse,
-    style = "rounded,filled,radial",
-    gradientangle=190, fillcolor="#88114499:#5555662f"
-  ]
-  ppwn [label = "pivot_wide_notes", URL = "@@2-1"]
+
+    ## pyramidi
+    node [
+      shape = ellipse,
+      style = "rounded,filled,radial",
+      gradientangle=190, fillcolor="#88114499:#5555662f"
+    ]
+    ppwn [label = "pivot_wide_notes", URL = "@@2-1"]
+
+  }
 
 
   # edges
