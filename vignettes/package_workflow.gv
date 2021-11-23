@@ -146,9 +146,15 @@ digraph miditapyr_flow {
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
     ppln [label = "pivot_long_notes", URL = "@@2-2"]
+    triage_measured_unnested
+    merge_long_events
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
     mf_wide
+    dfm
+    df_meta
+    df_not_notes
+    df_notes_long
 
 
     ## pyramidi
@@ -157,6 +163,7 @@ digraph miditapyr_flow {
       style = "rounded,filled,radial",
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
+    tab_measures
     ppwn [label = "pivot_wide_notes", URL = "@@2-1"]
 
   }
@@ -167,17 +174,33 @@ digraph miditapyr_flow {
 
   midi_in->mmf[arrowhead=none]
 
-  mf_unnested->ppwn[arrowhead=none]
+  mf_unnested->tab_measures[arrowhead=none]
+
+  tab_measures->dfm
+
+  dfm->triage_measured_unnested[arrowhead=none]
+  triage_measured_unnested->ppwn[arrowhead=none]
+  triage_measured_unnested->df_meta[arrowhead=none]
+  triage_measured_unnested->df_not_notes[arrowhead=none]
+
+  df_meta->merge_long_events
+  df_not_notes->merge_long_events
+  df_notes_long->merge_long_events
 
   ppwn->mf_wide
 
   mf_wide->ppln[arrowhead=none]
 
-  ppln->mf_unnested
+  ppln->df_notes_long
+
+
+  merge_long_events->mf_unnested
 
   mtwm->midi_out
 
   {rank = same; mf_unnested; mf_wide;}
+  {rank = same; mf_unnested; df_meta;}
+  {rank = same; mf_unnested; df_not_notes;}
 
     mf_midi_file -> mf_mf_raw
     mf_mf_raw -> mf_mf_unnested
