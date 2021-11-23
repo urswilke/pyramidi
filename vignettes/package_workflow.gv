@@ -1,4 +1,4 @@
-digraph miditapyr_flow {
+digraph pyramidi_flow {
 
   # define graph
   graph [
