@@ -113,10 +113,12 @@ digraph miditapyr_flow {
       mf_mf_unnested [
         label = "mf.mf_unnested",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_unnested"
+        color = red
       ]
       mf_mf_nested [
         label = "mf.mf_nested",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_nested"
+        color = red
       ]
       mf_write_file [
         label = "mf.write_file",
@@ -143,11 +145,11 @@ digraph miditapyr_flow {
     merge_long_events [URL = "@@2-4", tooltip = "@@4-4"]
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
-    mf_wide
+    mf_wide [color = red]
     dfm
     df_meta
     df_not_notes
-    df_notes_long
+    df_notes_long [color = red]
 
     node [
       shape = ellipse,
@@ -156,7 +158,7 @@ digraph miditapyr_flow {
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
     ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
-    update_notes_wide
+    update_notes_wide [color = red]
 
   }
 
@@ -177,16 +179,16 @@ digraph miditapyr_flow {
 
   df_meta->merge_long_events
   df_not_notes->merge_long_events
-  df_notes_long->merge_long_events
+  df_notes_long->merge_long_events [color = red, penwidth = 2]
 
   ppwn->mf_wide
 
-  mf_wide->ppln[arrowhead=none]
+  mf_wide->ppln[arrowhead=none, color = red, penwidth = 2]
 
-  ppln->df_notes_long
+  ppln->df_notes_long [color = red, penwidth = 2]
 
 
-  merge_long_events->mf_mf_unnested
+  merge_long_events->mf_mf_unnested [color = red, penwidth = 2]
 
   mtwm->midi_out
 
@@ -202,9 +204,9 @@ digraph miditapyr_flow {
 
   mf_midi_file -> mf_mf_raw
   mf_mf_raw -> mf_mf_unnested
-  mf_mf_unnested -> mf_mf_nested
+  mf_mf_unnested -> mf_mf_nested [color = red, penwidth = 2]
   mf_mf_nested -> mf_write_file
-  update_notes_wide->mf_wide
+  update_notes_wide->mf_wide [color = red, penwidth = 2]
 
   {rank = same; mf_midi_file; midi_file}
   {rank = same; mf_mf_raw; mf_raw}
