@@ -55,7 +55,6 @@ digraph miditapyr_flow {
       bgcolor="#FFD700:#CCA600";
       node [shape = box, fontname = jura, peripheries=2, style=rounded]
       midi_file [
-        label = "mido.MidiFile",
         URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
       ];
     }
