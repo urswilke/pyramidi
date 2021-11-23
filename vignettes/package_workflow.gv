@@ -110,19 +110,19 @@ digraph miditapyr_flow {
     ]
       mf_midi_file [
         label = "mf.midi_file",
-        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+        URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_file"
       ]
       mf_mf_raw [
         label = "mf.mf_raw",
-        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+        URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_raw"
       ]
       mf_mf_unnested [
         label = "mf.mf_unnested",
-        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+        URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_unnested"
       ]
       mf_mf_nested [
         label = "mf.mf_nested",
-        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+        URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_nested"
       ]
       mf_write_file [
         label = "mf.write_file",
