@@ -15,7 +15,7 @@ digraph miditapyr_flow {
   subgraph cluster_legend {
     label = < <B>legend</B> >;
     fontsize = 30;
-    bgcolor="#FFD7AA:#444666";
+    bgcolor="#FFD7AA44:#44466644";
 
     node [shape = folder, fontname = jura, peripheries=2]
     mfp [label = "midi file\npath"]
