@@ -54,15 +54,10 @@ digraph miditapyr_flow {
       label = < <B>mido</B> >;
       bgcolor="#FFD700:#CCA600";
       node [shape = box, fontname = jura, peripheries=2, style=rounded]
-      midi_file;
-
-      node [
-        shape = ellipse,
-        style = "rounded,filled,radial",
-        gradientangle=10, fillcolor="#aacc8874:#4455662f",
-        peripheries=1
-      ]
-      mmf  [label = "mido.MidiFile", URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"]
+      midi_file [
+        label = "mido.MidiFile",
+        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+      ];
     }
 
 
@@ -81,7 +76,6 @@ digraph miditapyr_flow {
 
     edge [fontname = jura]
 
-    mmf->midi_file
 
     midi_file->mtfm[arrowhead=none]
 
@@ -169,7 +163,7 @@ digraph miditapyr_flow {
   # edges
   edge [fontname = jura]
 
-  midi_in->mmf[arrowhead=none]
+  midi_in->midi_file
 
   mf_mf_unnested->tab_measures[arrowhead=none]
 
