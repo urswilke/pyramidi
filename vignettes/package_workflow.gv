@@ -14,23 +14,38 @@ digraph pyramidi_flow {
 
   subgraph cluster_legend {
     label = < <B>legend</B> >;
-    fontsize = 30;
+    fontsize = 18;
     bgcolor="#FFD7AA44:#44466644";
 
     node [shape = folder, fontname = jura, peripheries=2]
-    mfp [label = "midi file\npath"]
+    mfp [
+      label = "midi file\npath",
+      tooltip = "Path of the midi file on your computer"
+    ]
 
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
-    pmf  [label = "pyramidi\nfunction", URL = "https://urswilke.github.io/pyramidi/reference/index.html"]
-    mtf  [label = "miditapyr\nfunction", URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"]
+    pmf  [
+      label = "pyramidi\nfunction",
+      tooltip = "Function of the pyramidi R package"
+      URL = "https://urswilke.github.io/pyramidi/reference/index.html"
+    ]
+    mtf [
+      label = "miditapyr\nfunction",
+      tooltip = "Function of the miditapyr python package"
+      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"
+    ]
 
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
-    df [label = "data\nframe"]
+    df [
+      label = "data\nframe",
+      tooltip = "pandas\nDataFrame",
+      URL = "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html"
+    ]
 
     # add invisible edges to achieve vertical alignment:
     mfp -> df  [style = invisible, arrowhead=none]
@@ -41,7 +56,7 @@ digraph pyramidi_flow {
 
   subgraph cluster_miditapyr {
     label = < <B>miditapyr</B> >;
-    fontsize = 30;
+    fontsize = 18;
     bgcolor="#FFD700:#44A666";
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
@@ -130,7 +145,7 @@ digraph pyramidi_flow {
 
   subgraph cluster_pyramidi {
     label = < <B>pyramidi</B> >;
-    fontsize = 30;
+    fontsize = 18;
     bgcolor="#33D7AA:#CC4488";
     fontname = jura
 
