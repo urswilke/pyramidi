@@ -156,6 +156,7 @@ digraph miditapyr_flow {
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
     ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
+    update_notes_wide
 
   }
 
@@ -196,11 +197,13 @@ digraph miditapyr_flow {
   {rank = same; mf_mf_unnested; mf_wide;}
   {rank = same; mf_mf_unnested; df_meta;}
   {rank = same; mf_mf_unnested; df_not_notes;}
+  {rank = same; mf_mf_unnested; update_notes_wide;}
 
   mf_midi_file -> mf_mf_raw
   mf_mf_raw -> mf_mf_unnested
   mf_mf_unnested -> mf_mf_nested
   mf_mf_nested -> mf_write_file
+  update_notes_wide->mf_wide
 
   {rank = same; mf_midi_file; midi_file}
   {rank = same; mf_mf_raw; mf_raw}
