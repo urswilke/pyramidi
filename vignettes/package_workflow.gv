@@ -5,6 +5,7 @@ digraph miditapyr_flow {
     overlap = true,
     newrank=true
     fontsize = 12
+    fontname = jura
   ]
 
   # midi file paths
