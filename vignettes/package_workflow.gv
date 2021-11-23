@@ -43,7 +43,6 @@ digraph miditapyr_flow {
     fontsize = 30;
     bgcolor="#FFD700:#44A666";
 
-    # dataframes:
     node [shape = box, fontname = jura, peripheries=2, style=solid]
     mf_raw; mf_unnested; mf_nested
 
@@ -69,7 +68,6 @@ digraph miditapyr_flow {
     node [shape = box, fontname = jura, peripheries=2, style=rounded]
     midi_file;
 
-    ## miditapyr
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
@@ -109,26 +107,26 @@ digraph miditapyr_flow {
       gradientangle=10, fillcolor="#aacc8874:#4455662f",
       peripheries=1
     ]
-    mf_midi_file [
-      label = "mf.midi_file",
-      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
-    ]
-    mf_mf_raw [
-      label = "mf.mf_raw",
-      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
-    ]
-    mf_mf_unnested [
-      label = "mf.mf_unnested",
-      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
-    ]
-    mf_mf_nested [
-      label = "mf.mf_nested",
-      URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
-    ]
-    mf_write_file [
-      label = "mf.write_file",
-      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.write_file"
-    ]
+      mf_midi_file [
+        label = "mf.midi_file",
+        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+      ]
+      mf_mf_raw [
+        label = "mf.mf_raw",
+        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+      ]
+      mf_mf_unnested [
+        label = "mf.mf_unnested",
+        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+      ]
+      mf_mf_nested [
+        label = "mf.mf_nested",
+        URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
+      ]
+      mf_write_file [
+        label = "mf.write_file",
+        URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.write_file"
+      ]
 
   }
 
@@ -156,8 +154,6 @@ digraph miditapyr_flow {
     df_not_notes
     df_notes_long
 
-
-    ## pyramidi
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
@@ -206,28 +202,24 @@ digraph miditapyr_flow {
   {rank = same; mf_mf_unnested; df_meta;}
   {rank = same; mf_mf_unnested; df_not_notes;}
 
-    mf_midi_file -> mf_mf_raw
-    mf_mf_raw -> mf_mf_unnested
-    mf_mf_unnested -> mf_mf_nested
-    mf_mf_nested -> mf_write_file
+  mf_midi_file -> mf_mf_raw
+  mf_mf_raw -> mf_mf_unnested
+  mf_mf_unnested -> mf_mf_nested
+  mf_mf_nested -> mf_write_file
 
-    {rank = same; mf_midi_file; midi_file}
-    {rank = same; mf_mf_raw; mf_raw}
-    {rank = same; mf_mf_unnested; mf_unnested}
-    {rank = same; mf_mf_nested; mf_nested}
-    {rank = same; mf_write_file; mtwm}
+  {rank = same; mf_midi_file; midi_file}
+  {rank = same; mf_mf_raw; mf_raw}
+  {rank = same; mf_mf_unnested; mf_unnested}
+  {rank = same; mf_mf_nested; mf_nested}
+  {rank = same; mf_write_file; mtwm}
 
   edge [style = dotted, arrowsize = 0.5]
-mf_midi_file -> midi_file
-mf_mf_raw -> mf_raw
-mf_mf_unnested -> mf_unnested
-mf_mf_nested -> mf_nested
-mf_write_file -> mtwm
+    mf_midi_file -> midi_file
+    mf_mf_raw -> mf_raw
+    mf_mf_unnested -> mf_unnested
+    mf_mf_nested -> mf_nested
+    mf_write_file -> mtwm
 
-
-
-
-#  {rank = same; mtum; ppwn;}
 }
 
 
