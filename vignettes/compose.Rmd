@@ -34,7 +34,7 @@ library(details)
 ```
 
 
-For the moment, there is no proper constructor to generate an empty `MidiFramer()` object. Therefore, we just load our package midi file to have some scaffolding to put our notes in:
+First, we just load our package midi file to have some scaffolding to put our notes in:
 
 ```{r, message=FALSE}
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
@@ -56,7 +56,7 @@ usually used for drums. Let's try this out. 36 is the bass drum and 38 the snare
 
 ```{r}
 n_beats <- 16
-ticks_per_beat <- 960
+ticks_per_beat <- 960L
 drum <- tibble(
   i_track = 0,
   meta = FALSE,
