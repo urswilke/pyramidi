@@ -145,9 +145,9 @@ digraph miditapyr_flow {
       style = "rounded,filled,radial",
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
-    ppln [label = "pivot_long_notes", URL = "@@2-2", tooltip = "@@4-1"]
-    triage_measured_unnested [URL = "@@2-2", tooltip = "@@4-5"]
-    merge_long_events [URL = "@@2-2", tooltip = "@@4-4"]
+    ppln [label = "pivot_long_notes", URL = "@@2-1", tooltip = "@@4-1"]
+    triage_measured_unnested [URL = "@@2-5", tooltip = "@@4-5"]
+    merge_long_events [URL = "@@2-4", tooltip = "@@4-4"]
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
     mf_wide
@@ -163,8 +163,8 @@ digraph miditapyr_flow {
       style = "rounded,filled,radial",
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
-    tab_measures [URL = "@@2-2", tooltip = "@@4-3"]
-    ppwn [label = "pivot_wide_notes", URL = "@@2-1", tooltip = "@@4-2"]
+    tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
+    ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
 
   }
 
@@ -232,6 +232,6 @@ mf_write_file -> mtwm
 
 
 [1]: paste0("https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.", mt_funs)
-[2]: paste0("https://urswilke.github.io/pyramidi/reference/", c("pivot_wide_notes", "pivot_long_notes"), ".html")
+[2]: paste0("https://urswilke.github.io/pyramidi/reference/", pm_funs, ".html")
 [3]: mt_fun_descrs
 [4]: pm_fun_descrs
