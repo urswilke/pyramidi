@@ -33,7 +33,7 @@ digraph miditapyr_flow {
 
     # add invisible edges to achieve vertical alignment:
     mfp -> df  [style = invisible, arrowhead=none]
-    df -> pmf  [style = invisible, arrowhead=none]
+    #df -> pmf  [style = invisible, arrowhead=none]
     pmf -> mtf [style = invisible, arrowhead=none]
   }
 
