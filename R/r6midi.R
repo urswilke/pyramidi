@@ -3,7 +3,7 @@
 #' Constructor of an object of class "MidiFramer".
 #'
 #' @field midi_file_string Path to the midi file
-#' @field mf miditapyr$MidiFrames object,
+#' @field mf \code{miditapyr$MidiFrames} object,
 #' @field dfm result of \code{tab_measures()}
 #' @field df_notes_long result of \code{pivot_long_notes()}
 #' @field df_meta,df_not_notes,df_notes_wide results of \code{triage_measured_unnested()}
@@ -91,7 +91,7 @@ MidiFramer <- R6::R6Class(
       mod_notes.r_midi_frames(self, mod)
       invisible(self)
     },
-    #' @description Play midi from MidiFramer object
+    #' @description Play midi from MidiFramer object.
     #' Transform the midi file to fileext format and provide a play button for html
     #' documents.
     #'
@@ -135,8 +135,8 @@ MidiFramer <- R6::R6Class(
   ),
   active = list(
     #' @field ticks_per_beat
-    #' Set ticks per beat of \copy{MidiFrames()$mf$midi_file}.
-    #' The value of ticks_per_beat passed should be integer.
+    #' Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
+    #' The value of \code{ticks_per_beat} passed should be integer.
     #' When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.
     ticks_per_beat = function(value) {
       if (missing(value)) return(self$mf$midi_file$ticks_per_beat)

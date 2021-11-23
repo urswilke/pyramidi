@@ -72,7 +72,7 @@ mfr$play()
 \describe{
 \item{\code{midi_file_string}}{Path to the midi file}
 
-\item{\code{mf}}{miditapyr$MidiFrames object,}
+\item{\code{mf}}{\code{miditapyr$MidiFrames} object,}
 
 \item{\code{dfm}}{result of \code{tab_measures()}}
 
@@ -89,8 +89,8 @@ mfr$play()
 \describe{
 \item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{triage_measured_unnested()}}
 
-\item{\code{ticks_per_beat}}{Set ticks per beat of \copy{MidiFrames()$mf$midi_file}.
-The value of ticks_per_beat passed should be integer.
+\item{\code{ticks_per_beat}}{Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
+The value of \code{ticks_per_beat} passed should be integer.
 When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.}
 }
 \if{html}{\out{</div>}}
@@ -172,7 +172,7 @@ mfr$play()
 \if{html}{\out{<a id="method-play"></a>}}
 \if{latex}{\out{\hypertarget{method-play}{}}}
 \subsection{Method \code{play()}}{
-Play midi from MidiFramer object
+Play midi from MidiFramer object.
 Transform the midi file to fileext format and provide a play button for html
 documents.
 \subsection{Usage}{
