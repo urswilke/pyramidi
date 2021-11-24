@@ -45,4 +45,5 @@ test_that("active field `ticks_per_beat` works", {
   expect_error(mfr$ticks_per_beat <- "a")
   expect_warning(mfr$ticks_per_beat <- 1.5)
   expect_equal(mfr$mf$midi_file$ticks_per_beat, 1)
+  expect_equal(mfr$ticks_per_beat, 1)
 })
