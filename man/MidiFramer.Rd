@@ -80,7 +80,7 @@ mfr$play()
 
 \item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{split_midi_frame()}}
 
-\item{\code{df_long_mod}}{result of \code{merge_midi_frames()}}
+\item{\code{midi_frame_mod}}{result of \code{merge_midi_frames()}}
 }
 \if{html}{\out{</div>}}
 }

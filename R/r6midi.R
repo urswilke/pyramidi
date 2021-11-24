@@ -7,7 +7,7 @@
 #' @field dfm result of \code{tab_measures()}
 #' @field df_notes_long result of \code{pivot_long_notes()}
 #' @field df_meta,df_not_notes,df_notes_wide results of \code{split_midi_frame()}
-#' @field df_long_mod result of \code{merge_midi_frames()}
+#' @field midi_frame_mod result of \code{merge_midi_frames()}
 #'
 #' @return MidiFramer R6 object
 #' @export
@@ -36,7 +36,7 @@ MidiFramer <- R6::R6Class(
     df_meta = NULL,
     df_not_notes = NULL,
     df_notes_wide = NULL,
-    df_long_mod = NULL,
+    midi_frame_mod = NULL,
 
     #' @description Initialize a MidiFramer object
     #'
@@ -57,7 +57,7 @@ MidiFramer <- R6::R6Class(
 
       self$df_notes_long <- pivot_long_notes(self$df_notes_wide)
 
-      self$df_long_mod <- merge_midi_frames(self$df_meta, self$df_notes_long, self$df_not_notes)
+      self$midi_frame_mod <- merge_midi_frames(self$df_meta, self$df_notes_long, self$df_not_notes)
     },
 
     #' @description Update a MidiFramer object with modified notes

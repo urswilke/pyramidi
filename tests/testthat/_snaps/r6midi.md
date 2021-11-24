@@ -1,11 +1,11 @@
 # MidiFramer seems to work
 
     Code
-      c("df_long_mod", "df_notes_wide", "df_not_notes", "df_meta", "df_notes_long",
+      c("midi_frame_mod", "df_notes_wide", "df_not_notes", "df_meta", "df_notes_long",
         "dfm", "mf", "midi_file_string") %>% purrr::set_names() %>% purrr::map(~mfr6[[
         .x]])
     Output
-      $df_long_mod
+      $midi_frame_mod
       # A tibble: 268 x 13
          i_track channel  note type        time velocity meta  name    tempo numerator
            <dbl>   <dbl> <dbl> <chr>      <dbl>    <dbl> <lgl> <list>  <dbl>     <dbl>

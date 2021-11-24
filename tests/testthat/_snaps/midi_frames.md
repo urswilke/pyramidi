@@ -93,7 +93,7 @@
       10       0       9    38      1 note_off     0      101   720 0.500  0.75     3
       # ... with 250 more rows, and 1 more variable: meta <lgl>
       
-      $df_long_mod
+      $midi_frame_mod
       # A tibble: 268 x 13
          i_track channel  note type        time velocity meta  name    tempo numerator
            <dbl>   <dbl> <dbl> <chr>      <dbl>    <dbl> <lgl> <list>  <dbl>     <dbl>
