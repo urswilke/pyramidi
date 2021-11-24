@@ -208,7 +208,7 @@ digraph pyramidi_flow {
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
     ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
-    update_notes_wide [color = red, shape = diamond, peripheries = 1, style=rounded, URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html#arguments"]
+    update_notes_wide [color = red, shape = diamond, peripheries = 1, style=rounded, URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-update_notes_wide"]
 
   }
 
