@@ -54,6 +54,19 @@ digraph pyramidi_flow {
       tooltip = "Field in a MidiFramer object"
       URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html"
     ]
+
+    node [shape = box, fontname = jura, peripheries = 1, style=rounded, penwidth = 1]
+    mf_field [
+      label = "field in\nMidiFrames",
+      tooltip = "Field in a MidiFrames object"
+      URL = "file:///home/chief/python/miditapyr/docs/build/miditapyr.html#miditapyr.midi_frame.MidiFrames"
+    ]
+
+    node [shape = diamond, fontname = jura, peripheries = 1, style=rounded, penwidth = 1]
+    method [
+      label = "method",
+      tooltip = "Class method"
+    ]
   }
 
 
@@ -145,6 +158,8 @@ digraph pyramidi_flow {
         color = red
       ]
       mf_write_file [
+        style = rounded,
+        shape = diamond,
         label = "mf.write_file",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.write_file"
       ]
@@ -192,7 +207,7 @@ digraph pyramidi_flow {
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
     ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
-    update_notes_wide [color = red]
+    update_notes_wide [color = red, shape = diamond, peripheries = 1, style=rounded, URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html#arguments"]
 
   }
 
