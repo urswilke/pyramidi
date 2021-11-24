@@ -61,7 +61,11 @@ pm_fun_descrs <- map2_chr(
   title_until_line_ints,
   ~ .x[1:.y] %>% paste(collapse = " ") %>% str_squish() %>% str_remove_all("[`']")
 )
-
-
-grViz("package_workflow.gv")
 ```
+
+
+```{r, echo=FALSE, fig.height = 8, fig.width = 8, out.width = "8.5in"}
+# chunk options from here: https://stackoverflow.com/a/43213737
+gv
+```
+
