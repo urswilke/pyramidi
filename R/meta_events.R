@@ -7,6 +7,7 @@
 #' @family Time information functions
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
+#' @noRd
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
@@ -39,7 +40,7 @@ tab_time_sig <- function(df_meta) {
 #'
 #' @param df_meta data.frame containing midi meta event data resulting of miditapyr$split_df()
 #'
-#' @export
+#' @noRd
 #' @return tempo integer
 #' @family Time information functions
 #'
@@ -74,7 +75,7 @@ get_ticks2second_scale <- function(df_meta, ticks_per_beat) {
 #' @param df_meta  data.frame containing midi meta event data resulting of miditapyr$split_df()
 #'
 #' @return integer of beats per minute
-#' @export
+#' @noRd
 #' @family Time information functions
 #'
 #' @example man/rmdhunks/examples/generate_unnested_df.Rmd
