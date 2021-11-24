@@ -61,6 +61,7 @@ pm_fun_descrs <- map2_chr(
   title_until_line_ints,
   ~ .x[1:.y] %>% paste(collapse = " ") %>% str_squish() %>% str_remove_all("[`']")
 )
+gv <- grViz("package_workflow.gv")
 ```
 
 
