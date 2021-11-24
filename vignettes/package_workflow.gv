@@ -182,6 +182,7 @@ digraph pyramidi_flow {
     df_meta
     df_not_notes
     df_notes_long [color = red]
+    midi_frame_mod [color = red]
 
     node [
       shape = ellipse,
@@ -221,13 +222,14 @@ digraph pyramidi_flow {
   ppln->df_notes_long [color = red, penwidth = 2]
 
 
-  merge_midi_frames->mf_mf_unnested [color = red, penwidth = 2]
+  merge_midi_frames->midi_frame_mod [color = red, penwidth = 2]
+  midi_frame_mod->mf_mf_unnested [color = red, penwidth = 2]
 
   mtwm->midi_out
 
-  {rank = same; df_notes_long; mf_raw;}
+  {rank = same; df_notes_long; mtfm;}
   {rank = same; merge_midi_frames; ppln;}
-  {rank = same; ppln; mtum;}
+  {rank = same; ppln; mf_raw;}
   {rank = same; ppwn; tab_measures;}
   {rank = same; mf_mf_unnested; df_meta;}
   {rank = same; mf_mf_unnested; df_not_notes;}
