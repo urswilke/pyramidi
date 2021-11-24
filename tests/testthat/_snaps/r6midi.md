@@ -209,3 +209,18 @@
       20       0 FALSE       note_off, 240, 43, 60, 9
       
 
+# MidiFramer$update_notes_wide() seems to work
+
+    Code
+      mfr6$mf$midi_frame_nested$df
+    Output
+        i_track  meta                            msg
+      1       0 FALSE          9, 43, note_on, 0, 72
+      2       0 FALSE          9, 39, note_on, 0, 64
+      3       0  TRUE    track_name, 0, drum-t1-1-t1
+      4       0  TRUE           set_tempo, 0, 666666
+      5       0  TRUE time_signature, 0, 4, 4, 24, 8
+      6       0 FALSE       9, 43, note_off, 240, 72
+      7       0 FALSE         9, 39, note_off, 0, 64
+      8       0  TRUE            end_of_track, 15121
+

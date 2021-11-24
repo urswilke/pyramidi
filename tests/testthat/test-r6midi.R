@@ -12,7 +12,21 @@ test_that("MidiFramer seems to work", {
     mfr6$mf$midi_frame_nested$df
   ) %>%
     purrr::map(head, 20))
+
 })
+
+test_that("MidiFramer$update_notes_wide() seems to work", {
+  df_meta <- mfr6$df_meta[1:4,]
+  df_notes_wide <- mfr6$df_notes_wide[1:2,]
+
+  mfr6$df_meta <- df_meta
+  mfr6$update_notes_wide(df_notes_wide)
+
+  expect_snapshot(mfr6$mf$midi_frame_nested$df)
+})
+
+
+
 
 test_that("empty MidiFramer seems to work", {
   mfr_attrs <- c("midi_frame_mod", "df_notes_wide", "df_not_notes",
