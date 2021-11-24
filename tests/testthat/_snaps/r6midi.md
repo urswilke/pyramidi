@@ -2,8 +2,7 @@
 
     Code
       c("midi_frame_mod", "df_notes_wide", "df_not_notes", "df_meta", "df_notes_long",
-        "dfm", "mf", "midi_file_string") %>% purrr::set_names() %>% purrr::map(~mfr6[[
-        .x]])
+        "dfm", "mf") %>% purrr::set_names() %>% purrr::map(~mfr6[[.x]])
     Output
       $midi_frame_mod
       # A tibble: 268 x 13
@@ -111,9 +110,6 @@
       
       $mf
       <miditapyr.midi_frame.MidiFrames>
-      
-      $midi_file_string
-      [1] "/home/chief/R/pyramidi/inst/extdata/test_midi_file.mid"
       
 
 ---

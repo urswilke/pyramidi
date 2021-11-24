@@ -3,7 +3,7 @@ mfr6 <- MidiFramer$new(midi_file_string)
 
 test_that("MidiFramer seems to work", {
   expect_snapshot(c("midi_frame_mod", "df_notes_wide", "df_not_notes",
-                    "df_meta", "df_notes_long", "dfm", "mf", "midi_file_string") %>% purrr::set_names() %>% purrr::map(~`[[`(mfr6, .x)))
+                    "df_meta", "df_notes_long", "dfm", "mf") %>% purrr::set_names() %>% purrr::map(~`[[`(mfr6, .x)))
   expect_snapshot(list(
     mfr6$mf$midi_frame_raw,
     mfr6$mf$midi_frame_unnested$df,
