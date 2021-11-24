@@ -111,7 +111,7 @@ digraph pyramidi_flow {
     mf_nested->mtwm[arrowhead=none, weight=1000]
 
   subgraph cluster_mf {
-    label = < <B>MidiFrames</B> >;
+    label = < <B>mf</B> >;
     style = dashed;
     penwidth = 2;
     bgcolor="#33D700:#CCA6DD";
