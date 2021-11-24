@@ -46,8 +46,7 @@ digraph pyramidi_flow {
     node [shape = box, fontname = jura, peripheries=2, style=solid]
     df [
       label = "data\nframe",
-      tooltip = "pandas\nDataFrame",
-      URL = "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html"
+      tooltip = "pandas DataFrame or R data.frame"
     ]
 
     node [shape = box, fontname = jura, peripheries = 1, style=dashed, penwidth = 2]
