@@ -13,8 +13,12 @@ split_midi_frame(dfm)
 df_meta, df_not_notes & df_notes_wide
 }
 \description{
-Unnested midi frame with time data from `\code{tab_measures()} is split into 3 parts:
-df_meta, df_not_notes & df_notes_wide.
+Unnested midi frame with time data from \code{tab_measures()} is split into 3 parts:
+\itemize{
+\item{df_meta: Consisting of all the \href{https://mido.readthedocs.io/en/latest/midi_files.html#meta-messages}{meta} events in the midi data.}
+\item{df_not_notes: Containing all midi events that are not \code{meta} and not \code{note_on} or \code{note_off}.}
+\item{df_notes_wide: All \code{note_on} or \code{note_off} events and furthermore transformed to wide format by \code{pivot_note_wide}.}
+}
 }
 \examples{
 \dontrun{

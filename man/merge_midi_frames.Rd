@@ -7,7 +7,7 @@
 merge_midi_frames(df_meta, df_notes_long, df_not_notes)
 }
 \arguments{
-\item{df_meta, df_notes_long, df_not_notes}{Results of \code{miditapyr$split_df()}.}
+\item{df_meta, df_notes_long, df_not_notes}{Dataframes in the format of \code{split_midi_frame()}.}
 }
 \value{
 Merges the input dataframes, arranges by \code{i_track} & (absolute) \code{ticks}, and
@@ -19,7 +19,7 @@ transform to the right chronological order in order to replace the original
 midi_frame_unnested object.
 }
 \examples{
-
+\dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mf <- miditapyr$MidiFrames(midi_file_string)
 
@@ -30,6 +30,7 @@ l <- split_midi_frame(dfm)
 df_notes_long <- pivot_long_notes(l$df_notes_wide)
 
 merge_midi_frames(l$df_meta, df_notes_long, l$df_not_notes)
+}
 }
 \seealso{
 Other Split/merge meta/notes/non-note events: 

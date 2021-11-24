@@ -77,7 +77,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #' transform to the right chronological order in order to replace the original
 #' midi_frame_unnested object.
 #'
-#' @param df_meta,df_notes_long,df_not_notes Results of `miditapyr$split_df()`.
+#' @param df_meta,df_notes_long,df_not_notes Dataframes in the format of \code{split_midi_frame()}.
 #'
 #' @return Merges the input dataframes, arranges by \code{i_track} & (absolute) \code{ticks}, and
 #'   calculates \code{time} (in relative ticks since the last event).
@@ -85,7 +85,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #' @family Split/merge meta/notes/non-note events
 #'
 #' @examples
-#'
+#' \dontrun{
 #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 #' mf <- miditapyr$MidiFrames(midi_file_string)
 #'
@@ -96,6 +96,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #' df_notes_long <- pivot_long_notes(l$df_notes_wide)
 #'
 #' merge_midi_frames(l$df_meta, df_notes_long, l$df_not_notes)
+#' }
 merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
   if (is.null(df_meta) & is.null(df_notes_long) & is.null(df_not_notes)) {
     return(NULL)
@@ -116,8 +117,12 @@ merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
 
 #' Split unnested midi dataframe into parts
 #'
-#' Unnested midi frame with time data from `\code{tab_measures()} is split into 3 parts:
-#' df_meta, df_not_notes & df_notes_wide.
+#' Unnested midi frame with time data from \code{tab_measures()} is split into 3 parts:
+#' \itemize{
+#'   \item{df_meta: Consisting of all the \href{https://mido.readthedocs.io/en/latest/midi_files.html#meta-messages}{meta} events in the midi data.}
+#'   \item{df_not_notes: Containing all midi events that are not \code{meta} and not \code{note_on} or \code{note_off}.}
+#'   \item{df_notes_wide: All \code{note_on} or \code{note_off} events and furthermore transformed to wide format by \code{pivot_note_wide}.}
+#' }
 #'
 #' @param dfm result of \code{tab_measures()}
 #'
