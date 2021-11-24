@@ -17,6 +17,13 @@ knitr::opts_chunk$set(
 ```{r, message=FALSE, echo=FALSE, results = 'hide'}
 pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
+
+The following diagram depicts the structure of the pyramidi package and its
+python counterpart [miditapyr](https://github.com/urswilke/miditapyr).
+
+*Hover over nodes to see additional information. Many of the nodes are also 
+clickable for further information.*
+
 ```{r setup, echo=FALSE}
 library(pyramidi)
 library(stringr)
@@ -73,3 +80,21 @@ gv <- grViz("package_workflow.gv")
 gv
 ```
 
+* `miditapyr` can be used to load the midi file `midi_in` into a `mido.MidiFile`. 
+The chain down to `midi_out` shows, how miditpayr's functions can be used 
+to transform the data into different formats and finally save it to a new midi file. 
+Have a look [here](https://miditapyr.readthedocs.io/en/latest/notebooks/functions_usage.html) 
+to see in detail how this can be done.
+* `mf` shows the structure of a
+[`MidiFrames`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames) 
+object and how its fields are related to the low-level functions. Have a look
+[here](https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html) 
+to see how `MidiFrames` can be used in python.
+* The `pyramidi` subgraph illustrates how the functions in this package work.
+Starting from the dataframe `midi_frame_unnested`, the data is transformed to 
+different formats, finally resulting in the same format.
+* The dashed borders of the nodes in the graph depict the fields that are in a
+`MidiFramer` object (for clarity not included in the graph). 
+* The `MidiFramer` method `update_nodes_wide()` can be used to modify the 
+field `df_notes_wide`. The red arrows and borders show the other fields of the 
+`MidiFramer` object that are automatically updated when using this method.
