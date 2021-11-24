@@ -27,7 +27,7 @@ r_midi_frames <- function(midi_file_string) {
 
   df_notes_long <- pivot_long_notes(df_notes_wide)
 
-  df_long_mod <- merge_long_events(df_meta, df_notes_long, df_not_notes)
+  df_long_mod <- merge_midi_frames(df_meta, df_notes_long, df_not_notes)
 
   structure(
     tibble::lst(
@@ -90,7 +90,7 @@ mod_notes.r_midi_frames <- function(mfr, mod) {
   # recalculate the dataframes resulting from df_notes_wide in r_midi_frames:
   mfr$df_notes_long <- pivot_long_notes(mfr$df_notes_wide)
 
-  mfr$df_long_mod <- merge_long_events(mfr$df_meta, mfr$df_notes_long, mfr$df_not_notes)
+  mfr$df_long_mod <- merge_midi_frames(mfr$df_meta, mfr$df_notes_long, mfr$df_not_notes)
 
   mfr$mf$midi_frame_unnested$update_unnested_mf(mfr$df_long_mod)
   mfr

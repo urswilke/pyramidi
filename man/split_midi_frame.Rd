@@ -32,6 +32,6 @@ split_midi_frame(dfm)
 }
 \seealso{
 Other Split/merge meta/notes/non-note events: 
-\code{\link{merge_long_events}()}
+\code{\link{merge_midi_frames}()}
 }
 \concept{Split/merge meta/notes/non-note events}

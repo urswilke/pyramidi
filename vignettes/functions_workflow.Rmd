@@ -230,7 +230,7 @@ df_notes_long <- pivot_long_notes(df_notes_wide)
 We can now add the non note events:
 
 ```{r join_non_note_events}
-df_midi_out <- merge_long_events(df_meta, df_notes_long, df_not_notes)
+df_midi_out <- merge_midi_frames(df_meta, df_notes_long, df_not_notes)
 
 df_midi_out
 ```

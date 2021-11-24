@@ -35,7 +35,7 @@ pm_funs <- c(
   "pivot_long_notes",
   "pivot_wide_notes",
   "tab_measures",
-  "merge_long_events",
+  "merge_midi_frames",
   "split_midi_frame"
 )
 # inspired by:

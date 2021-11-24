@@ -95,8 +95,8 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' df_notes_long <- pivot_long_notes(l$df_notes_wide)
 #'
-#' merge_long_events(l$df_meta, df_notes_long, l$df_not_notes)
-merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
+#' merge_midi_frames(l$df_meta, df_notes_long, l$df_not_notes)
+merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
   if (is.null(df_meta) & is.null(df_notes_long) & is.null(df_not_notes)) {
     return(NULL)
   }
