@@ -32,12 +32,14 @@ digraph pyramidi_flow {
     pmf  [
       label = "pyramidi\nfunction",
       tooltip = "Function of the pyramidi R package"
-      URL = "https://urswilke.github.io/pyramidi/reference/index.html"
+      URL = "https://urswilke.github.io/pyramidi/reference/index.html",
+      fillcolor="#33D7AAFF:#CC4488FF"
     ]
     mtf [
       label = "miditapyr\nfunction",
       tooltip = "Function of the miditapyr python package"
-      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html"
+      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html",
+      fillcolor="#FFD700ff:#44A666ff"
     ]
 
 
@@ -52,14 +54,14 @@ digraph pyramidi_flow {
     mfr_field [
       label = "field in\nMidiFramer",
       tooltip = "Field in a MidiFramer object"
-      URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html"
+      URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html#public-fields"
     ]
 
     node [shape = box, fontname = jura, peripheries = 1, style=rounded, penwidth = 1]
     mf_field [
       label = "field in\nMidiFrames",
       tooltip = "Field in a MidiFrames object"
-      URL = "file:///home/chief/python/miditapyr/docs/build/miditapyr.html#miditapyr.midi_frame.MidiFrames"
+      URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames"
     ]
 
     node [shape = diamond, fontname = jura, peripheries = 1, style=rounded, penwidth = 1]
