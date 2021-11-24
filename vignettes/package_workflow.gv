@@ -27,7 +27,7 @@ digraph pyramidi_flow {
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
-      gradientangle=190, fillcolor="#88114499:#5555662f"
+      gradientangle=190
     ]
     pmf  [
       label = "pyramidi\nfunction",
@@ -101,7 +101,7 @@ digraph pyramidi_flow {
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
-      gradientangle=10, fillcolor="#33cc4499:#aa55662f",
+      gradientangle=190, fillcolor="#FFD700ff:#44A666ff",
       group = spaghetti
     ]
     mtfm [label = "frame_midi", URL = "@@1-1", tooltip = "@@3-1"]
@@ -181,7 +181,7 @@ digraph pyramidi_flow {
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
-      gradientangle=190, fillcolor="#88114499:#5555662f"
+      gradientangle=190, fillcolor="#33D7AAFF:#CC4488FF"
     ]
     ppln [label = "pivot_long_notes", URL = "@@2-1", tooltip = "@@4-1"]
     split_midi_frame [URL = "@@2-5", tooltip = "@@4-5"]
@@ -205,7 +205,7 @@ digraph pyramidi_flow {
       shape = ellipse,
       style = "rounded,filled,radial",
       penwidth = 1;
-      gradientangle=190, fillcolor="#88114499:#5555662f"
+      gradientangle=190, fillcolor="#33D7AAFF:#CC4488FF"
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
     ppwn [label = "pivot_wide_notes", URL = "@@2-2", tooltip = "@@4-2"]
