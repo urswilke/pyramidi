@@ -75,9 +75,6 @@ digraph pyramidi_flow {
     }
 
 
-    node [shape = box, fontname = jura, peripheries=2, style=rounded]
-    midi_file;
-
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
