@@ -9,8 +9,9 @@ digraph pyramidi_flow {
   ]
 
   # midi file paths
-  node [shape = folder, fontname = jura, peripheries=2]
-  midi_in; midi_out;
+  node [shape = folder, fontname = jura, peripheries=2, group = spaghetti]
+  midi_in [tooltip = "Filepath of midi file on your computer to manipulate"];
+  midi_out [tooltip = "Filepath of output midi file"];
 
   subgraph cluster_legend {
     label = < <B>legend</B> >;
@@ -58,18 +59,23 @@ digraph pyramidi_flow {
     label = < <B>miditapyr</B> >;
     fontsize = 20;
     bgcolor="#FFD700:#44A666";
+    tooltip = "Library for MIDI TAbulation in PYthon and for R";
+    URL = "https://miditapyr.readthedocs.io/"
 
-    node [shape = box, fontname = jura, peripheries=2, style=solid]
+    node [shape = box, fontname = jura, peripheries=2, style=solid, group = spaghetti]
     mf_raw; mf_unnested; mf_nested
 
 
 
     ## mido:
     subgraph cluster_mido {
+      tooltip = "Library for working with MIDI messages and ports"
+      URL = "https://mido.readthedocs.io/"
       label = < <B>mido</B> >;
       bgcolor="#FFD700:#CCA600";
-      node [shape = box, fontname = jura, peripheries=2, style=rounded]
+      node [shape = box, fontname = jura, peripheries=2, style=rounded, group = spaghetti]
       midi_file [
+        tooltip = "mido.MidiFile object"
         URL = "https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"
       ];
     }
@@ -78,7 +84,8 @@ digraph pyramidi_flow {
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
-      gradientangle=10, fillcolor="#33cc4499:#aa55662f"
+      gradientangle=10, fillcolor="#33cc4499:#aa55662f",
+      group = spaghetti
     ]
     mtfm [label = "frame_midi", URL = "@@1-1", tooltip = "@@3-1"]
     mtum [label = "unnest_midi", URL = "@@1-2", tooltip = "@@3-2"]
@@ -88,22 +95,24 @@ digraph pyramidi_flow {
     edge [fontname = jura]
 
 
-    midi_file->mtfm[arrowhead=none]
+    midi_file->mtfm[arrowhead=none, weight=1000]
 
-    mtfm->mf_raw;
+    mtfm->mf_raw [weight=1000];
 
-    mf_raw->mtum[arrowhead=none]
+    mf_raw->mtum[arrowhead=none, weight=1000]
 
-    mtum->mf_unnested
+    mtum->mf_unnested [weight=1000]
 
-    mf_unnested->mtnm[arrowhead=none]
-    mtnm->mf_nested
+    mf_unnested->mtnm[arrowhead=none, weight=1000]
+    mtnm->mf_nested [weight=1000]
 
-    mf_nested->mtwm[arrowhead=none]
+    mf_nested->mtwm[arrowhead=none, weight=1000]
 
   subgraph cluster_mf {
     label = < <B>MidiFrames</B> >;
     bgcolor="#33D700:#CCA6DD";
+    tooltip = "MidiFrames object";
+    URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames";
     fontname = jura
 
     node   [
@@ -144,6 +153,8 @@ digraph pyramidi_flow {
     label = < <B>pyramidi</B> >;
     fontsize = 20;
     bgcolor="#33D7AA:#CC4488";
+    tooltip = "R library to reproducibly generate/manipulate midi data in data frames";
+    URL = "https://urswilke.github.io/pyramidi/";
     fontname = jura
 
     node [
@@ -156,7 +167,7 @@ digraph pyramidi_flow {
     merge_long_events [URL = "@@2-4", tooltip = "@@4-4"]
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
-    mf_wide [color = red]
+    df_notes_wide [color = red]
     dfm
     df_meta
     df_not_notes
@@ -192,9 +203,9 @@ digraph pyramidi_flow {
   df_not_notes->merge_long_events
   df_notes_long->merge_long_events [color = red, penwidth = 2]
 
-  ppwn->mf_wide
+  ppwn->df_notes_wide
 
-  mf_wide->ppln[arrowhead=none, color = red, penwidth = 2]
+  df_notes_wide->ppln[arrowhead=none, color = red, penwidth = 2]
 
   ppln->df_notes_long [color = red, penwidth = 2]
 
@@ -209,15 +220,15 @@ digraph pyramidi_flow {
   {rank = same; ppwn; tab_measures;}
   {rank = same; mf_mf_unnested; df_meta;}
   {rank = same; mf_mf_unnested; df_not_notes;}
-  {rank = same; mf_mf_unnested; mf_wide;}
+  {rank = same; mf_mf_unnested; df_notes_wide;}
 #  {rank = same; mf_mf_unnested; update_notes_wide;}
-  df_meta -> df_not_notes -> mf_wide -> update_notes_wide [ style=invis ];
+  df_meta -> df_not_notes -> df_notes_wide -> update_notes_wide [ style=invis ];
 
-  mf_midi_file -> mf_mf_raw
-  mf_mf_raw -> mf_mf_unnested
-  mf_mf_unnested -> mf_mf_nested [color = red, penwidth = 2]
-  mf_mf_nested -> mf_write_file
-  update_notes_wide->mf_wide [color = red, penwidth = 2]
+  mf_midi_file -> mf_mf_raw [weight=1000]
+  mf_mf_raw -> mf_mf_unnested [weight=1000]
+  mf_mf_unnested -> mf_mf_nested [color = red, penwidth = 2, weight=1000]
+  mf_mf_nested -> mf_write_file [weight=1000]
+  update_notes_wide->df_notes_wide [color = red, penwidth = 2]
 
   {rank = same; mf_midi_file; midi_file}
   {rank = same; mf_mf_raw; mf_raw}
