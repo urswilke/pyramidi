@@ -145,16 +145,16 @@ digraph pyramidi_flow {
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_file"
       ]
       mf_mf_raw [
-        label = "mf.mf_raw",
+        label = "mf.midi_frame_raw",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_raw"
       ]
       mf_mf_unnested [
-        label = "mf.mf_unnested",
+        label = "mf.midi_frame_unnested",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_unnested"
         color = red
       ]
       mf_mf_nested [
-        label = "mf.mf_nested",
+        label = "mf.midi_frame_nested",
         URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.midi_frame_nested"
         color = red
       ]
