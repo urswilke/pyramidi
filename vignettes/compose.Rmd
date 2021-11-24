@@ -411,6 +411,17 @@ mfr$update_notes_wide(composition)
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 mfr$play("composition.mp3")
 ```
+
+```{r echo=FALSE}
+htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = "composition.mp3",
+      type = "audio/mp3"
+    )
+  )
+```
+
