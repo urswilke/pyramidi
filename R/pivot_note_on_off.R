@@ -91,7 +91,7 @@ pivot_long_notes <- function(df_notes_wide) {
 #'
 #' dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 #'
-#' l <- triage_measured_unnested(dfm)
+#' l <- split_midi_frame(dfm)
 #'
 #' df_notes_long <- pivot_long_notes(l$df_notes_wide)
 #'
@@ -129,9 +129,9 @@ merge_long_events <- function(df_meta, df_notes_long, df_not_notes) {
 #' @examples
 #' \dontrun{
 #' dfm <- tab_measures(df, ticks_per_beat)
-#' triage_measured_unnested(dfm)
+#' split_midi_frame(dfm)
 #' }
-triage_measured_unnested <- function(dfm) {
+split_midi_frame <- function(dfm) {
   if (is.null(dfm)) {
     return(list(NULL, NULL, NULL))
   }

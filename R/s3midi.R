@@ -18,8 +18,8 @@ r_midi_frames <- function(midi_file_string) {
 
   dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 
-  # c(df_meta, df_not_notes, df_notes_wide) %<-% triage_measured_unnested(dfm)
-  l <- triage_measured_unnested(dfm)
+  # c(df_meta, df_not_notes, df_notes_wide) %<-% split_midi_frame(dfm)
+  l <- split_midi_frame(dfm)
   df_meta <- l[[1]]
   df_not_notes <- l[[2]]
   df_notes_wide <- l[[3]]

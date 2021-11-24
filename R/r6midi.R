@@ -6,7 +6,7 @@
 #' @field mf \code{miditapyr$MidiFrames} object,
 #' @field dfm result of \code{tab_measures()}
 #' @field df_notes_long result of \code{pivot_long_notes()}
-#' @field df_meta,df_not_notes,df_notes_wide results of \code{triage_measured_unnested()}
+#' @field df_meta,df_not_notes,df_notes_wide results of \code{split_midi_frame()}
 #' @field df_long_mod result of \code{merge_long_events()}
 #'
 #' @return MidiFramer R6 object
@@ -53,7 +53,7 @@ MidiFramer <- R6::R6Class(
         self$dfm <- NULL
       }
 
-      c(self$df_meta, self$df_not_notes, self$df_notes_wide) %<-% triage_measured_unnested(self$dfm)
+      c(self$df_meta, self$df_not_notes, self$df_notes_wide) %<-% split_midi_frame(self$dfm)
 
       self$df_notes_long <- pivot_long_notes(self$df_notes_wide)
 

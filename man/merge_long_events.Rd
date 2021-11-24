@@ -25,7 +25,7 @@ mf <- miditapyr$MidiFrames(midi_file_string)
 
 dfm <- tab_measures(mf$midi_frame_unnested$df, ticks_per_beat = mf$midi_file$ticks_per_beat)
 
-l <- triage_measured_unnested(dfm)
+l <- split_midi_frame(dfm)
 
 df_notes_long <- pivot_long_notes(l$df_notes_wide)
 
@@ -33,6 +33,6 @@ merge_long_events(l$df_meta, df_notes_long, l$df_not_notes)
 }
 \seealso{
 Other Split/merge meta/notes/non-note events: 
-\code{\link{triage_measured_unnested}()}
+\code{\link{split_midi_frame}()}
 }
 \concept{Split/merge meta/notes/non-note events}

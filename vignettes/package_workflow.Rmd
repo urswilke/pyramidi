@@ -36,7 +36,7 @@ pm_funs <- c(
   "pivot_wide_notes",
   "tab_measures",
   "merge_long_events",
-  "triage_measured_unnested"
+  "split_midi_frame"
 )
 # inspired by:
 # https://stackoverflow.com/a/8928894 &

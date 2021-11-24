@@ -78,7 +78,7 @@ mfr$play()
 
 \item{\code{df_notes_long}}{result of \code{pivot_long_notes()}}
 
-\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{triage_measured_unnested()}}
+\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{split_midi_frame()}}
 
 \item{\code{df_long_mod}}{result of \code{merge_long_events()}}
 }
@@ -87,7 +87,7 @@ mfr$play()
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{triage_measured_unnested()}}
+\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{split_midi_frame()}}
 
 \item{\code{ticks_per_beat}}{Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
 The value of \code{ticks_per_beat} passed should be integer.
