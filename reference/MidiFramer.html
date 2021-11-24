@@ -107,6 +107,9 @@ Construct a midi frame R6 object" />
     <li>
       <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
+    <li>
+      <a href="../articles/package_workflow.html">Package workflow</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -153,21 +156,25 @@ Construct a midi frame R6 object" />
     <p><div class="r6-fields"></p><dl>
 <dt><code>midi_file_string</code></dt><dd><p>Path to the midi file</p></dd>
 
-<dt><code>mf</code></dt><dd><p>miditapyr$MidiFrames object,</p></dd>
+<dt><code>mf</code></dt><dd><p><code>miditapyr$MidiFrames</code> object,</p></dd>
 
 <dt><code>dfm</code></dt><dd><p>result of <code><a href='tab_measures.html'>tab_measures()</a></code></p></dd>
 
 <dt><code>df_notes_long</code></dt><dd><p>result of <code><a href='pivot_long_notes.html'>pivot_long_notes()</a></code></p></dd>
 
-<dt><code>df_meta, df_not_notes, df_notes_wide</code></dt><dd><p>results of <code><a href='triage_measured_unnested.html'>triage_measured_unnested()</a></code></p></dd>
+<dt><code>df_meta, df_not_notes, df_notes_wide</code></dt><dd><p>results of <code><a href='split_midi_frame.html'>split_midi_frame()</a></code></p></dd>
 
-<dt><code>df_long_mod</code></dt><dd><p>result of <code><a href='merge_long_events.html'>merge_long_events()</a></code></p></dd>
+<dt><code>midi_frame_mod</code></dt><dd><p>result of <code><a href='merge_midi_frames.html'>merge_midi_frames()</a></code></p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
 
     <p><div class="r6-active-bindings"></p><dl>
-<dt><code>df_meta, df_not_notes, df_notes_wide</code></dt><dd><p>results of <code><a href='triage_measured_unnested.html'>triage_measured_unnested()</a></code></p></dd>
+<dt><code>df_meta, df_not_notes, df_notes_wide</code></dt><dd><p>results of <code><a href='split_midi_frame.html'>split_midi_frame()</a></code></p></dd>
+
+<dt><code>ticks_per_beat</code></dt><dd><p>Set ticks per beat of <code>MidiFrames()$mf$midi_file</code>.
+The value of <code>ticks_per_beat</code> passed should be integer.
+When a value is passed, the field <code>mf$midi_file field$ticks_per_beat</code> is modified.</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -184,7 +191,7 @@ Construct a midi frame R6 object" />
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Initialize a MidiFramer object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>MidiFramer</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>midi_file_string</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>MidiFramer</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>midi_file_string <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -229,7 +236,7 @@ mfr$play()
 
 <p><hr>
 <a id="method-play"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>play()</code></h3>
-<p>Play midi from MidiFramer object
+<p>Play midi from MidiFramer object.
 Transform the midi file to fileext format and provide a play button for html
 documents.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>MidiFramer</span><span class='op'>$</span><span class='fu'>play</span><span class='op'>(</span>
@@ -271,6 +278,15 @@ mfr$play()
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>midi_file_string</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"test_midi_file.mid"</span>, package <span class='op'>=</span> <span class='st'>"pyramidi"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>MidiFramer</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>midi_file_string</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Create empty MidiFramer object:</span></span>
+<span class='r-in'><span class='va'>mfr</span> <span class='op'>&lt;-</span> <span class='va'>MidiFramer</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Print default value of empty MidiFile object:</span></span>
+<span class='r-in'><span class='va'>mfr</span><span class='op'>$</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_file</span><span class='op'>$</span><span class='va'>ticks_per_beat</span></span>
+<span class='r-in'><span class='co'># Modify it with the active binding ticks_per_beat:</span></span>
+<span class='r-in'><span class='va'>mfr</span><span class='op'>$</span><span class='va'>ticks_per_beat</span> <span class='op'>&lt;-</span> <span class='fl'>960L</span></span>
+<span class='r-in'><span class='co'># Print it again:</span></span>
+<span class='r-in'><span class='va'>mfr</span><span class='op'>$</span><span class='va'>mf</span><span class='op'>$</span><span class='va'>midi_file</span><span class='op'>$</span><span class='va'>ticks_per_beat</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'>## ------------------------------------------------</span></span>

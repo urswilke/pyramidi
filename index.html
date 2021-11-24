@@ -65,6 +65,9 @@
     <li>
       <a href="articles/mido_from_r.html">Using mido directly from R</a>
     </li>
+    <li>
+      <a href="articles/package_workflow.html">Package workflow</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -176,7 +179,8 @@
 <p>See the <code><a href="articles/midi_framer.html">vignette("midi_framer", package = "pyramidi")</a></code> to see how you can synthesize the midi data to wav, convert to mp3 if you want, and then embed a player in your rmarkdown html document with</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<audio controls=""><source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"></source></audio><p>Even if that sounds very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
+<audio controls=""><source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"></source></audio><p>*The player only appears in the <a href="https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio">docs</a>.</p>
+<p>Even if that sounds very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
 </div>
 </div>
 <div id="related-r-packages" class="section level2">
@@ -345,7 +349,7 @@ rmd <- create_rmd(cites)
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/github/urswilke/pyramidi"><img src="https://travis-ci.org/urswilke/pyramidi.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/urswilke/pyramidi?branch=master"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/urswilke/pyramidi?branch=master"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/urswilke/pyramidi/actions"><img src="https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>

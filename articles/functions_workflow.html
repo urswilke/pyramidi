@@ -65,6 +65,9 @@
     <li>
       <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
+    <li>
+      <a href="../articles/package_workflow.html">Package workflow</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -408,7 +411,7 @@
 <a href="#join-non-note-events" class="anchor"></a>Join non note events</h3>
 <p>We can now add the non note events:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_midi_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_long_events.html">merge_long_events</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">df_not_notes</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_midi_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_midi_frames.html">merge_midi_frames</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">df_not_notes</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
 <span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta", "track")</span>
 

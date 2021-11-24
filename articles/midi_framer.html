@@ -65,6 +65,9 @@
     <li>
       <a href="../articles/mido_from_r.html">Using mido directly from R</a>
     </li>
+    <li>
+      <a href="../articles/package_workflow.html">Package workflow</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -123,22 +126,23 @@ constructor function <code>MidiFramer$new()</code>:</p>
 <p>It is an R6 object that contains the following fields:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mfr</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 13 × 2</span>
+<span class="co">#&gt; # A tibble: 14 × 2</span>
 <span class="co">#&gt;    name              value              </span>
 <span class="co">#&gt;    &lt;chr&gt;             &lt;list&gt;             </span>
 <span class="co">#&gt;  1 .__enclos_env__   &lt;env&gt;              </span>
-<span class="co">#&gt;  2 df_long_mod       &lt;tibble [268 × 13]&gt;</span>
-<span class="co">#&gt;  3 df_notes_wide     &lt;tibble [130 × 17]&gt;</span>
-<span class="co">#&gt;  4 df_not_notes      &lt;df [0 × 12]&gt;      </span>
-<span class="co">#&gt;  5 df_meta           &lt;df [8 × 15]&gt;      </span>
-<span class="co">#&gt;  6 df_notes_long     &lt;tibble [260 × 12]&gt;</span>
-<span class="co">#&gt;  7 dfm               &lt;tibble [268 × 18]&gt;</span>
-<span class="co">#&gt;  8 mf                &lt;mdt._.MF&gt;         </span>
-<span class="co">#&gt;  9 midi_file_string  &lt;chr [1]&gt;          </span>
-<span class="co">#&gt; 10 clone             &lt;fn&gt;               </span>
-<span class="co">#&gt; 11 play              &lt;fn&gt;               </span>
-<span class="co">#&gt; 12 update_notes_wide &lt;fn&gt;               </span>
-<span class="co">#&gt; 13 initialize        &lt;fn&gt;</span></code></pre></div>
+<span class="co">#&gt;  2 ticks_per_beat    &lt;int [1]&gt;          </span>
+<span class="co">#&gt;  3 midi_frame_mod    &lt;tibble [268 × 13]&gt;</span>
+<span class="co">#&gt;  4 df_notes_wide     &lt;tibble [130 × 17]&gt;</span>
+<span class="co">#&gt;  5 df_not_notes      &lt;df [0 × 12]&gt;      </span>
+<span class="co">#&gt;  6 df_meta           &lt;df [8 × 15]&gt;      </span>
+<span class="co">#&gt;  7 df_notes_long     &lt;tibble [260 × 12]&gt;</span>
+<span class="co">#&gt;  8 dfm               &lt;tibble [268 × 18]&gt;</span>
+<span class="co">#&gt;  9 mf                &lt;mdt._.MF&gt;         </span>
+<span class="co">#&gt; 10 midi_file_string  &lt;chr [1]&gt;          </span>
+<span class="co">#&gt; 11 clone             &lt;fn&gt;               </span>
+<span class="co">#&gt; 12 play              &lt;fn&gt;               </span>
+<span class="co">#&gt; 13 update_notes_wide &lt;fn&gt;               </span>
+<span class="co">#&gt; 14 initialize        &lt;fn&gt;</span></code></pre></div>
 <p>The field <code>mf</code> is a <code>miditapyr.MidiFrames()</code> object. After its first element <code>mfr$mf$midi_file</code>, a <a href="https://mido.readthedocs.io/en/latest/midi_files.html">mido midi file object</a> with the raw data, there are the 3 dataframes:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
@@ -220,16 +224,16 @@ constructor function <code>MidiFramer$new()</code>:</p>
 <span class="co">#&gt; # A tibble: 130 × 17</span>
 <span class="co">#&gt;    i_track meta   note channel i_note time_note_on time_note_off</span>
 <span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 FALSE    60       9      1            0           240</span>
-<span class="co">#&gt;  2       0 FALSE    71       9      1            0             0</span>
-<span class="co">#&gt;  3       0 FALSE    66       9      1            0             0</span>
-<span class="co">#&gt;  4       0 FALSE    64       9      1          240             0</span>
-<span class="co">#&gt;  5       0 FALSE    63       9      1            0             0</span>
+<span class="co">#&gt;  1       0 FALSE    63       9      1            0           240</span>
+<span class="co">#&gt;  2       0 FALSE    67       9      1            0             0</span>
+<span class="co">#&gt;  3       0 FALSE    68       9      1            0             0</span>
+<span class="co">#&gt;  4       0 FALSE    69       9      1          240             0</span>
+<span class="co">#&gt;  5       0 FALSE    66       9      1            0             0</span>
 <span class="co">#&gt;  6       0 FALSE    60       9      2          240           240</span>
-<span class="co">#&gt;  7       0 FALSE    61       9      2            0           240</span>
-<span class="co">#&gt;  8       0 FALSE    60       9      3          240           240</span>
-<span class="co">#&gt;  9       0 FALSE    62       9      2            0             0</span>
-<span class="co">#&gt; 10       0 FALSE    61       9      4          240           240</span>
+<span class="co">#&gt;  7       0 FALSE    64       9      2            0           240</span>
+<span class="co">#&gt;  8       0 FALSE    69       9      3          240           240</span>
+<span class="co">#&gt;  9       0 FALSE    67       9      2            0             0</span>
+<span class="co">#&gt; 10       0 FALSE    68       9      4          240           240</span>
 <span class="co">#&gt; # … with 120 more rows, and 10 more variables: velocity_note_on &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   velocity_note_off &lt;dbl&gt;, ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   t_note_on &lt;dbl&gt;, t_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;,</span>
@@ -243,9 +247,9 @@ constructor function <code>MidiFramer$new()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_nested</span><span class="op">$</span><span class="va">df</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   i_track  meta                            msg</span>
-<span class="co">#&gt; 1       0 FALSE          9, 67, note_on, 0, 72</span>
+<span class="co">#&gt; 1       0 FALSE          9, 62, note_on, 0, 72</span>
 <span class="co">#&gt; 2       0 FALSE          9, 70, note_on, 0, 64</span>
-<span class="co">#&gt; 3       0 FALSE         9, 60, note_on, 0, 101</span>
+<span class="co">#&gt; 3       0 FALSE         9, 66, note_on, 0, 101</span>
 <span class="co">#&gt; 4       0  TRUE    track_name, 0, drum-t1-1-t1</span>
 <span class="co">#&gt; 5       0  TRUE           set_tempo, 0, 666666</span>
 <span class="co">#&gt; 6       0  TRUE time_signature, 0, 4, 4, 24, 8</span></code></pre></div>
