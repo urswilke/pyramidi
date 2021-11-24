@@ -1,6 +1,8 @@
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr6 <- MidiFramer$new(midi_file_string)
 
+mfr <- MidiFramer$new()
+
 test_that("MidiFramer seems to work", {
   expect_snapshot(c("midi_frame_mod", "df_notes_wide", "df_not_notes",
                     "df_meta", "df_notes_long", "dfm", "mf") %>% purrr::set_names() %>% purrr::map(~`[[`(mfr6, .x)))
@@ -13,7 +15,6 @@ test_that("MidiFramer seems to work", {
 })
 
 test_that("empty MidiFramer seems to work", {
-  mfr <- MidiFramer$new()
   mfr_attrs <- c("midi_frame_mod", "df_notes_wide", "df_not_notes",
     "df_meta", "df_notes_long", "dfm") %>%
     purrr::set_names() %>%
@@ -23,4 +24,10 @@ test_that("empty MidiFramer seems to work", {
   expect_error(mfr$mf$midi_frame_raw)
   expect_error(mfr$mf$midi_frame_unnested$df)
   expect_error(mfr$mf$midi_frame_nested$df)
+})
+
+
+test_that("active field `ticks_per_beat` works", {
+  expect_warning(mfr$ticks_per_beat <- 1.5)
+  expect_equal(mfr$mf$midi_file$ticks_per_beat, 1)
 })
