@@ -48,6 +48,12 @@ digraph pyramidi_flow {
       URL = "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html"
     ]
 
+    node [shape = box, fontname = jura, peripheries = 1, style=dashed, penwidth = 2]
+    mfr_field [
+      label = "field in\nMidiFramer",
+      tooltip = "Field in a MidiFramer object"
+      URL = "https://urswilke.github.io/pyramidi/reference/MidiFramer.html"
+    ]
   }
 
 
@@ -106,6 +112,8 @@ digraph pyramidi_flow {
 
   subgraph cluster_mf {
     label = < <B>MidiFrames</B> >;
+    style = dashed;
+    penwidth = 2;
     bgcolor="#33D700:#CCA6DD";
     tooltip = "MidiFrames object";
     URL = "https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames";
@@ -162,7 +170,13 @@ digraph pyramidi_flow {
     triage_measured_unnested [URL = "@@2-5", tooltip = "@@4-5"]
     merge_long_events [URL = "@@2-4", tooltip = "@@4-4"]
 
-    node [shape = box, fontname = jura, peripheries=2, style=solid]
+    node [
+      shape = box,
+      fontname = jura,
+      peripheries=2,
+      style = dashed;
+      penwidth = 2;
+      ]
     df_notes_wide [color = red]
     dfm
     df_meta
@@ -172,6 +186,7 @@ digraph pyramidi_flow {
     node [
       shape = ellipse,
       style = "rounded,filled,radial",
+      penwidth = 1;
       gradientangle=190, fillcolor="#88114499:#5555662f"
     ]
     tab_measures [URL = "@@2-3", tooltip = "@@4-3"]
