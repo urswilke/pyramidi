@@ -4,7 +4,7 @@ digraph pyramidi_flow {
   graph [
     overlap = true,
     newrank=true
-    fontsize = 12
+    fontsize = 20
     fontname = jura
   ]
 
@@ -14,7 +14,7 @@ digraph pyramidi_flow {
 
   subgraph cluster_legend {
     label = < <B>legend</B> >;
-    fontsize = 18;
+    fontsize = 20;
     bgcolor="#FFD7AA44:#44466644";
 
     node [shape = folder, fontname = jura, peripheries=2]
@@ -56,7 +56,7 @@ digraph pyramidi_flow {
 
   subgraph cluster_miditapyr {
     label = < <B>miditapyr</B> >;
-    fontsize = 18;
+    fontsize = 20;
     bgcolor="#FFD700:#44A666";
 
     node [shape = box, fontname = jura, peripheries=2, style=solid]
@@ -145,7 +145,7 @@ digraph pyramidi_flow {
 
   subgraph cluster_pyramidi {
     label = < <B>pyramidi</B> >;
-    fontsize = 18;
+    fontsize = 20;
     bgcolor="#33D7AA:#CC4488";
     fontname = jura
 
