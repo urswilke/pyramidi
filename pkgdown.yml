@@ -7,5 +7,8 @@ articles:
   midi_framer: midi_framer.html
   mido_from_r: mido_from_r.html
   package_workflow: package_workflow.html
-last_built: 2021-11-25T01:10Z
+last_built: 2021-11-25T17:44Z
+urls:
+  reference: https://urswilke.github.io/pyramidi/reference
+  article: https://urswilke.github.io/pyramidi/articles
 

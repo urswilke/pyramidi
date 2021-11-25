@@ -54,19 +54,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
+    </li>
+    <li>
       <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
+      <a href="../articles/package_workflow.html">Package workflow</a>
     </li>
     <li>
       <a href="../articles/functions_usage.html">Usage of pyramidi functions</a>
     </li>
     <li>
-      <a href="../articles/midi_framer.html">Midi manipulation with pyramidi</a>
-    </li>
-    <li>
       <a href="../articles/mido_from_r.html">Using mido directly from R</a>
-    </li>
-    <li>
-      <a href="../articles/package_workflow.html">Package workflow</a>
     </li>
   </ul>
 </li>
@@ -1093,8 +1093,6 @@
 <p>For comparison, we plot the results of <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi"><code>unnest_midi()</code></a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("i_track", "i_note", "type", "time", "ticks", "t", "m", "b", "meta")</span>
-<span class="co">#&gt; Joining, by = c("i_track", "channel", "note", "i_note", "type", "time", "velocity", "ticks", "t", "m", "b", "meta")</span>
 <span class="va">mt</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span>dfc <span class="op">=</span> <span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_raw</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 268 × 13</span>
