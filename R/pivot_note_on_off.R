@@ -103,9 +103,10 @@ merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
   }
   cols_to_remove <- c("i_note", "ticks", "t", "m", "b")
 
-  df_notes_long %>%
-    dplyr::full_join(df_meta) %>%
-    dplyr::full_join(df_not_notes) %>%
+  res <- df_notes_long %>%
+    dplyr::bind_rows(df_meta) %>%
+    dplyr::bind_rows(df_not_notes)
+
   # if in tab_measures() there weren't all columns built, we have to remove them here:
   cols_to_remove <- intersect(cols_to_remove, names(res))
   res %>%
