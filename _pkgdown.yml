@@ -10,5 +10,9 @@ articles:
   - compose
   - package_workflow
   - functions_usage
+
+- title: Further topics
+  contents:
   - mido_from_r
+  - tuner
 
