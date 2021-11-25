@@ -20,22 +20,21 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 # Introduction
 
-The goal of pyramidi is to reproducibly manipulate midi data from R.
-Midi data is read into dataframes, using the python package
+The goal of pyramidi is to reproducibly generate / manipulate midi data
+from R. Midi data is read into dataframes, using the python package
 [miditapyr](https://pypi.org/project/miditapyr/) under the hood (which
-itself uses [mido](https://github.com/mido/mido)). Then the midi
-information (one line per midi event) is translated into a wide format
-(one line per note). The wide format facilitates some manipulations of
-the notes’ data and also plotting them in piano roll plots. Finally, the
-modified dataframes can be written back to midi files (again using
-miditapyr).
+itself uses the excellent [mido](https://github.com/mido/mido)). Then,
+the notes’ midi information (one line per `note_on`/`note_off` midi
+event) is translated into a wide format (one line per note). The wide
+format facilitates some manipulations of the notes’ data and also
+plotting them in piano roll plots. Finally, the modified dataframes can
+be written back to midi files (again using miditapyr).
 
 Thus, you can manipulate all the intermediate dataframes and write midi
 files from R. However, you need to make sure yourself that the midi
 files you write can be understood by your softsynth. The data is not yet
-validated by pyramidi, but [mido](https://github.com/mido/mido) (also
-used to write midi files by miditapyr) already catches some of the
-possible inconsistencies.
+validated by pyramidi, but mido (also used to write midi files) already
+catches some of the possible inconsistencies.
 
 Via the small helper package
 [raudiomate](https://github.com/urswilke/raudiomate) the midi data can
@@ -45,8 +44,9 @@ be
     [fluidsynth](https://www.fluidsynth.org/) installed),
 -   converted to mp3 files with `raudiomate::convert_to_mp3()` (needs
     [ffmpeg](https://www.ffmpeg.org/)),
--   and played in rmarkdown documents with the `play()` method of
-    `MidiFramer` (using `raudiomate::player()`).
+-   and played in rmarkdown documents with the
+    [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play)
+    method of `MidiFramer` (using `raudiomate::player()`).
 
 If you’re new to midi, [mido’s
 documentation](https://mido.readthedocs.io/en/latest/) might be a good
@@ -93,8 +93,9 @@ manually configure your reticulate environment.*
 
 ### Generate a `MidiFramer` object
 
-We can create an `MidiFramer` object by passing the file path to the
-constructor method (`$new()`).
+We can create a `MidiFramer` object by passing the file path to the
+constructor method
+([`new()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-new)).
 
 ``` r
 library(pyramidi)
@@ -168,8 +169,32 @@ mfr$play()
 Even if that sounds very weird, I was very happy not having to listen to
 the package midi file over and over again. :)
 
+## Documentation
+
+You can find the complete online documentation of the package
+[here](https://urswilke.github.io/pyramidi/).
+
+-   See the `vignette("midi_framer")` for a brief usage introduction how
+    to manipulate midi data.
+-   The `vignette("compose")` shows a more extended example how to
+    compose music and generate midi files from scratch.
+-   `vignette("package_workflow")` shows in detail the structure of the
+    `MidiFramer` class and the functions of the pyramidi package.
+-   `vignette("functions_workflow")` illustrates the low-level functions
+    of the pyramidi package that `MidiFramer` objects use under the
+    hood.
+
 ## Related R packages
 
+-   The [tabr](https://github.com/leonawicz/tabr) package is a massive
+    music notation, transcription and analysis program allowing to
+    create musical scores (using Lilypond). It allows to read midi files
+    (wrapping tuneR; see below) and also to export them (also using
+    Lilypond).
+-   The [gm](https://github.com/flujoo/gm) package also allows to create
+    and show musical scores using musescore. It also allows to export
+    the music to audio (also using musescore) and to embed the players
+    in html documents.
 -   The [noon package](https://github.com/ColinFay/noon) wraps node.js
     libraries and can be used to read live midi input port data. I wrote
     a small [blog
@@ -184,14 +209,6 @@ the package midi file over and over again. :)
     [article](https://urswilke.github.io/pyramidi/articles/tuner.html),
     for an example how you can transform the tuner format into the
     pyramidi format.
--   The [tabr](https://github.com/leonawicz/tabr) package is a massive
-    music notation, transcription and analysis program allowing to
-    create musical scores (using Lilypond). It allows to read midi files
-    (wrapping tuneR) and also to export them (also using Lilypond).
--   The [gm](https://github.com/flujoo/gm) package also allows to create
-    and show musical scores using musescore. It also allows to export
-    the music to audio (also using musescore) and to embed the players
-    in html documents.
 
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
