@@ -2,24 +2,38 @@
 % Please edit documentation in R/r6midi.R
 \name{MidiFramer}
 \alias{MidiFramer}
-\title{Construct a midi frame R6 object}
-\value{
-MidiFramer R6 object
-}
+\title{MidiFramer class}
 \description{
-Construct a midi frame R6 object
-
-Construct a midi frame R6 object
+The class \code{MidiFramer} can be used to read midi files to
+dataframes in order to facilitate to manipulate the data from R. You can also
+create midi data from R without reading it from a file.
+The data is transformed to various formats.
+One of the \code{MidiFramer} fields is a
+\href{https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames}{\code{MidiFrames}}
+object of the python miditapyr package. Its method
+\href{https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.write_file}{write_file()}
+can be used to write the data back to a midi file.
 }
 \details{
-Constructor of an object of class "MidiFramer".
+\itemize{
+\item{See the \code{vignette("midi_framer")} for a brief usage introduction how to manipulate midi data.}
+\item{The \code{vignette("compose")} shows a more extended example how to generate midi files from scratch.}
+\item{\code{vignette("package_workflow")} shows in detail the structure of the \code{MidiFramer} class.}
+\item{\code{vignette("functions_workflow")} illustrates the low-level functions of the pyramidi package
+that \code{MidiFramer} objects use under the hood.}
+}
 }
 \examples{
 \dontrun{
+## Create a MidiFramer object from a midi file:
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 MidiFramer$new(midi_file_string)
 
-# Create empty MidiFramer object:
+## ------------------------------------------------
+## Create empty MidiFramer object to illustrate
+## the use of the `ticks_per_beat` active binding:
+## ------------------------------------------------
+
 mfr <- MidiFramer$new()
 # Print default value of empty MidiFile object:
 mfr$mf$midi_file$ticks_per_beat
@@ -70,24 +84,24 @@ mfr$play()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{midi_file_string}}{Path to the midi file}
+\item{\code{midi_file_string}}{Path to the midi file.}
 
-\item{\code{mf}}{\code{miditapyr$MidiFrames} object,}
+\item{\code{mf}}{\href{https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames}{\code{miditapyr$MidiFrames}} object.}
 
-\item{\code{dfm}}{result of \code{tab_measures()}}
+\item{\code{dfm}}{result of \code{tab_measures()}.}
 
-\item{\code{df_notes_long}}{result of \code{pivot_long_notes()}}
+\item{\code{df_notes_long}}{Result of \code{pivot_long_notes()}.}
 
-\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{split_midi_frame()}}
+\item{\code{df_meta, df_not_notes, df_notes_wide}}{Results of \code{split_midi_frame()}.}
 
-\item{\code{midi_frame_mod}}{result of \code{merge_midi_frames()}}
+\item{\code{midi_frame_mod}}{Result of \code{merge_midi_frames()}.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{df_meta, df_not_notes, df_notes_wide}}{results of \code{split_midi_frame()}}
+\item{\code{df_meta, df_not_notes, df_notes_wide}}{Results of \code{split_midi_frame()}.}
 
 \item{\code{ticks_per_beat}}{Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
 The value of \code{ticks_per_beat} passed should be integer.
@@ -116,7 +130,7 @@ Initialize a MidiFramer object
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{midi_file_string}}{Path to the midi file}
+\item{\code{midi_file_string}}{Path to the midi file; if NULL (the default), an empty \code{MidiFramer} object is created.}
 }
 \if{html}{\out{</div>}}
 }
