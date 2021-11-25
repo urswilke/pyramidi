@@ -72,14 +72,14 @@ mfr$play()
 }
 
 ## ------------------------------------------------
-## Method `MidiFramer$populate_object`
+## Method `MidiFramer$populate_r_fields`
 ## ------------------------------------------------
 
 \dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 mfr$params$columns_to_add <- c("m", "b", "t", "time")
-mfr$populate_object()
+mfr$populate_r_fields()
 }
 
 ## ------------------------------------------------
@@ -127,7 +127,7 @@ When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is mo
 \itemize{
 \item \href{#method-new}{\code{MidiFramer$new()}}
 \item \href{#method-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
-\item \href{#method-populate_object}{\code{MidiFramer$populate_object()}}
+\item \href{#method-populate_r_fields}{\code{MidiFramer$populate_r_fields()}}
 \item \href{#method-play}{\code{MidiFramer$play()}}
 \item \href{#method-clone}{\code{MidiFramer$clone()}}
 }
@@ -197,15 +197,15 @@ mfr$play()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-populate_object"></a>}}
-\if{latex}{\out{\hypertarget{method-populate_object}{}}}
-\subsection{Method \code{populate_object()}}{
+\if{html}{\out{<a id="method-populate_r_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-populate_r_fields}{}}}
+\subsection{Method \code{populate_r_fields()}}{
 Populate the fields of a MidiFramer object
 
 This can also be used to recalculate all the object's attributes,
 when a value in params is changed (see examples).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MidiFramer$populate_object()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MidiFramer$populate_r_fields()}\if{html}{\out{</div>}}
 }
 
 \subsection{Examples}{
@@ -214,7 +214,7 @@ when a value in params is changed (see examples).
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 mfr$params$columns_to_add <- c("m", "b", "t", "time")
-mfr$populate_object()
+mfr$populate_r_fields()
 }
 }
 \if{html}{\out{</div>}}

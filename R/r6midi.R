@@ -67,7 +67,10 @@ MidiFramer <- R6::R6Class(
     #' @param midi_file_string Path to the midi file; if NULL (the default), an empty \code{MidiFramer} object is created.
     initialize = function(midi_file_string = NULL) {
       self$midi_file_string <- midi_file_string
-      self$populate_object()
+
+      self$mf <- miditapyr$MidiFrames(self$midi_file_string)
+
+      self$populate_r_fields()
     },
 
     #' @description Update a MidiFramer object with modified notes
@@ -111,10 +114,10 @@ MidiFramer <- R6::R6Class(
     #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
     #' mfr <- MidiFramer$new(midi_file_string)
     #' mfr$params$columns_to_add <- c("m", "b", "t", "time")
-    #' mfr$populate_object()
+    #' mfr$populate_r_fields()
     #' }
-    populate_object = function() {
-      self$mf <- miditapyr$MidiFrames(self$midi_file_string)
+    populate_r_fields = function() {
+
 
       if (!is.null(self$mf$`_midi_frame_raw`)) {
         self$dfm <- tab_measures(

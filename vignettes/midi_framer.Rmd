@@ -32,7 +32,7 @@ library(raudiomate) # see https://github.com/urswilke/raudiomate
 
 ## Generate `MidiFramer` object
 
-We can create an R6 object of class `"MidiFramer"` by passing the midi file path to the  
+We can create an R6 object of class `"MidiFramer"` from a midi file path by passing it to the  
 constructor function `MidiFramer$new()`: 
 
 ```{r, message=FALSE}
@@ -59,7 +59,7 @@ list(
   map(as_tibble)
 ```
 
-And you can write the midi file resulting of the `MidiFrames` object to disk:
+And you can write the midi file resulting of the `MidiFrames` object back to disk:
 
 ```{r, eval=FALSE}
 mfr$mf$write_file("/path/to/your/midifile.mid")
