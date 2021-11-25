@@ -180,9 +180,8 @@ You can find the complete online documentation of the package
     compose music and generate midi files from scratch.
 -   `vignette("package_workflow")` shows in detail the structure of the
     `MidiFramer` class and the functions of the pyramidi package.
--   `vignette("functions_workflow")` illustrates the low-level functions
-    of the pyramidi package. that `MidiFramer` objects use under the
-    hood.
+-   `vignette("functions_usage")` illustrates the low-level functions of
+    the pyramidi package. that `MidiFramer` objects use under the hood.
 
 ## Related R packages
 
