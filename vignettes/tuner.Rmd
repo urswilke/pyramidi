@@ -10,12 +10,11 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval=FALSE,
   comment = "#>"
 )
 ```
 
-This vignette shows how  a midi file can also be read in by the [tuneR](https://cran.r-project.org/package=tuneR) package and then written to 
+This vignette shows how a midi file can also be read in by the [tuneR](https://cran.r-project.org/package=tuneR) package and then written to 
 disc. However, for other midi files the code might need to be adapted a bit.
 
 ### Load libraries
@@ -45,10 +44,10 @@ With pyramidi data can be loaded into a tidy dataframe like this:
 
 mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mido_mid_file <- mido$MidiFile(mid_file_str)
-dfc <- miditapyr$midi_to_df(mido_mid_file)
+dfc <- miditapyr$frame_midi(mido_mid_file)
 ticks_per_beat = mido_mid_file$ticks_per_beat
 df <- dfc %>%
-  miditapyr$tidy_df() %>% 
+  miditapyr$unnest_midi() %>% 
   as_tibble()
 df
 ```
@@ -132,11 +131,13 @@ dfm2 <- tab_measures(df2, ticks_per_beat) %>%
                         list(NA_character_), 
                         name)) %>%
   unnest(cols = track) %>% 
-  fill(track)
+  fill(track) %>% 
+  select(-parameterMetaSystem, -track)
 
 
 dfm2 %>%
-  miditapyr$split_df()  %->% c(df_meta, df_notes)
+  split_midi_frame() %->% 
+  c(df_meta, df_not_notes, df_notes_wide)
 
 # small correction of transforming "NA" strings into real NA values:
 df_meta <-
@@ -144,11 +145,16 @@ df_meta <-
   mutate(name = ifelse(name == "NA", NA, name))
 ```
 
-Now we can do exactly the same as if this data was read in by pyramidi (cf. the [README](https://github.com/urswilke/pyramidi/#readme))
-
-```{r child='../man/rmdhunks/piano_roll_note_date.Rmd'}
+```{r}
+mfr <- MidiFramer$new()
+mfr$ticks_per_beat <- ticks_per_beat
+mfr$df_meta <- df_meta
+mfr$df_not_notes <- df_not_notes
+mfr$update_notes_wide(df_notes_wide)
 ```
 
-```{r child='../man/rmdhunks/midi_df_to_file.Rmd'}
+
+```{r, eval=FALSE}
+mfr$mf$write_file("round_tripped_midi_file.mid")
 ```
 
