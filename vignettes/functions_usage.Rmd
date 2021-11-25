@@ -1,8 +1,8 @@
 ---
-title: "Package Workflow and Functions"
+title: "Usage of pyramidi functions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Package Workflow and Functions}
+  %\VignetteIndexEntry{Usage of pyramidi functions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
