@@ -103,13 +103,13 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The goal of pyramidi is to reproducibly manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> under the hood (which itself uses <a href="https://github.com/mido/mido">mido</a>). Then the midi information (one line per midi event) is translated into a wide format (one line per note). The wide format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
-<p>Thus, you can manipulate all the intermediate dataframes and write midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but <a href="https://github.com/mido/mido">mido</a> (also used to write midi files by miditapyr) already catches some of the possible inconsistencies.</p>
+<p>The goal of pyramidi is to reproducibly generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido">mido</a>). Then, the notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). The wide format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
+<p>Thus, you can manipulate all the intermediate dataframes and write midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
 <p>Via the small helper package <a href="https://github.com/urswilke/raudiomate">raudiomate</a> the midi data can be</p>
 <ul>
 <li>synthesized to wav files with <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">raudiomate::synthesize_midi()</a></code> (needs <a href="https://www.fluidsynth.org/">fluidsynth</a> installed),</li>
 <li>converted to mp3 files with <code><a href="https://urswilke.github.io/raudiomate/reference/convert_to_mp3.html">raudiomate::convert_to_mp3()</a></code> (needs <a href="https://www.ffmpeg.org/">ffmpeg</a>),</li>
-<li>and played in rmarkdown documents with the <code>play()</code> method of <code>MidiFramer</code> (using <code><a href="https://urswilke.github.io/raudiomate/reference/player.html">raudiomate::player()</a></code>).</li>
+<li>and played in rmarkdown documents with the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play"><code>play()</code></a> method of <code>MidiFramer</code> (using <code><a href="https://urswilke.github.io/raudiomate/reference/player.html">raudiomate::player()</a></code>).</li>
 </ul>
 <p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/">mido’s documentation</a> might be a good start.</p>
 <div id="installation" class="section level2">
@@ -138,7 +138,7 @@
 <div id="generate-a-midiframer-object" class="section level3">
 <h3 class="hasAnchor">
 <a href="#generate-a-midiframer-object" class="anchor"></a>Generate a <code>MidiFramer</code> object</h3>
-<p>We can create an <code>MidiFramer</code> object by passing the file path to the constructor method (<code>$new()</code>).</p>
+<p>We can create a <code>MidiFramer</code> object by passing the file path to the constructor method (<a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-new"><code>new()</code></a>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -183,14 +183,27 @@
 <p>Even if that sounds very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
 </div>
 </div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<p>You can find the complete online documentation of the package <a href="https://urswilke.github.io/pyramidi/">here</a>.</p>
+<ul>
+<li>See the <code><a href="articles/midi_framer.html">vignette("midi_framer")</a></code> for a brief usage introduction how to manipulate midi data.</li>
+<li>The <code><a href="articles/compose.html">vignette("compose")</a></code> shows a more extended example how to compose music and generate midi files from scratch.</li>
+<li>
+<code><a href="articles/package_workflow.html">vignette("package_workflow")</a></code> shows in detail the structure of the <code>MidiFramer</code> class and the functions of the pyramidi package.</li>
+<li>
+<code><a href="articles/functions_workflow.html">vignette("functions_workflow")</a></code> illustrates the low-level functions of the pyramidi package that <code>MidiFramer</code> objects use under the hood.</li>
+</ul>
+</div>
 <div id="related-r-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#related-r-packages" class="anchor"></a>Related R packages</h2>
 <ul>
+<li>The <a href="https://github.com/leonawicz/tabr">tabr</a> package is a massive music notation, transcription and analysis program allowing to create musical scores (using Lilypond). It allows to read midi files (wrapping tuneR; see below) and also to export them (also using Lilypond).</li>
+<li>The <a href="https://github.com/flujoo/gm">gm</a> package also allows to create and show musical scores using musescore. It also allows to export the music to audio (also using musescore) and to embed the players in html documents.</li>
 <li>The <a href="https://github.com/ColinFay/noon">noon package</a> wraps node.js libraries and can be used to read live midi input port data. I wrote a small <a href="https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/">blog post</a> how reading a midi port can also be done in R with <a href="https://mido.readthedocs.io/en/latest/ports.html">mido</a>. Interestingly, the node.js libraries and mido rely on a the same C++ library <a href="http://www.music.mcgill.ca/~gary/rtmidi/index.html">RtMidi</a>.</li>
 <li>The <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package can also read in midi data. See this <a href="https://urswilke.github.io/pyramidi/articles/tuner.html">article</a>, for an example how you can transform the tuner format into the pyramidi format.</li>
-<li>The <a href="https://github.com/leonawicz/tabr">tabr</a> package is a massive music notation, transcription and analysis program allowing to create musical scores (using Lilypond). It allows to read midi files (wrapping tuneR) and also to export them (also using Lilypond).</li>
-<li>The <a href="https://github.com/flujoo/gm">gm</a> package also allows to create and show musical scores using musescore. It also allows to export the music to audio (also using musescore) and to embed the players in html documents.</li>
 </ul>
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically

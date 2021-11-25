@@ -40,8 +40,12 @@
 
 
 <meta property="og:title" content="Split unnested midi dataframe into parts — split_midi_frame" />
-<meta property="og:description" content="Unnested midi frame with time data from `tab_measures() is split into 3 parts:
-df_meta, df_not_notes &amp;amp; df_notes_wide." />
+<meta property="og:description" content="Unnested midi frame with time data from tab_measures() is split into 3 parts:
+df_meta: Consisting of all the meta events in the midi data.
+df_not_notes: Containing all midi events that are not meta and not note_on or note_off.
+df_notes_wide: All note_on or note_off events and furthermore transformed to wide format by pivot_note_wide.
+
+" />
 
 
 
@@ -139,8 +143,12 @@ df_meta, df_not_notes &amp;amp; df_notes_wide." />
     </div>
 
     <div class="ref-description">
-    <p>Unnested midi frame with time data from `<code><a href='tab_measures.html'>tab_measures()</a></code> is split into 3 parts:
-df_meta, df_not_notes &amp; df_notes_wide.</p>
+    <p>Unnested midi frame with time data from <code><a href='tab_measures.html'>tab_measures()</a></code> is split into 3 parts:</p><ul>
+<li><p>df_meta: Consisting of all the <a href='https://mido.readthedocs.io/en/latest/midi_files.html#meta-messages'>meta</a> events in the midi data.</p></li>
+<li><p>df_not_notes: Containing all midi events that are not <code>meta</code> and not <code>note_on</code> or <code>note_off</code>.</p></li>
+<li><p>df_notes_wide: All <code>note_on</code> or <code>note_off</code> events and furthermore transformed to wide format by <code>pivot_note_wide</code>.</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>split_midi_frame</span><span class='op'>(</span><span class='va'>dfm</span><span class='op'>)</span></pre>
