@@ -1,0 +1,14 @@
+url: https://urswilke.github.io/pyramidi
+
+home:
+  title: Midi Data in R Data Frames
+
+articles:
+- title: Customise your site
+  navbar: ~
+  contents:
+  - midi_framer
+  - compose
+  - package_workflow
+  - functions_usage
+  - mido_from_r
