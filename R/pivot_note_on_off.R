@@ -106,6 +106,9 @@ merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
   df_notes_long %>%
     dplyr::full_join(df_meta) %>%
     dplyr::full_join(df_not_notes) %>%
+  # if in tab_measures() there weren't all columns built, we have to remove them here:
+  cols_to_remove <- intersect(cols_to_remove, names(res))
+  res %>%
     dplyr::arrange(.data$i_track, .data$ticks) %>%
     dplyr::group_by(.data$i_track) %>%
     dplyr::mutate(time = .data$ticks - dplyr::lag(.data$ticks) %>% {.[1] = 0; .}) %>%

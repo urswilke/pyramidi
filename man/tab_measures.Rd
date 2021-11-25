@@ -4,21 +4,40 @@
 \alias{tab_measures}
 \title{Tabulate measure related data in the midi event data}
 \usage{
-tab_measures(df, ticks_per_beat)
+tab_measures(df, ticks_per_beat, columns_to_add = "b")
 }
 \arguments{
 \item{df}{Note event data.frame resulting of miditapyr$unnest_midi()}
 
 \item{ticks_per_beat}{integer resulting of miditapyr$mido_midi_df()}
+
+\item{columns_to_add}{Character vector of the columns to be added to the result
+(see section "Details"). Subset of \code{c("m", "b", "t", "time")}.}
 }
 \value{
-A data.frame with the following columns added: c("m", "b", "t", "ticks", "time"). \cr
-m: measure \cr
-b: beat \cr
-t: time in seconds \cr
+A data.frame with the following columns added:
+\code{ticks}, \code{i_note} and the columns specified in \code{columns_to_add}.
 }
 \description{
-Tabulate measure related data in the midi event data
+This function mainly adds \code{ticks} which is the absolute value of mido's
+\code{time} (measured in ticks) for every track. Furthermore, this absolute
+time value is translated to the further columns of beats (quarter notes;
+\code{"b"}), measures (bars; \code{"m"}) and the time in seconds (\code{"t"}).
+The function outputs these additional columns only if they are specified in
+the argument \code{columns_to_add} (see details).
+}
+\details{
+The function transforms the unnested midi frame by first transforming the
+midi time (measured in ticks passed relative to the previous event) to
+absolute time for every track. Also the auxiliary variable \code{i_note} is
+added (indexing the occurrence of each note for every track). This is needed
+to allow to pivot the notes to wide format and back to long with
+\code{pivot_wide_notes()} and \code{pivot_long_notes()}.
+\itemize{
+\item{m: measure (bar)}
+\item{b: beat (quarter note)}
+\item{t: time in seconds}
+}
 }
 \examples{
 \dontrun{

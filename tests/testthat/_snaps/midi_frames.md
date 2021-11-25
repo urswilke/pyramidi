@@ -7,108 +7,97 @@
       <miditapyr.midi_frame.MidiFrames>
       
       $dfm
-      # A tibble: 268 x 18
-         i_track meta  type       name    time  note velocity channel  tempo numerator
-           <dbl> <lgl> <chr>      <list> <dbl> <dbl>    <dbl>   <dbl>  <dbl>     <dbl>
-       1       0 TRUE  track_name <chr ~     0   NaN      NaN     NaN    NaN       NaN
-       2       0 FALSE note_on    <dbl ~     0    43       72       9    NaN       NaN
-       3       0 FALSE note_on    <dbl ~     0    39       64       9    NaN       NaN
-       4       0 FALSE note_on    <dbl ~     0    36      101       9    NaN       NaN
-       5       0 TRUE  set_tempo  <dbl ~     0   NaN      NaN     NaN 666666       NaN
-       6       0 TRUE  time_sign~ <dbl ~     0   NaN      NaN     NaN    NaN         4
-       7       0 FALSE note_off   <dbl ~   240    43       72       9    NaN       NaN
-       8       0 FALSE note_off   <dbl ~     0    39       64       9    NaN       NaN
-       9       0 FALSE note_off   <dbl ~     0    36      101       9    NaN       NaN
-      10       0 FALSE note_on    <dbl ~   240    42      101       9    NaN       NaN
-      # ... with 258 more rows, and 8 more variables: denominator <dbl>,
-      #   clocks_per_click <dbl>, notated_32nd_notes_per_beat <dbl>, ticks <dbl>,
-      #   t <dbl>, m <dbl>, b <dbl>, i_note <int>
+      # A tibble: 268 x 15
+         i_track meta  type     name   note velocity channel ticks     b i_note  tempo
+           <dbl> <lgl> <chr>    <lis> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <int>  <dbl>
+       1       0 TRUE  track_n~ <chr~   NaN      NaN     NaN     0     0      0    NaN
+       2       0 FALSE note_on  <dbl~    43       72       9     0     0      1    NaN
+       3       0 FALSE note_on  <dbl~    39       64       9     0     0      1    NaN
+       4       0 FALSE note_on  <dbl~    36      101       9     0     0      1    NaN
+       5       0 TRUE  set_tem~ <dbl~   NaN      NaN     NaN     0     0      0 666666
+       6       0 TRUE  time_si~ <dbl~   NaN      NaN     NaN     0     0      0    NaN
+       7       0 FALSE note_off <dbl~    43       72       9   240     1      1    NaN
+       8       0 FALSE note_off <dbl~    39       64       9   240     1      1    NaN
+       9       0 FALSE note_off <dbl~    36      101       9   240     1      1    NaN
+      10       0 FALSE note_on  <dbl~    42      101       9   480     2      1    NaN
+      # ... with 258 more rows, and 4 more variables: numerator <dbl>,
+      #   denominator <dbl>, clocks_per_click <dbl>,
+      #   notated_32nd_notes_per_beat <dbl>
       
       $df_meta
-          i_track meta           type         name time  tempo numerator denominator
-      0         0 TRUE     track_name drum-t1-1-t1    0    NaN       NaN         NaN
-      4         0 TRUE      set_tempo          NaN    0 666666       NaN         NaN
-      5         0 TRUE time_signature          NaN    0    NaN         4           4
-      159       0 TRUE   end_of_track          NaN    1    NaN       NaN         NaN
-      160       1 TRUE     track_name   Audio+MIDI    0    NaN       NaN         NaN
-      185       1 TRUE   end_of_track          NaN    1    NaN       NaN         NaN
-      186       2 TRUE     track_name Audio+MIDI 1    0    NaN       NaN         NaN
-      267       2 TRUE   end_of_track          NaN    1    NaN       NaN         NaN
-          clocks_per_click notated_32nd_notes_per_beat ticks        t        m
-      0                NaN                         NaN     0  0.00000  0.00000
-      4                NaN                         NaN     0  0.00000  0.00000
-      5                 24                           8     0  0.00000  0.00000
-      159              NaN                         NaN 15361 10.66735 16.00104
-      160              NaN                         NaN     0  0.00000  0.00000
-      185              NaN                         NaN 15361 10.66735 16.00104
-      186              NaN                         NaN     0  0.00000  0.00000
-      267              NaN                         NaN 15361 10.66735 16.00104
-                 b i_note
-      0    0.00000      0
-      4    0.00000      0
-      5    0.00000      0
-      159 64.00417      0
-      160  0.00000      0
-      185 64.00417      0
-      186  0.00000      0
-      267 64.00417      0
+          i_track meta           type         name ticks        b i_note  tempo
+      0         0 TRUE     track_name drum-t1-1-t1     0  0.00000      0    NaN
+      4         0 TRUE      set_tempo          NaN     0  0.00000      0 666666
+      5         0 TRUE time_signature          NaN     0  0.00000      0    NaN
+      159       0 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+      160       1 TRUE     track_name   Audio+MIDI     0  0.00000      0    NaN
+      185       1 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+      186       2 TRUE     track_name Audio+MIDI 1     0  0.00000      0    NaN
+      267       2 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+          numerator denominator clocks_per_click notated_32nd_notes_per_beat
+      0         NaN         NaN              NaN                         NaN
+      4         NaN         NaN              NaN                         NaN
+      5           4           4               24                           8
+      159       NaN         NaN              NaN                         NaN
+      160       NaN         NaN              NaN                         NaN
+      185       NaN         NaN              NaN                         NaN
+      186       NaN         NaN              NaN                         NaN
+      267       NaN         NaN              NaN                         NaN
       
       $df_not_notes
-       [1] i_track  meta     type     time     note     velocity channel  ticks   
-       [9] t        m        b        i_note  
+      [1] i_track  meta     type     note     velocity channel  ticks    b       
+      [9] i_note  
       <0 rows> (or 0-length row.names)
       
       $df_notes_wide
-      # A tibble: 130 x 17
-         i_track meta   note channel i_note time_note_on time_note_off
-           <dbl> <lgl> <dbl>   <dbl>  <int>        <dbl>         <dbl>
-       1       0 FALSE    43       9      1            0           240
-       2       0 FALSE    39       9      1            0             0
-       3       0 FALSE    36       9      1            0             0
-       4       0 FALSE    42       9      1          240             0
-       5       0 FALSE    38       9      1            0             0
-       6       0 FALSE    43       9      2          240           240
-       7       0 FALSE    36       9      2            0           240
-       8       0 FALSE    43       9      3          240           240
-       9       0 FALSE    42       9      2            0             0
-      10       0 FALSE    43       9      4          240           240
-      # ... with 120 more rows, and 10 more variables: velocity_note_on <dbl>,
-      #   velocity_note_off <dbl>, ticks_note_on <dbl>, ticks_note_off <dbl>,
-      #   t_note_on <dbl>, t_note_off <dbl>, m_note_on <dbl>, m_note_off <dbl>,
-      #   b_note_on <dbl>, b_note_off <dbl>
+      # A tibble: 130 x 11
+         i_track meta   note channel i_note velocity_note_on velocity_note_off
+           <dbl> <lgl> <dbl>   <dbl>  <int>            <dbl>             <dbl>
+       1       0 FALSE    43       9      1               72                72
+       2       0 FALSE    39       9      1               64                64
+       3       0 FALSE    36       9      1              101               101
+       4       0 FALSE    42       9      1              101               101
+       5       0 FALSE    38       9      1              101               101
+       6       0 FALSE    43       9      2               64                64
+       7       0 FALSE    36       9      2              101               101
+       8       0 FALSE    43       9      3               60                60
+       9       0 FALSE    42       9      2              101               101
+      10       0 FALSE    43       9      4               60                60
+      # ... with 120 more rows, and 4 more variables: ticks_note_on <dbl>,
+      #   ticks_note_off <dbl>, b_note_on <dbl>, b_note_off <dbl>
       
       $df_notes_long
-      # A tibble: 260 x 12
-         i_track channel  note i_note type      time velocity ticks     t     m     b
-           <dbl>   <dbl> <dbl>  <int> <chr>    <dbl>    <dbl> <dbl> <dbl> <dbl> <dbl>
-       1       0       9    43      1 note_on      0       72     0 0      0        0
-       2       0       9    43      1 note_off   240       72   240 0.167  0.25     1
-       3       0       9    39      1 note_on      0       64     0 0      0        0
-       4       0       9    39      1 note_off     0       64   240 0.167  0.25     1
-       5       0       9    36      1 note_on      0      101     0 0      0        0
-       6       0       9    36      1 note_off     0      101   240 0.167  0.25     1
-       7       0       9    42      1 note_on    240      101   480 0.333  0.5      2
-       8       0       9    42      1 note_off     0      101   720 0.500  0.75     3
-       9       0       9    38      1 note_on      0      101   480 0.333  0.5      2
-      10       0       9    38      1 note_off     0      101   720 0.500  0.75     3
-      # ... with 250 more rows, and 1 more variable: meta <lgl>
+      # A tibble: 260 x 9
+         i_track channel  note i_note type     velocity ticks     b meta 
+           <dbl>   <dbl> <dbl>  <int> <chr>       <dbl> <dbl> <dbl> <lgl>
+       1       0       9    43      1 note_on        72     0     0 FALSE
+       2       0       9    43      1 note_off       72   240     1 FALSE
+       3       0       9    39      1 note_on        64     0     0 FALSE
+       4       0       9    39      1 note_off       64   240     1 FALSE
+       5       0       9    36      1 note_on       101     0     0 FALSE
+       6       0       9    36      1 note_off      101   240     1 FALSE
+       7       0       9    42      1 note_on       101   480     2 FALSE
+       8       0       9    42      1 note_off      101   720     3 FALSE
+       9       0       9    38      1 note_on       101   480     2 FALSE
+      10       0       9    38      1 note_off      101   720     3 FALSE
+      # ... with 250 more rows
       
       $midi_frame_mod
       # A tibble: 268 x 13
-         i_track channel  note type        time velocity meta  name    tempo numerator
-           <dbl>   <dbl> <dbl> <chr>      <dbl>    <dbl> <lgl> <list>  <dbl>     <dbl>
-       1       0       9    43 note_on        0       72 FALSE <NULL>     NA        NA
-       2       0       9    39 note_on        0       64 FALSE <NULL>     NA        NA
-       3       0       9    36 note_on        0      101 FALSE <NULL>     NA        NA
-       4       0      NA    NA track_name     0       NA TRUE  <chr ~    NaN       NaN
-       5       0      NA    NA set_tempo      0       NA TRUE  <dbl ~ 666666       NaN
-       6       0      NA    NA time_sign~     0       NA TRUE  <dbl ~    NaN         4
-       7       0       9    43 note_off     240       72 FALSE <NULL>     NA        NA
-       8       0       9    39 note_off       0       64 FALSE <NULL>     NA        NA
-       9       0       9    36 note_off       0      101 FALSE <NULL>     NA        NA
-      10       0       9    42 note_on      240      101 FALSE <NULL>     NA        NA
-      # ... with 258 more rows, and 3 more variables: denominator <dbl>,
-      #   clocks_per_click <dbl>, notated_32nd_notes_per_beat <dbl>
+         i_track channel  note type  velocity meta  name   tempo numerator denominator
+           <dbl>   <dbl> <dbl> <chr>    <dbl> <lgl> <lis>  <dbl>     <dbl>       <dbl>
+       1       0       9    43 note~       72 FALSE <NUL~     NA        NA          NA
+       2       0       9    39 note~       64 FALSE <NUL~     NA        NA          NA
+       3       0       9    36 note~      101 FALSE <NUL~     NA        NA          NA
+       4       0      NA    NA trac~       NA TRUE  <chr~    NaN       NaN         NaN
+       5       0      NA    NA set_~       NA TRUE  <dbl~ 666666       NaN         NaN
+       6       0      NA    NA time~       NA TRUE  <dbl~    NaN         4           4
+       7       0       9    43 note~       72 FALSE <NUL~     NA        NA          NA
+       8       0       9    39 note~       64 FALSE <NUL~     NA        NA          NA
+       9       0       9    36 note~      101 FALSE <NUL~     NA        NA          NA
+      10       0       9    42 note~      101 FALSE <NUL~     NA        NA          NA
+      # ... with 258 more rows, and 3 more variables: clocks_per_click <dbl>,
+      #   notated_32nd_notes_per_beat <dbl>, time <dbl>
       
       attr(,"class")
       [1] "r_midi_frames" "list"         
