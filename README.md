@@ -75,9 +75,9 @@ needs to be installed in your python environment used by
 pip install miditapyr
 ```
 
-But if everything works as it should 🤞😅, miditapyr is automatically
-installed if you install pyramidi, as soon as you access the module for
-the first time.
+But if everything works as I believe it should, miditapyr is
+automatically installed if you install pyramidi, as soon as you access
+the module for the first time.
 
 Otherwise, you can also install it in your reticulate python environment
 with the included helper function:
@@ -166,8 +166,8 @@ mfr$play()
 \*The player only appears in the
 [docs](https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio).
 
-Even if that sounds very weird, I was very happy not having to listen to
-the package midi file over and over again. :)
+Even if that might sound very weird, I was very happy not having to
+listen to the package midi file over and over again. :)
 
 ## Documentation
 
