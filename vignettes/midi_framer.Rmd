@@ -73,7 +73,7 @@ In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in note
 midi events belong together
 
 Let's look at a small example. We'll define a function to replace every 
-note with a random midi note between 60 & 71::
+note with a random midi note between 60 & 71:
 
 ```{r}
 mod <- function(dfn, seed) {
