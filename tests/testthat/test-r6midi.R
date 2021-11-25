@@ -47,3 +47,10 @@ test_that("active field `ticks_per_beat` works", {
   expect_equal(mfr$mf$midi_file$ticks_per_beat, 1)
   expect_equal(mfr$ticks_per_beat, 1)
 })
+
+test_that("Changing params and recalculating works.", {
+  mfr6$params$columns_to_add <- c("m", "b", "t", "time")
+  mfr6$populate_object()
+  expect_snapshot(mfr6$df_notes_wide)
+})
+

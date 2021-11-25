@@ -72,6 +72,17 @@ mfr$play()
 }
 
 ## ------------------------------------------------
+## Method `MidiFramer$populate_object`
+## ------------------------------------------------
+
+\dontrun{
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- MidiFramer$new(midi_file_string)
+mfr$params$columns_to_add <- c("m", "b", "t", "time")
+mfr$populate_object()
+}
+
+## ------------------------------------------------
 ## Method `MidiFramer$play`
 ## ------------------------------------------------
 
@@ -95,6 +106,8 @@ mfr$play()
 \item{\code{df_meta, df_not_notes, df_notes_wide}}{Results of \code{split_midi_frame()}.}
 
 \item{\code{midi_frame_mod}}{Result of \code{merge_midi_frames()}.}
+
+\item{\code{params}}{Parameters used in internal functions; Named list; params$columns_to_add is passed to \code{tab_measures(columns_to_add)}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -114,6 +127,7 @@ When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is mo
 \itemize{
 \item \href{#method-new}{\code{MidiFramer$new()}}
 \item \href{#method-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
+\item \href{#method-populate_object}{\code{MidiFramer$populate_object()}}
 \item \href{#method-play}{\code{MidiFramer$play()}}
 \item \href{#method-clone}{\code{MidiFramer$clone()}}
 }
@@ -175,6 +189,32 @@ set.seed(123)
 df_mod <- mod(mfr$df_notes_wide)
 mfr$update_notes_wide(df_mod)
 mfr$play()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-populate_object"></a>}}
+\if{latex}{\out{\hypertarget{method-populate_object}{}}}
+\subsection{Method \code{populate_object()}}{
+Populate the fields of a MidiFramer object
+
+This can also be used to recalculate all the object's attributes,
+when a value in params is changed (see examples).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MidiFramer$populate_object()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- MidiFramer$new(midi_file_string)
+mfr$params$columns_to_add <- c("m", "b", "t", "time")
+mfr$populate_object()
 }
 }
 \if{html}{\out{</div>}}

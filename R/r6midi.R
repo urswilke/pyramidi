@@ -24,6 +24,7 @@
 #' @field df_notes_long Result of \code{pivot_long_notes()}.
 #' @field df_meta,df_not_notes,df_notes_wide Results of \code{split_midi_frame()}.
 #' @field midi_frame_mod Result of \code{merge_midi_frames()}.
+#' @field params Parameters used in internal functions; Named list; params$columns_to_add is passed to \code{tab_measures(columns_to_add)}.
 #'
 #' @export
 #'
@@ -57,27 +58,16 @@ MidiFramer <- R6::R6Class(
     df_not_notes = NULL,
     df_notes_wide = NULL,
     midi_frame_mod = NULL,
+    params = list(
+      columns_to_add = "b"
+    ),
 
     #' @description Initialize a MidiFramer object
     #'
     #' @param midi_file_string Path to the midi file; if NULL (the default), an empty \code{MidiFramer} object is created.
     initialize = function(midi_file_string = NULL) {
       self$midi_file_string <- midi_file_string
-
-      self$mf <- miditapyr$MidiFrames(midi_file_string)
-
-      if (!is.null(self$mf$`_midi_frame_raw`)) {
-        self$dfm <- tab_measures(self$mf$midi_frame_unnested$df, ticks_per_beat = self$mf$midi_file$ticks_per_beat)
-      }
-      else {
-        self$dfm <- NULL
-      }
-
-      c(self$df_meta, self$df_not_notes, self$df_notes_wide) %<-% split_midi_frame(self$dfm)
-
-      self$df_notes_long <- pivot_long_notes(self$df_notes_wide)
-
-      self$midi_frame_mod <- merge_midi_frames(self$df_meta, self$df_notes_long, self$df_not_notes)
+      self$populate_object()
     },
 
     #' @description Update a MidiFramer object with modified notes
@@ -109,6 +99,39 @@ MidiFramer <- R6::R6Class(
     #' }
     update_notes_wide = function(mod) {
       mod_notes.r_midi_frames(self, mod)
+      invisible(self)
+    },
+    #' @description Populate the fields of a MidiFramer object
+    #'
+    #' This can also be used to recalculate all the object's attributes,
+    #' when a value in params is changed (see examples).
+    #'
+    #' @examples
+    #' \dontrun{
+    #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+    #' mfr <- MidiFramer$new(midi_file_string)
+    #' mfr$params$columns_to_add <- c("m", "b", "t", "time")
+    #' mfr$populate_object()
+    #' }
+    populate_object = function() {
+      self$mf <- miditapyr$MidiFrames(self$midi_file_string)
+
+      if (!is.null(self$mf$`_midi_frame_raw`)) {
+        self$dfm <- tab_measures(
+          self$mf$midi_frame_unnested$df,
+          ticks_per_beat = self$mf$midi_file$ticks_per_beat,
+          columns_to_add = self$params$columns_to_add
+        )
+      }
+      else {
+        self$dfm <- NULL
+      }
+
+      c(self$df_meta, self$df_not_notes, self$df_notes_wide) %<-% split_midi_frame(self$dfm)
+
+      self$df_notes_long <- pivot_long_notes(self$df_notes_wide)
+
+      self$midi_frame_mod <- merge_midi_frames(self$df_meta, self$df_notes_long, self$df_not_notes)
       invisible(self)
     },
     #' @description Play midi from MidiFramer object.

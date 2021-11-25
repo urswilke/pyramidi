@@ -213,3 +213,26 @@
       7       0 FALSE         9, 39, note_off, 64, 0
       8       0  TRUE            end_of_track, 15121
 
+# Changing params and recalculating works.
+
+    Code
+      mfr6$df_notes_wide
+    Output
+      # A tibble: 130 x 17
+         i_track meta   note channel i_note time_note_on time_note_off
+           <dbl> <lgl> <dbl>   <dbl>  <int>        <dbl>         <dbl>
+       1       0 FALSE    43       9      1            0           240
+       2       0 FALSE    39       9      1            0             0
+       3       0 FALSE    36       9      1            0             0
+       4       0 FALSE    42       9      1          240             0
+       5       0 FALSE    38       9      1            0             0
+       6       0 FALSE    43       9      2          240           240
+       7       0 FALSE    36       9      2            0           240
+       8       0 FALSE    43       9      3          240           240
+       9       0 FALSE    42       9      2            0             0
+      10       0 FALSE    43       9      4          240           240
+      # ... with 120 more rows, and 10 more variables: velocity_note_on <dbl>,
+      #   velocity_note_off <dbl>, ticks_note_on <dbl>, ticks_note_off <dbl>,
+      #   t_note_on <dbl>, t_note_off <dbl>, m_note_on <dbl>, m_note_off <dbl>,
+      #   b_note_on <dbl>, b_note_off <dbl>
+
