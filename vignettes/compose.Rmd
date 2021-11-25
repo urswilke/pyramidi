@@ -359,7 +359,7 @@ htmltools::tags$audio(
 
 ## Combine parts
 
-In `vignette("midi_framer", package = "pyramidi")` there is an example with `accumulate()` how you can 
+In `vignette("pyramidi", package = "pyramidi")` there is an example with `accumulate()` how you can 
 generate multiple midifiles while successively adding modifications to the data. Now we will also 
 successively add parts together, but in the same midifile. 
 
