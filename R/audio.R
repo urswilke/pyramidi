@@ -8,6 +8,8 @@
 #' @param overwrite logical; defaults to FALSE;
 #' if file exists and overwrite = FALSE, the existing files will be used and nothing
 #' is synthesized/converted to audio files.
+#' @param soundfont path to sf2 sound font (character string)
+#' @param verbose logical whether to print fluidsynth command line output; defaults to FALSE
 #'
 #' @return Retuns an audio html tag that can be embeded in (rmarkdown) html
 #'   documents to play the midi data.
@@ -22,7 +24,9 @@
 play_midi_frame <- function(
   mfr,
   audiofile = tempfile("mf_out_", fileext = ".wav"),
-  overwrite = FALSE
+  overwrite = FALSE,
+  soundfont = NULL,
+  verbose = FALSE
 ) {
   filetype <- audiofile %>%
     stringr::str_sub(-3L) %>%
@@ -38,10 +42,10 @@ play_midi_frame <- function(
     mfr$mf$write_file(midfile)
   }
   if (overwrite | !file.exists(wavfile)) {
-    raudiomate::synthesize_midi(midfile, wavfile)
+    raudiomate::synthesize_midi(midfile, wavfile, soundfont, verbose)
   }
   if ((overwrite | !file.exists(mp3file)) & filetype == "mp3") {
-    raudiomate::convert_to_mp3(wavfile)
+    raudiomate::convert_to_mp3(wavfile, verbose)
     message("(Hopefully) created mp3 file ", mp3file, ".")
   }
   message("(Hopefully) created midi and audio file ", midfile, " and synthesized ", wavfile, ".")

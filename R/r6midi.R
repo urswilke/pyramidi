@@ -142,6 +142,9 @@ MidiFramer <- R6::R6Class(
     #' @param overwrite logical; defaults to FALSE;
     #' if file exists and overwrite = FALSE, the existing files will be used and nothing
     #' is synthesized/converted to audio files.
+    #' @param soundfont path to sf2 sound font (character string); if NULL (the default)
+    #' the default soundfont is used.
+    #' @param verbose logical whether to print fluidsynth command line output; defaults to FALSE
     #'
     #' @examples
     #' \dontrun{
@@ -151,12 +154,16 @@ MidiFramer <- R6::R6Class(
     #' }
     play = function(
       audiofile = tempfile("mf_out_", fileext = ".wav"),
-      overwrite = FALSE
+      overwrite = FALSE,
+      soundfont = NULL,
+      verbose = FALSE
     ) {
       play_midi_frame(
         self,
         audiofile = audiofile,
-        overwrite = overwrite
+        overwrite = overwrite,
+        soundfont = soundfont,
+        verbose = verbose
       )
     }
   ),

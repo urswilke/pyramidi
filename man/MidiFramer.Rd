@@ -232,7 +232,9 @@ documents.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MidiFramer$play(
   audiofile = tempfile("mf_out_", fileext = ".wav"),
-  overwrite = FALSE
+  overwrite = FALSE,
+  soundfont = NULL,
+  verbose = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -244,6 +246,11 @@ documents.
 \item{\code{overwrite}}{logical; defaults to FALSE;
 if file exists and overwrite = FALSE, the existing files will be used and nothing
 is synthesized/converted to audio files.}
+
+\item{\code{soundfont}}{path to sf2 sound font (character string); if NULL (the default)
+the default soundfont is used.}
+
+\item{\code{verbose}}{logical whether to print fluidsynth command line output; defaults to FALSE}
 }
 \if{html}{\out{</div>}}
 }
