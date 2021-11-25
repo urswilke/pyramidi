@@ -241,7 +241,8 @@ documents.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{audiofile}}{Path to the audiofile to be synthesized}
+\item{\code{audiofile}}{Path to the audiofile to be synthesized. If audiofile of type mp3, it will
+first be synthesized to wav, and then converted to mp3 with ffmpeg.}
 
 \item{\code{overwrite}}{logical; defaults to FALSE;
 if file exists and overwrite = FALSE, the existing files will be used and nothing
@@ -250,7 +251,7 @@ is synthesized/converted to audio files.}
 \item{\code{soundfont}}{path to sf2 sound font (character string); if NULL (the default)
 the default soundfont is used.}
 
-\item{\code{verbose}}{logical whether to print fluidsynth command line output; defaults to FALSE}
+\item{\code{verbose}}{logical whether to print fluidsynth (and ffmpeg in case of mp3 audiofile type) command line output; defaults to FALSE}
 }
 \if{html}{\out{</div>}}
 }
