@@ -85,7 +85,7 @@ In order to derive the total time passed, you can use the function `tab_measures
 
 
 ```{r}
-dfm <- tab_measures(df, ticks_per_beat) %>%
+dfm <- tab_measures(df, ticks_per_beat, c("m", "b")) %>%
   # create a variable `track` with the track name (in order to have it in the plot below)
   mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
                         list(NA_character_), 
