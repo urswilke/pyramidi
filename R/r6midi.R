@@ -4,7 +4,7 @@
 #'   \item{See the \code{vignette("midi_framer")} for a brief usage introduction how to manipulate midi data.}
 #'   \item{The \code{vignette("compose")} shows a more extended example how to generate midi files from scratch.}
 #'   \item{\code{vignette("package_workflow")} shows in detail the structure of the \code{MidiFramer} class.}
-#'   \item{\code{vignette("functions_workflow")} illustrates the low-level functions of the pyramidi package
+#'   \item{\code{vignette("functions_workflow")} illustrates the low-level functions of the pyramidi package.
 #'   that \code{MidiFramer} objects use under the hood.}
 #' }
 #'

@@ -181,7 +181,7 @@ You can find the complete online documentation of the package
 -   `vignette("package_workflow")` shows in detail the structure of the
     `MidiFramer` class and the functions of the pyramidi package.
 -   `vignette("functions_workflow")` illustrates the low-level functions
-    of the pyramidi package that `MidiFramer` objects use under the
+    of the pyramidi package. that `MidiFramer` objects use under the
     hood.
 
 ## Related R packages
