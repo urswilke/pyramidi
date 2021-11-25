@@ -1,7 +1,7 @@
 #' MidiFramer class
 #'
 #' \itemize{
-#'   \item{See the \code{vignette("midi_framer")} for a brief usage introduction how to manipulate midi data.}
+#'   \item{See the \code{vignette("pyramidi")} for a brief usage introduction how to manipulate midi data.}
 #'   \item{The \code{vignette("compose")} shows a more extended example how to generate midi files from scratch.}
 #'   \item{\code{vignette("package_workflow")} shows in detail the structure of the \code{MidiFramer} class.}
 #'   \item{\code{vignette("functions_usage")} illustrates the low-level functions of the pyramidi package.
