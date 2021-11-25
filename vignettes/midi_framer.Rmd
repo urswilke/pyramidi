@@ -14,11 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include=FALSE, message=FALSE}
+After installing pyramidi, you can run the helper function to install its python dependency miditapyr 
+in your environment (in this case `"r-reticulate"`):
+
+```{r}
 pyramidi::install_miditapyr(envname = "r-reticulate")
 ```
 
 ## Load libraries
+
+When hopefully everything is set up correctly, we'll load some libraries.
 
 ```{r setup, message=FALSE}
 library(pyramidi)
@@ -26,47 +31,66 @@ library(dplyr)
 library(purrr)
 library(htmltools)
 library(tibble)
+library(details)
 # This is a small helper package, that allows to synthesize & play midi files:
 library(raudiomate) # see https://github.com/urswilke/raudiomate
 ```
 
-## Generate `MidiFramer` object
+## `MidiFramer` class
 
-We can create an R6 object of class `"MidiFramer"` from a midi file path by passing it to the  
-constructor function `MidiFramer$new()`: 
+This class is the main structure of the package.
 
-```{r, message=FALSE}
-midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- MidiFramer$new(midi_file_string)
+### Generate `MidiFramer` object
+
+You can create an empty R6 object of class `"MidiFramer"` like so:
+
+```{r}
+mfr <- MidiFramer$new()
+```
+
+
+```{details, details.summary = "Show print output"}
+mfr
+```
+
+
+
+But in this vignette, we'll create one from a `midi_file_path` by passing it to the  
+constructor method `MidiFramer$new()`: 
+
+```{r}
+midi_file_path <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- MidiFramer$new(midi_file_path)
 class(mfr)
 ```
 
-It is an R6 object that contains the following fields:
+### Fields in `MidiFramer` objects
 
-```{r}
+It is an [R6](https://r6.r-lib.org/) object that contains the following fields:
+
+```{details, details.summary = "Show print output"}
 enframe(as.list(mfr))
 ```
 
-The field `mf` is a `miditapyr.MidiFrames()` object. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the raw data, there are the 3 dataframes:
+Please refer to `help(MidiFramer)` for more information on this class. The field `mf` is a [`miditapyr.MidiFrames()`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames) object. After its first element `mfr$mf$midi_file`, a [mido midi file object](https://mido.readthedocs.io/en/latest/midi_files.html) with the mido message data, there are 3 more dataframes:
 
-```{r}
+```{details, details.summary = "Show print output of 30 first rows of these dataframes"}
 list(
     mfr$mf$midi_frame_raw,
     mfr$mf$midi_frame_unnested$df,
     mfr$mf$midi_frame_nested$df
   ) %>% 
-  # for prettier printing:
-  map(as_tibble)
+  map(head, 30) %>% 
+  map(knitr::kable)
 ```
 
-And you can write the midi file resulting of the `MidiFrames` object back to disk:
+When `mf` is initialized `midi_frame_raw` and `midi_frame_nested$df` should be the same (except the ordering of the named fields in the `msg` column might differ). 
 
-```{r, eval=FALSE}
-mfr$mf$write_file("/path/to/your/midifile.mid")
-```
+For a detailed interactive overview with further links showing how the various fields in the `MidiFramer` class are related and calculated see `vignette("package_workflow")`.
 
+## Usage
 
-## Modifying midi data
+### Modifying midi data
 
 In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
 (`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
@@ -108,7 +132,7 @@ mfr$mf$midi_frame_nested$df %>% head()
 ```
 
 
-## Writing modified midi files
+### Writing modified midi files
 
 Thus we can now directly save the modifications to a midi file:
 
@@ -117,7 +141,7 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 ```
 
 
-## Playing audio
+### Playing audio
 
 **You need to install fluidsynth if you want to do that on your computer.**
 **To generate mp3 files, you also need ffmpeg.**
@@ -157,7 +181,7 @@ htmltools::tags$audio(
 To play the audio, this saves the synthesized file under the path specified in `mp3file`. 
 As you can hear, the `sample()` function in `mod()` changed all midi notes randomly.
 
-## Multiple results
+### Multiple results
 
 You can also generate a list of multiple `MidiFramer` objects (in this case 2) and apply different modifications to each:
 
