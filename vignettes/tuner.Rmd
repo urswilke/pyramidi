@@ -1,0 +1,154 @@
+---
+title: "Using the tuneR package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the tuneR package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval=FALSE,
+  comment = "#>"
+)
+```
+
+This vignette shows how  a midi file can also be read in by the [tuneR](https://cran.r-project.org/package=tuneR) package and then written to 
+disc. However, for other midi files the code might need to be adapted a bit.
+
+### Load libraries
+
+```{r setup}
+library(pyramidi)
+library(zeallot)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+<!-- ```{r, echo=FALSE} -->
+<!-- # needed as long as the python modules of the package are not loaded correctly: -->
+<!-- miditapyr <- reticulate::import("miditapyr") -->
+<!-- mido <- reticulate::import("mido") -->
+
+<!-- ``` -->
+
+## Read midi in tidy format
+
+### pyramidi
+
+With pyramidi data can be loaded into a tidy dataframe like this:
+
+```{r read_pyramidi}
+
+mid_file_str <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mido_mid_file <- mido$MidiFile(mid_file_str)
+dfc <- miditapyr$midi_to_df(mido_mid_file)
+ticks_per_beat = mido_mid_file$ticks_per_beat
+df <- dfc %>%
+  miditapyr$tidy_df() %>% 
+  as_tibble()
+df
+```
+
+### tuneR
+
+With tuneR this could be done for this file in the following way:
+
+```{r read}
+# tuneR:
+dft <- tuneR::readMidi(mid_file_str)
+```
+
+ (*for other midi files the cleaning code would have to be adapted*)
+
+
+
+#### Changing format in dataframe
+
+* to make compatible with pyramidi
+
+```{r dataformat}
+# vector according to which we'll
+# rename the event types to the names given by mido, cf.:
+# https://mido.readthedocs.io/en/latest/message_types.html &
+# https://mido.readthedocs.io/en/latest/meta_message_types.html
+rename_type_vec <-
+  c(
+    "Set Tempo"           = "set_tempo",
+    "Time Signature"      = "time_signature",
+    "Note On"             = "note_on",
+    "Note Off"            = "note_off",
+    "Sequence/Track Name" = "track_name",
+    "End of Track"        = "end_of_track",
+    "Key Signature"       = "key",
+    "Controller"          = "control",
+    "Program Change"      = "program",
+    "Pitch Bend"          = "pitch"
+  )
+
+
+# transform the tuneR data.frame to the pyramidi format :
+df2 <- dft %>%
+  mutate(event = as.character(event)) %>%
+  as_tibble() %>%
+  mutate(meta = !is.na(type)) %>%
+  select(-type) %>%
+  rename(type     = event,
+         note     = parameter1,
+         velocity = parameter2,
+         i_track  = track) %>%
+  mutate(type  = recode(type, !!!rename_type_vec)) %>%
+  mutate(tempo = ifelse(type == "set_tempo", as.integer(parameterMetaSystem), NA)) %>%
+  mutate(name  = ifelse(type == "track_name", parameterMetaSystem, NA)) %>%
+  mutate(temp  = ifelse(type == "time_signature", parameterMetaSystem, NA)) %>%
+  separate(temp, c("numerator", 
+                   "denominator", 
+                   "clocks_per_click", 
+                   "temp1", "temp2", 
+                   "notated_32nd_notes_per_beat"),
+           convert = TRUE) %>%
+  select(-temp1, -temp2) %>%
+  arrange(i_track, time) %>%
+  group_by(i_track) %>%
+  # calculate time increments instead of total time:
+  mutate(time = time - lag(time) %>% {.[1] = 0; .}) %>%
+  ungroup() %>%
+  mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
+  mutate(name = ifelse(is.na(name), list(NULL), name))
+
+```
+
+### Apply pyramidi functions
+
+
+```{r }
+dfm2 <- tab_measures(df2, ticks_per_beat) %>%
+  # create a variable `track` with the track name (in order to have it in the
+  # plot below)
+  mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
+                        list(NA_character_), 
+                        name)) %>%
+  unnest(cols = track) %>% 
+  fill(track)
+
+
+dfm2 %>%
+  miditapyr$split_df()  %->% c(df_meta, df_notes)
+
+# small correction of transforming "NA" strings into real NA values:
+df_meta <-
+  df_meta %>%
+  mutate(name = ifelse(name == "NA", NA, name))
+```
+
+Now we can do exactly the same as if this data was read in by pyramidi (cf. the [README](https://github.com/urswilke/pyramidi/#readme))
+
+```{r child='../man/rmdhunks/piano_roll_note_date.Rmd'}
+```
+
+```{r child='../man/rmdhunks/midi_df_to_file.Rmd'}
+```
+
