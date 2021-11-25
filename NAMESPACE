@@ -2,8 +2,6 @@
 
 export("%>%")
 export(MidiFramer)
-export(get_bpm)
-export(get_tempo)
 export(install_miditapyr)
 export(merge_midi_frames)
 export(miditapyr)
