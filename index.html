@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
       </span>
     </div>
 
@@ -104,8 +104,8 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The goal of pyramidi is to reproducibly generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido">mido</a>). Then, the notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). The wide format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
-<p>Thus, you can manipulate all the intermediate dataframes and write midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
+<p>The goal of pyramidi is to reproducibly generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
+<p>Thus, you can manipulate all the intermediate dataframes and create midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
 <p>Via the small helper package <a href="https://github.com/urswilke/raudiomate">raudiomate</a> the midi data can be</p>
 <ul>
 <li>synthesized to wav files with <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">raudiomate::synthesize_midi()</a></code> (needs <a href="https://www.fluidsynth.org/">fluidsynth</a> installed),</li>
@@ -152,7 +152,7 @@
 <div id="modifying-midi-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#modifying-midi-data" class="anchor"></a>Modifying midi data</h3>
-<p>In the <code>MidiFramer</code> object, we can modify <code>mfr$df_notes_wide</code>, the notes in notewise wide format (<code>note_on</code> &amp; <code>note_off</code> events in the same line). Thus we don’t need to worry which midi events belong together</p>
+<p>In the <code>MidiFramer</code> object, we can modify <code>mfr$df_notes_wide</code>, the notes in note-wise wide format (<code>note_on</code> &amp; <code>note_off</code> events in the same line). Thus we don’t need to worry which midi events belong together</p>
 <p>Let’s look at a small example. We’ll define a function to replace every note with a random midi note between 60 &amp; 71::</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dfn</span>, <span class="va">seed</span><span class="op">)</span> <span class="op">{</span>
@@ -243,6 +243,7 @@ rmd <- create_rmd(cites)
 <li>magrittr (Bache and Wickham 2020)</li>
 <li>rlang (Henry and Wickham 2021)</li>
 <li>R6 (Chang 2021)</li>
+<li>spelling (Ooms and Hester 2020)</li>
 <li>knitr (Xie 2014)</li>
 <li>rmarkdown (Xie, Dervieux, and Riederer 2020)</li>
 <li>testthat (Wickham 2011)</li>
@@ -299,6 +300,9 @@ rmd <- create_rmd(cites)
 </div>
 <div id="ref-magick" class="csl-entry">
 <p>Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>. <a href="https://CRAN.R-project.org/package=magick" class="uri">https://CRAN.R-project.org/package=magick</a>.</p>
+</div>
+<div id="ref-spelling" class="csl-entry">
+<p>Ooms, Jeroen, and Jim Hester. 2020. <em>Spelling: Tools for Spell Checking in r</em>. <a href="https://CRAN.R-project.org/package=spelling" class="uri">https://CRAN.R-project.org/package=spelling</a>.</p>
 </div>
 <div id="ref-base" class="csl-entry">
 <p>R Core Team. 2021a. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
