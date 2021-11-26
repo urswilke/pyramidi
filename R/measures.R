@@ -59,6 +59,6 @@ tab_measures <- function(df, ticks_per_beat, columns_to_add = "b") {
     dplyr::mutate(i_note = cumsum(stringr::str_detect(.data$type, "^note_on$"))) %>%
     dplyr::ungroup() %>%
     dplyr::select(-!!columns_to_remove) %>%
-    dplyr::relocate(!!cols_to_put_last, .after = last_col())
+    dplyr::relocate(!!cols_to_put_last, .after = dplyr::last_col())
 }
 
