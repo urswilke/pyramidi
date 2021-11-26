@@ -38,11 +38,13 @@ library(raudiomate) # see https://github.com/urswilke/raudiomate
 
 ## `MidiFramer` class
 
-This class is the main structure of the package.
+This class is the main structure of the package allowing to read midi files, 
+manipulate the data, and write it back to disk. 
+You can also use it to generate the midi data from scratch in R.
 
 ### Generate `MidiFramer` object
 
-In this vignette, we'll create an R6 object of class `"MidiFramer"` from a `midi_file_path` by passing it to the  
+We'll create an R6 object of class `"MidiFramer"` from a `midi_file_path` by passing it to the  
 constructor method `MidiFramer$new()`: 
 
 ```{r}
@@ -100,7 +102,7 @@ In order to load a midi file to `mfr$mf` you have to use the miditapyr method [`
 mfr$mf$calc_attributes(midi_file_path)
 ```
 
-Then we can populate the fields of `mfr` with the `MidiFramer` method [`populate_r_fields()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-populate_r_fields).
+Then you can populate the fields of `mfr` with the `MidiFramer` method [`populate_r_fields()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-populate_r_fields).
 
 ```{r}
 mfr$populate_r_fields()
@@ -159,6 +161,8 @@ Thus we can now directly save the modifications to a midi file:
 mfr$mf$write_file("mod_test_midi_file.mid")
 ```
 
+For a more extensive and less arbitrary demo how to compose your own music with pyramidi, 
+see `vignette("compose")`.
 
 ### Playing audio
 
@@ -202,6 +206,11 @@ As you can hear, the `sample()` function in `mod()` changed all midi notes rando
 
 ### Multiple results
 
+One of the reasons to create this package was that R might help to avoid repetitive work. 
+See below how you can use functional programming approaches of [purrr](https://purrr.tidyverse.org/), 
+to generate multiple midi files in one call 
+(actually two calls for more clarity but you could also put them in one).
+
 You can also generate a list of multiple `MidiFramer` objects (in this case 2) and apply different modifications to each:
 
 
@@ -224,7 +233,7 @@ Otherwise the field of the python [`miditapyr.MidiFrames`](https://miditapyr.rea
 This means that updates to one of these elements in `l_mfr` (for instance `l_mfr[[1]]$mf`) also change the others, because they all are references to the same object.
 
 
-This is how you can embed multiple audio files in one call using `purrr::imap()`:
+This is how you can embed multiple audio files in an rmarkdown document using `purrr::imap()`:
 
 ```{r, eval=FALSE}
 tagList(
