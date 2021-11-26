@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 This vignette shows how a midi file can also be read in by the [tuneR](https://cran.r-project.org/package=tuneR) package and then written to 
 disc. However, for other midi files the code might need to be adapted a bit.
 
-### Load libraries
+## Load libraries
 
-```{r setup}
+```{r setup, message=FALSE}
 library(pyramidi)
 library(zeallot)
 library(dplyr)
@@ -27,18 +27,12 @@ library(tidyr)
 library(ggplot2)
 ```
 
-<!-- ```{r, echo=FALSE} -->
-<!-- # needed as long as the python modules of the package are not loaded correctly: -->
-<!-- miditapyr <- reticulate::import("miditapyr") -->
-<!-- mido <- reticulate::import("mido") -->
 
-<!-- ``` -->
-
-## Read midi in tidy format
+## Read midi in unnested format
 
 ### pyramidi
 
-With pyramidi data can be loaded into a tidy dataframe like this:
+With pyramidi data can be loaded into a unnested dataframe like this:
 
 ```{r read_pyramidi}
 
@@ -54,18 +48,17 @@ df
 
 ### tuneR
 
-With tuneR this could be done for this file in the following way:
+With tuneR this can be done for this file in the following way:
 
 ```{r read}
-# tuneR:
-dft <- tuneR::readMidi(mid_file_str)
+df_tuner <- tuneR::readMidi(mid_file_str)
 ```
 
- (*for other midi files the cleaning code would have to be adapted*)
+(*for other midi files the cleaning code would have to be adapted*)
 
 
 
-#### Changing format in dataframe
+### Changing format in tuneR dataframe
 
 * to make compatible with pyramidi
 
@@ -90,7 +83,7 @@ rename_type_vec <-
 
 
 # transform the tuneR data.frame to the pyramidi format :
-df2 <- dft %>%
+df_tuner_mod <- df_tuner %>%
   mutate(event = as.character(event)) %>%
   as_tibble() %>%
   mutate(meta = !is.na(type)) %>%
@@ -116,40 +109,55 @@ df2 <- dft %>%
   mutate(time = time - lag(time) %>% {.[1] = 0; .}) %>%
   ungroup() %>%
   mutate_if(is.numeric, ~ifelse(is.na(.), NaN, .)) %>%
-  mutate(name = ifelse(is.na(name), list(NULL), name))
+  mutate(name = ifelse(is.na(name), list(NULL), name)) %>%
+  # small correction of transforming "NA" strings into real NA values:
+  mutate(name = ifelse(name == "NA", NA, name)) %>%
+  select(-parameterMetaSystem)
 
 ```
 
-### Apply pyramidi functions
+### Translate to pyramidi format
 
 
 ```{r }
-dfm2 <- tab_measures(df2, ticks_per_beat) %>%
-  # create a variable `track` with the track name (in order to have it in the
-  # plot below)
-  mutate(track = ifelse(purrr::map_chr(name, typeof) != "character", 
-                        list(NA_character_), 
-                        name)) %>%
-  unnest(cols = track) %>% 
-  fill(track) %>% 
-  select(-parameterMetaSystem, -track)
+dfm <- tab_measures(df_tuner_mod, ticks_per_beat)
 
 
-dfm2 %>%
+dfm %>%
   split_midi_frame() %->% 
   c(df_meta, df_not_notes, df_notes_wide)
 
-# small correction of transforming "NA" strings into real NA values:
 df_meta <-
-  df_meta %>%
-  mutate(name = ifelse(name == "NA", NA, name))
+  df_meta
 ```
+
+## Export midi file from tuneR data
+
+Now we have the data in 3 objects that `MidiFramer` can understand. First let's create an empty `MidiFramer` object:
 
 ```{r}
 mfr <- MidiFramer$new()
+```
+
+We'll set the ticks per beat (see [here](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#active-bindings))
+```{r}
 mfr$ticks_per_beat <- ticks_per_beat
+```
+
+First we'll pass the first two dataframes in the according fields of `mfr`:
+
+```{r}
 mfr$df_meta <- df_meta
 mfr$df_not_notes <- df_not_notes
+```
+
+We'll add the last one with the method `MidiFramer$update_notes_wide()`, 
+in order to pass the information to other fields 
+(in particular `mfr$mf$midi_frame_nested`, 
+which can be transformed back to a midi file; 
+see `vignette("package_workflow")`):
+
+```{r}
 mfr$update_notes_wide(df_notes_wide)
 ```
 
