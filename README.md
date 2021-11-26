@@ -204,10 +204,8 @@ You can find the complete online documentation of the package
     library
     [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
 -   The [tuneR](https://cran.r-project.org/package=tuneR) package can
-    also read in midi data. See this
-    [article](https://urswilke.github.io/pyramidi/articles/tuner.html),
-    for an example how you can transform the tuner format into the
-    pyramidi format.
+    also read in midi data. See the `vignette("tuner")`, for an example
+    how you can transform the tuner format into the pyramidi format.
 
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
