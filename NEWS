@@ -28,5 +28,3 @@ Changes:
         * "Midi manipulation with pyramidi"
         * "Package workflow"
         * "Using mido directly from R"
-    * removed vignette:
-        * "Using the tuneR package"
