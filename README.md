@@ -117,7 +117,7 @@ mfr$mf$write_file("/path/to/your/midifile.mid")
 ### Modifying midi data
 
 In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes
-in notewise wide format (`note_on` & `note_off` events in the same
+in note-wise wide format (`note_on` & `note_off` events in the same
 line). Thus we don’t need to worry which midi events belong together
 
 Let’s look at a small example. We’ll define a function to replace every
@@ -244,6 +244,7 @@ authors of the following libraries!
 -   magrittr (Bache and Wickham 2020)
 -   rlang (Henry and Wickham 2021)
 -   R6 (Chang 2021)
+-   spelling (Ooms and Hester 2020)
 -   knitr (Xie 2014)
 -   rmarkdown (Xie, Dervieux, and Riederer 2020)
 -   testthat (Wickham 2011)
@@ -343,6 +344,13 @@ Müller, Kirill, and Hadley Wickham. 2021. *Tibble: Simple Data Frames*.
 
 Ooms, Jeroen. 2021. *Magick: Advanced Graphics and Image-Processing in
 r*. <https://CRAN.R-project.org/package=magick>.
+
+</div>
+
+<div id="ref-spelling" class="csl-entry">
+
+Ooms, Jeroen, and Jim Hester. 2020. *Spelling: Tools for Spell Checking
+in r*. <https://CRAN.R-project.org/package=spelling>.
 
 </div>
 

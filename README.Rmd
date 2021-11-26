@@ -117,7 +117,7 @@ mfr$mf$write_file("/path/to/your/midifile.mid")
 
 ### Modifying midi data
 
-In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in note-wise wide format
 (`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
 midi events belong together
 
@@ -232,6 +232,7 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - magrittr [@magrittr]
 - rlang [@rlang]
 - R6 [@R6]
+- spelling [@spelling]
 - knitr [@knitr]
 - rmarkdown [@rmarkdown]
 - testthat [@testthat]

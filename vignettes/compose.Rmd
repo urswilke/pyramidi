@@ -404,7 +404,7 @@ composition <- c(augmentation, rev(set_names(augmentation, ~paste0(., "2")))) %>
   beats_to_ticks()
 ```
 
-Let's have a listen to my first compostion in R:
+Let's have a listen to my first composition in R:
 
 ```{r, message=FALSE}
 mfr$update_notes_wide(composition)

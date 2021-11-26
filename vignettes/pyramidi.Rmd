@@ -113,7 +113,7 @@ mfr$populate_r_fields()
 
 ### Modifying midi data
 
-In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in notewise wide format
+In the `MidiFramer` object, we can modify `mfr$df_notes_wide`, the notes in note-wise wide format
 (`note_on` & `note_off` events in the same line). Thus we don't need to worry which 
 midi events belong together
 

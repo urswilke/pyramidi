@@ -81,7 +81,7 @@ gv
 ```
 
 * `miditapyr` can be used to load the midi file `midi_in` into a `mido.MidiFile`. 
-The chain down to `midi_out` shows, how miditpayr's functions can be used 
+The chain down to `midi_out` shows, how miditapyr's functions can be used 
 to transform the data into different formats and finally save it to a new midi file. 
 Have a look [here](https://miditapyr.readthedocs.io/en/latest/notebooks/functions_usage.html) 
 to see in detail how this can be done.
