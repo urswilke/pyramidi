@@ -1,5 +1,5 @@
 Package: pyramidi
-Title:  Generate and Manipulate Midi Data in R Data Frames 
+Title: Generate and Manipulate Midi Data in R Data Frames 
 Version: 0.0.2
 Authors@R: 
     person(given = "Urs",
@@ -43,7 +43,8 @@ Suggests:
     htmltools,
     covr,
     forcats,
-    DiagrammeR
+    DiagrammeR,
+    tuneR
 Remotes: 
     urswilke/raudiomate
 Roxygen: list(markdown = TRUE)
