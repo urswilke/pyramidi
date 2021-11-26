@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -44,6 +44,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/pyramidi.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -54,7 +57,17 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/tuner.html">Using the tuneR package</a>
+      <a href="../articles/compose.html">Composing from R</a>
+    </li>
+    <li>
+      <a href="../articles/package_workflow.html">Package workflow</a>
+    </li>
+    <li>
+      <a href="../articles/functions_usage.html">Usage of pyramidi functions</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -90,50 +103,60 @@
     
     
 <p>This vignette shows how a midi file can also be read in by the <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package and then written to disc. However, for other midi files the code might need to be adapted a bit.</p>
-<div id="load-libraries" class="section level3">
-<h3 class="hasAnchor">
-<a href="#load-libraries" class="anchor"></a>Load libraries</h3>
+<div id="load-libraries" class="section level2">
+<h2 class="hasAnchor">
+<a href="#load-libraries" class="anchor"></a>Load libraries</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
-<!-- ```{r, echo=FALSE} -->
-<!-- # needed as long as the python modules of the package are not loaded correctly: -->
-<!-- miditapyr <- reticulate::import("miditapyr") -->
-<!-- mido <- reticulate::import("mido") -->
-<!-- ``` -->
 </div>
-<div id="read-midi-in-tidy-format" class="section level2">
+<div id="read-midi-in-unnested-format" class="section level2">
 <h2 class="hasAnchor">
-<a href="#read-midi-in-tidy-format" class="anchor"></a>Read midi in tidy format</h2>
+<a href="#read-midi-in-unnested-format" class="anchor"></a>Read midi in unnested format</h2>
 <div id="pyramidi" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pyramidi" class="anchor"></a>pyramidi</h3>
-<p>With pyramidi data can be loaded into a tidy dataframe like this:</p>
+<p>With pyramidi data can be loaded into a unnested dataframe like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">mid_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mido_mid_file</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span>
-<span class="va">dfc</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">midi_to_df</span><span class="op">(</span><span class="va">mido_mid_file</span><span class="op">)</span>
+<span class="va">dfc</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">frame_midi</span><span class="op">(</span><span class="va">mido_mid_file</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">=</span> <span class="va">mido_mid_file</span><span class="op">$</span><span class="va">ticks_per_beat</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">dfc</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">tidy_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">df</span></code></pre></div>
+<span class="va">df</span>
+<span class="co">#&gt; # A tibble: 268 × 13</span>
+<span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
+<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
+<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
+<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
+<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
+<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
+<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
+<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
+<span class="co">#&gt; # … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="tuner" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tuner" class="anchor"></a>tuneR</h3>
-<p>With tuneR this could be done for this file in the following way:</p>
+<p>With tuneR this can be done for this file in the following way:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># tuneR:</span>
-<span class="va">dft</span> <span class="op">&lt;-</span> <span class="fu">tuneR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMidi.html">readMidi</a></span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df_tuner</span> <span class="op">&lt;-</span> <span class="fu">tuneR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMidi.html">readMidi</a></span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span></code></pre></div>
 <p>(<em>for other midi files the cleaning code would have to be adapted</em>)</p>
-<div id="changing-format-in-dataframe" class="section level4">
-<h4 class="hasAnchor">
-<a href="#changing-format-in-dataframe" class="anchor"></a>Changing format in dataframe</h4>
+</div>
+<div id="changing-format-in-tuner-dataframe" class="section level3">
+<h3 class="hasAnchor">
+<a href="#changing-format-in-tuner-dataframe" class="anchor"></a>Changing format in tuneR dataframe</h3>
 <ul>
 <li>to make compatible with pyramidi</li>
 </ul>
@@ -158,7 +181,7 @@
 
 
 <span class="co"># transform the tuneR data.frame to the pyramidi format :</span>
-<span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">dft</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+<span class="va">df_tuner_mod</span> <span class="op">&lt;-</span> <span class="va">df_tuner</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">event</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>meta <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
@@ -184,32 +207,47 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">time</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="cn">NaN</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="co"># small correction of transforming "NA" strings into real NA values:</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">parameterMetaSystem</span><span class="op">)</span>
+<span class="co">#&gt; Warning in ifelse(type == "set_tempo", as.integer(parameterMetaSystem), : NAs</span>
+<span class="co">#&gt; introduced by coercion</span>
+<span class="co">#&gt; Warning: Expected 6 pieces. Additional pieces discarded in 1 rows [6].</span></code></pre></div>
 </div>
-</div>
-<div id="apply-pyramidi-functions" class="section level3">
+<div id="translate-to-pyramidi-format" class="section level3">
 <h3 class="hasAnchor">
-<a href="#apply-pyramidi-functions" class="anchor"></a>Apply pyramidi functions</h3>
+<a href="#translate-to-pyramidi-format" class="anchor"></a>Translate to pyramidi format</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df2</span>, <span class="va">ticks_per_beat</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="co"># create a variable `track` with the track name (in order to have it in the</span>
-  <span class="co"># plot below)</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
-                        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
-                        <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html">fill</a></span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df_tuner_mod</span>, <span class="va">ticks_per_beat</span><span class="op">)</span>
 
 
-<span class="va">dfm2</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span>
+<span class="va">dfm</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/split_midi_frame.html">split_midi_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_not_notes</span>, <span class="va">df_notes_wide</span><span class="op">)</span>
 
-<span class="co"># small correction of transforming "NA" strings into real NA values:</span>
 <span class="va">df_meta</span> <span class="op">&lt;-</span>
-  <span class="va">df_meta</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Now we can do exactly the same as if this data was read in by pyramidi (cf. the <a href="https://github.com/urswilke/pyramidi/#readme">README</a>)</p>
+  <span class="va">df_meta</span></code></pre></div>
 </div>
+</div>
+<div id="export-midi-file-from-tuner-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#export-midi-file-from-tuner-data" class="anchor"></a>Export midi file from tuneR data</h2>
+<p>Now we have the data in 3 objects that <code>MidiFramer</code> can understand. First let’s create an empty <code>MidiFramer</code> object:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>We’ll set the ticks per beat (see <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#active-bindings">here</a>)</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">ticks_per_beat</span></code></pre></div>
+<p>First we’ll pass the first two dataframes in the according fields of <code>mfr</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">df_meta</span> <span class="op">&lt;-</span> <span class="va">df_meta</span>
+<span class="va">mfr</span><span class="op">$</span><span class="va">df_not_notes</span> <span class="op">&lt;-</span> <span class="va">df_not_notes</span></code></pre></div>
+<p>We’ll add the last one with the method <code>MidiFramer$update_notes_wide()</code>, in order to pass the information to other fields (in particular <code>mfr$mf$midi_frame_nested</code>, which can be transformed back to a midi file; see <code><a href="../articles/package_workflow.html">vignette("package_workflow")</a></code>):</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">df_notes_wide</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="st">"round_tripped_midi_file.mid"</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 

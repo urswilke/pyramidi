@@ -46,12 +46,15 @@
     <loc>https://urswilke.github.io/pyramidi/articles/functions_usage.html</loc>
   </url>
   <url>
-    <loc>https://urswilke.github.io/pyramidi/articles/midi_framer.html</loc>
-  </url>
-  <url>
     <loc>https://urswilke.github.io/pyramidi/articles/mido_from_r.html</loc>
   </url>
   <url>
     <loc>https://urswilke.github.io/pyramidi/articles/package_workflow.html</loc>
+  </url>
+  <url>
+    <loc>https://urswilke.github.io/pyramidi/articles/pyramidi.html</loc>
+  </url>
+  <url>
+    <loc>https://urswilke.github.io/pyramidi/articles/tuner.html</loc>
   </url>
 </urlset>
