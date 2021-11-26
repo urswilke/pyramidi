@@ -23,14 +23,14 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 The goal of pyramidi is to reproducibly generate / manipulate midi data
 from R. Midi data is read into dataframes, using the python package
 [miditapyr](https://pypi.org/project/miditapyr/) under the hood (which
-itself uses the excellent [mido](https://github.com/mido/mido)). Then,
-the notes’ midi information (one line per `note_on`/`note_off` midi
-event) is translated into a wide format (one line per note). The wide
-format facilitates some manipulations of the notes’ data and also
-plotting them in piano roll plots. Finally, the modified dataframes can
-be written back to midi files (again using miditapyr).
+itself uses the excellent [mido](https://github.com/mido/mido)). The
+notes’ midi information (one line per `note_on`/`note_off` midi event)
+is translated into a wide format (one line per note). This format
+facilitates some manipulations of the notes’ data and also plotting them
+in piano roll plots. Finally, the modified dataframes can be written
+back to midi files (again using miditapyr).
 
-Thus, you can manipulate all the intermediate dataframes and write midi
+Thus, you can manipulate all the intermediate dataframes and create midi
 files from R. However, you need to make sure yourself that the midi
 files you write can be understood by your softsynth. The data is not yet
 validated by pyramidi, but mido (also used to write midi files) already
