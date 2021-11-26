@@ -1,6 +1,6 @@
 Package: pyramidi
 Title: Generate and Manipulate Midi Data in R Data Frames 
-Version: 0.0.2
+Version: 0.1
 Authors@R: 
     person(given = "Urs",
            family = "Wilke",
