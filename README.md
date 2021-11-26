@@ -226,7 +226,7 @@ rmd <- create_rmd(cites)
 This package stands on the shoulders of giants. A big thank you to the
 authors of the following libraries!
 
--   base (R Core Team 2021)
+-   base (R Core Team 2021a)
 -   pkgdown (Wickham and Hesselberth 2020)
 -   dplyr (Wickham et al. 2021)
 -   forcats (Wickham 2021a)
@@ -249,6 +249,10 @@ authors of the following libraries!
 -   testthat (Wickham 2011)
 -   htmltools (Cheng et al. 2021)
 -   covr (Hester 2020)
+-   DiagrammeR (Iannone 2020)
+-   tuneR (Ligges et al. 2018)
+-   tools (R Core Team 2021b)
+-   utils (R Core Team 2021c)
 -   rayrender (Morgan-Wall 2021)
 -   magick (Ooms 2021)
 
@@ -306,6 +310,21 @@ Hester, Jim. 2020. *Covr: Test Coverage for Packages*.
 
 </div>
 
+<div id="ref-DiagrammeR" class="csl-entry">
+
+Iannone, Richard. 2020. *DiagrammeR: Graph/Network Visualization*.
+<https://CRAN.R-project.org/package=DiagrammeR>.
+
+</div>
+
+<div id="ref-tuneR" class="csl-entry">
+
+Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
+2018. *<span class="nocase">tuneR</span>: Analysis of Music and Speech*.
+<https://CRAN.R-project.org/package=tuneR>.
+
+</div>
+
 <div id="ref-rayrender" class="csl-entry">
 
 Morgan-Wall, Tyler. 2021. *Rayrender: Build and Raytrace 3d Scenes*.
@@ -329,8 +348,24 @@ r*. <https://CRAN.R-project.org/package=magick>.
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2021. *R: A Language and Environment for Statistical
+R Core Team. 2021a. *R: A Language and Environment for Statistical
 Computing*. Vienna, Austria: R Foundation for Statistical Computing.
+<https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-tools" class="csl-entry">
+
+———. 2021b. *R: A Language and Environment for Statistical Computing*.
+Vienna, Austria: R Foundation for Statistical Computing.
+<https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-utils" class="csl-entry">
+
+———. 2021c. *R: A Language and Environment for Statistical Computing*.
+Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
 
 </div>

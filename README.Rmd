@@ -237,6 +237,10 @@ This package stands on the shoulders of giants. A big thank you to the authors o
 - testthat [@testthat]
 - htmltools [@htmltools]
 - covr [@covr]
+- DiagrammeR [@DiagrammeR]
+- tuneR [@tuneR]
+- tools [@tools]
+- utils [@utils]
 - rayrender [@rayrender]
 - magick [@magick]
 
