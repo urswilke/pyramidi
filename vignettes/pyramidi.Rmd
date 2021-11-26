@@ -42,10 +42,12 @@ This class is the main structure of the package.
 
 ### Generate `MidiFramer` object
 
-You can create an empty R6 object of class `"MidiFramer"` like so:
+In this vignette, we'll create an R6 object of class `"MidiFramer"` from a `midi_file_path` by passing it to the  
+constructor method `MidiFramer$new()`: 
 
 ```{r}
-mfr <- MidiFramer$new()
+midi_file_path <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+mfr <- MidiFramer$new(midi_file_path)
 ```
 
 
@@ -53,16 +55,6 @@ mfr <- MidiFramer$new()
 mfr
 ```
 
-
-
-But in this vignette, we'll create one from a `midi_file_path` by passing it to the  
-constructor method `MidiFramer$new()`: 
-
-```{r}
-midi_file_path <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-mfr <- MidiFramer$new(midi_file_path)
-class(mfr)
-```
 
 ### Fields in `MidiFramer` objects
 
@@ -87,6 +79,33 @@ list(
 When `mf` is initialized `midi_frame_raw` and `midi_frame_nested$df` should be the same (except the ordering of the named fields in the `msg` column might differ). 
 
 For a detailed interactive overview with further links showing how the various fields in the `MidiFramer` class are related and calculated see `vignette("package_workflow")`.
+
+### Populating an empty `MidiFramer` object
+
+You could also achieve the same result by first creating an empty `MidiFramer` object like so:
+
+```{r}
+mfr <- MidiFramer$new()
+```
+
+```{details, details.summary = "Show print output"}
+mfr
+```
+
+In this case all the dataframe fields are initialized to `NULL` (or `None` in python which reticulate also translates to `NULL` in R).
+
+In order to load a midi file to `mfr$mf` you have to use the miditapyr method [`calc_attributes()`](https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.midi_frame.MidiFrames.calc_attributes):
+
+```{r}
+mfr$mf$calc_attributes(midi_file_path)
+```
+
+Then we can populate the fields of `mfr` with the `MidiFramer` method [`populate_r_fields()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-populate_r_fields).
+
+```{r}
+mfr$populate_r_fields()
+```
+
 
 ## Usage
 
