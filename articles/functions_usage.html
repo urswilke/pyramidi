@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/pyramidi.html">Get started</a>
 </li>
@@ -66,15 +62,16 @@
       <a href="../articles/functions_usage.html">Usage of pyramidi functions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/urswilke/pyramidi/">
+  <a href="https://github.com/urswilke/pyramidi/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -95,42 +92,42 @@
       <h1 data-toc-skip>Usage of pyramidi functions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/master/vignettes/functions_usage.Rmd"><code>vignettes/functions_usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/HEAD/vignettes/functions_usage.Rmd" class="external-link"><code>vignettes/functions_usage.Rmd</code></a></small>
       <div class="hidden name"><code>functions_usage.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>I started to write this vignette a while ago, before I knew object-oriented programming (OOP) in R. So this might be interesting for you if you don’t know OOP but want to learn more about all the internals of pyramidi. If you just want to see some use cases or if you know well R6, the other vignettes might be a better place to start.</p>
-<div id="load-libraries" class="section level3">
-<h3 class="hasAnchor">
-<a href="#load-libraries" class="anchor"></a>Load libraries</h3>
+<div class="section level3">
+<h3 id="load-libraries">Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"></a>
+</h3>
 <p>First load some libraries:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi" class="external-link">pyramidi</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot" class="external-link">zeallot</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="extract-midi-into-dataframe" class="section level3">
-<h3 class="hasAnchor">
-<a href="#extract-midi-into-dataframe" class="anchor"></a>Extract midi into dataframe</h3>
+<div class="section level3">
+<h3 id="extract-midi-into-dataframe">Extract midi into dataframe<a class="anchor" aria-label="anchor" href="#extract-midi-into-dataframe"></a>
+</h3>
 <p>We’ll extract the information of a midi file into dataframe. We’ll use the package internal midi file:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">midi_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 
 <span class="va">midifile</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">midi_file_str</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="va">midifile</span><span class="op">$</span><span class="va">ticks_per_beat</span></code></pre></div>
 <p>Now we can load the information of the <code>midifile</code> into a dataframe:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc</span> <span class="op">=</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">frame_midi</span><span class="op">(</span><span class="va">midifile</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dfc</span>, <span class="fl">20</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dfc</span>, <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt;    i_track  meta                            msg</span>
 <span class="co">#&gt; 1        0  TRUE    track_name, drum-t1-1-t1, 0</span>
 <span class="co">#&gt; 2        0 FALSE          note_on, 0, 43, 72, 9</span>
@@ -153,88 +150,88 @@
 <span class="co">#&gt; 19       0 FALSE         note_on, 0, 42, 101, 9</span>
 <span class="co">#&gt; 20       0 FALSE       note_off, 240, 43, 60, 9</span></code></pre></div>
 <p>This dataframe contains the columns of the track index <code>i_track</code>, <code>meta</code> (whether the midi event is a note event), and <code>msg</code> containing named lists of further midi event information.</p>
-<p>The <code>MidiFile()</code> function of <code>mido</code> also yields the <a href="https://mido.readthedocs.io/en/latest/midi_files.html#tempo-and-beat-resolution"><code>ticks_per_beat</code></a> of the file:</p>
+<p>The <code>MidiFile()</code> function of <code>mido</code> also yields the <a href="https://mido.readthedocs.io/en/latest/midi_files.html#tempo-and-beat-resolution" class="external-link"><code>ticks_per_beat</code></a> of the file:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ticks_per_beat</span>
 <span class="co">#&gt; [1] 960</span></code></pre></div>
-<p>The <code>miditapyr$unnest_midi()</code> function transforms the <code>msg</code> column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in <code>msg</code> (like <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::unnest_wider()</a></code>):</p>
+<p>The <code>miditapyr$unnest_midi()</code> function transforms the <code>msg</code> column of the dataframe to a wide format, where every new column name corresponds to the names in the lists in <code>msg</code> (like <code><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">tidyr::unnest_wider()</a></code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 20 × 13</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span><span class="va">dfc</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">20</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 13</span></span>
 <span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
-<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
-<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
-<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 11       0 FALSE note_on    &lt;dbl …     0    38      101       9    NaN       NaN</span>
-<span class="co">#&gt; 12       0 FALSE note_on    &lt;dbl …   240    43       64       9    NaN       NaN</span>
-<span class="co">#&gt; 13       0 FALSE note_off   &lt;dbl …     0    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 14       0 FALSE note_off   &lt;dbl …     0    38      101       9    NaN       NaN</span>
-<span class="co">#&gt; 15       0 FALSE note_off   &lt;dbl …   240    43       64       9    NaN       NaN</span>
-<span class="co">#&gt; 16       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 17       0 FALSE note_off   &lt;dbl …   240    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 18       0 FALSE note_on    &lt;dbl …   240    43       60       9    NaN       NaN</span>
-<span class="co">#&gt; 19       0 FALSE note_on    &lt;dbl …     0    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; 20       0 FALSE note_off   &lt;dbl …   240    43       60       9    NaN       NaN</span>
-<span class="co">#&gt; # … with 3 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 TRUE  track_name <span style="color: #949494;">&lt;chr </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  set_tempo  <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span> <span style="text-decoration: underline;">666</span>666       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  time_sign… <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…   240    42      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    38      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…   240    43       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    42      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    38      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    43       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…   240    43       60       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    42      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">20</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    43       60       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 3 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   notated_32nd_notes_per_beat &lt;dbl&gt;</span></span></code></pre></div>
 <p>Except the <code>name</code> column this seems to be the same as</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfc</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 268 × 13</span>
+<code class="sourceCode R"><span class="va">dfc</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 13</span></span>
 <span class="co">#&gt;    i_track meta  type      name     time  note velocity channel  tempo numerator</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt; &lt;int&gt;    &lt;int&gt;   &lt;int&gt;  &lt;int&gt;     &lt;int&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_na… drum-t…     0    NA       NA      NA     NA        NA</span>
-<span class="co">#&gt;  2       0 FALSE note_on   &lt;NA&gt;        0    43       72       9     NA        NA</span>
-<span class="co">#&gt;  3       0 FALSE note_on   &lt;NA&gt;        0    39       64       9     NA        NA</span>
-<span class="co">#&gt;  4       0 FALSE note_on   &lt;NA&gt;        0    36      101       9     NA        NA</span>
-<span class="co">#&gt;  5       0 TRUE  set_tempo &lt;NA&gt;        0    NA       NA      NA 666666        NA</span>
-<span class="co">#&gt;  6       0 TRUE  time_sig… &lt;NA&gt;        0    NA       NA      NA     NA         4</span>
-<span class="co">#&gt;  7       0 FALSE note_off  &lt;NA&gt;      240    43       72       9     NA        NA</span>
-<span class="co">#&gt;  8       0 FALSE note_off  &lt;NA&gt;        0    39       64       9     NA        NA</span>
-<span class="co">#&gt;  9       0 FALSE note_off  &lt;NA&gt;        0    36      101       9     NA        NA</span>
-<span class="co">#&gt; 10       0 FALSE note_on   &lt;NA&gt;      240    42      101       9     NA        NA</span>
-<span class="co">#&gt; # … with 258 more rows, and 3 more variables: denominator &lt;int&gt;,</span>
-<span class="co">#&gt; #   clocks_per_click &lt;int&gt;, notated_32nd_notes_per_beat &lt;int&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 TRUE  track_na… drum-t…     0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on   <span style="color: #BB0000;">NA</span>          0    43       72       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on   <span style="color: #BB0000;">NA</span>          0    39       64       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_on   <span style="color: #BB0000;">NA</span>          0    36      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  set_tempo <span style="color: #BB0000;">NA</span>          0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span> <span style="text-decoration: underline;">666</span>666        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  time_sig… <span style="color: #BB0000;">NA</span>          0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_off  <span style="color: #BB0000;">NA</span>        240    43       72       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_off  <span style="color: #BB0000;">NA</span>          0    39       64       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_off  <span style="color: #BB0000;">NA</span>          0    36      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_on   <span style="color: #BB0000;">NA</span>        240    42      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows, and 3 more variables: denominator &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   clocks_per_click &lt;int&gt;, notated_32nd_notes_per_beat &lt;int&gt;</span></span></code></pre></div>
 </div>
-<div id="translate-midi-time-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#translate-midi-time-information" class="anchor"></a>Translate midi time information</h3>
+<div class="section level3">
+<h3 id="translate-midi-time-information">Translate midi time information<a class="anchor" aria-label="anchor" href="#translate-midi-time-information"></a>
+</h3>
 <p>In the midi format, time is treated as relative increments between events (measured in ticks). In order to derive the total time passed, you can use the function <code><a href="../reference/tab_measures.html">tab_measures()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">ticks_per_beat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">ticks_per_beat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="co"># create a variable `track` with the track name (in order to have it in the plot below)</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
-                        <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
-                        <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html">fill</a></span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>track <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">typeof</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"character"</span>, 
+                        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NA_character_</span><span class="op">)</span>, 
+                        <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">fill</a></span><span class="op">(</span><span class="va">track</span><span class="op">)</span>
 
 <span class="va">dfm</span>
-<span class="co">#&gt; # A tibble: 268 × 17</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 17</span></span>
 <span class="co">#&gt;    i_track meta  type     name    note velocity channel ticks     m     b i_note</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;    &lt;list&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_n… &lt;chr …   NaN      NaN     NaN     0  0        0      0</span>
-<span class="co">#&gt;  2       0 FALSE note_on  &lt;dbl …    43       72       9     0  0        0      1</span>
-<span class="co">#&gt;  3       0 FALSE note_on  &lt;dbl …    39       64       9     0  0        0      1</span>
-<span class="co">#&gt;  4       0 FALSE note_on  &lt;dbl …    36      101       9     0  0        0      1</span>
-<span class="co">#&gt;  5       0 TRUE  set_tem… &lt;dbl …   NaN      NaN     NaN     0  0        0      0</span>
-<span class="co">#&gt;  6       0 TRUE  time_si… &lt;dbl …   NaN      NaN     NaN     0  0        0      0</span>
-<span class="co">#&gt;  7       0 FALSE note_off &lt;dbl …    43       72       9   240  0.25     1      1</span>
-<span class="co">#&gt;  8       0 FALSE note_off &lt;dbl …    39       64       9   240  0.25     1      1</span>
-<span class="co">#&gt;  9       0 FALSE note_off &lt;dbl …    36      101       9   240  0.25     1      1</span>
-<span class="co">#&gt; 10       0 FALSE note_on  &lt;dbl …    42      101       9   480  0.5      2      1</span>
-<span class="co">#&gt; # … with 258 more rows, and 6 more variables: tempo &lt;dbl&gt;, numerator &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 TRUE  track_n… <span style="color: #949494;">&lt;chr </span>…   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>     0  0        0      0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on  <span style="color: #949494;">&lt;dbl </span>…    43       72       9     0  0        0      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on  <span style="color: #949494;">&lt;dbl </span>…    39       64       9     0  0        0      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_on  <span style="color: #949494;">&lt;dbl </span>…    36      101       9     0  0        0      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  set_tem… <span style="color: #949494;">&lt;dbl </span>…   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>     0  0        0      0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  time_si… <span style="color: #949494;">&lt;dbl </span>…   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>     0  0        0      0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_off <span style="color: #949494;">&lt;dbl </span>…    43       72       9   240  0.25     1      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_off <span style="color: #949494;">&lt;dbl </span>…    39       64       9   240  0.25     1      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_off <span style="color: #949494;">&lt;dbl </span>…    36      101       9   240  0.25     1      1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_on  <span style="color: #949494;">&lt;dbl </span>…    42      101       9   480  0.5      2      1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows, and 6 more variables: tempo &lt;dbl&gt;, numerator &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></span></code></pre></div>
 <p>This function adds further columns:</p>
 <ul>
 <li>
@@ -242,96 +239,96 @@
 <li>
 <code>t</code>: specifying the total time in seconds passed,</li>
 <li>
-<code>m</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Bar_(music)">measures</a> (bars) passed,</li>
+<code>m</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Bar_(music)" class="external-link">measures</a> (bars) passed,</li>
 <li>
-<code>b</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Beat_(music)">beats</a> passed,</li>
+<code>b</code>: specifying the total <a href="https://en.wikipedia.org/wiki/Beat_(music)" class="external-link">beats</a> passed,</li>
 <li>
 <code>i_note</code>: unique ascending index for every track and midi note in the midi file.</li>
 </ul>
 </div>
-<div id="further-processing-of-the-midi-events" class="section level3">
-<h3 class="hasAnchor">
-<a href="#further-processing-of-the-midi-events" class="anchor"></a>Further processing of the midi events</h3>
-<p>You can split the dataframe in two by whether the events are <a href="https://mido.readthedocs.io/en/latest/meta_message_types.html">meta</a> or not:</p>
+<div class="section level3">
+<h3 id="further-processing-of-the-midi-events">Further processing of the midi events<a class="anchor" aria-label="anchor" href="#further-processing-of-the-midi-events"></a>
+</h3>
+<p>You can split the dataframe in two by whether the events are <a href="https://mido.readthedocs.io/en/latest/meta_message_types.html" class="external-link">meta</a> or not:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">dfm</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+    <span class="va">miditapyr</span><span class="op">$</span><span class="fu">split_df</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html" class="external-link">%-&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 8 × 14</span>
+<code class="sourceCode R"><span class="va">df_meta</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 14</span></span>
 <span class="co">#&gt;   i_track meta  type           name    ticks     m     b i_note  tempo numerator</span>
-<span class="co">#&gt;     &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;          &lt;list&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1       0 TRUE  track_name     &lt;chr […     0   0     0        0    NaN       NaN</span>
-<span class="co">#&gt; 2       0 TRUE  set_tempo      &lt;dbl […     0   0     0        0 666666       NaN</span>
-<span class="co">#&gt; 3       0 TRUE  time_signature &lt;dbl […     0   0     0        0    NaN         4</span>
-<span class="co">#&gt; 4       0 TRUE  end_of_track   &lt;dbl [… 15361  16.0  64.0      0    NaN       NaN</span>
-<span class="co">#&gt; 5       1 TRUE  track_name     &lt;chr […     0   0     0        0    NaN       NaN</span>
-<span class="co">#&gt; 6       1 TRUE  end_of_track   &lt;dbl [… 15361  16.0  64.0      0    NaN       NaN</span>
-<span class="co">#&gt; 7       2 TRUE  track_name     &lt;chr […     0   0     0        0    NaN       NaN</span>
-<span class="co">#&gt; 8       2 TRUE  end_of_track   &lt;dbl [… 15361  16.0  64.0      0    NaN       NaN</span>
-<span class="co">#&gt; # … with 4 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></code></pre></div>
+<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>       0 TRUE  track_name     <span style="color: #949494;">&lt;chr [</span>…     0   0     0        0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>       0 TRUE  set_tempo      <span style="color: #949494;">&lt;dbl [</span>…     0   0     0        0 <span style="text-decoration: underline;">666</span>666       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>       0 TRUE  time_signature <span style="color: #949494;">&lt;dbl [</span>…     0   0     0        0    <span style="color: #BB0000;">NaN</span>         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>       0 TRUE  end_of_track   <span style="color: #949494;">&lt;dbl [</span>… <span style="text-decoration: underline;">15</span>361  16.0  64.0      0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>       1 TRUE  track_name     <span style="color: #949494;">&lt;chr [</span>…     0   0     0        0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span>       1 TRUE  end_of_track   <span style="color: #949494;">&lt;dbl [</span>… <span style="text-decoration: underline;">15</span>361  16.0  64.0      0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span>       2 TRUE  track_name     <span style="color: #949494;">&lt;chr [</span>…     0   0     0        0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span>       2 TRUE  end_of_track   <span style="color: #949494;">&lt;dbl [</span>… <span style="text-decoration: underline;">15</span>361  16.0  64.0      0    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: denominator &lt;dbl&gt;, clocks_per_click &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_notes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 260 × 11</span>
+<code class="sourceCode R"><span class="va">df_notes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 260 × 11</span></span>
 <span class="co">#&gt;    i_track meta  type      note velocity channel ticks     m     b i_note track </span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt; </span>
-<span class="co">#&gt;  1       0 FALSE note_on     43       72       9     0  0        0      1 drum-…</span>
-<span class="co">#&gt;  2       0 FALSE note_on     39       64       9     0  0        0      1 drum-…</span>
-<span class="co">#&gt;  3       0 FALSE note_on     36      101       9     0  0        0      1 drum-…</span>
-<span class="co">#&gt;  4       0 FALSE note_off    43       72       9   240  0.25     1      1 drum-…</span>
-<span class="co">#&gt;  5       0 FALSE note_off    39       64       9   240  0.25     1      1 drum-…</span>
-<span class="co">#&gt;  6       0 FALSE note_off    36      101       9   240  0.25     1      1 drum-…</span>
-<span class="co">#&gt;  7       0 FALSE note_on     42      101       9   480  0.5      2      1 drum-…</span>
-<span class="co">#&gt;  8       0 FALSE note_on     38      101       9   480  0.5      2      1 drum-…</span>
-<span class="co">#&gt;  9       0 FALSE note_on     43       64       9   720  0.75     3      2 drum-…</span>
-<span class="co">#&gt; 10       0 FALSE note_off    42      101       9   720  0.75     3      1 drum-…</span>
-<span class="co">#&gt; # … with 250 more rows</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE note_on     43       72       9     0  0        0      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on     39       64       9     0  0        0      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on     36      101       9     0  0        0      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_off    43       72       9   240  0.25     1      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE note_off    39       64       9   240  0.25     1      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE note_off    36      101       9   240  0.25     1      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_on     42      101       9   480  0.5      2      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_on     38      101       9   480  0.5      2      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_on     43       64       9   720  0.75     3      2 drum-…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_off    42      101       9   720  0.75     3      1 drum-…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 250 more rows</span></span></code></pre></div>
 </div>
-<div id="pivot-note-dataframe-to-wide" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pivot-note-dataframe-to-wide" class="anchor"></a>Pivot note dataframe to wide</h3>
-<p>Each note in the midi file is characterized by a <code>note_on</code> and a <code>note_off</code> event. In order to generate a piano roll plot with ggplot2, we need to <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> those events. This can be done with the function <code><a href="../reference/pivot_wide_notes.html">pivot_wide_notes()</a></code>:</p>
+<div class="section level3">
+<h3 id="pivot-note-dataframe-to-wide">Pivot note dataframe to wide<a class="anchor" aria-label="anchor" href="#pivot-note-dataframe-to-wide"></a>
+</h3>
+<p>Each note in the midi file is characterized by a <code>note_on</code> and a <code>note_off</code> event. In order to generate a piano roll plot with ggplot2, we need to <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code> those events. This can be done with the function <code><a href="../reference/pivot_wide_notes.html">pivot_wide_notes()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_not_notes</span> <span class="op">&lt;-</span> 
-  <span class="va">df_notes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> 
+  <span class="va">df_notes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> 
 
 <span class="va">df_notes_wide</span> <span class="op">&lt;-</span>
-  <span class="va">df_notes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="va">df_notes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">type</span>, <span class="st">"^note_o[nf]f?$"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="co"># tab_measures(df_meta, df_notes, ticks_per_beat) %&gt;%</span>
-  <span class="fu"><a href="../reference/pivot_wide_notes.html">pivot_wide_notes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="fu">pyramidi</span><span class="fu">::</span><span class="va"><a href="../reference/midi_defs.html">midi_defs</a></span><span class="op">)</span>
+  <span class="fu"><a href="../reference/pivot_wide_notes.html">pivot_wide_notes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu">pyramidi</span><span class="fu">::</span><span class="va"><a href="../reference/midi_defs.html">midi_defs</a></span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "note"</span>
 <span class="va">df_notes_wide</span>
-<span class="co">#&gt; # A tibble: 130 × 15</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 130 × 15</span></span>
 <span class="co">#&gt;    i_track meta   note channel i_note track    velocity_note_on velocity_note_o…</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;               &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 FALSE    43       9      1 drum-t1…               72               72</span>
-<span class="co">#&gt;  2       0 FALSE    39       9      1 drum-t1…               64               64</span>
-<span class="co">#&gt;  3       0 FALSE    36       9      1 drum-t1…              101              101</span>
-<span class="co">#&gt;  4       0 FALSE    42       9      1 drum-t1…              101              101</span>
-<span class="co">#&gt;  5       0 FALSE    38       9      1 drum-t1…              101              101</span>
-<span class="co">#&gt;  6       0 FALSE    43       9      2 drum-t1…               64               64</span>
-<span class="co">#&gt;  7       0 FALSE    36       9      2 drum-t1…              101              101</span>
-<span class="co">#&gt;  8       0 FALSE    43       9      3 drum-t1…               60               60</span>
-<span class="co">#&gt;  9       0 FALSE    42       9      2 drum-t1…              101              101</span>
-<span class="co">#&gt; 10       0 FALSE    43       9      4 drum-t1…               60               60</span>
-<span class="co">#&gt; # … with 120 more rows, and 7 more variables: ticks_note_on &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   ticks_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;, b_note_on &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   b_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE    43       9      1 drum-t1…               72               72</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE    39       9      1 drum-t1…               64               64</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE    36       9      1 drum-t1…              101              101</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE    42       9      1 drum-t1…              101              101</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE    38       9      1 drum-t1…              101              101</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE    43       9      2 drum-t1…               64               64</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE    36       9      2 drum-t1…              101              101</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE    43       9      3 drum-t1…               60               60</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE    42       9      2 drum-t1…              101              101</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE    43       9      4 drum-t1…               60               60</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 120 more rows, and 7 more variables: ticks_note_on &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   ticks_note_off &lt;dbl&gt;, m_note_on &lt;dbl&gt;, m_note_off &lt;dbl&gt;, b_note_on &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   b_note_off &lt;dbl&gt;, note_name &lt;fct&gt;</span></span></code></pre></div>
 <p>In the new format, the data has half the number of rows. The columns <code>m</code>, <code>b</code>, <code>t</code>, <code>ticks</code>, <code>time</code> and <code>velocity</code> are each replaced by two columns with the suffix <code>_note_on</code> and <code>_note_off</code>.</p>
 </div>
-<div id="plot-midi-information-in-piano-roll-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#plot-midi-information-in-piano-roll-plot" class="anchor"></a>Plot midi information in piano roll plot</h3>
+<div class="section level3">
+<h3 id="plot-midi-information-in-piano-roll-plot">Plot midi information in piano roll plot<a class="anchor" aria-label="anchor" href="#plot-midi-information-in-piano-roll-plot"></a>
+</h3>
 <p>Now we have the midi data in the right format for the piano roll plot:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>
       x <span class="op">=</span> <span class="va">m_note_on</span>,
       y <span class="op">=</span> <span class="va">note_name</span>,
       xend <span class="op">=</span> <span class="va">m_note_off</span>,
@@ -340,124 +337,124 @@
     <span class="op">)</span>
   <span class="op">)</span> <span class="op">+</span>
   <span class="co"># each midi track is printed into its own facet:</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span> <span class="op">~</span> <span class="va">track</span>,
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span> <span class="op">~</span> <span class="va">track</span>,
               ncol <span class="op">=</span> <span class="fl">1</span>,
               scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_colourbar.html">guide_colorbar</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Note velocity"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_colourbar.html" class="external-link">guide_colorbar</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Note velocity"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>
     title <span class="op">=</span> <span class="st">"Piano roll of the note events in the midi file"</span>,
     subtitle <span class="op">=</span> <span class="st">"Only notes played are shown."</span>
   <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Measures"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">16</span>, <span class="fl">4</span><span class="op">)</span>,
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Measures"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">16</span>, <span class="fl">4</span><span class="op">)</span>,
                      minor_breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_colour_gradient</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_colour_gradient</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="functions_usage_files/figure-html/midi_piano_roll-1.png" width="700"></p>
 </div>
-<div id="manipulation-of-the-midi-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#manipulation-of-the-midi-data" class="anchor"></a>Manipulation of the midi data</h3>
+<div class="section level3">
+<h3 id="manipulation-of-the-midi-data">Manipulation of the midi data<a class="anchor" aria-label="anchor" href="#manipulation-of-the-midi-data"></a>
+</h3>
 <p>The new format also allows to easily manipulate the midi data. For instance, let’s put the volume (called <code>velocity</code> in midi) of the first beat in every bar to the maximum (127), and to half of its original value otherwise:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_notes_wide_mod</span> <span class="op">&lt;-</span> <span class="va">df_notes_wide</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    velocity_note_on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">df_notes_wide_mod</span> <span class="op">&lt;-</span> <span class="va">df_notes_wide</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
+    velocity_note_on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>
       <span class="co"># As it's a 4/4 beat, the first beat of each bar is a multiple of 4:</span>
-      <span class="va">b_note_on</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">4</span> <span class="op">==</span> <span class="fl">0</span>, 
+      <span class="va">b_note_on</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span> <span class="op">==</span> <span class="fl">0</span>, 
       <span class="fl">127</span>, 
       <span class="va">velocity_note_on</span> <span class="op">/</span> <span class="fl">2</span>
     <span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p>Let’s compare the modified value to the original one:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">b_note_on</span>, <span class="va">velocity_note_on</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_cols</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">df_notes_wide</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">b_note_on</span>, <span class="va">velocity_note_on</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>
     new <span class="op">=</span> <span class="va">df_notes_wide_mod</span><span class="op">$</span><span class="va">velocity_note_on</span>
   <span class="op">)</span>
-<span class="co">#&gt; # A tibble: 130 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 130 × 3</span></span>
 <span class="co">#&gt;    b_note_on velocity_note_on   new</span>
-<span class="co">#&gt;        &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1         0               72 127  </span>
-<span class="co">#&gt;  2         0               64 127  </span>
-<span class="co">#&gt;  3         0              101 127  </span>
-<span class="co">#&gt;  4         2              101  50.5</span>
-<span class="co">#&gt;  5         2              101  50.5</span>
-<span class="co">#&gt;  6         3               64  32  </span>
-<span class="co">#&gt;  7         4              101 127  </span>
-<span class="co">#&gt;  8         6               60  30  </span>
-<span class="co">#&gt;  9         6              101  50.5</span>
-<span class="co">#&gt; 10         8               60 127  </span>
-<span class="co">#&gt; # … with 120 more rows</span></code></pre></div>
-<p>With an <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> statement, we modified the volume of the midi notes, depending on if they’re the first beat in the measure or not.</p>
+<span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0               72 127  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0               64 127  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0              101 127  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         2              101  50.5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         2              101  50.5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         3               64  32  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         4              101 127  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         6               60  30  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         6              101  50.5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         8               60 127  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 120 more rows</span></span></code></pre></div>
+<p>With an <code><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse()</a></code> statement, we modified the volume of the midi notes, depending on if they’re the first beat in the measure or not.</p>
 <p>Other possible manipulations could be for instance:</p>
 <ul>
 <li>
-<a href="https://en.wikipedia.org/wiki/Quantization_(music)">Quantization</a> by <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code>ing the <code>note_on</code>/<code>note_off</code> times,</li>
-<li>Chord generation, e.g. by applying a <code>group_by(floor(m_note_on))</code>-<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> logic, or</li>
-<li>Arpeggiating chords by a <code>group_by(floor(m_note_on))</code> - <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> logic.</li>
+<a href="https://en.wikipedia.org/wiki/Quantization_(music)" class="external-link">Quantization</a> by <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">round()</a></code>ing the <code>note_on</code>/<code>note_off</code> times,</li>
+<li>Chord generation, e.g. by applying a <code>group_by(floor(m_note_on))</code>-<code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> logic, or</li>
+<li>Arpeggiating chords by a <code>group_by(floor(m_note_on))</code> - <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> logic.</li>
 </ul>
 </div>
-<div id="pivot-note-data-frame-back-to-long-format" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pivot-note-data-frame-back-to-long-format" class="anchor"></a>Pivot note data frame back to long format</h3>
+<div class="section level3">
+<h3 id="pivot-note-data-frame-back-to-long-format">Pivot note data frame back to long format<a class="anchor" aria-label="anchor" href="#pivot-note-data-frame-back-to-long-format"></a>
+</h3>
 <p>We can transform the wide midi data back to the long format:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_notes_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pivot_long_notes.html">pivot_long_notes</a></span><span class="op">(</span><span class="va">df_notes_wide</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="join-non-note-events" class="section level3">
-<h3 class="hasAnchor">
-<a href="#join-non-note-events" class="anchor"></a>Join non note events</h3>
+<div class="section level3">
+<h3 id="join-non-note-events">Join non note events<a class="anchor" aria-label="anchor" href="#join-non-note-events"></a>
+</h3>
 <p>We can now add the non note events:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_midi_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_midi_frames.html">merge_midi_frames</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">df_not_notes</span><span class="op">)</span>
 
 <span class="va">df_midi_out</span>
-<span class="co">#&gt; # A tibble: 268 × 14</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 14</span></span>
 <span class="co">#&gt;    i_track channel  note type  velocity meta  name   tempo numerator denominator</span>
-<span class="co">#&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;lgl&gt; &lt;lis&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0       9    43 note…       72 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt;  2       0       9    39 note…       64 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt;  3       0       9    36 note…      101 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt;  4       0      NA    NA trac…       NA TRUE  &lt;chr…    NaN       NaN         NaN</span>
-<span class="co">#&gt;  5       0      NA    NA set_…       NA TRUE  &lt;dbl… 666666       NaN         NaN</span>
-<span class="co">#&gt;  6       0      NA    NA time…       NA TRUE  &lt;dbl…    NaN         4           4</span>
-<span class="co">#&gt;  7       0       9    43 note…       72 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt;  8       0       9    39 note…       64 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt;  9       0       9    36 note…      101 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt; 10       0       9    42 note…      101 FALSE &lt;NUL…     NA        NA          NA</span>
-<span class="co">#&gt; # … with 258 more rows, and 4 more variables: clocks_per_click &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;, time &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0       9    43 note…       72 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0       9    39 note…       64 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0       9    36 note…      101 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> trac…       <span style="color: #BB0000;">NA</span> TRUE  <span style="color: #949494;">&lt;chr</span>…    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span>         <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> set_…       <span style="color: #BB0000;">NA</span> TRUE  <span style="color: #949494;">&lt;dbl</span>… <span style="text-decoration: underline;">666</span>666       <span style="color: #BB0000;">NaN</span>         <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> time…       <span style="color: #BB0000;">NA</span> TRUE  <span style="color: #949494;">&lt;dbl</span>…    <span style="color: #BB0000;">NaN</span>         4           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0       9    43 note…       72 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0       9    39 note…       64 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0       9    36 note…      101 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0       9    42 note…      101 FALSE <span style="color: #949494;">&lt;NUL</span>…     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows, and 4 more variables: clocks_per_click &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   notated_32nd_notes_per_beat &lt;dbl&gt;, track &lt;chr&gt;, time &lt;dbl&gt;</span></span></code></pre></div>
 <p>The <code>time</code> value in midi format is given by the number of <code>ticks</code> passed between events.</p>
 </div>
-<div id="write-midi-dataframe-back-to-a-midi-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-midi-dataframe-back-to-a-midi-file" class="anchor"></a>Write midi dataframe back to a midi file</h3>
+<div class="section level3">
+<h3 id="write-midi-dataframe-back-to-a-midi-file">Write midi dataframe back to a midi file<a class="anchor" aria-label="anchor" href="#write-midi-dataframe-back-to-a-midi-file"></a>
+</h3>
 <p>Now we can transform the data back to a dataframe of the same format as the one we got with <code>miditapyr$frame_midi()</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfc2</span> <span class="op">&lt;-</span>
-  <span class="va">df_midi_out</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="va">df_midi_out</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="co"># When reticulate converts R dataframes to pandas, there are complications</span>
   <span class="co"># with character columns containing missing values.</span>
   <span class="co"># repair_reticulate_conversion = TRUE, repairs that in the miditapyr python</span>
   <span class="co"># code:</span>
   <span class="va">miditapyr</span><span class="op">$</span><span class="fu">nest_midi</span><span class="op">(</span>repair_reticulate_conversion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">dfc2</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 268 × 3</span>
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">dfc2</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 3</span></span>
 <span class="co">#&gt;    i_track meta  msg             </span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;list&gt;          </span>
-<span class="co">#&gt;  1       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt;  2       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt;  3       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt;  4       0 TRUE  &lt;named list [4]&gt;</span>
-<span class="co">#&gt;  5       0 TRUE  &lt;named list [4]&gt;</span>
-<span class="co">#&gt;  6       0 TRUE  &lt;named list [7]&gt;</span>
-<span class="co">#&gt;  7       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt;  8       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt;  9       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt; 10       0 FALSE &lt;named list [6]&gt;</span>
-<span class="co">#&gt; # … with 258 more rows</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 TRUE  <span style="color: #949494;">&lt;named list [4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  <span style="color: #949494;">&lt;named list [4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  <span style="color: #949494;">&lt;named list [7]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE <span style="color: #949494;">&lt;named list [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows</span></span></code></pre></div>
 <p>And we can save it back to a midi file:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">miditapyr</span><span class="op">$</span><span class="fu">write_midi</span><span class="op">(</span><span class="va">dfc2</span>, <span class="va">ticks_per_beat</span>, <span class="st">"test.mid"</span><span class="op">)</span></code></pre></div>
@@ -476,11 +473,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Urs Wilke.</p>
+  <p></p>
+<p>Developed by Urs Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -488,6 +487,8 @@
 
   
 
+
+  
 
   </body>
 </html>

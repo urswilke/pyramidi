@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/pyramidi.html">Get started</a>
 </li>
@@ -66,15 +62,16 @@
       <a href="articles/functions_usage.html">Usage of pyramidi functions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/urswilke/pyramidi/">
+  <a href="https://github.com/urswilke/pyramidi/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -92,40 +89,40 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="pyramidi-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#pyramidi-" class="anchor"></a>pyramidi <a href="https://github.com/urswilke/pyramidi/"><img src="reference/figures/hex_logo_pyramidi.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="pyramidi-">pyramidi <a href="https://github.com/urswilke/pyramidi/" class="external-link"><img src="reference/figures/hex_logo_pyramidi.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#pyramidi-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p><strong>Work in progress!</strong></p>
 <p>♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬</p>
 </div>
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The goal of pyramidi is to reproducibly generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
+<div class="section level1">
+<h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h1>
+<p>The goal of pyramidi is to reproducibly generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido" class="external-link">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
 <p>Thus, you can manipulate all the intermediate dataframes and create midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
-<p>Via the small helper package <a href="https://github.com/urswilke/raudiomate">raudiomate</a> the midi data can be</p>
+<p>Via the small helper package <a href="https://github.com/urswilke/raudiomate" class="external-link">raudiomate</a> the midi data can be</p>
 <ul>
-<li>synthesized to wav files with <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html">raudiomate::synthesize_midi()</a></code> (needs <a href="https://www.fluidsynth.org/">fluidsynth</a> installed),</li>
-<li>converted to mp3 files with <code><a href="https://urswilke.github.io/raudiomate/reference/convert_to_mp3.html">raudiomate::convert_to_mp3()</a></code> (needs <a href="https://www.ffmpeg.org/">ffmpeg</a>),</li>
-<li>and played in rmarkdown documents with the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play"><code>play()</code></a> method of <code>MidiFramer</code> (using <code><a href="https://urswilke.github.io/raudiomate/reference/player.html">raudiomate::player()</a></code>).</li>
+<li>synthesized to wav files with <code><a href="https://urswilke.github.io/raudiomate/reference/synthesize_midi.html" class="external-link">raudiomate::synthesize_midi()</a></code> (needs <a href="https://www.fluidsynth.org/" class="external-link">fluidsynth</a> installed),</li>
+<li>converted to mp3 files with <code><a href="https://urswilke.github.io/raudiomate/reference/convert_to_mp3.html" class="external-link">raudiomate::convert_to_mp3()</a></code> (needs <a href="https://www.ffmpeg.org/" class="external-link">ffmpeg</a>),</li>
+<li>and played in rmarkdown documents with the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play"><code>play()</code></a> method of <code>MidiFramer</code> (using <code><a href="https://urswilke.github.io/raudiomate/reference/player.html" class="external-link">raudiomate::player()</a></code>).</li>
 </ul>
-<p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/">mido’s documentation</a> might be a good start.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install pyramidi from <a href="https://github.com/urswilke/pyramidi">github</a> with:</p>
+<p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/" class="external-link">mido’s documentation</a> might be a good start.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install pyramidi from <a href="https://github.com/urswilke/pyramidi" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## install remotes package if it's not already</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co">## install dev version of rtweettree from github</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"UrsWilke/pyramidi"</span><span class="op">)</span></code></pre></div>
-<p>The python package <a href="https://pypi.org/project/miditapyr/">miditapyr</a> also needs to be installed in your python environment used by <a href="https://github.com/rstudio/reticulate">reticulate</a>.</p>
+<p>The python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> also needs to be installed in your python environment used by <a href="https://github.com/rstudio/reticulate" class="external-link">reticulate</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
 <p>But if everything works as I believe it should, miditapyr is automatically installed if you install pyramidi, as soon as you access the module for the first time.</p>
 <p>Otherwise, you can also install it in your reticulate python environment with the included helper function:</p>
@@ -133,33 +130,33 @@
 <code class="sourceCode R"><span class="fu">pyramidi</span><span class="fu">::</span><span class="fu"><a href="reference/install_miditapyr.html">install_miditapyr</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><em>I’m not sure if that works on windows too. Perhaps there you have to manually configure your reticulate environment.</em></p>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="generate-a-midiframer-object" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generate-a-midiframer-object" class="anchor"></a>Generate a <code>MidiFramer</code> object</h3>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="generate-a-midiframer-object">Generate a <code>MidiFramer</code> object<a class="anchor" aria-label="anchor" href="#generate-a-midiframer-object"></a>
+</h3>
 <p>We can create a <code>MidiFramer</code> object by passing the file path to the constructor method (<a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-new"><code>new()</code></a>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi" class="external-link">pyramidi</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></code></pre></div>
-<p>The object contains the midi data in various dataframe formats and an interface to the miditapyr <a href="https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html">miditapyr.MidiFrames</a> object <code>mfr$mf</code>. You can write the midi file resulting of the <code>MidiFramer</code> object to disk:</p>
+<p>The object contains the midi data in various dataframe formats and an interface to the miditapyr <a href="https://miditapyr.readthedocs.io/en/latest/notebooks/midi_frame_usage.html" class="external-link">miditapyr.MidiFrames</a> object <code>mfr$mf</code>. You can write the midi file resulting of the <code>MidiFramer</code> object to disk:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="st">"/path/to/your/midifile.mid"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="modifying-midi-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#modifying-midi-data" class="anchor"></a>Modifying midi data</h3>
+<div class="section level3">
+<h3 id="modifying-midi-data">Modifying midi data<a class="anchor" aria-label="anchor" href="#modifying-midi-data"></a>
+</h3>
 <p>In the <code>MidiFramer</code> object, we can modify <code>mfr$df_notes_wide</code>, the notes in note-wise wide format (<code>note_on</code> &amp; <code>note_off</code> events in the same line). Thus we don’t need to worry which midi events belong together</p>
 <p>Let’s look at a small example. We’ll define a function to replace every note with a random midi note between 60 &amp; 71::</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dfn</span>, <span class="va">seed</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">n_notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dfn</span><span class="op">$</span><span class="va">note</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">dfn</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>note <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">note</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">60</span><span class="op">:</span><span class="fl">71</span>, <span class="va">n_notes</span>, <span class="cn">TRUE</span><span class="op">)</span>,
+  <span class="va">n_notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dfn</span><span class="op">$</span><span class="va">note</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">dfn</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>note <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>
+    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">note</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">60</span><span class="op">:</span><span class="fl">71</span>, <span class="va">n_notes</span>, <span class="cn">TRUE</span><span class="op">)</span>,
     <span class="va">note</span>
   <span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -167,16 +164,16 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="writing-modified-midi-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#writing-modified-midi-files" class="anchor"></a>Writing modified midi files</h3>
+<div class="section level3">
+<h3 id="writing-modified-midi-files">Writing modified midi files<a class="anchor" aria-label="anchor" href="#writing-modified-midi-files"></a>
+</h3>
 <p>Thus, we can now save the modifications to a midi file:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="st">"mod_test_midi_file.mid"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="synthesizing-and-playing-audio" class="section level3">
-<h3 class="hasAnchor">
-<a href="#synthesizing-and-playing-audio" class="anchor"></a>Synthesizing and playing audio</h3>
+<div class="section level3">
+<h3 id="synthesizing-and-playing-audio">Synthesizing and playing audio<a class="anchor" aria-label="anchor" href="#synthesizing-and-playing-audio"></a>
+</h3>
 <p>See the <code><a href="articles/pyramidi.html">vignette("pyramidi", package = "pyramidi")</a></code> to see how you can synthesize the midi data to wav, convert to mp3 if you want, and then embed a player in your rmarkdown html document with</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -184,9 +181,9 @@
 <p>Even if that might sound very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
 </div>
 </div>
-<div id="documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<div class="section level2">
+<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h2>
 <p>You can find the complete online documentation of the package <a href="https://urswilke.github.io/pyramidi/">here</a>.</p>
 <ul>
 <li>See the <code><a href="articles/pyramidi.html">vignette("pyramidi")</a></code> for a brief usage introduction how to manipulate midi data.</li>
@@ -197,14 +194,14 @@
 <code><a href="articles/functions_usage.html">vignette("functions_usage")</a></code> illustrates the low-level functions of the pyramidi package. that <code>MidiFramer</code> objects use under the hood.</li>
 </ul>
 </div>
-<div id="related-r-packages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#related-r-packages" class="anchor"></a>Related R packages</h2>
+<div class="section level2">
+<h2 id="related-r-packages">Related R packages<a class="anchor" aria-label="anchor" href="#related-r-packages"></a>
+</h2>
 <ul>
-<li>The <a href="https://github.com/leonawicz/tabr">tabr</a> package is a massive music notation, transcription and analysis program allowing to create musical scores (using Lilypond). It allows to read midi files (wrapping tuneR; see below) and also to export them (also using Lilypond).</li>
-<li>The <a href="https://github.com/flujoo/gm">gm</a> package also allows to create and show musical scores using musescore. It also allows to export the music to audio (also using musescore) and to embed the players in html documents.</li>
-<li>The <a href="https://github.com/ColinFay/noon">noon package</a> wraps node.js libraries and can be used to read live midi input port data. I wrote a small <a href="https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/">blog post</a> how reading a midi port can also be done in R with <a href="https://mido.readthedocs.io/en/latest/ports.html">mido</a>. Interestingly, the node.js libraries and mido rely on a the same C++ library <a href="http://www.music.mcgill.ca/~gary/rtmidi/index.html">RtMidi</a>.</li>
-<li>The <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package can also read in midi data. See the <code><a href="articles/tuner.html">vignette("tuner")</a></code>, for an example how you can transform the tuner format into the pyramidi format.</li>
+<li>The <a href="https://github.com/leonawicz/tabr" class="external-link">tabr</a> package is a massive music notation, transcription and analysis program allowing to create musical scores (using Lilypond). It allows to read midi files (wrapping tuneR; see below) and also to export them (also using Lilypond).</li>
+<li>The <a href="https://github.com/flujoo/gm" class="external-link">gm</a> package also allows to create and show musical scores using musescore. It also allows to export the music to audio (also using musescore) and to embed the players in html documents.</li>
+<li>The <a href="https://github.com/ColinFay/noon" class="external-link">noon package</a> wraps node.js libraries and can be used to read live midi input port data. I wrote a small <a href="https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/" class="external-link">blog post</a> how reading a midi port can also be done in R with <a href="https://mido.readthedocs.io/en/latest/ports.html" class="external-link">mido</a>. Interestingly, the node.js libraries and mido rely on a the same C++ library <a href="http://www.music.mcgill.ca/~gary/rtmidi/index.html" class="external-link">RtMidi</a>.</li>
+<li>The <a href="https://cran.r-project.org/package=tuneR" class="external-link">tuneR</a> package can also read in midi data. See the <code><a href="articles/tuner.html">vignette("tuner")</a></code>, for an example how you can transform the tuner format into the pyramidi format.</li>
 </ul>
 <!-- 
 The following as well as the bibtex file "pkg-refs.bib" were automatically
@@ -220,9 +217,9 @@ rmd <- create_rmd(cites)
 
 -->
 </div>
-<div id="r-packages-used" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-packages-used" class="anchor"></a>R packages used</h2>
+<div class="section level2">
+<h2 id="r-packages-used">R packages used<a class="anchor" aria-label="anchor" href="#r-packages-used"></a>
+</h2>
 <p>This package stands on the shoulders of giants. A big thank you to the authors of the following libraries!</p>
 <ul>
 <li>base (R Core Team 2021a)</li>
@@ -257,103 +254,99 @@ rmd <- create_rmd(cites)
 <li>magick (Ooms 2021)</li>
 </ul>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-pichor" class="csl-entry">
 <p>Andersen, Mikkel Meyer. 2021. <em>Pichor: Piano Chords in r</em>.</p>
 </div>
 <div id="ref-magrittr" class="csl-entry">
-<p>Bache, Stefan Milton, and Hadley Wickham. 2020. <em>Magrittr: A Forward-Pipe Operator for r</em>. <a href="https://CRAN.R-project.org/package=magrittr" class="uri">https://CRAN.R-project.org/package=magrittr</a>.</p>
+<p>Bache, Stefan Milton, and Hadley Wickham. 2020. <em>Magrittr: A Forward-Pipe Operator for r</em>. <a href="https://CRAN.R-project.org/package=magrittr" class="external-link uri">https://CRAN.R-project.org/package=magrittr</a>.</p>
 </div>
 <div id="ref-R6" class="csl-entry">
-<p>Chang, Winston. 2021. <em>R6: Encapsulated Classes with Reference Semantics</em>. <a href="https://CRAN.R-project.org/package=R6" class="uri">https://CRAN.R-project.org/package=R6</a>.</p>
+<p>Chang, Winston. 2021. <em>R6: Encapsulated Classes with Reference Semantics</em>. <a href="https://CRAN.R-project.org/package=R6" class="external-link uri">https://CRAN.R-project.org/package=R6</a>.</p>
 </div>
 <div id="ref-htmltools" class="csl-entry">
-<p>Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie, and Jeff Allen. 2021. <em>Htmltools: Tools for HTML</em>. <a href="https://CRAN.R-project.org/package=htmltools" class="uri">https://CRAN.R-project.org/package=htmltools</a>.</p>
+<p>Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie, and Jeff Allen. 2021. <em>Htmltools: Tools for HTML</em>. <a href="https://CRAN.R-project.org/package=htmltools" class="external-link uri">https://CRAN.R-project.org/package=htmltools</a>.</p>
 </div>
 <div id="ref-purrr" class="csl-entry">
-<p>Henry, Lionel, and Hadley Wickham. 2020. <em>Purrr: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr" class="uri">https://CRAN.R-project.org/package=purrr</a>.</p>
+<p>Henry, Lionel, and Hadley Wickham. 2020. <em>Purrr: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr" class="external-link uri">https://CRAN.R-project.org/package=purrr</a>.</p>
 </div>
 <div id="ref-rlang" class="csl-entry">
-<p>———. 2021. <em>Rlang: Functions for Base Types and Core r and ’Tidyverse’ Features</em>. <a href="https://CRAN.R-project.org/package=rlang" class="uri">https://CRAN.R-project.org/package=rlang</a>.</p>
+<p>———. 2021. <em>Rlang: Functions for Base Types and Core r and ’Tidyverse’ Features</em>. <a href="https://CRAN.R-project.org/package=rlang" class="external-link uri">https://CRAN.R-project.org/package=rlang</a>.</p>
 </div>
 <div id="ref-covr" class="csl-entry">
-<p>Hester, Jim. 2020. <em>Covr: Test Coverage for Packages</em>. <a href="https://CRAN.R-project.org/package=covr" class="uri">https://CRAN.R-project.org/package=covr</a>.</p>
+<p>Hester, Jim. 2020. <em>Covr: Test Coverage for Packages</em>. <a href="https://CRAN.R-project.org/package=covr" class="external-link uri">https://CRAN.R-project.org/package=covr</a>.</p>
 </div>
 <div id="ref-DiagrammeR" class="csl-entry">
-<p>Iannone, Richard. 2020. <em>DiagrammeR: Graph/Network Visualization</em>. <a href="https://CRAN.R-project.org/package=DiagrammeR" class="uri">https://CRAN.R-project.org/package=DiagrammeR</a>.</p>
+<p>Iannone, Richard. 2020. <em>DiagrammeR: Graph/Network Visualization</em>. <a href="https://CRAN.R-project.org/package=DiagrammeR" class="external-link uri">https://CRAN.R-project.org/package=DiagrammeR</a>.</p>
 </div>
 <div id="ref-tuneR" class="csl-entry">
-<p>Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.</p>
-<ol>
-<li>
-<em><span class="nocase">tuneR</span>: Analysis of Music and Speech</em>. <a href="https://CRAN.R-project.org/package=tuneR" class="uri">https://CRAN.R-project.org/package=tuneR</a>.</li>
-</ol>
+<p>Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg. 2018. <em><span class="nocase">tuneR</span>: Analysis of Music and Speech</em>. <a href="https://CRAN.R-project.org/package=tuneR" class="external-link uri">https://CRAN.R-project.org/package=tuneR</a>.</p>
 </div>
 <div id="ref-rayrender" class="csl-entry">
-<p>Morgan-Wall, Tyler. 2021. <em>Rayrender: Build and Raytrace 3d Scenes</em>. <a href="https://CRAN.R-project.org/package=rayrender" class="uri">https://CRAN.R-project.org/package=rayrender</a>.</p>
+<p>Morgan-Wall, Tyler. 2021. <em>Rayrender: Build and Raytrace 3d Scenes</em>. <a href="https://CRAN.R-project.org/package=rayrender" class="external-link uri">https://CRAN.R-project.org/package=rayrender</a>.</p>
 </div>
 <div id="ref-tibble" class="csl-entry">
-<p>Müller, Kirill, and Hadley Wickham. 2021. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>.</p>
+<p>Müller, Kirill, and Hadley Wickham. 2021. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble" class="external-link uri">https://CRAN.R-project.org/package=tibble</a>.</p>
 </div>
 <div id="ref-magick" class="csl-entry">
-<p>Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>. <a href="https://CRAN.R-project.org/package=magick" class="uri">https://CRAN.R-project.org/package=magick</a>.</p>
+<p>Ooms, Jeroen. 2021. <em>Magick: Advanced Graphics and Image-Processing in r</em>. <a href="https://CRAN.R-project.org/package=magick" class="external-link uri">https://CRAN.R-project.org/package=magick</a>.</p>
 </div>
 <div id="ref-spelling" class="csl-entry">
-<p>Ooms, Jeroen, and Jim Hester. 2020. <em>Spelling: Tools for Spell Checking in r</em>. <a href="https://CRAN.R-project.org/package=spelling" class="uri">https://CRAN.R-project.org/package=spelling</a>.</p>
+<p>Ooms, Jeroen, and Jim Hester. 2020. <em>Spelling: Tools for Spell Checking in r</em>. <a href="https://CRAN.R-project.org/package=spelling" class="external-link uri">https://CRAN.R-project.org/package=spelling</a>.</p>
 </div>
 <div id="ref-base" class="csl-entry">
-<p>R Core Team. 2021a. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2021a. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-tools" class="csl-entry">
-<p>———. 2021b. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>———. 2021b. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-utils" class="csl-entry">
-<p>———. 2021c. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>———. 2021c. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-details" class="csl-entry">
-<p>Sidi, Jonathan. 2020. <em>Details: Create Details HTML Tag for Markdown and Package Documentation</em>. <a href="https://CRAN.R-project.org/package=details" class="uri">https://CRAN.R-project.org/package=details</a>.</p>
+<p>Sidi, Jonathan. 2020. <em>Details: Create Details HTML Tag for Markdown and Package Documentation</em>. <a href="https://CRAN.R-project.org/package=details" class="external-link uri">https://CRAN.R-project.org/package=details</a>.</p>
 </div>
 <div id="ref-zeallot" class="csl-entry">
-<p>Teetor, Nathan. 2018. <em>Zeallot: Multiple, Unpacking, and Destructuring Assignment</em>. <a href="https://CRAN.R-project.org/package=zeallot" class="uri">https://CRAN.R-project.org/package=zeallot</a>.</p>
+<p>Teetor, Nathan. 2018. <em>Zeallot: Multiple, Unpacking, and Destructuring Assignment</em>. <a href="https://CRAN.R-project.org/package=zeallot" class="external-link uri">https://CRAN.R-project.org/package=zeallot</a>.</p>
 </div>
 <div id="ref-reticulate" class="csl-entry">
-<p>Ushey, Kevin, JJ Allaire, and Yuan Tang. 2021. <em>Reticulate: Interface to ’Python’</em>. <a href="https://CRAN.R-project.org/package=reticulate" class="uri">https://CRAN.R-project.org/package=reticulate</a>.</p>
+<p>Ushey, Kevin, JJ Allaire, and Yuan Tang. 2021. <em>Reticulate: Interface to ’Python’</em>. <a href="https://CRAN.R-project.org/package=reticulate" class="external-link uri">https://CRAN.R-project.org/package=reticulate</a>.</p>
 </div>
 <div id="ref-testthat" class="csl-entry">
-<p>Wickham, Hadley. 2011. “Testthat: Get Started with Testing.” <em>The R Journal</em> 3: 5–10. <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="uri">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.</p>
+<p>Wickham, Hadley. 2011. “Testthat: Get Started with Testing.” <em>The R Journal</em> 3: 5–10. <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="external-link uri">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.</p>
 </div>
 <div id="ref-ggplot2" class="csl-entry">
-<p>———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>.</p>
+<p>———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org" class="external-link uri">https://ggplot2.tidyverse.org</a>.</p>
 </div>
 <div id="ref-stringr" class="csl-entry">
-<p>———. 2019. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>.</p>
+<p>———. 2019. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr" class="external-link uri">https://CRAN.R-project.org/package=stringr</a>.</p>
 </div>
 <div id="ref-forcats" class="csl-entry">
-<p>———. 2021a. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>.</p>
+<p>———. 2021a. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats" class="external-link uri">https://CRAN.R-project.org/package=forcats</a>.</p>
 </div>
 <div id="ref-rvest" class="csl-entry">
-<p>———. 2021b. <em>Rvest: Easily Harvest (Scrape) Web Pages</em>. <a href="https://CRAN.R-project.org/package=rvest" class="uri">https://CRAN.R-project.org/package=rvest</a>.</p>
+<p>———. 2021b. <em>Rvest: Easily Harvest (Scrape) Web Pages</em>. <a href="https://CRAN.R-project.org/package=rvest" class="external-link uri">https://CRAN.R-project.org/package=rvest</a>.</p>
 </div>
 <div id="ref-tidyr" class="csl-entry">
-<p>———. 2021c. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
+<p>———. 2021c. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="external-link uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
 </div>
 <div id="ref-usethis" class="csl-entry">
-<p>Wickham, Hadley, Jennifer Bryan, and Malcolm Barrett. 2021. <em>Usethis: Automate Package and Project Setup</em>. <a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>.</p>
+<p>Wickham, Hadley, Jennifer Bryan, and Malcolm Barrett. 2021. <em>Usethis: Automate Package and Project Setup</em>. <a href="https://CRAN.R-project.org/package=usethis" class="external-link uri">https://CRAN.R-project.org/package=usethis</a>.</p>
 </div>
 <div id="ref-dplyr" class="csl-entry">
-<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2021. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2021. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="external-link uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
 </div>
 <div id="ref-pkgdown" class="csl-entry">
-<p>Wickham, Hadley, and Jay Hesselberth. 2020. <em>Pkgdown: Make Static HTML Documentation for a Package</em>. <a href="https://CRAN.R-project.org/package=pkgdown" class="uri">https://CRAN.R-project.org/package=pkgdown</a>.</p>
+<p>Wickham, Hadley, and Jay Hesselberth. 2020. <em>Pkgdown: Make Static HTML Documentation for a Package</em>. <a href="https://CRAN.R-project.org/package=pkgdown" class="external-link uri">https://CRAN.R-project.org/package=pkgdown</a>.</p>
 </div>
 <div id="ref-knitr" class="csl-entry">
-<p>Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research in R.” In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>.</p>
+<p>Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research in R.” In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595" class="external-link uri">http://www.crcpress.com/product/isbn/9781466561595</a>.</p>
 </div>
 <div id="ref-rmarkdown" class="csl-entry">
-<p>Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbook</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>.</p>
+<p>Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbook</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="external-link uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>.</p>
 </div>
 </div>
 </div>
@@ -363,45 +356,57 @@ rmd <- create_rmd(cites)
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/urswilke/pyramidi/">https://​github.com/​urswilke/​pyramidi/​</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Urs Wilke <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7257-2524" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://github.com/urswilke/pyramidi/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/github/urswilke/pyramidi"><img src="https://travis-ci.org/urswilke/pyramidi.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://app.codecov.io/gh/urswilke/pyramidi?branch=master"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/urswilke/pyramidi/actions"><img src="https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing pyramidi</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Urs Wilke <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7257-2524" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/github/urswilke/pyramidi" class="external-link"><img src="https://travis-ci.org/urswilke/pyramidi.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://app.codecov.io/gh/urswilke/pyramidi?branch=master" class="external-link"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/urswilke/pyramidi/actions" class="external-link"><img src="https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Urs Wilke.</p>
+  <p></p>
+<p>Developed by Urs Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -409,6 +414,8 @@ rmd <- create_rmd(cites)
 
   
 
+
+  
 
   </body>
 </html>

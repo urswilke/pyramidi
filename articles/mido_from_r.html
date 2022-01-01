@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/pyramidi.html">Get started</a>
 </li>
@@ -66,15 +62,16 @@
       <a href="../articles/functions_usage.html">Usage of pyramidi functions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/urswilke/pyramidi/">
+  <a href="https://github.com/urswilke/pyramidi/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -95,39 +92,39 @@
       <h1 data-toc-skip>Using mido directly from R</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/master/vignettes/mido_from_r.Rmd"><code>vignettes/mido_from_r.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/HEAD/vignettes/mido_from_r.Rmd" class="external-link"><code>vignettes/mido_from_r.Rmd</code></a></small>
       <div class="hidden name"><code>mido_from_r.Rmd</code></div>
 
     </div>
 
     
     
-<div id="setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#setup" class="anchor"></a>Setup</h2>
-<p>By using <code><a href="../reference/install_miditapyr.html">install_miditapyr()</a></code>, this should also install <a href="https://github.com/mido/mido">mido</a> which is a dependency of miditapyr:</p>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<p>By using <code><a href="../reference/install_miditapyr.html">install_miditapyr()</a></code>, this should also install <a href="https://github.com/mido/mido" class="external-link">mido</a> which is a dependency of miditapyr:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pyramidi</span><span class="fu">::</span><span class="fu"><a href="../reference/install_miditapyr.html">install_miditapyr</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">"r-reticulate"</span><span class="op">)</span>
 <span class="co">#&gt; Using virtual environment 'r-reticulate' ...</span></code></pre></div>
-<p>Now we’ll load some R and the python mido &amp; miditapyr libraries with the <code><a href="https://rdrr.io/pkg/reticulate/man/import.html">reticulate::import()</a></code> function. The loading of <code><a href="https://rdrr.io/pkg/reticulate/man/import.html">import_builtins()</a></code> into <code>pb</code> will allow to work with python objects from R:</p>
+<p>Now we’ll load some R and the python mido &amp; miditapyr libraries with the <code><a href="https://rdrr.io/pkg/reticulate/man/import.html" class="external-link">reticulate::import()</a></code> function. The loading of <code><a href="https://rdrr.io/pkg/reticulate/man/import.html" class="external-link">import_builtins()</a></code> into <code>pb</code> will allow to work with python objects from R:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate">reticulate</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yonicd/details">details</a></span><span class="op">)</span>
-<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span>
-<span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
-<span class="va">pb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import_builtins</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate" class="external-link">reticulate</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi" class="external-link">pyramidi</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yonicd/details" class="external-link">details</a></span><span class="op">)</span>
+<span class="va">mido</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"mido"</span><span class="op">)</span>
+<span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"miditapyr"</span><span class="op">)</span>
+<span class="va">pb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html" class="external-link">import_builtins</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="load-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-file" class="anchor"></a>Load file</h2>
-<p>Here we’ll load the midi file included in the package into a <a href="https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile"><code>mido.MidiFile</code></a> object:</p>
+<div class="section level2">
+<h2 id="load-file">Load file<a class="anchor" aria-label="anchor" href="#load-file"></a>
+</h2>
+<p>Here we’ll load the midi file included in the package into a <a href="https://mido.readthedocs.io/en/latest/lib.html#mido.MidiFile" class="external-link"><code>mido.MidiFile</code></a> object:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">midi_file</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></code></pre></div>
-<pre class="details"><code>midi_file</code></pre>
+<pre class="details"><code><span class="va">midi_file</span></code></pre>
 <details closed><p><summary><span title="Click to Open"> Click here to show the printed mido <code>MidiFile()</code> object </span> </summary></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">MidiFile</span>(<span class="dt">type=</span><span class="dv">1</span>, <span class="dt">ticks_per_beat=</span><span class="dv">960</span>, <span class="dt">tracks=</span>[</span>
@@ -406,16 +403,16 @@
 </details><p><br></p>
 <p>This object is a list object, containing besides some meta information multiple <code>MidiTrack()</code>s which are themselves also lists containing the midi event messages.</p>
 </div>
-<div id="transform-to-unnested-dataframe" class="section level2">
-<h2 class="hasAnchor">
-<a href="#transform-to-unnested-dataframe" class="anchor"></a>Transform to unnested dataframe</h2>
-<p>We can transform the midi data to a data.frame similar to the one returned by <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi"><code>unnest_midi()</code></a> from the miditapyr package. We’ll only use the data of the first track of the midi file:</p>
+<div class="section level2">
+<h2 id="transform-to-unnested-dataframe">Transform to unnested dataframe<a class="anchor" aria-label="anchor" href="#transform-to-unnested-dataframe"></a>
+</h2>
+<p>We can transform the midi data to a data.frame similar to the one returned by <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi" class="external-link"><code>unnest_midi()</code></a> from the miditapyr package. We’ll only use the data of the first track of the midi file:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># access first track:</span>
 <span class="va">track1</span> <span class="op">&lt;-</span> <span class="va">midi_file</span><span class="op">$</span><span class="va">tracks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># transform MidiTrack() object to an R list of mido Message()s and MetaMessage()s:</span>
 <span class="va">track1list</span> <span class="op">&lt;-</span> <span class="va">pb</span><span class="op">$</span><span class="fu">list</span><span class="op">(</span><span class="va">track1</span><span class="op">)</span></code></pre></div>
-<pre class="details"><code>track1list</code></pre>
+<pre class="details"><code><span class="va">track1list</span></code></pre>
 <details closed><p><summary><span title="Click to Open"> Show details of list in R </span> </summary></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2"></a>[[<span class="dv">1</span>]]</span>
@@ -901,10 +898,9 @@
 <p>The list contains mido <code>Message()</code> &amp; <code>MetaMessage()</code> objects (<code>Message()</code>s seem to have a special print method).</p>
 <p>With the function <code>pb$vars()</code> we can extract all variables for every event into a list of named R lists:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">track1Rlist</span> <span class="op">&lt;-</span> <span class="va">track1list</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">pb</span><span class="op">$</span><span class="va">vars</span><span class="op">)</span></code></pre></div>
-<pre class="details"><code>track1Rlist[1:10]
-</code></pre>
+<code class="sourceCode R"><span class="va">track1Rlist</span> <span class="op">&lt;-</span> <span class="va">track1list</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">pb</span><span class="op">$</span><span class="va">vars</span><span class="op">)</span></code></pre></div>
+<pre class="details"><code><span class="va">track1Rlist</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre>
 <details closed><p><summary><span title="Click to Open"> Show details of first 10 elements of track events list in R </span> </summary></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2"></a>[[<span class="dv">1</span>]]</span>
@@ -1069,48 +1065,48 @@
 </details><p><br></p>
 <p>We can put this list of message lists in a dataframe and write the values of each key in their own column:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">track1Rlist</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 160 × 11</span>
+<code class="sourceCode R"><span class="va">track1Rlist</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 160 × 11</span></span>
 <span class="co">#&gt;    type       name      time  note velocity channel  tempo numerator denominator</span>
-<span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt; &lt;int&gt;    &lt;int&gt;   &lt;int&gt;  &lt;int&gt;     &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 track_name drum-t1…     0    NA       NA      NA     NA        NA          NA</span>
-<span class="co">#&gt;  2 note_on    &lt;NA&gt;         0    43       72       9     NA        NA          NA</span>
-<span class="co">#&gt;  3 note_on    &lt;NA&gt;         0    39       64       9     NA        NA          NA</span>
-<span class="co">#&gt;  4 note_on    &lt;NA&gt;         0    36      101       9     NA        NA          NA</span>
-<span class="co">#&gt;  5 set_tempo  &lt;NA&gt;         0    NA       NA      NA 666666        NA          NA</span>
-<span class="co">#&gt;  6 time_sign… &lt;NA&gt;         0    NA       NA      NA     NA         4           4</span>
-<span class="co">#&gt;  7 note_off   &lt;NA&gt;       240    43       72       9     NA        NA          NA</span>
-<span class="co">#&gt;  8 note_off   &lt;NA&gt;         0    39       64       9     NA        NA          NA</span>
-<span class="co">#&gt;  9 note_off   &lt;NA&gt;         0    36      101       9     NA        NA          NA</span>
-<span class="co">#&gt; 10 note_on    &lt;NA&gt;       240    42      101       9     NA        NA          NA</span>
-<span class="co">#&gt; # … with 150 more rows, and 2 more variables: clocks_per_click &lt;int&gt;,</span>
-<span class="co">#&gt; #   notated_32nd_notes_per_beat &lt;int&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> track_name drum-t1…     0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> note_on    <span style="color: #BB0000;">NA</span>           0    43       72       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> note_on    <span style="color: #BB0000;">NA</span>           0    39       64       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> note_on    <span style="color: #BB0000;">NA</span>           0    36      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> set_tempo  <span style="color: #BB0000;">NA</span>           0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span> <span style="text-decoration: underline;">666</span>666        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> time_sign… <span style="color: #BB0000;">NA</span>           0    <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>         4           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> note_off   <span style="color: #BB0000;">NA</span>         240    43       72       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> note_off   <span style="color: #BB0000;">NA</span>           0    39       64       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> note_off   <span style="color: #BB0000;">NA</span>           0    36      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> note_on    <span style="color: #BB0000;">NA</span>         240    42      101       9     <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 150 more rows, and 2 more variables: clocks_per_click &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   notated_32nd_notes_per_beat &lt;int&gt;</span></span></code></pre></div>
 </div>
-<div id="compare-with-pyramidi" class="section level2">
-<h2 class="hasAnchor">
-<a href="#compare-with-pyramidi" class="anchor"></a>Compare with pyramidi</h2>
-<p>For comparison, we plot the results of <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi"><code>unnest_midi()</code></a></p>
+<div class="section level2">
+<h2 id="compare-with-pyramidi">Compare with pyramidi<a class="anchor" aria-label="anchor" href="#compare-with-pyramidi"></a>
+</h2>
+<p>For comparison, we plot the results of <a href="https://miditapyr.readthedocs.io/en/latest/miditapyr.html#miditapyr.mido_io.unnest_midi" class="external-link"><code>unnest_midi()</code></a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span>
-<span class="va">mt</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span>dfc <span class="op">=</span> <span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_raw</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 268 × 13</span>
+<span class="va">mt</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span>dfc <span class="op">=</span> <span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_raw</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 13</span></span>
 <span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
-<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
-<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
-<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; # … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 TRUE  track_name <span style="color: #949494;">&lt;chr </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  set_tempo  <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span> <span style="text-decoration: underline;">666</span>666       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  time_sign… <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…   240    42      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></span></code></pre></div>
 <p>There are some differences in the types and <code>track1Rlist</code> only contains the data of track 1, but you can see that apart from that, the output is the same.</p>
 </div>
   </div>
@@ -1126,11 +1122,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Urs Wilke.</p>
+  <p></p>
+<p>Developed by Urs Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -1138,6 +1136,8 @@
 
   
 
+
+  
 
   </body>
 </html>

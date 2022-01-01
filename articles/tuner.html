@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pyramidi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/pyramidi.html">Get started</a>
 </li>
@@ -66,15 +62,16 @@
       <a href="../articles/functions_usage.html">Usage of pyramidi functions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/urswilke/pyramidi/">
+  <a href="https://github.com/urswilke/pyramidi/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -95,68 +92,68 @@
       <h1 data-toc-skip>Using the tuneR package</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/master/vignettes/tuner.Rmd"><code>vignettes/tuner.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/urswilke/pyramidi/blob/HEAD/vignettes/tuner.Rmd" class="external-link"><code>vignettes/tuner.Rmd</code></a></small>
       <div class="hidden name"><code>tuner.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette shows how a midi file can also be read in by the <a href="https://cran.r-project.org/package=tuneR">tuneR</a> package and then written to disc. However, for other midi files the code might need to be adapted a bit.</p>
-<div id="load-libraries" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-libraries" class="anchor"></a>Load libraries</h2>
+<p>This vignette shows how a midi file can also be read in by the <a href="https://cran.r-project.org/package=tuneR" class="external-link">tuneR</a> package and then written to disc. However, for other midi files the code might need to be adapted a bit.</p>
+<div class="section level2">
+<h2 id="load-libraries">Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi">pyramidi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot">zeallot</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urswilke/pyramidi" class="external-link">pyramidi</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nteetor/zeallot" class="external-link">zeallot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="read-midi-in-unnested-format" class="section level2">
-<h2 class="hasAnchor">
-<a href="#read-midi-in-unnested-format" class="anchor"></a>Read midi in unnested format</h2>
-<div id="pyramidi" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pyramidi" class="anchor"></a>pyramidi</h3>
+<div class="section level2">
+<h2 id="read-midi-in-unnested-format">Read midi in unnested format<a class="anchor" aria-label="anchor" href="#read-midi-in-unnested-format"></a>
+</h2>
+<div class="section level3">
+<h3 id="pyramidi">pyramidi<a class="anchor" aria-label="anchor" href="#pyramidi"></a>
+</h3>
 <p>With pyramidi data can be loaded into a unnested dataframe like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">mid_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
+<span class="va">mid_file_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span>
 <span class="va">mido_mid_file</span> <span class="op">&lt;-</span> <span class="va">mido</span><span class="op">$</span><span class="fu">MidiFile</span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span>
 <span class="va">dfc</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">frame_midi</span><span class="op">(</span><span class="va">mido_mid_file</span><span class="op">)</span>
 <span class="va">ticks_per_beat</span> <span class="op">=</span> <span class="va">mido_mid_file</span><span class="op">$</span><span class="va">ticks_per_beat</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">dfc</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">dfc</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="va">miditapyr</span><span class="op">$</span><span class="fu">unnest_midi</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">df</span>
-<span class="co">#&gt; # A tibble: 268 × 13</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 268 × 13</span></span>
 <span class="co">#&gt;    i_track meta  type       name    time  note velocity channel  tempo numerator</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;      &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1       0 TRUE  track_name &lt;chr …     0   NaN      NaN     NaN    NaN       NaN</span>
-<span class="co">#&gt;  2       0 FALSE note_on    &lt;dbl …     0    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  3       0 FALSE note_on    &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  4       0 FALSE note_on    &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt;  5       0 TRUE  set_tempo  &lt;dbl …     0   NaN      NaN     NaN 666666       NaN</span>
-<span class="co">#&gt;  6       0 TRUE  time_sign… &lt;dbl …     0   NaN      NaN     NaN    NaN         4</span>
-<span class="co">#&gt;  7       0 FALSE note_off   &lt;dbl …   240    43       72       9    NaN       NaN</span>
-<span class="co">#&gt;  8       0 FALSE note_off   &lt;dbl …     0    39       64       9    NaN       NaN</span>
-<span class="co">#&gt;  9       0 FALSE note_off   &lt;dbl …     0    36      101       9    NaN       NaN</span>
-<span class="co">#&gt; 10       0 FALSE note_on    &lt;dbl …   240    42      101       9    NaN       NaN</span>
-<span class="co">#&gt; # … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 TRUE  track_name <span style="color: #949494;">&lt;chr </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 TRUE  set_tempo  <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span> <span style="text-decoration: underline;">666</span>666       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 TRUE  time_sign… <span style="color: #949494;">&lt;dbl </span>…     0   <span style="color: #BB0000;">NaN</span>      <span style="color: #BB0000;">NaN</span>     <span style="color: #BB0000;">NaN</span>    <span style="color: #BB0000;">NaN</span>         4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…   240    43       72       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    39       64       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE note_off   <span style="color: #949494;">&lt;dbl </span>…     0    36      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE note_on    <span style="color: #949494;">&lt;dbl </span>…   240    42      101       9    <span style="color: #BB0000;">NaN</span>       <span style="color: #BB0000;">NaN</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 258 more rows, and 3 more variables: denominator &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   clocks_per_click &lt;dbl&gt;, notated_32nd_notes_per_beat &lt;dbl&gt;</span></span></code></pre></div>
 </div>
-<div id="tuner" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tuner" class="anchor"></a>tuneR</h3>
+<div class="section level3">
+<h3 id="tuner">tuneR<a class="anchor" aria-label="anchor" href="#tuner"></a>
+</h3>
 <p>With tuneR this can be done for this file in the following way:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_tuner</span> <span class="op">&lt;-</span> <span class="fu">tuneR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMidi.html">readMidi</a></span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df_tuner</span> <span class="op">&lt;-</span> <span class="fu">tuneR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMidi.html" class="external-link">readMidi</a></span><span class="op">(</span><span class="va">mid_file_str</span><span class="op">)</span></code></pre></div>
 <p>(<em>for other midi files the cleaning code would have to be adapted</em>)</p>
 </div>
-<div id="changing-format-in-tuner-dataframe" class="section level3">
-<h3 class="hasAnchor">
-<a href="#changing-format-in-tuner-dataframe" class="anchor"></a>Changing format in tuneR dataframe</h3>
+<div class="section level3">
+<h3 id="changing-format-in-tuner-dataframe">Changing format in tuneR dataframe<a class="anchor" aria-label="anchor" href="#changing-format-in-tuner-dataframe"></a>
+</h3>
 <ul>
 <li>to make compatible with pyramidi</li>
 </ul>
@@ -166,7 +163,7 @@
 <span class="co"># https://mido.readthedocs.io/en/latest/message_types.html &amp;</span>
 <span class="co"># https://mido.readthedocs.io/en/latest/meta_message_types.html</span>
 <span class="va">rename_type_vec</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
     <span class="st">"Set Tempo"</span>           <span class="op">=</span> <span class="st">"set_tempo"</span>,
     <span class="st">"Time Signature"</span>      <span class="op">=</span> <span class="st">"time_signature"</span>,
     <span class="st">"Note On"</span>             <span class="op">=</span> <span class="st">"note_on"</span>,
@@ -181,58 +178,58 @@
 
 
 <span class="co"># transform the tuneR data.frame to the pyramidi format :</span>
-<span class="va">df_tuner_mod</span> <span class="op">&lt;-</span> <span class="va">df_tuner</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">event</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>meta <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>type     <span class="op">=</span> <span class="va">event</span>,
+<span class="va">df_tuner_mod</span> <span class="op">&lt;-</span> <span class="va">df_tuner</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">event</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>meta <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>type     <span class="op">=</span> <span class="va">event</span>,
          note     <span class="op">=</span> <span class="va">parameter1</span>,
          velocity <span class="op">=</span> <span class="va">parameter2</span>,
-         i_track  <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type  <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">type</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rename_type_vec</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>tempo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"set_tempo"</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">parameterMetaSystem</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"track_name"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>temp  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"time_signature"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">temp</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"numerator"</span>, 
+         i_track  <span class="op">=</span> <span class="va">track</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>type  <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html" class="external-link">recode</a></span><span class="op">(</span><span class="va">type</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rename_type_vec</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tempo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"set_tempo"</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">parameterMetaSystem</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"track_name"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>temp  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"time_signature"</span>, <span class="va">parameterMetaSystem</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">separate</a></span><span class="op">(</span><span class="va">temp</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"numerator"</span>, 
                    <span class="st">"denominator"</span>, 
                    <span class="st">"clocks_per_click"</span>, 
                    <span class="st">"temp1"</span>, <span class="st">"temp2"</span>, 
                    <span class="st">"notated_32nd_notes_per_beat"</span><span class="op">)</span>,
-           convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">temp1</span>, <span class="op">-</span><span class="va">temp2</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">i_track</span>, <span class="va">time</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">i_track</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+           convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">temp1</span>, <span class="op">-</span><span class="va">temp2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">i_track</span>, <span class="va">time</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">i_track</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="co"># calculate time increments instead of total time:</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">time</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="cn">NaN</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">time</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html" class="external-link">lag</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="op">{</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>; <span class="va">.</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="cn">NaN</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="co"># small correction of transforming "NA" strings into real NA values:</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">parameterMetaSystem</span><span class="op">)</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">parameterMetaSystem</span><span class="op">)</span>
 <span class="co">#&gt; Warning in ifelse(type == "set_tempo", as.integer(parameterMetaSystem), : NAs</span>
 <span class="co">#&gt; introduced by coercion</span>
 <span class="co">#&gt; Warning: Expected 6 pieces. Additional pieces discarded in 1 rows [6].</span></code></pre></div>
 </div>
-<div id="translate-to-pyramidi-format" class="section level3">
-<h3 class="hasAnchor">
-<a href="#translate-to-pyramidi-format" class="anchor"></a>Translate to pyramidi format</h3>
+<div class="section level3">
+<h3 id="translate-to-pyramidi-format">Translate to pyramidi format<a class="anchor" aria-label="anchor" href="#translate-to-pyramidi-format"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">df_tuner_mod</span>, <span class="va">ticks_per_beat</span><span class="op">)</span>
 
 
-<span class="va">dfm</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/split_midi_frame.html">split_midi_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html">%-&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_not_notes</span>, <span class="va">df_notes_wide</span><span class="op">)</span>
+<span class="va">dfm</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/split_midi_frame.html">split_midi_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/zeallot/man/operator.html" class="external-link">%-&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_not_notes</span>, <span class="va">df_notes_wide</span><span class="op">)</span>
 
 <span class="va">df_meta</span> <span class="op">&lt;-</span>
   <span class="va">df_meta</span></code></pre></div>
 </div>
 </div>
-<div id="export-midi-file-from-tuner-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#export-midi-file-from-tuner-data" class="anchor"></a>Export midi file from tuneR data</h2>
+<div class="section level2">
+<h2 id="export-midi-file-from-tuner-data">Export midi file from tuneR data<a class="anchor" aria-label="anchor" href="#export-midi-file-from-tuner-data"></a>
+</h2>
 <p>Now we have the data in 3 objects that <code>MidiFramer</code> can understand. First let’s create an empty <code>MidiFramer</code> object:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -262,11 +259,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Urs Wilke.</p>
+  <p></p>
+<p>Developed by Urs Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -274,6 +273,8 @@
 
   
 
+
+  
 
   </body>
 </html>
