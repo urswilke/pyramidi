@@ -191,7 +191,7 @@ MidiFramer <- R6::R6Class(
     #' @field ticks_per_beat
     #' Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
     #' The value of \code{ticks_per_beat} passed should be integer.
-    #' When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.
+    #' When a value is passed, the field \code{mf$midi_file$ticks_per_beat} is modified.
     ticks_per_beat = function(value) {
       if (missing(value)) return(self$mf$midi_file$ticks_per_beat)
       if (!is.numeric(value)) {

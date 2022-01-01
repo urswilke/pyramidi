@@ -118,7 +118,7 @@ mfr$play()
 
 \item{\code{ticks_per_beat}}{Set ticks per beat of \code{MidiFrames()$mf$midi_file}.
 The value of \code{ticks_per_beat} passed should be integer.
-When a value is passed, the field \code{mf$midi_file field$ticks_per_beat} is modified.}
+When a value is passed, the field \code{mf$midi_file$ticks_per_beat} is modified.}
 }
 \if{html}{\out{</div>}}
 }
