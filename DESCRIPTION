@@ -18,9 +18,8 @@ Config/reticulate:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports: 
-    raudiomate,
     reticulate,
     tibble,
     details,
@@ -32,7 +31,10 @@ Imports:
     zeallot,
     magrittr,
     rlang,
-    R6
+    R6,
+    av,
+    fluidsynth,
+    pichor
 URL: https://github.com/urswilke/pyramidi, https://urswilke.github.io/pyramidi/
 Depends: 
     R (>= 2.10)
@@ -47,7 +49,8 @@ Suggests:
     DiagrammeR,
     tuneR
 Remotes: 
-    urswilke/raudiomate
+    ropensci/fluidsynth,
+    mikldk/pichor
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 RdMacros: details

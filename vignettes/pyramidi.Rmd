@@ -32,8 +32,6 @@ library(purrr)
 library(htmltools)
 library(tibble)
 library(details)
-# This is a small helper package, that allows to synthesize & play midi files:
-library(raudiomate) # see https://github.com/urswilke/raudiomate
 ```
 
 ## `MidiFramer` class

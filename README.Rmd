@@ -1,6 +1,6 @@
 ---
 output: github_document
-bibliography: pkg-refs.bib
+bibliography: grateful-refs.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -23,13 +23,9 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-**Work in progress!**
-
-♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ 
-
 # Introduction
 
-The goal of pyramidi is to reproducibly generate / manipulate midi data from R.
+pyramidi is an experimental package to generate / manipulate midi data from R.
 Midi data is read into dataframes, using the python package [miditapyr](https://pypi.org/project/miditapyr/) 
 under the hood (which itself uses the excellent [mido](https://github.com/mido/mido)). 
 The notes' midi information (one line per `note_on`/`note_off` midi event) 
@@ -42,13 +38,14 @@ However, you need to make sure yourself that the midi files you write can be und
 The data is not yet validated by pyramidi, 
 but mido (also used to write midi files) already catches some of the possible inconsistencies. 
 
-Via the small helper package [raudiomate](https://github.com/urswilke/raudiomate) the midi data can be 
+The midi data can be 
 
-* synthesized to wav files with `raudiomate::synthesize_midi()` (needs [fluidsynth](https://www.fluidsynth.org/) installed),
-* converted to mp3 files with `raudiomate::convert_to_mp3()` (needs [ffmpeg](https://www.ffmpeg.org/)),
+* played live in the R console thanks to the excellent R packages [fluidsynth](https://github.com/ropensci/fluidsynth) & [av](https://github.com/ropensci/av/) (see [here](............................................)), or
+* synthesized to wav files with `fluidsynth::midi_convert()` (needs [fluidsynth](https://www.fluidsynth.org/) installed, but if I understand correctly R will do that for you),
+* converted to mp3 files with `av::av_audio_convert()` 
 * and played in rmarkdown documents with the 
 [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play) 
-method of `MidiFramer` (using `raudiomate::player()`).
+method of `MidiFramer`).
 
 If you're new to midi, [mido's documentation](https://mido.readthedocs.io/en/latest/) might be a good start.
 
@@ -186,7 +183,11 @@ You can find the complete online documentation of the package [here](https://urs
 * `vignette("functions_usage")` illustrates the low-level functions of the pyramidi package.
 that `MidiFramer` objects use under the hood.
 
+## pyramidi out in the wild
 
+To see examples where pyramidi is used for midi mangling in R dataframes etc. (amongst plenty other of his awesome writings about music),
+please check out Matt Crump's [blog](https://homophony.quest/notes.html#category=midi)
+and his package [midiblender](https://www.crumplab.com/midiblender/articles/Getting_started.html)!
 
 ## Related R packages
 
@@ -196,53 +197,19 @@ that `MidiFramer` objects use under the hood.
 * The [tuneR](https://cran.r-project.org/package=tuneR) package can also read in midi data. See the `vignette("tuner")`, for an example how you can transform the tuner format into the pyramidi format. 
 
 
-<!-- 
-The following as well as the bibtex file "pkg-refs.bib" were automatically
-created with the commands:
-library(grateful)
-pkgs <- scan_packages()
-# don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi", "raudiomate")] %>% c("rayrender", "magick")
-cites <- get_citations(pkgs)
-rmd <- create_rmd(cites)
-
--> then copy the list in the created refs.Rmd below
-
--->
-
 ## R packages used
 
 This package stands on the shoulders of giants. A big thank you to the authors of the following libraries!
 
-- base [@base]
-- pkgdown [@pkgdown]
-- dplyr [@dplyr]
-- forcats [@forcats]
-- tibble [@tibble]
-- tidyr [@tidyr]
-- usethis [@usethis]
-- pichor [@pichor]
-- purrr [@purrr]
-- rvest [@rvest]
-- reticulate [@reticulate]
-- details [@details]
-- stringr [@stringr]
-- ggplot2 [@ggplot2]
-- zeallot [@zeallot]
-- magrittr [@magrittr]
-- rlang [@rlang]
-- R6 [@R6]
-- spelling [@spelling]
-- knitr [@knitr]
-- rmarkdown [@rmarkdown]
-- testthat [@testthat]
-- htmltools [@htmltools]
-- covr [@covr]
-- DiagrammeR [@DiagrammeR]
-- tuneR [@tuneR]
-- tools [@tools]
-- utils [@utils]
-- rayrender [@rayrender]
-- magick [@magick]
+```{r, echo=FALSE, warning=FALSE}
+pkgs <- grateful::cite_packages(
+  output = "table",
+  out.dir = ".", 
+  omit = c("pyramidi"),
+)
+knitr::kable(pkgs)
+```
 
-## References
+
+
+

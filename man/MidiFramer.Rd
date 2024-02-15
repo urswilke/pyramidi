@@ -125,16 +125,16 @@ When a value is passed, the field \code{mf$midi_file$ticks_per_beat} is modified
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{MidiFramer$new()}}
-\item \href{#method-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
-\item \href{#method-populate_r_fields}{\code{MidiFramer$populate_r_fields()}}
-\item \href{#method-play}{\code{MidiFramer$play()}}
-\item \href{#method-clone}{\code{MidiFramer$clone()}}
+\item \href{#method-MidiFramer-new}{\code{MidiFramer$new()}}
+\item \href{#method-MidiFramer-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
+\item \href{#method-MidiFramer-populate_r_fields}{\code{MidiFramer$populate_r_fields()}}
+\item \href{#method-MidiFramer-play}{\code{MidiFramer$play()}}
+\item \href{#method-MidiFramer-clone}{\code{MidiFramer$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-MidiFramer-new"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize a MidiFramer object
 \subsection{Usage}{
@@ -150,8 +150,8 @@ Initialize a MidiFramer object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-update_notes_wide"></a>}}
-\if{latex}{\out{\hypertarget{method-update_notes_wide}{}}}
+\if{html}{\out{<a id="method-MidiFramer-update_notes_wide"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-update_notes_wide}{}}}
 \subsection{Method \code{update_notes_wide()}}{
 Update a MidiFramer object with modified notes
 \subsection{Usage}{
@@ -197,8 +197,8 @@ mfr$play()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-populate_r_fields"></a>}}
-\if{latex}{\out{\hypertarget{method-populate_r_fields}{}}}
+\if{html}{\out{<a id="method-MidiFramer-populate_r_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-populate_r_fields}{}}}
 \subsection{Method \code{populate_r_fields()}}{
 Populate the fields of a MidiFramer object
 
@@ -223,8 +223,8 @@ mfr$populate_r_fields()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-play"></a>}}
-\if{latex}{\out{\hypertarget{method-play}{}}}
+\if{html}{\out{<a id="method-MidiFramer-play"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-play}{}}}
 \subsection{Method \code{play()}}{
 Play midi from MidiFramer object.
 Transform the midi file to fileext format and provide a play button for html
@@ -232,9 +232,10 @@ documents.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MidiFramer$play(
   audiofile = tempfile("mf_out_", fileext = ".wav"),
-  overwrite = FALSE,
-  soundfont = NULL,
-  verbose = FALSE
+  overwrite = TRUE,
+  soundfont = fluidsynth::soundfont_path(),
+  verbose = FALSE,
+  live = interactive()
 )}\if{html}{\out{</div>}}
 }
 
@@ -248,10 +249,14 @@ first be synthesized to wav, and then converted to mp3 with ffmpeg.}
 if file exists and overwrite = FALSE, the existing files will be used and nothing
 is synthesized/converted to audio files.}
 
-\item{\code{soundfont}}{path to sf2 sound font (character string); if NULL (the default)
-the default soundfont is used.}
+\item{\code{soundfont}}{path to sf2 sound font (character string); if not specified,
+the default soundfont of the fluidsynth package (\code{fluidsynth::soundfont_path()}) will be (downloaded if not present and) used.}
 
 \item{\code{verbose}}{logical whether to print fluidsynth (and ffmpeg in case of mp3 audiofile type) command line output; defaults to FALSE}
+
+\item{\code{live}}{logical; if \code{TRUE} the synthesized midi is directly played in
+the console. If \code{FALSE} an audio html tag is written. This will generate
+a small audio player in a knitr Rmd document (and probably also Quarto qmd files).}
 }
 \if{html}{\out{</div>}}
 }
@@ -269,8 +274,8 @@ mfr$play()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-MidiFramer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

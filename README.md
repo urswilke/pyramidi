@@ -14,13 +14,9 @@ coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-**Work in progress!**
-
-♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬ ♪ ♫ ♩ ♬
-
 # Introduction
 
-The goal of pyramidi is to reproducibly generate / manipulate midi data
+pyramidi is an experimental package to generate / manipulate midi data
 from R. Midi data is read into dataframes, using the python package
 [miditapyr](https://pypi.org/project/miditapyr/) under the hood (which
 itself uses the excellent [mido](https://github.com/mido/mido)). The
@@ -36,17 +32,19 @@ files you write can be understood by your softsynth. The data is not yet
 validated by pyramidi, but mido (also used to write midi files) already
 catches some of the possible inconsistencies.
 
-Via the small helper package
-[raudiomate](https://github.com/urswilke/raudiomate) the midi data can
-be
+The midi data can be
 
--   synthesized to wav files with `raudiomate::synthesize_midi()` (needs
-    [fluidsynth](https://www.fluidsynth.org/) installed),
--   converted to mp3 files with `raudiomate::convert_to_mp3()` (needs
-    [ffmpeg](https://www.ffmpeg.org/)),
--   and played in rmarkdown documents with the
-    [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play)
-    method of `MidiFramer` (using `raudiomate::player()`).
+- played live in the R console thanks to the excellent R packages
+  [fluidsynth](https://github.com/ropensci/fluidsynth) &
+  [av](https://github.com/ropensci/av/) (see
+  [here](............................................)), or
+- synthesized to wav files with `fluidsynth::midi_convert()` (needs
+  [fluidsynth](https://www.fluidsynth.org/) installed, but if I
+  understand correctly R will do that for you),
+- converted to mp3 files with `av::av_audio_convert()`
+- and played in rmarkdown documents with the
+  [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play)
+  method of `MidiFramer`).
 
 If you’re new to midi, [mido’s
 documentation](https://mido.readthedocs.io/en/latest/) might be a good
@@ -174,104 +172,91 @@ listen to the package midi file over and over again. :)
 You can find the complete online documentation of the package
 [here](https://urswilke.github.io/pyramidi/).
 
--   See the `vignette("pyramidi")` for a brief usage introduction how to
-    manipulate midi data.
--   The `vignette("compose")` shows a more extended example how to
-    compose music and generate midi files from scratch.
--   `vignette("package_workflow")` shows in detail the structure of the
-    `MidiFramer` class and the functions of the pyramidi package.
--   `vignette("functions_usage")` illustrates the low-level functions of
-    the pyramidi package. that `MidiFramer` objects use under the hood.
+- See the `vignette("pyramidi")` for a brief usage introduction how to
+  manipulate midi data.
+- The `vignette("compose")` shows a more extended example how to compose
+  music and generate midi files from scratch.
+- `vignette("package_workflow")` shows in detail the structure of the
+  `MidiFramer` class and the functions of the pyramidi package.
+- `vignette("functions_usage")` illustrates the low-level functions of
+  the pyramidi package. that `MidiFramer` objects use under the hood.
+
+## pyramidi out in the wild
+
+To see examples where pyramidi is used for midi mangling in R dataframes
+etc. (amongst plenty other of his awesome writings about music), please
+check out Matt Crump’s
+[blog](https://homophony.quest/notes.html#category=midi) and his package
+[midiblender](https://www.crumplab.com/midiblender/articles/Getting_started.html)!
 
 ## Related R packages
 
--   The [tabr](https://github.com/leonawicz/tabr) package is a massive
-    music notation, transcription and analysis program allowing to
-    create musical scores (using Lilypond). It allows to read midi files
-    (wrapping tuneR; see below) and also to export them (also using
-    Lilypond).
--   The [gm](https://github.com/flujoo/gm) package also allows to create
-    and show musical scores using musescore. It also allows to export
-    the music to audio (also using musescore) and to embed the players
-    in html documents.
--   The [noon package](https://github.com/ColinFay/noon) wraps node.js
-    libraries and can be used to read live midi input port data. I wrote
-    a small [blog
-    post](https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/)
-    how reading a midi port can also be done in R with
-    [mido](https://mido.readthedocs.io/en/latest/ports.html).
-    Interestingly, the node.js libraries and mido rely on a the same C++
-    library
-    [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
--   The [tuneR](https://cran.r-project.org/package=tuneR) package can
-    also read in midi data. See the `vignette("tuner")`, for an example
-    how you can transform the tuner format into the pyramidi format.
-
-<!-- 
-The following as well as the bibtex file "pkg-refs.bib" were automatically
-created with the commands:
-library(grateful)
-pkgs <- scan_packages()
-# don't know why including "R" gives an error ??
-pkgs <- pkgs[!pkgs %in% c("R", "pyramidi", "raudiomate")] %>% c("rayrender", "magick")
-cites <- get_citations(pkgs)
-rmd <- create_rmd(cites)
-
--> then copy the list in the created refs.Rmd below
-
--->
+- The [tabr](https://github.com/leonawicz/tabr) package is a massive
+  music notation, transcription and analysis program allowing to create
+  musical scores (using Lilypond). It allows to read midi files
+  (wrapping tuneR; see below) and also to export them (also using
+  Lilypond).
+- The [gm](https://github.com/flujoo/gm) package also allows to create
+  and show musical scores using musescore. It also allows to export the
+  music to audio (also using musescore) and to embed the players in html
+  documents.
+- The [noon package](https://github.com/ColinFay/noon) wraps node.js
+  libraries and can be used to read live midi input port data. I wrote a
+  small [blog
+  post](https://urssblogg.netlify.app/post/2020-10-24-live-recording-of-a-midi-controller-via-mido-inport/)
+  how reading a midi port can also be done in R with
+  [mido](https://mido.readthedocs.io/en/latest/ports.html).
+  Interestingly, the node.js libraries and mido rely on a the same C++
+  library [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html).
+- The [tuneR](https://cran.r-project.org/package=tuneR) package can also
+  read in midi data. See the `vignette("tuner")`, for an example how you
+  can transform the tuner format into the pyramidi format.
 
 ## R packages used
 
 This package stands on the shoulders of giants. A big thank you to the
 authors of the following libraries!
 
--   base (R Core Team 2021a)
--   pkgdown (Wickham and Hesselberth 2020)
--   dplyr (Wickham et al. 2021)
--   forcats (Wickham 2021a)
--   tibble (Müller and Wickham 2021)
--   tidyr (Wickham 2021c)
--   usethis (Wickham, Bryan, and Barrett 2021)
--   pichor (Andersen 2021)
--   purrr (Henry and Wickham 2020)
--   rvest (Wickham 2021b)
--   reticulate (Ushey, Allaire, and Tang 2021)
--   details (Sidi 2020)
--   stringr (Wickham 2019)
--   ggplot2 (Wickham 2016)
--   zeallot (Teetor 2018)
--   magrittr (Bache and Wickham 2020)
--   rlang (Henry and Wickham 2021)
--   R6 (Chang 2021)
--   spelling (Ooms and Hester 2020)
--   knitr (Xie 2014)
--   rmarkdown (Xie, Dervieux, and Riederer 2020)
--   testthat (Wickham 2011)
--   htmltools (Cheng et al. 2021)
--   covr (Hester 2020)
--   DiagrammeR (Iannone 2020)
--   tuneR (Ligges et al. 2018)
--   tools (R Core Team 2021b)
--   utils (R Core Team 2021c)
--   rayrender (Morgan-Wall 2021)
--   magick (Ooms 2021)
+| Package    | Version    | Citation                                                                                      |
+|:-----------|:-----------|:----------------------------------------------------------------------------------------------|
+| av         | 0.9.0      | Ooms (2023)                                                                                   |
+| base       | 4.3.2      | R Core Team (2023a)                                                                           |
+| details    | 0.3.0      | Sidi (2022)                                                                                   |
+| DiagrammeR | 1.0.11     | Iannone and Roy (2024)                                                                        |
+| fluidsynth | 0.1.0      | Ooms (2024)                                                                                   |
+| glue       | 1.7.0      | Hester and Bryan (2024)                                                                       |
+| grateful   | 0.2.6      | Rodriguez-Sanchez and Jackson (2023)                                                          |
+| htmltools  | 0.5.7      | Cheng et al. (2023)                                                                           |
+| knitr      | 1.45       | Xie (2014); Xie (2015); Xie (2023)                                                            |
+| pichor     | 0.0.0.9030 | Andersen (2024)                                                                               |
+| pkgdown    | 2.0.7      | Wickham, Hesselberth, and Salmon (2022)                                                       |
+| R6         | 2.5.1      | Chang (2021)                                                                                  |
+| reticulate | 1.35.0     | Ushey, Allaire, and Tang (2024)                                                               |
+| rmarkdown  | 2.25       | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2023) |
+| spelling   | 2.2.1      | Ooms and Hester (2023)                                                                        |
+| testthat   | 3.2.1      | Wickham (2011)                                                                                |
+| tidyverse  | 2.0.0      | Wickham et al. (2019)                                                                         |
+| tools      | 4.3.2      | R Core Team (2023b)                                                                           |
+| tuneR      | 1.4.6      | Ligges et al. (2023)                                                                          |
+| usethis    | 2.2.2      | Wickham et al. (2023)                                                                         |
+| zeallot    | 0.1.0      | Teetor (2018)                                                                                 |
 
-## References
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-rmarkdown2023" class="csl-entry">
 
-<div id="ref-pichor" class="csl-entry">
-
-Andersen, Mikkel Meyer. 2021. *Pichor: Piano Chords in r*.
+Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier
+Luraschi, Kevin Ushey, Aron Atkins, et al. 2023.
+*<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
+<https://github.com/rstudio/rmarkdown>.
 
 </div>
 
-<div id="ref-magrittr" class="csl-entry">
+<div id="ref-pichor" class="csl-entry">
 
-Bache, Stefan Milton, and Hadley Wickham. 2020. *Magrittr: A
-Forward-Pipe Operator for r*.
-<https://CRAN.R-project.org/package=magrittr>.
+Andersen, Mikkel Meyer. 2024. *<span class="nocase">pichor</span>: Piano
+Chords in r*.
 
 </div>
 
@@ -285,78 +270,59 @@ Semantics*. <https://CRAN.R-project.org/package=R6>.
 <div id="ref-htmltools" class="csl-entry">
 
 Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie,
-and Jeff Allen. 2021. *Htmltools: Tools for HTML*.
-<https://CRAN.R-project.org/package=htmltools>.
+and Jeff Allen. 2023. *<span class="nocase">htmltools</span>: Tools for
+HTML*. <https://CRAN.R-project.org/package=htmltools>.
 
 </div>
 
-<div id="ref-purrr" class="csl-entry">
+<div id="ref-glue" class="csl-entry">
 
-Henry, Lionel, and Hadley Wickham. 2020. *Purrr: Functional Programming
-Tools*. <https://CRAN.R-project.org/package=purrr>.
-
-</div>
-
-<div id="ref-rlang" class="csl-entry">
-
-———. 2021. *Rlang: Functions for Base Types and Core r and ’Tidyverse’
-Features*. <https://CRAN.R-project.org/package=rlang>.
-
-</div>
-
-<div id="ref-covr" class="csl-entry">
-
-Hester, Jim. 2020. *Covr: Test Coverage for Packages*.
-<https://CRAN.R-project.org/package=covr>.
+Hester, Jim, and Jennifer Bryan. 2024.
+*<span class="nocase">glue</span>: Interpreted String Literals*.
+<https://CRAN.R-project.org/package=glue>.
 
 </div>
 
 <div id="ref-DiagrammeR" class="csl-entry">
 
-Iannone, Richard. 2020. *DiagrammeR: Graph/Network Visualization*.
-<https://CRAN.R-project.org/package=DiagrammeR>.
+Iannone, Richard, and Olivier Roy. 2024. *DiagrammeR: Graph/Network
+Visualization*. <https://CRAN.R-project.org/package=DiagrammeR>.
 
 </div>
 
 <div id="ref-tuneR" class="csl-entry">
 
 Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
-2018. *<span class="nocase">tuneR</span>: Analysis of Music and Speech*.
+2023. *<span class="nocase">tuneR</span>: Analysis of Music and Speech*.
 <https://CRAN.R-project.org/package=tuneR>.
 
 </div>
 
-<div id="ref-rayrender" class="csl-entry">
+<div id="ref-av" class="csl-entry">
 
-Morgan-Wall, Tyler. 2021. *Rayrender: Build and Raytrace 3d Scenes*.
-<https://CRAN.R-project.org/package=rayrender>.
-
-</div>
-
-<div id="ref-tibble" class="csl-entry">
-
-Müller, Kirill, and Hadley Wickham. 2021. *Tibble: Simple Data Frames*.
-<https://CRAN.R-project.org/package=tibble>.
+Ooms, Jeroen. 2023. *<span class="nocase">av</span>: Working with Audio
+and Video in r*. <https://CRAN.R-project.org/package=av>.
 
 </div>
 
-<div id="ref-magick" class="csl-entry">
+<div id="ref-fluidsynth" class="csl-entry">
 
-Ooms, Jeroen. 2021. *Magick: Advanced Graphics and Image-Processing in
-r*. <https://CRAN.R-project.org/package=magick>.
+———. 2024. *<span class="nocase">fluidsynth</span>: Play and Render MIDI
+Files in r*. <https://docs.ropensci.org/fluidsynth/>.
 
 </div>
 
 <div id="ref-spelling" class="csl-entry">
 
-Ooms, Jeroen, and Jim Hester. 2020. *Spelling: Tools for Spell Checking
-in r*. <https://CRAN.R-project.org/package=spelling>.
+Ooms, Jeroen, and Jim Hester. 2023.
+*<span class="nocase">spelling</span>: Tools for Spell Checking in r*.
+<https://CRAN.R-project.org/package=spelling>.
 
 </div>
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2021a. *R: A Language and Environment for Statistical
+R Core Team. 2023a. *R: A Language and Environment for Statistical
 Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
 
@@ -364,118 +330,109 @@ Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 
 <div id="ref-tools" class="csl-entry">
 
-———. 2021b. *R: A Language and Environment for Statistical Computing*.
+———. 2023b. *R: A Language and Environment for Statistical Computing*.
 Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
 
 </div>
 
-<div id="ref-utils" class="csl-entry">
+<div id="ref-grateful" class="csl-entry">
 
-———. 2021c. *R: A Language and Environment for Statistical Computing*.
-Vienna, Austria: R Foundation for Statistical Computing.
-<https://www.R-project.org/>.
+Rodriguez-Sanchez, Francisco, and Connor P. Jackson. 2023.
+*<span class="nocase">grateful</span>: Facilitate Citation of r
+Packages*. <https://pakillo.github.io/grateful/>.
 
 </div>
 
 <div id="ref-details" class="csl-entry">
 
-Sidi, Jonathan. 2020. *Details: Create Details HTML Tag for Markdown and
-Package Documentation*. <https://CRAN.R-project.org/package=details>.
+Sidi, Jonathan. 2022. *<span class="nocase">details</span>: Create
+Details HTML Tag for Markdown and Package Documentation*.
+<https://CRAN.R-project.org/package=details>.
 
 </div>
 
 <div id="ref-zeallot" class="csl-entry">
 
-Teetor, Nathan. 2018. *Zeallot: Multiple, Unpacking, and Destructuring
-Assignment*. <https://CRAN.R-project.org/package=zeallot>.
+Teetor, Nathan. 2018. *<span class="nocase">zeallot</span>: Multiple,
+Unpacking, and Destructuring Assignment*.
+<https://CRAN.R-project.org/package=zeallot>.
 
 </div>
 
 <div id="ref-reticulate" class="csl-entry">
 
-Ushey, Kevin, JJ Allaire, and Yuan Tang. 2021. *Reticulate: Interface to
-’Python’*. <https://CRAN.R-project.org/package=reticulate>.
+Ushey, Kevin, JJ Allaire, and Yuan Tang. 2024.
+*<span class="nocase">reticulate</span>: Interface to “Python”*.
+<https://CRAN.R-project.org/package=reticulate>.
 
 </div>
 
 <div id="ref-testthat" class="csl-entry">
 
-Wickham, Hadley. 2011. “Testthat: Get Started with Testing.” *The R
-Journal* 3: 5–10.
+Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
+Started with Testing.” *The R Journal* 3: 5–10.
 <https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.
 
 </div>
 
-<div id="ref-ggplot2" class="csl-entry">
+<div id="ref-tidyverse" class="csl-entry">
 
-———. 2016. *Ggplot2: Elegant Graphics for Data Analysis*.
-Springer-Verlag New York. <https://ggplot2.tidyverse.org>.
-
-</div>
-
-<div id="ref-stringr" class="csl-entry">
-
-———. 2019. *Stringr: Simple, Consistent Wrappers for Common String
-Operations*. <https://CRAN.R-project.org/package=stringr>.
-
-</div>
-
-<div id="ref-forcats" class="csl-entry">
-
-———. 2021a. *Forcats: Tools for Working with Categorical Variables
-(Factors)*. <https://CRAN.R-project.org/package=forcats>.
-
-</div>
-
-<div id="ref-rvest" class="csl-entry">
-
-———. 2021b. *Rvest: Easily Harvest (Scrape) Web Pages*.
-<https://CRAN.R-project.org/package=rvest>.
-
-</div>
-
-<div id="ref-tidyr" class="csl-entry">
-
-———. 2021c. *Tidyr: Tidy Messy Data*.
-<https://CRAN.R-project.org/package=tidyr>.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
+D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
+“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
+Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
 <div id="ref-usethis" class="csl-entry">
 
-Wickham, Hadley, Jennifer Bryan, and Malcolm Barrett. 2021. *Usethis:
-Automate Package and Project Setup*.
-<https://CRAN.R-project.org/package=usethis>.
-
-</div>
-
-<div id="ref-dplyr" class="csl-entry">
-
-Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2021.
-*Dplyr: A Grammar of Data Manipulation*.
-<https://CRAN.R-project.org/package=dplyr>.
+Wickham, Hadley, Jennifer Bryan, Malcolm Barrett, and Andy Teucher.
+2023. *<span class="nocase">usethis</span>: Automate Package and Project
+Setup*. <https://CRAN.R-project.org/package=usethis>.
 
 </div>
 
 <div id="ref-pkgdown" class="csl-entry">
 
-Wickham, Hadley, and Jay Hesselberth. 2020. *Pkgdown: Make Static HTML
-Documentation for a Package*.
-<https://CRAN.R-project.org/package=pkgdown>.
+Wickham, Hadley, Jay Hesselberth, and Maëlle Salmon. 2022.
+*<span class="nocase">pkgdown</span>: Make Static HTML Documentation for
+a Package*. <https://CRAN.R-project.org/package=pkgdown>.
 
 </div>
 
-<div id="ref-knitr" class="csl-entry">
+<div id="ref-knitr2014" class="csl-entry">
 
-Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research
-in R.” In *Implementing Reproducible Computational Research*, edited by
-Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman;
-Hall/CRC. <http://www.crcpress.com/product/isbn/9781466561595>.
+Xie, Yihui. 2014. “<span class="nocase">knitr</span>: A Comprehensive
+Tool for Reproducible Research in R.” In *Implementing Reproducible
+Computational Research*, edited by Victoria Stodden, Friedrich Leisch,
+and Roger D. Peng. Chapman; Hall/CRC.
 
 </div>
 
-<div id="ref-rmarkdown" class="csl-entry">
+<div id="ref-knitr2015" class="csl-entry">
+
+———. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Boca Raton,
+Florida: Chapman; Hall/CRC. <https://yihui.org/knitr/>.
+
+</div>
+
+<div id="ref-knitr2023" class="csl-entry">
+
+———. 2023. *<span class="nocase">knitr</span>: A General-Purpose Package
+for Dynamic Report Generation in r*. <https://yihui.org/knitr/>.
+
+</div>
+
+<div id="ref-rmarkdown2018" class="csl-entry">
+
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
+Definitive Guide*. Boca Raton, Florida: Chapman; Hall/CRC.
+<https://bookdown.org/yihui/rmarkdown>.
+
+</div>
+
+<div id="ref-rmarkdown2020" class="csl-entry">
 
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
 Cookbook*. Boca Raton, Florida: Chapman; Hall/CRC.
