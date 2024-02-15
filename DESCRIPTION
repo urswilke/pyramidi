@@ -30,7 +30,6 @@ Imports:
     ggplot2,
     zeallot,
     magrittr,
-    rlang,
     R6,
     av,
     fluidsynth,

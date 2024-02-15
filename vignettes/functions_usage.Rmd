@@ -133,11 +133,11 @@ This can be done with the function `pivot_wide_notes()`:
 ```{r df_notes_wide}
 df_not_notes <- 
   df_notes %>% 
-  dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$")) 
+  dplyr::filter(!stringr::str_detect(type, "^note_o[nf]f?$")) 
 
 df_notes_wide <-
   df_notes %>% 
-  dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
+  dplyr::filter(stringr::str_detect(type, "^note_o[nf]f?$")) %>%
   # tab_measures(df_meta, df_notes, ticks_per_beat) %>%
   pivot_wide_notes() %>%
   left_join(pyramidi::midi_defs)

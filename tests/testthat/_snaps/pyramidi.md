@@ -2,19 +2,6 @@
 
     Code
       tab_time_sig(df_meta)
-    Condition
-      Warning:
-      Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
-      i Please use `"numerator"` instead of `.data$numerator`
-      Warning:
-      Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
-      i Please use `"denominator"` instead of `.data$denominator`
-      Warning:
-      Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
-      i Please use `"clocks_per_click"` instead of `.data$clocks_per_click`
-      Warning:
-      Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
-      i Please use `"notated_32nd_notes_per_beat"` instead of `.data$notated_32nd_notes_per_beat`
     Output
       # A tibble: 1 x 4
         numerator denominator clocks_per_click notated_32nd_notes_per_beat

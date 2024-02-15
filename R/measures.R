@@ -48,15 +48,15 @@ tab_measures <- function(df, ticks_per_beat, columns_to_add = "b") {
 
   df %>%
     tibble::as_tibble() %>%
-    dplyr::group_by(.data$i_track) %>%
-    dplyr::mutate(ticks = cumsum(.data$time)) %>%
-    dplyr::mutate(t = .data$ticks * get_ticks2second_scale(df, ticks_per_beat)) %>%
+    dplyr::group_by(i_track) %>%
+    dplyr::mutate(ticks = cumsum(time)) %>%
+    dplyr::mutate(t = ticks * get_ticks2second_scale(df, ticks_per_beat)) %>%
     dplyr::mutate(m = t * get_bpm(df) / 60) %>%
     # TODO: generalize for if there are several time signatures in the midi file!
     # the "[1]" only takes the first time signature if several in file:
-    dplyr::mutate(b = .data$m * tab_time_sig(df)$numerator[1]) %>%
-    dplyr::group_by(.data$i_track, .data$note) %>%
-    dplyr::mutate(i_note = cumsum(stringr::str_detect(.data$type, "^note_on$"))) %>%
+    dplyr::mutate(b = m * tab_time_sig(df)$numerator[1]) %>%
+    dplyr::group_by(i_track, note) %>%
+    dplyr::mutate(i_note = cumsum(stringr::str_detect(type, "^note_on$"))) %>%
     dplyr::ungroup() %>%
     dplyr::select(-!!columns_to_remove) %>%
     dplyr::relocate(!!cols_to_put_last, .after = dplyr::last_col())
