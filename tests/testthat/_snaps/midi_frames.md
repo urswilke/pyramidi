@@ -4,36 +4,36 @@
       mfr
     Output
       $mf
-      <miditapyr.midi_frame.MidiFrames>
+      <miditapyr.midi_frame.MidiFrames object at 0x7a3add7b9610>
       
       $dfm
       # A tibble: 268 x 15
          i_track meta  type     name   note velocity channel ticks     b i_note  tempo
-           <dbl> <lgl> <chr>    <lis> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <int>  <dbl>
-       1       0 TRUE  track_n~ <chr~   NaN      NaN     NaN     0     0      0    NaN
-       2       0 FALSE note_on  <dbl~    43       72       9     0     0      1    NaN
-       3       0 FALSE note_on  <dbl~    39       64       9     0     0      1    NaN
-       4       0 FALSE note_on  <dbl~    36      101       9     0     0      1    NaN
-       5       0 TRUE  set_tem~ <dbl~   NaN      NaN     NaN     0     0      0 666666
-       6       0 TRUE  time_si~ <dbl~   NaN      NaN     NaN     0     0      0    NaN
-       7       0 FALSE note_off <dbl~    43       72       9   240     1      1    NaN
-       8       0 FALSE note_off <dbl~    39       64       9   240     1      1    NaN
-       9       0 FALSE note_off <dbl~    36      101       9   240     1      1    NaN
-      10       0 FALSE note_on  <dbl~    42      101       9   480     2      1    NaN
-      # ... with 258 more rows, and 4 more variables: numerator <dbl>,
-      #   denominator <dbl>, clocks_per_click <dbl>,
-      #   notated_32nd_notes_per_beat <dbl>
+           <dbl> <lgl> <chr>    <chr> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <int>  <dbl>
+       1       0 TRUE  track_n~ drum~   NaN      NaN     NaN     0     0      0    NaN
+       2       0 FALSE note_on  <NA>     43       72       9     0     0      1    NaN
+       3       0 FALSE note_on  <NA>     39       64       9     0     0      1    NaN
+       4       0 FALSE note_on  <NA>     36      101       9     0     0      1    NaN
+       5       0 TRUE  set_tem~ <NA>    NaN      NaN     NaN     0     0      0 666666
+       6       0 TRUE  time_si~ <NA>    NaN      NaN     NaN     0     0      0    NaN
+       7       0 FALSE note_off <NA>     43       72       9   240     1      1    NaN
+       8       0 FALSE note_off <NA>     39       64       9   240     1      1    NaN
+       9       0 FALSE note_off <NA>     36      101       9   240     1      1    NaN
+      10       0 FALSE note_on  <NA>     42      101       9   480     2      1    NaN
+      # i 258 more rows
+      # i 4 more variables: numerator <dbl>, denominator <dbl>,
+      #   clocks_per_click <dbl>, notated_32nd_notes_per_beat <dbl>
       
       $df_meta
           i_track meta           type         name ticks        b i_note  tempo
       0         0 TRUE     track_name drum-t1-1-t1     0  0.00000      0    NaN
-      4         0 TRUE      set_tempo          NaN     0  0.00000      0 666666
-      5         0 TRUE time_signature          NaN     0  0.00000      0    NaN
-      159       0 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+      4         0 TRUE      set_tempo         <NA>     0  0.00000      0 666666
+      5         0 TRUE time_signature         <NA>     0  0.00000      0    NaN
+      159       0 TRUE   end_of_track         <NA> 15361 64.00417      0    NaN
       160       1 TRUE     track_name   Audio+MIDI     0  0.00000      0    NaN
-      185       1 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+      185       1 TRUE   end_of_track         <NA> 15361 64.00417      0    NaN
       186       2 TRUE     track_name Audio+MIDI 1     0  0.00000      0    NaN
-      267       2 TRUE   end_of_track          NaN 15361 64.00417      0    NaN
+      267       2 TRUE   end_of_track         <NA> 15361 64.00417      0    NaN
           numerator denominator clocks_per_click notated_32nd_notes_per_beat
       0         NaN         NaN              NaN                         NaN
       4         NaN         NaN              NaN                         NaN
@@ -63,8 +63,9 @@
        8       0 FALSE    43       9      3               60                60
        9       0 FALSE    42       9      2              101               101
       10       0 FALSE    43       9      4               60                60
-      # ... with 120 more rows, and 4 more variables: ticks_note_on <dbl>,
-      #   ticks_note_off <dbl>, b_note_on <dbl>, b_note_off <dbl>
+      # i 120 more rows
+      # i 4 more variables: ticks_note_on <dbl>, ticks_note_off <dbl>,
+      #   b_note_on <dbl>, b_note_off <dbl>
       
       $df_notes_long
       # A tibble: 260 x 9
@@ -80,23 +81,24 @@
        8       0       9    42      1 note_off      101   720     3 FALSE
        9       0       9    38      1 note_on       101   480     2 FALSE
       10       0       9    38      1 note_off      101   720     3 FALSE
-      # ... with 250 more rows
+      # i 250 more rows
       
       $midi_frame_mod
       # A tibble: 268 x 13
          i_track channel  note type  velocity meta  name   tempo numerator denominator
-           <dbl>   <dbl> <dbl> <chr>    <dbl> <lgl> <lis>  <dbl>     <dbl>       <dbl>
-       1       0       9    43 note~       72 FALSE <NUL~     NA        NA          NA
-       2       0       9    39 note~       64 FALSE <NUL~     NA        NA          NA
-       3       0       9    36 note~      101 FALSE <NUL~     NA        NA          NA
-       4       0      NA    NA trac~       NA TRUE  <chr~    NaN       NaN         NaN
-       5       0      NA    NA set_~       NA TRUE  <dbl~ 666666       NaN         NaN
-       6       0      NA    NA time~       NA TRUE  <dbl~    NaN         4           4
-       7       0       9    43 note~       72 FALSE <NUL~     NA        NA          NA
-       8       0       9    39 note~       64 FALSE <NUL~     NA        NA          NA
-       9       0       9    36 note~      101 FALSE <NUL~     NA        NA          NA
-      10       0       9    42 note~      101 FALSE <NUL~     NA        NA          NA
-      # ... with 258 more rows, and 3 more variables: clocks_per_click <dbl>,
+           <dbl>   <dbl> <dbl> <chr>    <dbl> <lgl> <chr>  <dbl>     <dbl>       <dbl>
+       1       0       9    43 note~       72 FALSE <NA>      NA        NA          NA
+       2       0       9    39 note~       64 FALSE <NA>      NA        NA          NA
+       3       0       9    36 note~      101 FALSE <NA>      NA        NA          NA
+       4       0      NA    NA trac~       NA TRUE  drum~    NaN       NaN         NaN
+       5       0      NA    NA set_~       NA TRUE  <NA>  666666       NaN         NaN
+       6       0      NA    NA time~       NA TRUE  <NA>     NaN         4           4
+       7       0       9    43 note~       72 FALSE <NA>      NA        NA          NA
+       8       0       9    39 note~       64 FALSE <NA>      NA        NA          NA
+       9       0       9    36 note~      101 FALSE <NA>      NA        NA          NA
+      10       0       9    42 note~      101 FALSE <NA>      NA        NA          NA
+      # i 258 more rows
+      # i 3 more variables: clocks_per_click <dbl>,
       #   notated_32nd_notes_per_beat <dbl>, time <dbl>
       
       attr(,"class")
@@ -382,273 +384,273 @@
       [[2]]
           i_track  meta           type         name time note velocity channel  tempo
       1         0  TRUE     track_name drum-t1-1-t1    0  NaN      NaN     NaN    NaN
-      2         0 FALSE        note_on          NaN    0   43       72       9    NaN
-      3         0 FALSE        note_on          NaN    0   39       64       9    NaN
-      4         0 FALSE        note_on          NaN    0   36      101       9    NaN
-      5         0  TRUE      set_tempo          NaN    0  NaN      NaN     NaN 666666
-      6         0  TRUE time_signature          NaN    0  NaN      NaN     NaN    NaN
-      7         0 FALSE       note_off          NaN  240   43       72       9    NaN
-      8         0 FALSE       note_off          NaN    0   39       64       9    NaN
-      9         0 FALSE       note_off          NaN    0   36      101       9    NaN
-      10        0 FALSE        note_on          NaN  240   42      101       9    NaN
-      11        0 FALSE        note_on          NaN    0   38      101       9    NaN
-      12        0 FALSE        note_on          NaN  240   43       64       9    NaN
-      13        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      14        0 FALSE       note_off          NaN    0   38      101       9    NaN
-      15        0 FALSE       note_off          NaN  240   43       64       9    NaN
-      16        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      17        0 FALSE       note_off          NaN  240   36      101       9    NaN
-      18        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      19        0 FALSE        note_on          NaN    0   42      101       9    NaN
-      20        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      21        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      22        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      23        0 FALSE        note_on          NaN    0   39       66       9    NaN
-      24        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      25        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      26        0 FALSE       note_off          NaN    0   39       66       9    NaN
-      27        0 FALSE       note_off          NaN    0   36      101       9    NaN
-      28        0 FALSE        note_on          NaN  240   42      101       9    NaN
-      29        0 FALSE        note_on          NaN    0   38      101       9    NaN
-      30        0 FALSE        note_on          NaN  240   43       53       9    NaN
-      31        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      32        0 FALSE       note_off          NaN    0   38      101       9    NaN
-      33        0 FALSE       note_off          NaN  240   43       53       9    NaN
-      34        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      35        0 FALSE       note_off          NaN  240   36      101       9    NaN
-      36        0 FALSE        note_on          NaN  240   43       52       9    NaN
-      37        0 FALSE        note_on          NaN    0   42       66       9    NaN
-      38        0 FALSE       note_off          NaN  240   43       52       9    NaN
-      39        0 FALSE       note_off          NaN    0   42       66       9    NaN
-      40        0 FALSE        note_on          NaN  240   43       72       9    NaN
-      41        0 FALSE        note_on          NaN    0   39       64       9    NaN
-      42        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      43        0 FALSE       note_off          NaN  240   43       72       9    NaN
-      44        0 FALSE       note_off          NaN    0   39       64       9    NaN
-      45        0 FALSE       note_off          NaN    0   36      101       9    NaN
-      46        0 FALSE        note_on          NaN  240   42      101       9    NaN
-      47        0 FALSE        note_on          NaN    0   38      101       9    NaN
-      48        0 FALSE        note_on          NaN  240   43       64       9    NaN
-      49        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      50        0 FALSE       note_off          NaN    0   38      101       9    NaN
-      51        0 FALSE       note_off          NaN  240   43       64       9    NaN
-      52        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      53        0 FALSE       note_off          NaN  240   36      101       9    NaN
-      54        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      55        0 FALSE        note_on          NaN    0   42      101       9    NaN
-      56        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      57        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      58        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      59        0 FALSE        note_on          NaN    0   39       66       9    NaN
-      60        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      61        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      62        0 FALSE       note_off          NaN    0   39       66       9    NaN
-      63        0 FALSE       note_off          NaN    0   36      101       9    NaN
-      64        0 FALSE        note_on          NaN  240   42      101       9    NaN
-      65        0 FALSE        note_on          NaN    0   38      101       9    NaN
-      66        0 FALSE        note_on          NaN  240   43       53       9    NaN
-      67        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      68        0 FALSE       note_off          NaN    0   38      101       9    NaN
-      69        0 FALSE       note_off          NaN  240   43       53       9    NaN
-      70        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      71        0 FALSE       note_off          NaN  240   36      101       9    NaN
-      72        0 FALSE        note_on          NaN  240   43       52       9    NaN
-      73        0 FALSE        note_on          NaN    0   42       66       9    NaN
-      74        0 FALSE       note_off          NaN  240   43       52       9    NaN
-      75        0 FALSE       note_off          NaN    0   42       66       9    NaN
-      76        0 FALSE        note_on          NaN  240   43       72       9    NaN
-      77        0 FALSE        note_on          NaN    0   39       64       9    NaN
-      78        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      79        0 FALSE       note_off          NaN  240   43       72       9    NaN
-      80        0 FALSE       note_off          NaN    0   39       64       9    NaN
-      81        0 FALSE       note_off          NaN    0   36      101       9    NaN
-      82        0 FALSE        note_on          NaN  240   42      101       9    NaN
-      83        0 FALSE        note_on          NaN    0   38      101       9    NaN
-      84        0 FALSE        note_on          NaN  240   43       64       9    NaN
-      85        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      86        0 FALSE       note_off          NaN    0   38      101       9    NaN
-      87        0 FALSE       note_off          NaN  240   43       64       9    NaN
-      88        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      89        0 FALSE       note_off          NaN  240   36      101       9    NaN
-      90        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      91        0 FALSE        note_on          NaN    0   42      101       9    NaN
-      92        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      93        0 FALSE       note_off          NaN    0   42      101       9    NaN
-      94        0 FALSE        note_on          NaN  240   43       60       9    NaN
-      95        0 FALSE        note_on          NaN    0   39       66       9    NaN
-      96        0 FALSE        note_on          NaN    0   36      101       9    NaN
-      97        0 FALSE       note_off          NaN  240   43       60       9    NaN
-      98        0 FALSE       note_off          NaN    0   39       66       9    NaN
-      99        0 FALSE       note_off          NaN    0   36      101       9    NaN
-      100       0 FALSE        note_on          NaN  240   42      101       9    NaN
-      101       0 FALSE        note_on          NaN    0   38      101       9    NaN
-      102       0 FALSE        note_on          NaN  240   43       53       9    NaN
-      103       0 FALSE       note_off          NaN    0   42      101       9    NaN
-      104       0 FALSE       note_off          NaN    0   38      101       9    NaN
-      105       0 FALSE       note_off          NaN  240   43       53       9    NaN
-      106       0 FALSE        note_on          NaN    0   36      101       9    NaN
-      107       0 FALSE       note_off          NaN  240   36      101       9    NaN
-      108       0 FALSE        note_on          NaN  240   43       52       9    NaN
-      109       0 FALSE        note_on          NaN    0   42       66       9    NaN
-      110       0 FALSE       note_off          NaN  240   43       52       9    NaN
-      111       0 FALSE       note_off          NaN    0   42       66       9    NaN
-      112       0 FALSE        note_on          NaN  240   43       81       9    NaN
-      113       0 FALSE        note_on          NaN    0   36      101       9    NaN
-      114       0 FALSE       note_off          NaN  240   43       81       9    NaN
-      115       0 FALSE       note_off          NaN    0   36      101       9    NaN
-      116       0 FALSE        note_on          NaN  240   42      101       9    NaN
-      117       0 FALSE        note_on          NaN    0   39       57       9    NaN
-      118       0 FALSE        note_on          NaN    0   38      101       9    NaN
-      119       0 FALSE        note_on          NaN  240   43       60       9    NaN
-      120       0 FALSE       note_off          NaN    0   42      101       9    NaN
-      121       0 FALSE       note_off          NaN    0   39       57       9    NaN
-      122       0 FALSE       note_off          NaN    0   38      101       9    NaN
-      123       0 FALSE       note_off          NaN  240   43       60       9    NaN
-      124       0 FALSE        note_on          NaN    0   36      101       9    NaN
-      125       0 FALSE       note_off          NaN  240   36      101       9    NaN
-      126       0 FALSE        note_on          NaN  240   43       66       9    NaN
-      127       0 FALSE        note_on          NaN    0   42      101       9    NaN
-      128       0 FALSE       note_off          NaN  240   43       66       9    NaN
-      129       0 FALSE       note_off          NaN    0   42      101       9    NaN
-      130       0 FALSE        note_on          NaN  240   43       66       9    NaN
-      131       0 FALSE        note_on          NaN    0   36      101       9    NaN
-      132       0 FALSE       note_off          NaN  240   43       66       9    NaN
-      133       0 FALSE       note_off          NaN    0   36      101       9    NaN
-      134       0 FALSE        note_on          NaN  240   46       81       9    NaN
-      135       0 FALSE        note_on          NaN    0   45       67       9    NaN
-      136       0 FALSE        note_on          NaN    0   39       60       9    NaN
-      137       0 FALSE        note_on          NaN    0   38      101       9    NaN
-      138       0 FALSE       note_off          NaN  240   46       81       9    NaN
-      139       0 FALSE       note_off          NaN    0   45       67       9    NaN
-      140       0 FALSE       note_off          NaN    0   39       60       9    NaN
-      141       0 FALSE       note_off          NaN    0   38      101       9    NaN
-      142       0 FALSE        note_on          NaN  240   39       59       9    NaN
-      143       0 FALSE        note_on          NaN    0   36      101       9    NaN
-      144       0 FALSE       note_off          NaN  240   39       59       9    NaN
-      145       0 FALSE        note_on          NaN    0   39       55       9    NaN
-      146       0 FALSE       note_off          NaN    0   36      101       9    NaN
-      147       0 FALSE        note_on          NaN  240   45       63       9    NaN
-      148       0 FALSE        note_on          NaN    0   43       52       9    NaN
-      149       0 FALSE        note_on          NaN    0   42      101       9    NaN
-      150       0 FALSE       note_off          NaN    0   39       55       9    NaN
-      151       0 FALSE        note_on          NaN    0   39       55       9    NaN
-      152       0 FALSE       note_off          NaN  240   45       63       9    NaN
-      153       0 FALSE       note_off          NaN    0   43       52       9    NaN
-      154       0 FALSE       note_off          NaN    0   42      101       9    NaN
-      155       0 FALSE        note_on          NaN    0   42       59       9    NaN
-      156       0 FALSE       note_off          NaN    0   39       55       9    NaN
-      157       0 FALSE        note_on          NaN    0   39       57       9    NaN
-      158       0 FALSE       note_off          NaN  240   42       59       9    NaN
-      159       0 FALSE       note_off          NaN    0   39       57       9    NaN
-      160       0  TRUE   end_of_track          NaN    1  NaN      NaN     NaN    NaN
+      2         0 FALSE        note_on         <NA>    0   43       72       9    NaN
+      3         0 FALSE        note_on         <NA>    0   39       64       9    NaN
+      4         0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      5         0  TRUE      set_tempo         <NA>    0  NaN      NaN     NaN 666666
+      6         0  TRUE time_signature         <NA>    0  NaN      NaN     NaN    NaN
+      7         0 FALSE       note_off         <NA>  240   43       72       9    NaN
+      8         0 FALSE       note_off         <NA>    0   39       64       9    NaN
+      9         0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      10        0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      11        0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      12        0 FALSE        note_on         <NA>  240   43       64       9    NaN
+      13        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      14        0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      15        0 FALSE       note_off         <NA>  240   43       64       9    NaN
+      16        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      17        0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      18        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      19        0 FALSE        note_on         <NA>    0   42      101       9    NaN
+      20        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      21        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      22        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      23        0 FALSE        note_on         <NA>    0   39       66       9    NaN
+      24        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      25        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      26        0 FALSE       note_off         <NA>    0   39       66       9    NaN
+      27        0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      28        0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      29        0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      30        0 FALSE        note_on         <NA>  240   43       53       9    NaN
+      31        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      32        0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      33        0 FALSE       note_off         <NA>  240   43       53       9    NaN
+      34        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      35        0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      36        0 FALSE        note_on         <NA>  240   43       52       9    NaN
+      37        0 FALSE        note_on         <NA>    0   42       66       9    NaN
+      38        0 FALSE       note_off         <NA>  240   43       52       9    NaN
+      39        0 FALSE       note_off         <NA>    0   42       66       9    NaN
+      40        0 FALSE        note_on         <NA>  240   43       72       9    NaN
+      41        0 FALSE        note_on         <NA>    0   39       64       9    NaN
+      42        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      43        0 FALSE       note_off         <NA>  240   43       72       9    NaN
+      44        0 FALSE       note_off         <NA>    0   39       64       9    NaN
+      45        0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      46        0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      47        0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      48        0 FALSE        note_on         <NA>  240   43       64       9    NaN
+      49        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      50        0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      51        0 FALSE       note_off         <NA>  240   43       64       9    NaN
+      52        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      53        0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      54        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      55        0 FALSE        note_on         <NA>    0   42      101       9    NaN
+      56        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      57        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      58        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      59        0 FALSE        note_on         <NA>    0   39       66       9    NaN
+      60        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      61        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      62        0 FALSE       note_off         <NA>    0   39       66       9    NaN
+      63        0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      64        0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      65        0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      66        0 FALSE        note_on         <NA>  240   43       53       9    NaN
+      67        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      68        0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      69        0 FALSE       note_off         <NA>  240   43       53       9    NaN
+      70        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      71        0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      72        0 FALSE        note_on         <NA>  240   43       52       9    NaN
+      73        0 FALSE        note_on         <NA>    0   42       66       9    NaN
+      74        0 FALSE       note_off         <NA>  240   43       52       9    NaN
+      75        0 FALSE       note_off         <NA>    0   42       66       9    NaN
+      76        0 FALSE        note_on         <NA>  240   43       72       9    NaN
+      77        0 FALSE        note_on         <NA>    0   39       64       9    NaN
+      78        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      79        0 FALSE       note_off         <NA>  240   43       72       9    NaN
+      80        0 FALSE       note_off         <NA>    0   39       64       9    NaN
+      81        0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      82        0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      83        0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      84        0 FALSE        note_on         <NA>  240   43       64       9    NaN
+      85        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      86        0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      87        0 FALSE       note_off         <NA>  240   43       64       9    NaN
+      88        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      89        0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      90        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      91        0 FALSE        note_on         <NA>    0   42      101       9    NaN
+      92        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      93        0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      94        0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      95        0 FALSE        note_on         <NA>    0   39       66       9    NaN
+      96        0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      97        0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      98        0 FALSE       note_off         <NA>    0   39       66       9    NaN
+      99        0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      100       0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      101       0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      102       0 FALSE        note_on         <NA>  240   43       53       9    NaN
+      103       0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      104       0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      105       0 FALSE       note_off         <NA>  240   43       53       9    NaN
+      106       0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      107       0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      108       0 FALSE        note_on         <NA>  240   43       52       9    NaN
+      109       0 FALSE        note_on         <NA>    0   42       66       9    NaN
+      110       0 FALSE       note_off         <NA>  240   43       52       9    NaN
+      111       0 FALSE       note_off         <NA>    0   42       66       9    NaN
+      112       0 FALSE        note_on         <NA>  240   43       81       9    NaN
+      113       0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      114       0 FALSE       note_off         <NA>  240   43       81       9    NaN
+      115       0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      116       0 FALSE        note_on         <NA>  240   42      101       9    NaN
+      117       0 FALSE        note_on         <NA>    0   39       57       9    NaN
+      118       0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      119       0 FALSE        note_on         <NA>  240   43       60       9    NaN
+      120       0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      121       0 FALSE       note_off         <NA>    0   39       57       9    NaN
+      122       0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      123       0 FALSE       note_off         <NA>  240   43       60       9    NaN
+      124       0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      125       0 FALSE       note_off         <NA>  240   36      101       9    NaN
+      126       0 FALSE        note_on         <NA>  240   43       66       9    NaN
+      127       0 FALSE        note_on         <NA>    0   42      101       9    NaN
+      128       0 FALSE       note_off         <NA>  240   43       66       9    NaN
+      129       0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      130       0 FALSE        note_on         <NA>  240   43       66       9    NaN
+      131       0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      132       0 FALSE       note_off         <NA>  240   43       66       9    NaN
+      133       0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      134       0 FALSE        note_on         <NA>  240   46       81       9    NaN
+      135       0 FALSE        note_on         <NA>    0   45       67       9    NaN
+      136       0 FALSE        note_on         <NA>    0   39       60       9    NaN
+      137       0 FALSE        note_on         <NA>    0   38      101       9    NaN
+      138       0 FALSE       note_off         <NA>  240   46       81       9    NaN
+      139       0 FALSE       note_off         <NA>    0   45       67       9    NaN
+      140       0 FALSE       note_off         <NA>    0   39       60       9    NaN
+      141       0 FALSE       note_off         <NA>    0   38      101       9    NaN
+      142       0 FALSE        note_on         <NA>  240   39       59       9    NaN
+      143       0 FALSE        note_on         <NA>    0   36      101       9    NaN
+      144       0 FALSE       note_off         <NA>  240   39       59       9    NaN
+      145       0 FALSE        note_on         <NA>    0   39       55       9    NaN
+      146       0 FALSE       note_off         <NA>    0   36      101       9    NaN
+      147       0 FALSE        note_on         <NA>  240   45       63       9    NaN
+      148       0 FALSE        note_on         <NA>    0   43       52       9    NaN
+      149       0 FALSE        note_on         <NA>    0   42      101       9    NaN
+      150       0 FALSE       note_off         <NA>    0   39       55       9    NaN
+      151       0 FALSE        note_on         <NA>    0   39       55       9    NaN
+      152       0 FALSE       note_off         <NA>  240   45       63       9    NaN
+      153       0 FALSE       note_off         <NA>    0   43       52       9    NaN
+      154       0 FALSE       note_off         <NA>    0   42      101       9    NaN
+      155       0 FALSE        note_on         <NA>    0   42       59       9    NaN
+      156       0 FALSE       note_off         <NA>    0   39       55       9    NaN
+      157       0 FALSE        note_on         <NA>    0   39       57       9    NaN
+      158       0 FALSE       note_off         <NA>  240   42       59       9    NaN
+      159       0 FALSE       note_off         <NA>    0   39       57       9    NaN
+      160       0  TRUE   end_of_track         <NA>    1  NaN      NaN     NaN    NaN
       161       1  TRUE     track_name   Audio+MIDI    0  NaN      NaN     NaN    NaN
-      162       1 FALSE        note_on          NaN    0   50       82      15    NaN
-      163       1 FALSE       note_off          NaN  240   50       82      15    NaN
-      164       1 FALSE        note_on          NaN 3000   45       85      15    NaN
-      165       1 FALSE        note_on          NaN  600   50       81      15    NaN
-      166       1 FALSE       note_off          NaN    0   45       85      15    NaN
-      167       1 FALSE       note_off          NaN  240   50       81      15    NaN
-      168       1 FALSE        note_on          NaN 3120   45       69      15    NaN
-      169       1 FALSE        note_on          NaN  480   50       69      15    NaN
-      170       1 FALSE       note_off          NaN    0   45       69      15    NaN
-      171       1 FALSE       note_off          NaN  360   50       69      15    NaN
-      172       1 FALSE        note_on          NaN 2400   45       82      15    NaN
-      173       1 FALSE       note_off          NaN  960   45       82      15    NaN
-      174       1 FALSE        note_on          NaN  120   50       72      15    NaN
-      175       1 FALSE       note_off          NaN 1080   50       72      15    NaN
-      176       1 FALSE        note_on          NaN  360   57       79      15    NaN
-      177       1 FALSE       note_off          NaN  480   57       79      15    NaN
-      178       1 FALSE        note_on          NaN    0   55       50      15    NaN
-      179       1 FALSE       note_off          NaN  480   55       50      15    NaN
-      180       1 FALSE        note_on          NaN    0   53       73      15    NaN
-      181       1 FALSE       note_off          NaN  480   53       73      15    NaN
-      182       1 FALSE        note_on          NaN    0   52       69      15    NaN
-      183       1 FALSE       note_off          NaN  480   52       69      15    NaN
-      184       1 FALSE        note_on          NaN    0   48       85      15    NaN
-      185       1 FALSE       note_off          NaN  480   48       85      15    NaN
-      186       1  TRUE   end_of_track          NaN    1  NaN      NaN     NaN    NaN
+      162       1 FALSE        note_on         <NA>    0   50       82      15    NaN
+      163       1 FALSE       note_off         <NA>  240   50       82      15    NaN
+      164       1 FALSE        note_on         <NA> 3000   45       85      15    NaN
+      165       1 FALSE        note_on         <NA>  600   50       81      15    NaN
+      166       1 FALSE       note_off         <NA>    0   45       85      15    NaN
+      167       1 FALSE       note_off         <NA>  240   50       81      15    NaN
+      168       1 FALSE        note_on         <NA> 3120   45       69      15    NaN
+      169       1 FALSE        note_on         <NA>  480   50       69      15    NaN
+      170       1 FALSE       note_off         <NA>    0   45       69      15    NaN
+      171       1 FALSE       note_off         <NA>  360   50       69      15    NaN
+      172       1 FALSE        note_on         <NA> 2400   45       82      15    NaN
+      173       1 FALSE       note_off         <NA>  960   45       82      15    NaN
+      174       1 FALSE        note_on         <NA>  120   50       72      15    NaN
+      175       1 FALSE       note_off         <NA> 1080   50       72      15    NaN
+      176       1 FALSE        note_on         <NA>  360   57       79      15    NaN
+      177       1 FALSE       note_off         <NA>  480   57       79      15    NaN
+      178       1 FALSE        note_on         <NA>    0   55       50      15    NaN
+      179       1 FALSE       note_off         <NA>  480   55       50      15    NaN
+      180       1 FALSE        note_on         <NA>    0   53       73      15    NaN
+      181       1 FALSE       note_off         <NA>  480   53       73      15    NaN
+      182       1 FALSE        note_on         <NA>    0   52       69      15    NaN
+      183       1 FALSE       note_off         <NA>  480   52       69      15    NaN
+      184       1 FALSE        note_on         <NA>    0   48       85      15    NaN
+      185       1 FALSE       note_off         <NA>  480   48       85      15    NaN
+      186       1  TRUE   end_of_track         <NA>    1  NaN      NaN     NaN    NaN
       187       2  TRUE     track_name Audio+MIDI 1    0  NaN      NaN     NaN    NaN
-      188       2 FALSE        note_on          NaN   54   62       78      15    NaN
-      189       2 FALSE        note_on          NaN   10   57       78      15    NaN
-      190       2 FALSE        note_on          NaN    6   65       72      15    NaN
-      191       2 FALSE       note_off          NaN  283   65       72      15    NaN
-      192       2 FALSE       note_off          NaN   16   62       78      15    NaN
-      193       2 FALSE       note_off          NaN   55   57       78      15    NaN
-      194       2 FALSE        note_on          NaN 1049   62       57      15    NaN
-      195       2 FALSE        note_on          NaN    9   57       53      15    NaN
-      196       2 FALSE        note_on          NaN    8   65       58      15    NaN
-      197       2 FALSE       note_off          NaN 1652   65       58      15    NaN
-      198       2 FALSE       note_off          NaN    8   62       57      15    NaN
-      199       2 FALSE       note_off          NaN   47   57       53      15    NaN
-      200       2 FALSE        note_on          NaN  142   62       61      15    NaN
-      201       2 FALSE        note_on          NaN    9   57       53      15    NaN
-      202       2 FALSE        note_on          NaN    8   65       58      15    NaN
-      203       2 FALSE       note_off          NaN  188   62       61      15    NaN
-      204       2 FALSE       note_off          NaN    8   65       58      15    NaN
-      205       2 FALSE       note_off          NaN   24   57       53      15    NaN
-      206       2 FALSE        note_on          NaN  275   62       47      15    NaN
-      207       2 FALSE        note_on          NaN    8   57       42      15    NaN
-      208       2 FALSE        note_on          NaN    9   65       46      15    NaN
-      209       2 FALSE       note_off          NaN  337   65       46      15    NaN
-      210       2 FALSE       note_off          NaN  266   62       47      15    NaN
-      211       2 FALSE       note_off          NaN  119   57       42      15    NaN
-      212       2 FALSE        note_on          NaN  657   62       56      15    NaN
-      213       2 FALSE        note_on          NaN    9   57       53      15    NaN
-      214       2 FALSE        note_on          NaN    8   65       58      15    NaN
-      215       2 FALSE       note_off          NaN 1651   65       58      15    NaN
-      216       2 FALSE       note_off          NaN   24   62       56      15    NaN
-      217       2 FALSE       note_off          NaN   24   57       53      15    NaN
-      218       2 FALSE        note_on          NaN  173   62       49      15    NaN
-      219       2 FALSE        note_on          NaN    9   57       42      15    NaN
-      220       2 FALSE        note_on          NaN    8   65       49      15    NaN
-      221       2 FALSE       note_off          NaN  266   65       49      15    NaN
-      222       2 FALSE       note_off          NaN   24   62       49      15    NaN
-      223       2 FALSE       note_off          NaN   24   57       42      15    NaN
-      224       2 FALSE        note_on          NaN  212   62       37      15    NaN
-      225       2 FALSE        note_on          NaN    9   57       34      15    NaN
-      226       2 FALSE        note_on          NaN    8   65       51      15    NaN
-      227       2 FALSE       note_off          NaN  314   65       51      15    NaN
-      228       2 FALSE       note_off          NaN    8   62       37      15    NaN
-      229       2 FALSE       note_off          NaN   79   57       34      15    NaN
-      230       2 FALSE        note_on          NaN 1018   57       58      15    NaN
-      231       2 FALSE        note_on          NaN    8   62       60      15    NaN
-      232       2 FALSE        note_on          NaN    8   65       56      15    NaN
-      233       2 FALSE       note_off          NaN 1746   65       56      15    NaN
-      234       2 FALSE       note_off          NaN    8   62       60      15    NaN
-      235       2 FALSE       note_off          NaN   71   57       58      15    NaN
-      236       2 FALSE        note_on          NaN  447   62       50      15    NaN
-      237       2 FALSE        note_on          NaN    8   57       40      15    NaN
-      238       2 FALSE        note_on          NaN    8   65       52      15    NaN
-      239       2 FALSE       note_off          NaN  431   62       50      15    NaN
-      240       2 FALSE       note_off          NaN    9   65       52      15    NaN
-      241       2 FALSE       note_off          NaN   70   57       40      15    NaN
-      242       2 FALSE        note_on          NaN  917   62       63      15    NaN
-      243       2 FALSE        note_on          NaN    8   59       69      15    NaN
-      244       2 FALSE        note_on          NaN    8   67       58      15    NaN
-      245       2 FALSE       note_off          NaN  252   62       63      15    NaN
-      246       2 FALSE       note_off          NaN    8   67       58      15    NaN
-      247       2 FALSE       note_off          NaN   23   59       69      15    NaN
-      248       2 FALSE        note_on          NaN  268   59       58      15    NaN
-      249       2 FALSE        note_on          NaN    8   62       58      15    NaN
-      250       2 FALSE        note_on          NaN    8   67       58      15    NaN
-      251       2 FALSE       note_off          NaN  587   62       58      15    NaN
-      252       2 FALSE       note_off          NaN    9   67       58      15    NaN
-      253       2 FALSE       note_off          NaN   63   59       58      15    NaN
-      254       2 FALSE        note_on          NaN   87   59       52      15    NaN
-      255       2 FALSE        note_on          NaN    8   67       60      15    NaN
-      256       2 FALSE        note_on          NaN    8   62       65      15    NaN
-      257       2 FALSE       note_off          NaN  251   62       65      15    NaN
-      258       2 FALSE       note_off          NaN   32   67       60      15    NaN
-      259       2 FALSE       note_off          NaN   48   59       52      15    NaN
-      260       2 FALSE        note_on          NaN  337   59       57      15    NaN
-      261       2 FALSE        note_on          NaN    9   62       60      15    NaN
-      262       2 FALSE        note_on          NaN    8   67       57      15    NaN
-      263       2 FALSE       note_off          NaN  173   62       60      15    NaN
-      264       2 FALSE       note_off          NaN   31   59       57      15    NaN
-      265       2 FALSE       note_off          NaN    9   67       57      15    NaN
-      266       2 FALSE        note_on          NaN  266   62       82      15    NaN
-      267       2 FALSE       note_off          NaN    5   62       82      15    NaN
-      268       2  TRUE   end_of_track          NaN    1  NaN      NaN     NaN    NaN
+      188       2 FALSE        note_on         <NA>   54   62       78      15    NaN
+      189       2 FALSE        note_on         <NA>   10   57       78      15    NaN
+      190       2 FALSE        note_on         <NA>    6   65       72      15    NaN
+      191       2 FALSE       note_off         <NA>  283   65       72      15    NaN
+      192       2 FALSE       note_off         <NA>   16   62       78      15    NaN
+      193       2 FALSE       note_off         <NA>   55   57       78      15    NaN
+      194       2 FALSE        note_on         <NA> 1049   62       57      15    NaN
+      195       2 FALSE        note_on         <NA>    9   57       53      15    NaN
+      196       2 FALSE        note_on         <NA>    8   65       58      15    NaN
+      197       2 FALSE       note_off         <NA> 1652   65       58      15    NaN
+      198       2 FALSE       note_off         <NA>    8   62       57      15    NaN
+      199       2 FALSE       note_off         <NA>   47   57       53      15    NaN
+      200       2 FALSE        note_on         <NA>  142   62       61      15    NaN
+      201       2 FALSE        note_on         <NA>    9   57       53      15    NaN
+      202       2 FALSE        note_on         <NA>    8   65       58      15    NaN
+      203       2 FALSE       note_off         <NA>  188   62       61      15    NaN
+      204       2 FALSE       note_off         <NA>    8   65       58      15    NaN
+      205       2 FALSE       note_off         <NA>   24   57       53      15    NaN
+      206       2 FALSE        note_on         <NA>  275   62       47      15    NaN
+      207       2 FALSE        note_on         <NA>    8   57       42      15    NaN
+      208       2 FALSE        note_on         <NA>    9   65       46      15    NaN
+      209       2 FALSE       note_off         <NA>  337   65       46      15    NaN
+      210       2 FALSE       note_off         <NA>  266   62       47      15    NaN
+      211       2 FALSE       note_off         <NA>  119   57       42      15    NaN
+      212       2 FALSE        note_on         <NA>  657   62       56      15    NaN
+      213       2 FALSE        note_on         <NA>    9   57       53      15    NaN
+      214       2 FALSE        note_on         <NA>    8   65       58      15    NaN
+      215       2 FALSE       note_off         <NA> 1651   65       58      15    NaN
+      216       2 FALSE       note_off         <NA>   24   62       56      15    NaN
+      217       2 FALSE       note_off         <NA>   24   57       53      15    NaN
+      218       2 FALSE        note_on         <NA>  173   62       49      15    NaN
+      219       2 FALSE        note_on         <NA>    9   57       42      15    NaN
+      220       2 FALSE        note_on         <NA>    8   65       49      15    NaN
+      221       2 FALSE       note_off         <NA>  266   65       49      15    NaN
+      222       2 FALSE       note_off         <NA>   24   62       49      15    NaN
+      223       2 FALSE       note_off         <NA>   24   57       42      15    NaN
+      224       2 FALSE        note_on         <NA>  212   62       37      15    NaN
+      225       2 FALSE        note_on         <NA>    9   57       34      15    NaN
+      226       2 FALSE        note_on         <NA>    8   65       51      15    NaN
+      227       2 FALSE       note_off         <NA>  314   65       51      15    NaN
+      228       2 FALSE       note_off         <NA>    8   62       37      15    NaN
+      229       2 FALSE       note_off         <NA>   79   57       34      15    NaN
+      230       2 FALSE        note_on         <NA> 1018   57       58      15    NaN
+      231       2 FALSE        note_on         <NA>    8   62       60      15    NaN
+      232       2 FALSE        note_on         <NA>    8   65       56      15    NaN
+      233       2 FALSE       note_off         <NA> 1746   65       56      15    NaN
+      234       2 FALSE       note_off         <NA>    8   62       60      15    NaN
+      235       2 FALSE       note_off         <NA>   71   57       58      15    NaN
+      236       2 FALSE        note_on         <NA>  447   62       50      15    NaN
+      237       2 FALSE        note_on         <NA>    8   57       40      15    NaN
+      238       2 FALSE        note_on         <NA>    8   65       52      15    NaN
+      239       2 FALSE       note_off         <NA>  431   62       50      15    NaN
+      240       2 FALSE       note_off         <NA>    9   65       52      15    NaN
+      241       2 FALSE       note_off         <NA>   70   57       40      15    NaN
+      242       2 FALSE        note_on         <NA>  917   62       63      15    NaN
+      243       2 FALSE        note_on         <NA>    8   59       69      15    NaN
+      244       2 FALSE        note_on         <NA>    8   67       58      15    NaN
+      245       2 FALSE       note_off         <NA>  252   62       63      15    NaN
+      246       2 FALSE       note_off         <NA>    8   67       58      15    NaN
+      247       2 FALSE       note_off         <NA>   23   59       69      15    NaN
+      248       2 FALSE        note_on         <NA>  268   59       58      15    NaN
+      249       2 FALSE        note_on         <NA>    8   62       58      15    NaN
+      250       2 FALSE        note_on         <NA>    8   67       58      15    NaN
+      251       2 FALSE       note_off         <NA>  587   62       58      15    NaN
+      252       2 FALSE       note_off         <NA>    9   67       58      15    NaN
+      253       2 FALSE       note_off         <NA>   63   59       58      15    NaN
+      254       2 FALSE        note_on         <NA>   87   59       52      15    NaN
+      255       2 FALSE        note_on         <NA>    8   67       60      15    NaN
+      256       2 FALSE        note_on         <NA>    8   62       65      15    NaN
+      257       2 FALSE       note_off         <NA>  251   62       65      15    NaN
+      258       2 FALSE       note_off         <NA>   32   67       60      15    NaN
+      259       2 FALSE       note_off         <NA>   48   59       52      15    NaN
+      260       2 FALSE        note_on         <NA>  337   59       57      15    NaN
+      261       2 FALSE        note_on         <NA>    9   62       60      15    NaN
+      262       2 FALSE        note_on         <NA>    8   67       57      15    NaN
+      263       2 FALSE       note_off         <NA>  173   62       60      15    NaN
+      264       2 FALSE       note_off         <NA>   31   59       57      15    NaN
+      265       2 FALSE       note_off         <NA>    9   67       57      15    NaN
+      266       2 FALSE        note_on         <NA>  266   62       82      15    NaN
+      267       2 FALSE       note_off         <NA>    5   62       82      15    NaN
+      268       2  TRUE   end_of_track         <NA>    1  NaN      NaN     NaN    NaN
           numerator denominator clocks_per_click notated_32nd_notes_per_beat
       1         NaN         NaN              NaN                         NaN
       2         NaN         NaN              NaN                         NaN
