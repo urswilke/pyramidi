@@ -176,7 +176,7 @@ MidiFramer <- R6::R6Class(
     #' mfr$mf$write_file(midi_out)
     #' fluidsynth::midi_convert(midifile, output = audiofile)
     #' av::av_audio_convert(audiofile, mp3file)
-    #' # `marie_kondo` = TRUE, the midi (and wav if `audiofile` if an mp3 file) file would be deleted.
+    #' # `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
     #' # `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
     #' }
     play = function(
