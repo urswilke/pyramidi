@@ -164,6 +164,8 @@ MidiFramer <- R6::R6Class(
     #' @param ... Arguments passed to the fluidsynth functions 
     #'   (`fluidsynth::midi_play` or `fluidsynth::midi_convert` 
     #'   depending on the value of `live`).
+    #'   
+    #' @param @seealso player
     #' @examples
     #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
     #' mfr <- MidiFramer$new(midi_file_string)

@@ -284,6 +284,8 @@ deletes the intermediate wav file); defaults to \code{TRUE}}
 \item{\code{...}}{Arguments passed to the fluidsynth functions
 (\code{fluidsynth::midi_play} or \code{fluidsynth::midi_convert}
 depending on the value of \code{live}).}
+
+\item{\code{@seealso}}{player}
 }
 \if{html}{\out{</div>}}
 }
