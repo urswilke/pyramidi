@@ -1,9 +1,3 @@
----
-runme:
-  id: 01HPST16J80HPZPJJNG4Y2S6K2
-  version: v3
----
-
 # pyramidi
 
 Changes:
