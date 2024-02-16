@@ -95,7 +95,7 @@ midi_out <- "my_output.mid"
 audiofile <- "test.wav"
 mp3file <- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midifile, output = audiofile)
+fluidsynth::midi_convert(midi_out, output = audiofile)
 av::av_audio_convert(audiofile, mp3file)
 # `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
 # `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
@@ -298,7 +298,7 @@ midi_out <- "my_output.mid"
 audiofile <- "test.wav"
 mp3file <- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midifile, output = audiofile)
+fluidsynth::midi_convert(midi_out, output = audiofile)
 av::av_audio_convert(audiofile, mp3file)
 # `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
 # `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
