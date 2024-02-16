@@ -237,8 +237,10 @@ mfr$populate_r_fields()
 </div><p></p><hr><a id="method-MidiFramer-play"></a><div class="section">
 <h3 id="method-play-">Method <code>play()</code><a class="anchor" aria-label="anchor" href="#method-play-"></a></h3>
 <p>Play midi from MidiFramer object.
-Transform the midi file to fileext format and provide a play button for html
-documents.</p>
+Writes a midi file and either playing it in the R console (<code>live = TRUE</code>),
+or otherwise (<code>live = FALSE</code>) writes an audio file
+and adding an html <a href="https://developer.mozilla.org/docs/Web/HTML/Element/audio" class="external-link">audio player</a> in an Rmarkdown (/quarto?) document.
+Calls <code><a href="player.html">player()</a></code> helper function.</p>
 <p>WARNING: Setting <code>overwrite = TRUE</code> or <code>marie_kondo = TRUE</code> (the default!!) will DELETE the specified audio files!!!
 (see more details below)</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
@@ -300,6 +302,10 @@ deletes the intermediate wav file); defaults to <code>TRUE</code></p></dd>
 depending on the value of <code>live</code>).</p></dd>
 
 
+<dt><code>@seealso</code></dt>
+<dd><p>player</p></dd>
+
+
 </dl><p></p></div>
 </div>
 <div class="section">
@@ -313,7 +319,7 @@ midi_out &lt;- "my_output.mid"
 audiofile &lt;- "test.wav"
 mp3file &lt;- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midifile, output = audiofile)
+fluidsynth::midi_convert(midi_out, output = audiofile)
 av::av_audio_convert(audiofile, mp3file)
 # `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
 # `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file
@@ -445,7 +451,7 @@ av::av_audio_convert(audiofile, mp3file)
 <span class="r-in"><span><span class="va">audiofile</span> <span class="op">&lt;-</span> <span class="st">"test.wav"</span></span></span>
 <span class="r-in"><span><span class="va">mp3file</span> <span class="op">&lt;-</span> <span class="st">"test.mp3"</span></span></span>
 <span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="va">midi_out</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">midi_convert</a></span><span class="op">(</span><span class="va">midifile</span>, output <span class="op">=</span> <span class="va">audiofile</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">midi_convert</a></span><span class="op">(</span><span class="va">midi_out</span>, output <span class="op">=</span> <span class="va">audiofile</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">av</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av_audio_convert</a></span><span class="op">(</span><span class="va">audiofile</span>, <span class="va">mp3file</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.</span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file</span></span></span>
