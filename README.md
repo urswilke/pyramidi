@@ -154,11 +154,11 @@ synthesize the midi data to wav, convert to mp3 if you want, and then
 embed a player in your rmarkdown html document with
 
 ``` r
-mfr$play("test.mp3")
+mfr$play("mod_test_midi_file.mp3")
 ```
 
 <audio controls="">
-<source src="test.mp3" type="audio/mp3"/>
+<source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"/>
 </audio>
 
 \*The player only appears in the
