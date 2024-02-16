@@ -9,3 +9,4 @@ playground
 *.mp3
 *.mid
 !inst/extdata/test_midi_file.mid
+!test.mp3

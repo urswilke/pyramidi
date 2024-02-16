@@ -154,7 +154,7 @@ See the `vignette("pyramidi", package = "pyramidi")` to see how you can
 synthesize the midi data to wav, convert to mp3 if you want, and then 
 embed a player in your rmarkdown html document with
 ```{r}
-mfr$play()
+mfr$play("test.mp3")
 ```
 
 

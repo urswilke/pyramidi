@@ -154,11 +154,11 @@ synthesize the midi data to wav, convert to mp3 if you want, and then
 embed a player in your rmarkdown html document with
 
 ``` r
-mfr$play()
+mfr$play("test.mp3")
 ```
 
 <audio controls="">
-<source src="/tmp/RtmpAThHrv/mf_out_1e8d6fee23f0.mp3" type="audio/mp3"/>
+<source src="test.mp3" type="audio/mp3"/>
 </audio>
 
 \*The player only appears in the
