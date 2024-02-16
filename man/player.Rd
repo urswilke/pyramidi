@@ -4,27 +4,70 @@
 \alias{player}
 \title{Play midi file}
 \usage{
-player(audiofile, fileext = "wav")
+player(
+  midifile,
+  soundfont = fluidsynth::soundfont_path(),
+  output = gsub(".mid$", ".mp3", midifile),
+  live = interactive(),
+  verbose = interactive(),
+  overwrite = TRUE,
+  marie_kondo = TRUE,
+  ...
+)
 }
 \arguments{
-\item{audiofile}{audiofile}
+\item{midifile}{Path to the midi file to synthesize on; character string.}
 
-\item{fileext}{file extension}
+\item{soundfont}{path to sf2 sound font (character string); if not specified,
+the default soundfont of the fluidsynth package (\code{fluidsynth::soundfont_path()}) will be (downloaded if not present and) used.}
+
+\item{output}{Path to the audiofile to be synthesized. If audiofile of type mp3, it will
+first be synthesized to wav, and then converted to mp3 the \code{av} package;
+(character string).}
+
+\item{live}{logical; if \code{TRUE} the synthesized midi is directly played in
+the console. If \code{FALSE} an audio html tag is written. This will generate
+a small audio player when knitting an Rmd document
+(and probably also Quarto qmd files; I didn't check).}
+
+\item{verbose}{logical whether to print command line output; defaults to FALSE}
+
+\item{overwrite}{logical; defaults to TRUE;
+if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.}
+
+\item{marie_kondo}{logical, whether to remove intermediate files (the midi
+file, and if live = \code{FALSE} and \code{audiofile} is an mp3 also it also
+deletes the intermediate wav file); defaults to \code{TRUE}}
+
+\item{...}{Arguments passed to the fluidsynth functions
+(\code{fluidsynth::midi_play} or \code{fluidsynth::midi_convert}
+depending on the value of \code{live}).}
 }
 \value{
-html tag of a play button
+If \code{live = TRUE}, nothing is returned. If \code{live = FALSE}, a html
+audio tag is returned that will render as a small audio player when knitting
+an Rmd document. The audio player can then play the generated \code{output} audio file.
 }
 \description{
+Play midi from MidiFramer object.
 Transform the midi file to fileext format and provide a play button for html
 documents.
+
+WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
+(see more details below)
 }
 \examples{
+midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+midi_file_string |> player()
+
+# The player is a small helper function to do basically this:
 \dontrun{
 midifile <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 audiofile <- "test.wav"
 mp3file <- "test.mp3"
 fluidsynth::midi_convert(midifile, output = audiofile)
 av::av_audio_convert(audiofile, mp3file)
-audiofile \%>\% player()
+# `marie_kondo` = TRUE, the wav file would be deleted.
+# `overwrite` = TRUE would delete the wav file
 }
 }

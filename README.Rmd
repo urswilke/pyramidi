@@ -153,20 +153,10 @@ mfr$mf$write_file("mod_test_midi_file.mid")
 See the `vignette("pyramidi", package = "pyramidi")` to see how you can
 synthesize the midi data to wav, convert to mp3 if you want, and then 
 embed a player in your rmarkdown html document with
-```{r, eval=FALSE}
+```{r}
 mfr$play()
 ```
 
-
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3",
-      type = "audio/mp3"
-    )
-  )
-```
 
 *The player only appears in the [docs](https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio).
 
@@ -180,8 +170,7 @@ You can find the complete online documentation of the package [here](https://urs
 * See the `vignette("pyramidi")` for a brief usage introduction how to manipulate midi data.
 * The `vignette("compose")` shows a more extended example how to compose music and generate midi files from scratch.
 * `vignette("package_workflow")` shows in detail the structure of the `MidiFramer` class and the functions of the pyramidi package.
-* `vignette("functions_usage")` illustrates the low-level functions of the pyramidi package.
-that `MidiFramer` objects use under the hood.
+* `vignette("functions_usage")` illustrates the low-level functions of the pyramidi package, that `MidiFramer` objects use under the hood.
 
 ## pyramidi out in the wild
 

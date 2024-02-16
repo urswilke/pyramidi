@@ -158,7 +158,7 @@ mfr$play()
 ```
 
 <audio controls="">
-<source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"/>
+<source src="/tmp/RtmpAThHrv/mf_out_1e8d6fee23f0.mp3" type="audio/mp3"/>
 </audio>
 
 \*The player only appears in the
@@ -179,7 +179,7 @@ You can find the complete online documentation of the package
 - `vignette("package_workflow")` shows in detail the structure of the
   `MidiFramer` class and the functions of the pyramidi package.
 - `vignette("functions_usage")` illustrates the low-level functions of
-  the pyramidi package. that `MidiFramer` objects use under the hood.
+  the pyramidi package, that `MidiFramer` objects use under the hood.
 
 ## pyramidi out in the wild
 
