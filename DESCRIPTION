@@ -22,22 +22,23 @@ RoxygenNote: 7.2.3
 Imports: 
     reticulate,
     tibble,
-    details,
-    purrr,
     dplyr,
     stringr,
     tidyr,
-    ggplot2,
-    zeallot,
     magrittr,
     R6,
     av,
     fluidsynth,
-    pichor
+    details,
+    zeallot,
+    glue
 URL: https://github.com/urswilke/pyramidi, https://urswilke.github.io/pyramidi/
 Depends: 
     R (>= 2.10)
 Suggests:
+    pichor,
+    purrr,
+    ggplot2,
     spelling, 
     knitr,
     rmarkdown,

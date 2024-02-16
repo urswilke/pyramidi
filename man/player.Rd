@@ -12,7 +12,7 @@ player(audiofile, fileext = "wav")
 \item{fileext}{file extension}
 }
 \value{
-html tag of a playbutton
+html tag of a play button
 }
 \description{
 Transform the midi file to fileext format and provide a play button for html

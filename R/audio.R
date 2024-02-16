@@ -77,7 +77,7 @@ play_midi_frame <- function(
 #' @param audiofile audiofile
 #' @param fileext file extension
 #'
-#' @return html tag of a playbutton
+#' @return html tag of a play button
 #' @export
 #'
 #' @examples

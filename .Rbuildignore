@@ -10,3 +10,5 @@
 ^\.travis\.yml$
 ^codecov\.yml$
 ^setup_stuff$
+^playground$
+^grateful-refs\.bib$
