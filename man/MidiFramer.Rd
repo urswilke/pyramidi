@@ -236,8 +236,10 @@ mfr$populate_r_fields()
 \if{latex}{\out{\hypertarget{method-MidiFramer-play}{}}}
 \subsection{Method \code{play()}}{
 Play midi from MidiFramer object.
-Transform the midi file to fileext format and provide a play button for html
-documents.
+Writes a midi file and either playing it in the R console (\code{live = TRUE}),
+or otherwise (\code{live = FALSE}) writes an audio file
+and adding an html \href{https://developer.mozilla.org/docs/Web/HTML/Element/audio}{audio player} in an Rmarkdown (/quarto?) document.
+Calls \code{player()} helper function.
 
 WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
 (see more details below)

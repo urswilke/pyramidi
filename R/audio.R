@@ -1,8 +1,11 @@
 #' Play midi file
 #' 
 #' @description Play midi from MidiFramer object.
-#' Transform the midi file to fileext format and provide a play button for html
-#' documents.
+#' Helper function to synthesize midi, either:
+#'   * directly in the console,
+#'   * or generate audio files and include a small player in html documents.
+#'   
+#' This helper function is also called in the `MidiFramer$play()` method.
 #' 
 #' WARNING: Setting `overwrite = TRUE` or `marie_kondo = TRUE` (the default!!) will DELETE the specified audio files!!!
 #' (see more details below)
@@ -21,14 +24,14 @@
 #'   a small audio player when knitting an Rmd document 
 #'   (and probably also Quarto qmd files; I didn't check).
 #' @param marie_kondo logical, whether to remove intermediate files (the midi
-#'   file, and if live = `FALSE` and `audiofile` is an mp3 also it also 
+#'   file, and if live = `FALSE` and `audiofile` is an mp3 it also 
 #'   deletes the intermediate wav file); defaults to `TRUE`
 #' @param ... Arguments passed to the fluidsynth functions 
 #'   (`fluidsynth::midi_play` or `fluidsynth::midi_convert` 
 #'   depending on the value of `live`).
 #'   
 #' @return If `live = TRUE`, nothing is returned. If `live = FALSE`, a html
-#'   audio tag is returned that will render as a small audio player when knitting
+#'   [audio tag](https://developer.mozilla.org/docs/Web/HTML/Element/audio) is returned that will render as a small audio player when knitting
 #'   an Rmd document. The audio player can then play the generated `output` audio file.
 #'   
 #' @export

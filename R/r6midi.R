@@ -138,8 +138,10 @@ MidiFramer <- R6::R6Class(
       invisible(self)
     },
     #' @description Play midi from MidiFramer object.
-    #' Transform the midi file to fileext format and provide a play button for html
-    #' documents.
+    #' Writes a midi file and either playing it in the R console (`live = TRUE`), 
+    #' or otherwise (`live = FALSE`) writes an audio file 
+    #' and adding an html [audio player](https://developer.mozilla.org/docs/Web/HTML/Element/audio) in an Rmarkdown (/quarto?) document. 
+    #' Calls `player()` helper function.
     #' 
     #' WARNING: Setting `overwrite = TRUE` or `marie_kondo = TRUE` (the default!!) will DELETE the specified audio files!!! 
     #' (see more details below)

@@ -36,7 +36,7 @@ a small audio player when knitting an Rmd document
 if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.}
 
 \item{marie_kondo}{logical, whether to remove intermediate files (the midi
-file, and if live = \code{FALSE} and \code{audiofile} is an mp3 also it also
+file, and if live = \code{FALSE} and \code{audiofile} is an mp3 it also
 deletes the intermediate wav file); defaults to \code{TRUE}}
 
 \item{...}{Arguments passed to the fluidsynth functions
@@ -45,13 +45,18 @@ depending on the value of \code{live}).}
 }
 \value{
 If \code{live = TRUE}, nothing is returned. If \code{live = FALSE}, a html
-audio tag is returned that will render as a small audio player when knitting
+\href{https://developer.mozilla.org/docs/Web/HTML/Element/audio}{audio tag} is returned that will render as a small audio player when knitting
 an Rmd document. The audio player can then play the generated \code{output} audio file.
 }
 \description{
 Play midi from MidiFramer object.
-Transform the midi file to fileext format and provide a play button for html
-documents.
+Helper function to synthesize midi, either:
+\itemize{
+\item directly in the console,
+\item or generate audio files and include a small player in html documents.
+}
+
+This helper function is also called in the \code{MidiFramer$play()} method.
 
 WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
 (see more details below)
