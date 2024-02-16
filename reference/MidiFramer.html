@@ -37,7 +37,7 @@ can be used to write the data back to a midi file."><!-- mathjax --><script src=
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -150,16 +150,16 @@ When a value is passed, the field <code>mf$midi_file$ticks_per_beat</code> is mo
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>MidiFramer$new()</code></a></p></li>
-<li><p><a href="#method-update_notes_wide"><code>MidiFramer$update_notes_wide()</code></a></p></li>
-<li><p><a href="#method-populate_r_fields"><code>MidiFramer$populate_r_fields()</code></a></p></li>
-<li><p><a href="#method-play"><code>MidiFramer$play()</code></a></p></li>
-<li><p><a href="#method-clone"><code>MidiFramer$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-MidiFramer-new"><code>MidiFramer$new()</code></a></p></li>
+<li><p><a href="#method-MidiFramer-update_notes_wide"><code>MidiFramer$update_notes_wide()</code></a></p></li>
+<li><p><a href="#method-MidiFramer-populate_r_fields"><code>MidiFramer$populate_r_fields()</code></a></p></li>
+<li><p><a href="#method-MidiFramer-play"><code>MidiFramer$play()</code></a></p></li>
+<li><p><a href="#method-MidiFramer-clone"><code>MidiFramer$clone()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-MidiFramer-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Initialize a MidiFramer object</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>midi_file_string <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>midi_file_string <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -171,11 +171,11 @@ When a value is passed, the field <code>mf$midi_file$ticks_per_beat</code> is mo
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-update_notes_wide"></a><div class="section">
+</div><p></p><hr><a id="method-MidiFramer-update_notes_wide"></a><div class="section">
 <h3 id="method-update-notes-wide-">Method <code>update_notes_wide()</code><a class="anchor" aria-label="anchor" href="#method-update-notes-wide-"></a></h3>
 <p>Update a MidiFramer object with modified notes</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -215,13 +215,13 @@ mfr$play()
 </div>
 
 
-</div><p></p><hr><a id="method-populate_r_fields"></a><div class="section">
+</div><p></p><hr><a id="method-MidiFramer-populate_r_fields"></a><div class="section">
 <h3 id="method-populate-r-fields-">Method <code>populate_r_fields()</code><a class="anchor" aria-label="anchor" href="#method-populate-r-fields-"></a></h3>
 <p>Populate the fields of a MidiFramer object</p>
 <p>This can also be used to recalculate all the object's attributes,
 when a value in params is changed (see examples).</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">populate_r_fields</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">populate_r_fields</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -236,60 +236,99 @@ mfr$populate_r_fields()
 </div>
 
 
-</div><p></p><hr><a id="method-play"></a><div class="section">
+</div><p></p><hr><a id="method-MidiFramer-play"></a><div class="section">
 <h3 id="method-play-">Method <code>play()</code><a class="anchor" aria-label="anchor" href="#method-play-"></a></h3>
 <p>Play midi from MidiFramer object.
 Transform the midi file to fileext format and provide a play button for html
-documents.</p><div class="section">
+documents.</p>
+<p>WARNING: Setting <code>overwrite = TRUE</code> or <code>marie_kondo = TRUE</code> (the default!!) will DELETE the specified audio files!!!
+(see more details below)</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span>
-  audiofile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"mf_out_"</span>, fileext <span class="op">=</span> <span class="st">".wav"</span><span class="op">)</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  soundfont <span class="op">=</span> <span class="cn">NULL</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span></span>
+<span>  audiofile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"mf_out_"</span>, fileext <span class="op">=</span> <span class="st">".mp3"</span><span class="op">)</span>,</span>
+<span>  soundfont <span class="op">=</span> <span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/soundfonts.html" class="external-link">soundfont_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  midifile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">".mp3$"</span>, <span class="st">".mid"</span>, <span class="va">audiofile</span><span class="op">)</span>,</span>
+<span>  live <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  marie_kondo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>audiofile</code></dt>
 <dd><p>Path to the audiofile to be synthesized. If audiofile of type mp3, it will
-first be synthesized to wav, and then converted to mp3 with ffmpeg.</p></dd>
-
-
-<dt><code>overwrite</code></dt>
-<dd><p>logical; defaults to FALSE;
-if file exists and overwrite = FALSE, the existing files will be used and nothing
-is synthesized/converted to audio files.</p></dd>
+first be synthesized to wav, and then converted to mp3 with ffmpeg;
+(character string).</p></dd>
 
 
 <dt><code>soundfont</code></dt>
-<dd><p>path to sf2 sound font (character string); if NULL (the default)
-the default soundfont is used.</p></dd>
+<dd><p>path to sf2 sound font (character string); if not specified,
+the default soundfont of the fluidsynth package (<code><a href="https://docs.ropensci.org/fluidsynth/reference/soundfonts.html" class="external-link">fluidsynth::soundfont_path()</a></code>) will be (downloaded if not present and) used.</p></dd>
+
+
+<dt><code>midifile</code></dt>
+<dd><p>Path to the midi file to synthesize on. If <code>marie_kondo = TRUE</code>, it will be cleaned up (removed) at the end;
+(character string).</p></dd>
+
+
+<dt><code>live</code></dt>
+<dd><p>logical; if <code>TRUE</code> the synthesized midi is directly played in
+the console. If <code>FALSE</code> an audio html tag is written. This will generate
+a small audio player when knitting an Rmd document
+(and probably also Quarto qmd files; I didn't check).</p></dd>
 
 
 <dt><code>verbose</code></dt>
-<dd><p>logical whether to print fluidsynth (and ffmpeg in case of mp3 audiofile type) command line output; defaults to FALSE</p></dd>
+<dd><p>logical whether to print command line output; defaults to FALSE</p></dd>
+
+
+<dt><code>overwrite</code></dt>
+<dd><p>logical; defaults to TRUE;
+if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.</p></dd>
+
+
+<dt><code>marie_kondo</code></dt>
+<dd><p>logical, whether to remove intermediate files (the midi
+file, and if live = <code>FALSE</code> and <code>audiofile</code> is an mp3 also it also
+deletes the intermediate wav file); defaults to <code>TRUE</code></p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Arguments passed to the fluidsynth functions
+(<code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_play</a></code> or <code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_convert</a></code>
+depending on the value of <code>live</code>).</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
-<p></p><div class="r example copy"><div class="sourceCode"><pre><code>\dontrun{
-midi_file_string &lt;- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code>midi_file_string &lt;- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr &lt;- MidiFramer$new(midi_file_string)
 mfr$play()
+# The play method does basically this:
+\dontrun{
+midi_out &lt;- "my_output.mid"
+audiofile &lt;- "test.wav"
+mp3file &lt;- "test.mp3"
+mfr$mf$write_file(midi_out)
+fluidsynth::midi_convert(midifile, output = audiofile)
+av::av_audio_convert(audiofile, mp3file)
+# `marie_kondo` = TRUE, the midi (and wav if `audiofile` if an mp3 file) file would be deleted.
+# `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file
 }
 </code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-MidiFramer-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -307,73 +346,112 @@ mfr$play()
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## Create a MidiFramer object from a midi file:</span></span>
-<span class="r-in"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## Create empty MidiFramer object to illustrate</span></span>
-<span class="r-in"><span class="co">## the use of the `ticks_per_beat` active binding:</span></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Print default value of empty MidiFile object:</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span></span>
-<span class="r-in"><span class="co"># Modify it with the active binding ticks_per_beat:</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="fl">960L</span></span>
-<span class="r-in"><span class="co"># Print it again:</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## Method `MidiFramer$update_notes_wide`</span></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Function to replace every note with a random midi note between 60 &amp; 71:</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dfn</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">n_notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dfn</span><span class="op">$</span><span class="va">note</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">dfn</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>note <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">note</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">60</span><span class="op">:</span><span class="fl">71</span>, <span class="va">n_notes</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="va">note</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># You can pass functions to the $update_notes_wide() method (as above), but</span></span>
-<span class="r-in"><span class="co"># you can also modify the dataframe directly and pass it. Therefore, the</span></span>
-<span class="r-in"><span class="co"># following results in the same:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df_mod</span> <span class="op">&lt;-</span> <span class="fu">mod</span><span class="op">(</span><span class="va">mfr</span><span class="op">$</span><span class="va">df_notes_wide</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">df_mod</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## Method `MidiFramer$populate_r_fields`</span></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">columns_to_add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"time"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">populate_r_fields</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## Method `MidiFramer$play`</span></span>
-<span class="r-in"><span class="co">## ------------------------------------------------</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Create a MidiFramer object from a midi file:</span></span></span>
+<span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Create empty MidiFramer object to illustrate</span></span></span>
+<span class="r-in"><span><span class="co">## the use of the `ticks_per_beat` active binding:</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Print default value of empty MidiFile object:</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span></span></span>
+<span class="r-in"><span><span class="co"># Modify it with the active binding ticks_per_beat:</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">ticks_per_beat</span> <span class="op">&lt;-</span> <span class="fl">960L</span></span></span>
+<span class="r-in"><span><span class="co"># Print it again:</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MidiFramer$update_notes_wide`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Function to replace every note with a random midi note between 60 &amp; 71:</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dfn</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">n_notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dfn</span><span class="op">$</span><span class="va">note</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dfn</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>note <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">note</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">60</span><span class="op">:</span><span class="fl">71</span>, <span class="va">n_notes</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="va">note</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># You can pass functions to the $update_notes_wide() method (as above), but</span></span></span>
+<span class="r-in"><span><span class="co"># you can also modify the dataframe directly and pass it. Therefore, the</span></span></span>
+<span class="r-in"><span><span class="co"># following results in the same:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df_mod</span> <span class="op">&lt;-</span> <span class="fu">mod</span><span class="op">(</span><span class="va">mfr</span><span class="op">$</span><span class="va">df_notes_wide</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">update_notes_wide</span><span class="op">(</span><span class="va">df_mod</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MidiFramer$populate_r_fields`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">columns_to_add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"time"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">populate_r_fields</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MidiFramer$play`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ python              : chr "/usr/bin/python3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ libpython           : chr "/usr/lib/python3.10/config-3.10-x86_64-linux-gnu/libpython3.10.so"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pythonhome          : chr "//usr://usr"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pythonpath          : chr "/home/runner/work/_temp/Library/reticulate/config:/usr/lib/python310.zip:/usr/lib/python3.10:/usr/lib/python3.1"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prefix              : chr "/usr"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ exec_prefix         : chr "/usr"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_exec_prefix    : chr "/usr"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ virtualenv          : chr ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ virtualenv_activate : chr ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ executable          : chr "/usr/bin/python3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_executable     : chr "/usr/bin/python3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version_string      : chr "3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version             : chr "3.10"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ architecture        : chr "64bit"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ anaconda            : logi FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ conda               : chr "False"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ numpy               : NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ required_module     : chr "miditapyr"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ required_module_path: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ available           : logi TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ python_versions     : chr [1:2] "/usr/bin/python3" "/usr/bin/python"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ forced              : NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "py_config"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Python module miditapyr was not found.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> Detected Python configuration:</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'mfr' not found</span>
+<span class="r-in"><span><span class="co"># The play method does basically this:</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">midi_out</span> <span class="op">&lt;-</span> <span class="st">"my_output.mid"</span></span></span>
+<span class="r-in"><span><span class="va">audiofile</span> <span class="op">&lt;-</span> <span class="st">"test.wav"</span></span></span>
+<span class="r-in"><span><span class="va">mp3file</span> <span class="op">&lt;-</span> <span class="st">"test.mp3"</span></span></span>
+<span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="va">midi_out</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">midi_convert</a></span><span class="op">(</span><span class="va">midifile</span>, output <span class="op">=</span> <span class="va">audiofile</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">av</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av_audio_convert</a></span><span class="op">(</span><span class="va">audiofile</span>, <span class="va">mp3file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># `marie_kondo` = TRUE, the midi (and wav if `audiofile` if an mp3 file) file would be deleted.</span></span></span>
+<span class="r-in"><span><span class="co"># `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -388,7 +466,7 @@ mfr$play()
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

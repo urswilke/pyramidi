@@ -31,7 +31,7 @@ midi_frame_unnested object."><!-- mathjax --><script src="https://cdnjs.cloudfla
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -77,17 +77,20 @@ midi_frame_unnested object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">merge_midi_frames</span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">df_not_notes</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_midi_frames</span><span class="op">(</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">df_not_notes</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df_meta, df_notes_long, df_not_notes</dt>
 <dd><p>Dataframes in the format of <code><a href="split_midi_frame.html">split_midi_frame()</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Merges the input dataframes, arranges by <code>i_track</code> &amp; (absolute) <code>ticks</code>, and
+    
+
+<p>Merges the input dataframes, arranges by <code>i_track</code> &amp; (absolute) <code>ticks</code>, and
 calculates <code>time</code> (in relative ticks since the last event).</p>
     </div>
     <div id="see-also">
@@ -98,18 +101,18 @@ calculates <code>time</code> (in relative ticks since the last event).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mf</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">MidiFrames</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_unnested</span><span class="op">$</span><span class="va">df</span>, ticks_per_beat <span class="op">=</span> <span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="split_midi_frame.html">split_midi_frame</a></span><span class="op">(</span><span class="va">dfm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_notes_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="pivot_long_notes.html">pivot_long_notes</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">df_notes_wide</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">merge_midi_frames</span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">l</span><span class="op">$</span><span class="va">df_not_notes</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mf</span> <span class="op">&lt;-</span> <span class="va">miditapyr</span><span class="op">$</span><span class="fu">MidiFrames</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dfm</span> <span class="op">&lt;-</span> <span class="fu"><a href="tab_measures.html">tab_measures</a></span><span class="op">(</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_unnested</span><span class="op">$</span><span class="va">df</span>, ticks_per_beat <span class="op">=</span> <span class="va">mf</span><span class="op">$</span><span class="va">midi_file</span><span class="op">$</span><span class="va">ticks_per_beat</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="split_midi_frame.html">split_midi_frame</a></span><span class="op">(</span><span class="va">dfm</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_notes_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="pivot_long_notes.html">pivot_long_notes</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">df_notes_wide</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">merge_midi_frames</span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">df_meta</span>, <span class="va">df_notes_long</span>, <span class="va">l</span><span class="op">$</span><span class="va">df_not_notes</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -124,7 +127,7 @@ calculates <code>time</code> (in relative ticks since the last event).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
