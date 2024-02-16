@@ -2,6 +2,17 @@ pyramidi
 ========
 
 Changes:
+* **0.2**
+    * **breaking changes** -
+        * `MidiFramer$play()`:
+            * `overwrite` argument was changed to `TRUE` by default. Be careful not to OVERWRITE files!
+            * `marie_kondo` argument was added which DELETES intermediate files.
+            * the `live` argument also allows to play the sound in the R console (setting this to `TRUE` when rendering an Rmarkdown document will probably result in an error).
+        * removed `play_midi_frame()` and replaced it by `player()` (the workhorse of the new `MidiFramer$play()` method)
+    * New features:
+        * the play() method and player (see above :) - play your modified sounds directly from the `MidiFramer` object in the R console! 🥳
+        * The new dependency on the fluidsynth & av packages now allows to remove the audio files from git (needed for the audio on the pkgdown site; except for the README where it's still needed as knitted locally...). In other words, you can now also play the generated sounds on a deployed site without pushing a copy of the audio files to the server where the site is deployed (the pkgdown site on github pages is generated with new R randomness in some of the sounds, every time a new commit is pushed to main. Before the audio generation only worked locally on my machine. Now, installing the package and its dependencies makes everything work remotely.).
+        * The dependency on raudiomate was removed thanks to fluidsynth & av.
 
 * **0.1**
     * **Breaking changes** -
