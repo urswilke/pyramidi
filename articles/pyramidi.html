@@ -122,11 +122,7 @@ it to generate the midi data from scratch in R.</p>
 constructor method <code>MidiFramer$new()</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">midi_file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span>
-<span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_path</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in python_config_impl(python) : </span></span>
-<span><span class="co">#&gt;   Error running '/home/runner/.virtualenvs/r-reticulate/python': No such file.</span></span>
-<span><span class="co">#&gt; The Python installation used to create the virtualenv has been moved or removed:</span></span>
-<span><span class="co">#&gt;   '/opt/hostedtoolcache/Python/3.12.2/x64/bin'</span></span></code></pre></div>
+<span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MidiFramer.html">MidiFramer</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_path</span><span class="op">)</span></span></code></pre></div>
 <pre class="details"><code><span><span class="va">mfr</span></span></code></pre>
 <details closed><summary><span title="Click to Open"> Show print output </span>
 </summary><div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -402,16 +398,16 @@ every note with a random midi note between 60 &amp; 71:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 130 × 11</span></span></span>
 <span><span class="co">#&gt;    i_track meta   note channel i_note velocity_note_on velocity_note_off</span></span>
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE    66       9      1               72                72</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE    62       9      1               64                64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE    64       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE    69       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE    64       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE    68       9      2               64                64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE    65       9      2              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE    71       9      3               60                60</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE    65       9      2              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE    63       9      4               60                60</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE    69       9      1               72                72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE    69       9      1               64                64</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE    61       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE    64       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE    65       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE    62       9      2               64                64</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE    64       9      2              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE    65       9      3               60                60</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE    67       9      2              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE    62       9      4               60                60</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 120 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -427,9 +423,9 @@ depending list elements are also automatically updated.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_nested</span><span class="op">$</span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   i_track  meta                            msg</span></span>
-<span><span class="co">#&gt; 1       0 FALSE          9, 70, note_on, 72, 0</span></span>
-<span><span class="co">#&gt; 2       0 FALSE          9, 64, note_on, 64, 0</span></span>
-<span><span class="co">#&gt; 3       0 FALSE         9, 67, note_on, 101, 0</span></span>
+<span><span class="co">#&gt; 1       0 FALSE          9, 65, note_on, 72, 0</span></span>
+<span><span class="co">#&gt; 2       0 FALSE          9, 63, note_on, 64, 0</span></span>
+<span><span class="co">#&gt; 3       0 FALSE         9, 69, note_on, 101, 0</span></span>
 <span><span class="co">#&gt; 4       0  TRUE    track_name, drum-t1-1-t1, 0</span></span>
 <span><span class="co">#&gt; 5       0  TRUE           set_tempo, 666666, 0</span></span>
 <span><span class="co">#&gt; 6       0  TRUE time_signature, 4, 4, 24, 8, 0</span></span></code></pre></div>
@@ -461,7 +457,7 @@ synthesize them with the convenience function <code><a href="../reference/player
 player for the <code>MidiFramer</code> object:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<audio controls=""><source src="/tmp/RtmpGdMLwu/mf_out_22a63c83caa0.mp3" type="audio/mp3"></source></audio><p>When using R interactively, this will directly play the generated
+<audio controls=""><source src="/tmp/RtmpeJ3isY/mf_out_25bb796bde7a.mp3" type="audio/mp3"></source></audio><p>When using R interactively, this will directly play the generated
 audio in the console.</p>
 </div>
 <div class="section level3">
