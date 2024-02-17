@@ -26,7 +26,7 @@ pivot_wide_notes <- function(df_measures) {
     # dplyr::select(c("i_track", "name", "channel", "type", "m", "b", "t", "ticks", "time", "note", "velocity", "i_note")) %>%
     tidyr::pivot_wider(names_from = c("type"), values_from = !!values_from_vector) %>%
     # as.data.frame() %>%
-    dplyr::arrange(.data$i_track, .data$b_note_on)
+    dplyr::arrange(i_track, b_note_on)
 }
 
 
@@ -110,9 +110,9 @@ merge_midi_frames <- function(df_meta, df_notes_long, df_not_notes) {
   # if in tab_measures() there weren't all columns built, we have to remove them here:
   cols_to_remove <- intersect(cols_to_remove, names(res))
   res %>%
-    dplyr::arrange(.data$i_track, .data$ticks) %>%
-    dplyr::group_by(.data$i_track) %>%
-    dplyr::mutate(time = .data$ticks - dplyr::lag(.data$ticks) %>% {.[1] = 0; .}) %>%
+    dplyr::arrange(i_track, ticks) %>%
+    dplyr::group_by(i_track) %>%
+    dplyr::mutate(time = ticks - dplyr::lag(ticks) %>% {.[1] = 0; .}) %>%
     dplyr::ungroup() %>%
     dplyr::select(-!!cols_to_remove)
 }
@@ -150,10 +150,10 @@ split_midi_frame <- function(dfm) {
   df_notes <- l[[2]]
 
   df_not_notes <- df_notes %>%
-    dplyr::filter(!stringr::str_detect(.data$type, "^note_o[nf]f?$"))
+    dplyr::filter(!stringr::str_detect(type, "^note_o[nf]f?$"))
 
   df_notes_wide <- df_notes %>%
-    dplyr::filter(stringr::str_detect(.data$type, "^note_o[nf]f?$")) %>%
+    dplyr::filter(stringr::str_detect(type, "^note_o[nf]f?$")) %>%
     pivot_wide_notes()
 
   tibble::lst(df_meta, df_not_notes, df_notes_wide)

@@ -2,8 +2,6 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
-setup_stuff/*
-removed/*
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^docs$
@@ -11,3 +9,6 @@ removed/*
 ^\.github$
 ^\.travis\.yml$
 ^codecov\.yml$
+^setup_stuff$
+^playground$
+^grateful-refs\.bib$

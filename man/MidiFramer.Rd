@@ -86,10 +86,19 @@ mfr$populate_r_fields()
 ## Method `MidiFramer$play`
 ## ------------------------------------------------
 
-\dontrun{
 midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 mfr$play()
+# The play method does basically this:
+\dontrun{
+midi_out <- "my_output.mid"
+audiofile <- "test.wav"
+mp3file <- "test.mp3"
+mfr$mf$write_file(midi_out)
+fluidsynth::midi_convert(midi_out, output = audiofile)
+av::av_audio_convert(audiofile, mp3file)
+# `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
+# `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
 }
 }
 \section{Public fields}{
@@ -125,16 +134,16 @@ When a value is passed, the field \code{mf$midi_file$ticks_per_beat} is modified
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{MidiFramer$new()}}
-\item \href{#method-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
-\item \href{#method-populate_r_fields}{\code{MidiFramer$populate_r_fields()}}
-\item \href{#method-play}{\code{MidiFramer$play()}}
-\item \href{#method-clone}{\code{MidiFramer$clone()}}
+\item \href{#method-MidiFramer-new}{\code{MidiFramer$new()}}
+\item \href{#method-MidiFramer-update_notes_wide}{\code{MidiFramer$update_notes_wide()}}
+\item \href{#method-MidiFramer-populate_r_fields}{\code{MidiFramer$populate_r_fields()}}
+\item \href{#method-MidiFramer-play}{\code{MidiFramer$play()}}
+\item \href{#method-MidiFramer-clone}{\code{MidiFramer$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-MidiFramer-new"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize a MidiFramer object
 \subsection{Usage}{
@@ -150,8 +159,8 @@ Initialize a MidiFramer object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-update_notes_wide"></a>}}
-\if{latex}{\out{\hypertarget{method-update_notes_wide}{}}}
+\if{html}{\out{<a id="method-MidiFramer-update_notes_wide"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-update_notes_wide}{}}}
 \subsection{Method \code{update_notes_wide()}}{
 Update a MidiFramer object with modified notes
 \subsection{Usage}{
@@ -197,8 +206,8 @@ mfr$play()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-populate_r_fields"></a>}}
-\if{latex}{\out{\hypertarget{method-populate_r_fields}{}}}
+\if{html}{\out{<a id="method-MidiFramer-populate_r_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-populate_r_fields}{}}}
 \subsection{Method \code{populate_r_fields()}}{
 Populate the fields of a MidiFramer object
 
@@ -223,18 +232,27 @@ mfr$populate_r_fields()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-play"></a>}}
-\if{latex}{\out{\hypertarget{method-play}{}}}
+\if{html}{\out{<a id="method-MidiFramer-play"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-play}{}}}
 \subsection{Method \code{play()}}{
 Play midi from MidiFramer object.
-Transform the midi file to fileext format and provide a play button for html
-documents.
+Writes a midi file and either playing it in the R console (\code{live = TRUE}),
+or otherwise (\code{live = FALSE}) writes an audio file
+and adding an html \href{https://developer.mozilla.org/docs/Web/HTML/Element/audio}{audio player} in an Rmarkdown (/quarto?) document.
+Calls \code{player()} helper function.
+
+WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
+(see more details below)
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MidiFramer$play(
-  audiofile = tempfile("mf_out_", fileext = ".wav"),
-  overwrite = FALSE,
-  soundfont = NULL,
-  verbose = FALSE
+  audiofile = tempfile("mf_out_", fileext = ".mp3"),
+  soundfont = fluidsynth::soundfont_path(),
+  midifile = gsub(".mp3$", ".mid", audiofile),
+  live = interactive(),
+  verbose = FALSE,
+  overwrite = TRUE,
+  marie_kondo = TRUE,
+  ...
 )}\if{html}{\out{</div>}}
 }
 
@@ -242,25 +260,52 @@ documents.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{audiofile}}{Path to the audiofile to be synthesized. If audiofile of type mp3, it will
-first be synthesized to wav, and then converted to mp3 with ffmpeg.}
+first be synthesized to wav, and then converted to mp3 with ffmpeg;
+(character string).}
 
-\item{\code{overwrite}}{logical; defaults to FALSE;
-if file exists and overwrite = FALSE, the existing files will be used and nothing
-is synthesized/converted to audio files.}
+\item{\code{soundfont}}{path to sf2 sound font (character string); if not specified,
+the default soundfont of the fluidsynth package (\code{fluidsynth::soundfont_path()}) will be (downloaded if not present and) used.}
 
-\item{\code{soundfont}}{path to sf2 sound font (character string); if NULL (the default)
-the default soundfont is used.}
+\item{\code{midifile}}{Path to the midi file to synthesize on. If \code{marie_kondo = TRUE}, it will be cleaned up (removed) at the end;
+(character string).}
 
-\item{\code{verbose}}{logical whether to print fluidsynth (and ffmpeg in case of mp3 audiofile type) command line output; defaults to FALSE}
+\item{\code{live}}{logical; if \code{TRUE} the synthesized midi is directly played in
+the console. If \code{FALSE} an audio html tag is written. This will generate
+a small audio player when knitting an Rmd document
+(and probably also Quarto qmd files; I didn't check).}
+
+\item{\code{verbose}}{logical whether to print command line output; defaults to FALSE}
+
+\item{\code{overwrite}}{logical; defaults to TRUE;
+if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.}
+
+\item{\code{marie_kondo}}{logical, whether to remove intermediate files (the midi
+file, and if live = \code{FALSE} and \code{audiofile} is an mp3 also it also
+deletes the intermediate wav file); defaults to \code{TRUE}}
+
+\item{\code{...}}{Arguments passed to the fluidsynth functions
+(\code{fluidsynth::midi_play} or \code{fluidsynth::midi_convert}
+depending on the value of \code{live}).}
+
+\item{\code{@seealso}}{player}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{\dontrun{
-midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
+\preformatted{midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
 mfr <- MidiFramer$new(midi_file_string)
 mfr$play()
+# The play method does basically this:
+\dontrun{
+midi_out <- "my_output.mid"
+audiofile <- "test.wav"
+mp3file <- "test.mp3"
+mfr$mf$write_file(midi_out)
+fluidsynth::midi_convert(midi_out, output = audiofile)
+av::av_audio_convert(audiofile, mp3file)
+# `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
+# `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
 }
 }
 \if{html}{\out{</div>}}
@@ -269,8 +314,8 @@ mfr$play()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-MidiFramer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-MidiFramer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

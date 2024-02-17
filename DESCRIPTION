@@ -1,6 +1,6 @@
 Package: pyramidi
 Title: Generate and Manipulate Midi Data in R Data Frames 
-Version: 0.1
+Version: 0.2
 Authors@R: 
     person(given = "Urs",
            family = "Wilke",
@@ -18,25 +18,27 @@ Config/reticulate:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports: 
-    raudiomate,
     reticulate,
     tibble,
-    details,
-    purrr,
     dplyr,
     stringr,
     tidyr,
-    ggplot2,
-    zeallot,
     magrittr,
-    rlang,
-    R6
+    R6,
+    av,
+    fluidsynth,
+    details,
+    zeallot,
+    glue
 URL: https://github.com/urswilke/pyramidi, https://urswilke.github.io/pyramidi/
 Depends: 
     R (>= 2.10)
 Suggests:
+    pichor,
+    purrr,
+    ggplot2,
     spelling, 
     knitr,
     rmarkdown,
@@ -47,7 +49,8 @@ Suggests:
     DiagrammeR,
     tuneR
 Remotes: 
-    urswilke/raudiomate
+    ropensci/fluidsynth,
+    mikldk/pichor
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 RdMacros: details

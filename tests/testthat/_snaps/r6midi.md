@@ -100,7 +100,7 @@
       #   clocks_per_click <dbl>, notated_32nd_notes_per_beat <dbl>
       
       $mf
-      <miditapyr.midi_frame.MidiFrames object at 0x7a3aece7c0d0>
+      <miditapyr.midi_frame.MidiFrames object at <stochastic term :)>>
       
 
 ---

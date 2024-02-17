@@ -98,19 +98,8 @@ mfr$update_notes_wide(beats_to_ticks(drum))
 
 and listen to the drums of our first composition:
 
-```{r, eval=FALSE}
+```{r}
 mfr$play("drum.mp3")
-```
-
-
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "drum.mp3",
-      type = "audio/mp3"
-    )
-  )
 ```
 
 
@@ -174,20 +163,9 @@ mfr$update_notes_wide(midi_note_events_wide)
 
 And play it:
 
-```{r, eval=FALSE}
+```{r}
 mfr$play("combine.mp3")
 ```
-
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "combine.mp3",
-      type = "audio/mp3"
-    )
-  )
-```
-
 
 
 
@@ -343,18 +321,8 @@ mfr$update_notes_wide(combination)
 ```
 
 
-```{r, eval=FALSE}
+```{r}
 mfr$play("combination.mp3")
-```
-
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "combination.mp3",
-      type = "audio/mp3"
-    )
-  )
 ```
 
 ## Combine parts
@@ -411,17 +379,7 @@ mfr$update_notes_wide(composition)
 ```
 
 
-```{r, eval=FALSE}
+```{r}
 mfr$play("composition.mp3")
-```
-
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "composition.mp3",
-      type = "audio/mp3"
-    )
-  )
 ```
 

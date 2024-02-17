@@ -138,36 +138,77 @@ MidiFramer <- R6::R6Class(
       invisible(self)
     },
     #' @description Play midi from MidiFramer object.
-    #' Transform the midi file to fileext format and provide a play button for html
-    #' documents.
-    #'
+    #' Writes a midi file and either playing it in the R console (`live = TRUE`), 
+    #' or otherwise (`live = FALSE`) writes an audio file 
+    #' and adding an html [audio player](https://developer.mozilla.org/docs/Web/HTML/Element/audio) in an Rmarkdown (/quarto?) document. 
+    #' Calls `player()` helper function.
+    #' 
+    #' WARNING: Setting `overwrite = TRUE` or `marie_kondo = TRUE` (the default!!) will DELETE the specified audio files!!! 
+    #' (see more details below)
+    #' 
     #' @param audiofile Path to the audiofile to be synthesized. If audiofile of type mp3, it will
-    #' first be synthesized to wav, and then converted to mp3 with ffmpeg.
-    #' @param overwrite logical; defaults to FALSE;
-    #' if file exists and overwrite = FALSE, the existing files will be used and nothing
-    #' is synthesized/converted to audio files.
-    #' @param soundfont path to sf2 sound font (character string); if NULL (the default)
-    #' the default soundfont is used.
-    #' @param verbose logical whether to print fluidsynth (and ffmpeg in case of mp3 audiofile type) command line output; defaults to FALSE
-    #'
+    #' first be synthesized to wav, and then converted to mp3 with ffmpeg;
+    #' (character string).
+    #' @param soundfont path to sf2 sound font (character string); if not specified,
+    #'   the default soundfont of the fluidsynth package (`fluidsynth::soundfont_path()`) will be (downloaded if not present and) used.
+    #' @param midifile Path to the midi file to synthesize on. If `marie_kondo = TRUE`, it will be cleaned up (removed) at the end;
+    #' (character string).
+    #' @param overwrite logical; defaults to TRUE;
+    #' if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.
+    #' @param verbose logical whether to print command line output; defaults to FALSE
+    #' @param live logical; if `TRUE` the synthesized midi is directly played in 
+    #'   the console. If `FALSE` an audio html tag is written. This will generate 
+    #'   a small audio player when knitting an Rmd document 
+    #'   (and probably also Quarto qmd files; I didn't check).
+    #' @param marie_kondo logical, whether to remove intermediate files (the midi
+    #'   file, and if live = `FALSE` and `audiofile` is an mp3 also it also 
+    #'   deletes the intermediate wav file); defaults to `TRUE`
+    #' @param ... Arguments passed to the fluidsynth functions 
+    #'   (`fluidsynth::midi_play` or `fluidsynth::midi_convert` 
+    #'   depending on the value of `live`).
+    #'   
+    #' @param @seealso player
     #' @examples
-    #' \dontrun{
     #' midi_file_string <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
     #' mfr <- MidiFramer$new(midi_file_string)
     #' mfr$play()
+    #' # The play method does basically this:
+    #' \dontrun{
+    #' midi_out <- "my_output.mid"
+    #' audiofile <- "test.wav"
+    #' mp3file <- "test.mp3"
+    #' mfr$mf$write_file(midi_out)
+    #' fluidsynth::midi_convert(midi_out, output = audiofile)
+    #' av::av_audio_convert(audiofile, mp3file)
+    #' # `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
+    #' # `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
     #' }
     play = function(
-      audiofile = tempfile("mf_out_", fileext = ".wav"),
-      overwrite = FALSE,
-      soundfont = NULL,
-      verbose = FALSE
+      audiofile = tempfile("mf_out_", fileext = ".mp3"),
+      soundfont = fluidsynth::soundfont_path(),
+      midifile = gsub(".mp3$", ".mid", audiofile),
+      live = interactive(),
+      verbose = FALSE,
+      overwrite = TRUE,
+      marie_kondo = TRUE,
+      ...
     ) {
-      play_midi_frame(
-        self,
-        audiofile = audiofile,
-        overwrite = overwrite,
-        soundfont = soundfont,
-        verbose = verbose
+      if (!overwrite & file.exists(midifile)) {
+        stop("The following file  exists:\n", midifile, "\nUse `overwrite = TRUE` to overwrite it.")
+      }
+      if (marie_kondo) {
+        on.exit(unlink(midifile))
+      }
+      self$mf$write_file(midifile)
+      player(
+        midifile,
+        soundfont,
+        audiofile,
+        live,
+        verbose,
+        overwrite,
+        marie_kondo,
+        ...
       )
     }
   ),

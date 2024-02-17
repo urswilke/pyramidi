@@ -32,8 +32,6 @@ library(purrr)
 library(htmltools)
 library(tibble)
 library(details)
-# This is a small helper package, that allows to synthesize & play midi files:
-library(raudiomate) # see https://github.com/urswilke/raudiomate
 ```
 
 ## `MidiFramer` class
@@ -75,7 +73,7 @@ list(
     mfr$mf$midi_frame_nested$df
   ) %>% 
   map(head, 30) %>% 
-  map(knitr::kable)
+  walk(\(x) print(knitr::kable(x)))
 ```
 
 When `mf` is initialized `midi_frame_raw` and `midi_frame_nested$df` should be the same (except the ordering of the named fields in the `msg` column might differ). 
@@ -158,7 +156,8 @@ mfr$mf$midi_frame_nested$df %>% head()
 Thus we can now directly save the modifications to a midi file:
 
 ```{r}
-mfr$mf$write_file("mod_test_midi_file.mid")
+midifile <- "mod_test_midi_file.mid"
+mfr$mf$write_file(midifile)
 ```
 
 For a more extensive and less arbitrary demo how to compose your own music with pyramidi, 
@@ -166,43 +165,26 @@ see `vignette("compose")`.
 
 ### Playing audio
 
-**You need to install fluidsynth if you want to do that on your computer.**
-**To generate mp3 files, you also need ffmpeg.**
+**You need to install [fluidsynth](https://www.fluidsynth.org/) on your computer and the [R package](https://docs.ropensci.org/fluidsynth/index.html) (which should be installed with pyramidi) if you want to do that on your computer.**
 
 If you want to produce audio files from the midi files you can synthesize them
-with the convenience function `synthesize_midi()`
+with the convenience function `player()`
+
 
 ```{r}
-midifile <- "mod_test_midi_file.mid"
-mp3file <- "mod_test_midi_file.mp3"
-wavfile <- "mod_test_midi_file.wav"
+midifile |> player()
 ```
 
-
-```{r, eval=FALSE}
-synthesize_midi(midifile, wavfile)
-```
+As you can hear, the `sample()` function in `mod()` changed all midi notes randomly.
 
 You can also listen to your synthesized files by embedding an audio player for the 
 `MidiFramer` object:
 
-```{r, eval=FALSE}
-mfr$play(mp3file)
+```{r}
+mfr$play()
 ```
 
-```{r echo=FALSE}
-htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = mp3file,
-      type = "audio/mp3"
-    )
-  )
-```
-
-
-To play the audio, this saves the synthesized file under the path specified in `mp3file`. 
-As you can hear, the `sample()` function in `mod()` changed all midi notes randomly.
+When using R interactively, this will directly play the generated audio in the console.
 
 ### Multiple results
 
@@ -214,7 +196,7 @@ to generate multiple midi files in one call
 You can also generate a list of multiple `MidiFramer` objects (in this case 2) and apply different modifications to each:
 
 
-```{r, eval=FALSE}
+```{r}
 l_mfr <- 1:2 %>%
   set_names(paste0("test", ., ".mp3")) %>% 
   map(~mfr$clone(deep = TRUE)$update_notes_wide(mod))
@@ -222,7 +204,7 @@ l_mfr <- 1:2 %>%
 
 And if you want to successively add modifications to the same object and store all intermediate results in a list, you could do it like this:
 
-```{r, eval=FALSE}
+```{r}
 l_mfr2 <- 1:2 %>%
   set_names(paste0("test", ., ".mp3")) %>% 
   accumulate(~.x$clone(deep = TRUE)$update_notes_wide(mod), .init = mfr)
@@ -235,7 +217,7 @@ This means that updates to one of these elements in `l_mfr` (for instance `l_mfr
 
 This is how you can embed multiple audio files in an rmarkdown document using `purrr::imap()`:
 
-```{r, eval=FALSE}
+```{r}
 tagList(
   imap(
     l_mfr, 
@@ -250,31 +232,5 @@ tagList(
 )
 ```
 
-```{r, echo=FALSE}
-tagList(list(
-  div(
-    h4("audio result test1.mp3"),
-    htmltools::tags$audio(
-      controls = "",
-      htmltools::tags$source(
-        src = "test1.mp3",
-        type = "audio/mp3"
-      )
-    ),
-    br(),
-    br()
-  ),
-  div(
-    h4("audio result test2.mp3"),
-    htmltools::tags$audio(
-    controls = "",
-    htmltools::tags$source(
-      src = "test2.mp3",
-      type = "audio/mp3"
-    )
-  )
-
-  )
-))
-```
-
+Compared to the two audio samples in [Playing audio] (which are the same), we 
+now have two different results.

@@ -1,3 +1,6 @@
+template:
+  bootstrap: 5
+
 url: https://urswilke.github.io/pyramidi
 
 home:

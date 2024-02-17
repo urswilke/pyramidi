@@ -4,7 +4,7 @@
       mfr
     Output
       $mf
-      <miditapyr.midi_frame.MidiFrames object at 0x7a3add7b9610>
+      <miditapyr.midi_frame.MidiFrames object at <stochastic term :)>>
       
       $dfm
       # A tibble: 268 x 15
