@@ -83,17 +83,21 @@
 <div class="section level1">
 <h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h1>
-<p>pyramidi is an experimental package to generate / manipulate midi data from R. Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido" class="external-link">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
+<p>pyramidi is a very experimental package to generate / manipulate midi data from R. Be aware that a lot of the code I’ve written some years ago hurts my eyes when I look at it now :) Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido" class="external-link">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
 <p>Thus, you can manipulate all the intermediate dataframes and create midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
-<p>The midi data can be</p>
+<div class="section level2">
+<h2 id="new-in-version-02">New in version 0.2<a class="anchor" aria-label="anchor" href="#new-in-version-02"></a>
+</h2>
+<p>The midi data can now be</p>
 <ul>
-<li>played live in the R console thanks to the excellent R packages <a href="https://github.com/ropensci/fluidsynth" class="external-link">fluidsynth</a> &amp; <a href="https://github.com/ropensci/av/" class="external-link">av</a> (see <a href="............................................">here</a>), or</li>
-<li>synthesized to wav files with <code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_convert()</a></code> (needs <a href="https://www.fluidsynth.org/" class="external-link">fluidsynth</a> installed, but if I understand correctly R will do that for you),</li>
-<li>converted to mp3 files with <code><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av::av_audio_convert()</a></code>
-</li>
-<li>and played in rmarkdown documents with the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play"><code>play()</code></a> method of <code>MidiFramer</code>).</li>
+<li>played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages <a href="https://github.com/ropensci/fluidsynth" class="external-link">fluidsynth</a> &amp; <a href="https://github.com/ropensci/av/" class="external-link">av</a> (see the documentation of the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-"><code>play()</code></a> method in the <code>MidiFramer</code> class and its helper function <code><a href="reference/player.html">player()</a></code> which use</li>
+<li>
+<code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_convert()</a></code> to synthesize midi to wav files (needs <a href="https://www.fluidsynth.org/" class="external-link">fluidsynth</a> installed, but if I understand correctly R will do that for you),</li>
+<li>
+<code><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av::av_audio_convert()</a></code> to convert wav to mp3 files</li>
 </ul>
 <p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/" class="external-link">mido’s documentation</a> might be a good start.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -162,7 +166,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="st">"mod_test_midi_file.mp3"</span><span class="op">)</span></span></code></pre></div>
 <audio controls><source src="https://urswilke.github.io/pyramidi/articles/mod_test_midi_file.mp3" type="audio/mp3"></source></audio><p>*The player only appears in the <a href="https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio">docs</a>.</p>
-<p>Even if that might sound very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
+<p>Even if that sound is very weird, I was very happy not having to listen to the package midi file over and over again. :)</p>
 </div>
 </div>
 <div class="section level2">
@@ -231,7 +235,7 @@
 </tr>
 <tr class="odd">
 <td align="left">fluidsynth</td>
-<td align="left">0.1.0</td>
+<td align="left">1.0.0</td>
 <td align="left">Ooms (2024)</td>
 </tr>
 <tr class="even">
@@ -342,7 +346,7 @@ Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg. 2023. <em><
 Ooms, Jeroen. 2023. <em><span class="nocase">av</span>: Working with Audio and Video in r</em>. <a href="https://CRAN.R-project.org/package=av" class="external-link uri">https://CRAN.R-project.org/package=av</a>.
 </div>
 <div id="ref-fluidsynth" class="csl-entry">
-———. 2024. <em><span class="nocase">fluidsynth</span>: Play and Render MIDI Files in r</em>. <a href="https://docs.ropensci.org/fluidsynth/" class="external-link uri">https://docs.ropensci.org/fluidsynth/</a>.
+———. 2024. <em><span class="nocase">fluidsynth</span>: Read and Play Digital Music (MIDI) in r</em>. <a href="https://docs.ropensci.org/fluidsynth/%20https://ropensci.r-universe.dev/fluidsynth" class="external-link">https://docs.ropensci.org/fluidsynth/ https://ropensci.r-universe.dev/fluidsynth</a>.
 </div>
 <div id="ref-spelling" class="csl-entry">
 Ooms, Jeroen, and Jim Hester. 2023. <em><span class="nocase">spelling</span>: Tools for Spell Checking in r</em>. <a href="https://CRAN.R-project.org/package=spelling" class="external-link uri">https://CRAN.R-project.org/package=spelling</a>.
