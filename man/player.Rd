@@ -73,6 +73,6 @@ mp3file <- "test.mp3"
 fluidsynth::midi_convert(midifile, output = audiofile)
 av::av_audio_convert(audiofile, mp3file)
 # `marie_kondo` = TRUE, the wav file would be deleted.
-# `overwrite` = TRUE would overwrite the wav file if previously existing.
+# `overwrite` = TRUE would overwrite the wav & mp3 file if previously existing.
 }
 }

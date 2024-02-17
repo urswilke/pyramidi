@@ -14,7 +14,7 @@ Changes:
 
    * New features:
       * the play() method and player (see above :) - play your modified sounds directly from the `MidiFramer` object in the R console! 🥳
-      * The new dependency on the fluidsynth & av packages now allows to remove the audio files from git (needed for the audio on the pkgdown site; except for the README where it's still needed as knitted locally...). In other words, you can now also play the generated sounds on a deployed site without pushing a copy of the audio files to the server where the site is deployed (the pkgdown site on github pages is generated with new R randomness in some of the sounds, every time a new commit is pushed to main. Before the audio generation only worked locally on my machine. Now, installing the package and its dependencies makes everything work remotely.).
+      * The new dependency on the fluidsynth & av packages now allows to remove the audio files from git (needed for the audio on the pkgdown site; except for the README where it's still needed as knitted locally...). In other words, you can now also play the generated sounds on a deployed site without pushing a copy of the audio files to the server where the site is deployed (the pkgdown site on github pages is generated with new R randomness in some of the sounds, every time a new commit is pushed to main. Before the audio generation only worked locally on my machine. Now, installing the package and its dependencies makes things start to work remotely.).
       * The dependency on raudiomate was replaced by fluidsynth & av (thanks to @jeroen! #4).
 
 * **0.1**

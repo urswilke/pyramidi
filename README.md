@@ -16,8 +16,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 # Introduction
 
-pyramidi is an experimental package to generate / manipulate midi data
-from R. Midi data is read into dataframes, using the python package
+pyramidi is a very experimental package to generate / manipulate midi
+data from R. Be aware that a lot of the code I’ve written some years ago
+hurts my eyes when I look at it now :) Midi data is read into
+dataframes, using the python package
 [miditapyr](https://pypi.org/project/miditapyr/) under the hood (which
 itself uses the excellent [mido](https://github.com/mido/mido)). The
 notes’ midi information (one line per `note_on`/`note_off` midi event)
@@ -32,19 +34,21 @@ files you write can be understood by your softsynth. The data is not yet
 validated by pyramidi, but mido (also used to write midi files) already
 catches some of the possible inconsistencies.
 
-The midi data can be
+## New in version 0.2
 
-- played live in the R console thanks to the excellent R packages
-  [fluidsynth](https://github.com/ropensci/fluidsynth) &
-  [av](https://github.com/ropensci/av/) (see
-  [here](............................................)), or
-- synthesized to wav files with `fluidsynth::midi_convert()` (needs
+The midi data can now be
+
+- played live in the R console OR generate a sound file and a html audio
+  player when knitting rmarkdown documents thanks to the excellent R
+  packages [fluidsynth](https://github.com/ropensci/fluidsynth) &
+  [av](https://github.com/ropensci/av/) (see the documentation of the
+  [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-)
+  method in the `MidiFramer` class and its helper function `player()`
+  which use
+- `fluidsynth::midi_convert()` to synthesize midi to wav files (needs
   [fluidsynth](https://www.fluidsynth.org/) installed, but if I
   understand correctly R will do that for you),
-- converted to mp3 files with `av::av_audio_convert()`
-- and played in rmarkdown documents with the
-  [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play)
-  method of `MidiFramer`).
+- `av::av_audio_convert()` to convert wav to mp3 files
 
 If you’re new to midi, [mido’s
 documentation](https://mido.readthedocs.io/en/latest/) might be a good
@@ -164,8 +168,8 @@ mfr$play("mod_test_midi_file.mp3")
 \*The player only appears in the
 [docs](https://urswilke.github.io/pyramidi/index.html#synthesizing-and-playing-audio).
 
-Even if that might sound very weird, I was very happy not having to
-listen to the package midi file over and over again. :)
+Even if that sound is very weird, I was very happy not having to listen
+to the package midi file over and over again. :)
 
 ## Documentation
 
@@ -223,7 +227,7 @@ authors of the following libraries!
 | base       | 4.3.2      | R Core Team (2023a)                                                                           |
 | details    | 0.3.0      | Sidi (2022)                                                                                   |
 | DiagrammeR | 1.0.11     | Iannone and Roy (2024)                                                                        |
-| fluidsynth | 0.1.0      | Ooms (2024)                                                                                   |
+| fluidsynth | 1.0.0      | Ooms (2024)                                                                                   |
 | glue       | 1.7.0      | Hester and Bryan (2024)                                                                       |
 | grateful   | 0.2.6      | Rodriguez-Sanchez and Jackson (2023)                                                          |
 | htmltools  | 0.5.7      | Cheng et al. (2023)                                                                           |
@@ -307,8 +311,10 @@ and Video in r*. <https://CRAN.R-project.org/package=av>.
 
 <div id="ref-fluidsynth" class="csl-entry">
 
-———. 2024. *<span class="nocase">fluidsynth</span>: Play and Render MIDI
-Files in r*. <https://docs.ropensci.org/fluidsynth/>.
+———. 2024. *<span class="nocase">fluidsynth</span>: Read and Play
+Digital Music (MIDI) in r*. [https://docs.ropensci.org/fluidsynth/
+https://ropensci.r-universe.dev/fluidsynth](https://docs.ropensci.org/fluidsynth/
+https://ropensci.r-universe.dev/fluidsynth).
 
 </div>
 
