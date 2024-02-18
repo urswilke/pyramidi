@@ -34,6 +34,10 @@ files you write can be understood by your softsynth. The data is not yet
 validated by pyramidi, but mido (also used to write midi files) already
 catches some of the possible inconsistencies.
 
+If you’re new to midi, [mido’s
+documentation](https://mido.readthedocs.io/en/latest/) might be a good
+start.
+
 ## New in version 0.2
 
 The midi data can now be
@@ -49,10 +53,6 @@ The midi data can now be
   [fluidsynth](https://www.fluidsynth.org/) installed, but if I
   understand correctly R will do that for you),
 - `av::av_audio_convert()` to convert wav to mp3 files
-
-If you’re new to midi, [mido’s
-documentation](https://mido.readthedocs.io/en/latest/) might be a good
-start.
 
 ## Installation
 
