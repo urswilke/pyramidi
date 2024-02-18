@@ -3,7 +3,7 @@ mfr <- r_midi_frames(midi_file_string)
 
 test_that("print of r_midi_frames() correct", {
   expect_snapshot(mfr,
-                  transform = \(x) stringr::str_replace(x, "0x[0-9a-f]{12}", "<stochastic term :)>"))
+                  transform = \(x) stringr::str_replace(x, "0x[0-9a-f]+", "<stochastic term :)>"))
   expect_snapshot(list(
     mfr$mf$midi_frame_raw,
     mfr$mf$midi_frame_unnested$df,

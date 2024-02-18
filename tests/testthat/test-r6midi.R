@@ -6,7 +6,7 @@ mfr <- MidiFramer$new()
 test_that("MidiFramer seems to work", {
   expect_snapshot(c("midi_frame_mod", "df_notes_wide", "df_not_notes",
                     "df_meta", "df_notes_long", "dfm", "mf") %>% purrr::set_names() %>% purrr::map(~`[[`(mfr6, .x)),
-                  transform = \(x) stringr::str_replace(x, "0x[0-9a-f]{12}", "<stochastic term :)>"))
+                  transform = \(x) stringr::str_replace(x, "0x[0-9a-f]+", "<stochastic term :)>"))
   expect_snapshot(list(
     mfr6$mf$midi_frame_raw,
     mfr6$mf$midi_frame_unnested$df,
