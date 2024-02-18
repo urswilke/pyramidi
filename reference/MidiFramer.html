@@ -414,37 +414,14 @@ av::av_audio_convert(audiofile, mp3file)
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">midi_file_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_midi_file.mid"</span>, package <span class="op">=</span> <span class="st">"pyramidi"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mfr</span> <span class="op">&lt;-</span> <span class="va">MidiFramer</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">midi_file_string</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ python              : chr "/usr/bin/python3"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ libpython           : chr "/usr/lib/python3.10/config-3.10-x86_64-linux-gnu/libpython3.10.so"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pythonhome          : chr "//usr://usr"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pythonpath          : chr "/home/runner/work/_temp/Library/reticulate/config:/usr/lib/python310.zip:/usr/lib/python3.10:/usr/lib/python3.1"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prefix              : chr "/usr"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ exec_prefix         : chr "/usr"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_exec_prefix    : chr "/usr"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ virtualenv          : chr ""</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ virtualenv_activate : chr ""</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ executable          : chr "/usr/bin/python3"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_executable     : chr "/usr/bin/python3"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version_string      : chr "3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version             : chr "3.10"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ architecture        : chr "64bit"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ anaconda            : logi FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ conda               : chr "False"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ numpy               : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ required_module     : chr "miditapyr"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ required_module_path: NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ available           : logi TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ python_versions     : chr [1:2] "/usr/bin/python3" "/usr/bin/python"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ forced              : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "py_config"</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Python module miditapyr was not found.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Detected Python configuration:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in python_config_impl(python) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Error running '/home/runner/.virtualenvs/r-reticulate/python': No such file.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The Python installation used to create the virtualenv has been moved or removed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   '/opt/hostedtoolcache/Python/3.12.2/x64/bin'</span>
 <span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'mfr' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;audio controls=""&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;source src="/tmp/RtmpwyM9pV/mf_out_1e8a5a4ef8f4.mp3" type="audio/mp3"/&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/audio&gt;</span>
 <span class="r-in"><span><span class="co"># The play method does basically this:</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">midi_out</span> <span class="op">&lt;-</span> <span class="st">"my_output.mid"</span></span></span>
