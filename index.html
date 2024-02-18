@@ -85,6 +85,7 @@
 </h1>
 <p>pyramidi is a very experimental package to generate / manipulate midi data from R. Be aware that a lot of the code I’ve written some years ago hurts my eyes when I look at it now :) Midi data is read into dataframes, using the python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> under the hood (which itself uses the excellent <a href="https://github.com/mido/mido" class="external-link">mido</a>). The notes’ midi information (one line per <code>note_on</code>/<code>note_off</code> midi event) is translated into a wide format (one line per note). This format facilitates some manipulations of the notes’ data and also plotting them in piano roll plots. Finally, the modified dataframes can be written back to midi files (again using miditapyr).</p>
 <p>Thus, you can manipulate all the intermediate dataframes and create midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
+<p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/" class="external-link">mido’s documentation</a> might be a good start.</p>
 <div class="section level2">
 <h2 id="new-in-version-02">New in version 0.2<a class="anchor" aria-label="anchor" href="#new-in-version-02"></a>
 </h2>
@@ -96,7 +97,6 @@
 <li>
 <code><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av::av_audio_convert()</a></code> to convert wav to mp3 files</li>
 </ul>
-<p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/" class="external-link">mido’s documentation</a> might be a good start.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
