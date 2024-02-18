@@ -25,7 +25,7 @@
       $df_notes_wide
       # A tibble: 130 x 11
          i_track meta   note channel i_note velocity_note_on velocity_note_off
-           <dbl> <lgl> <dbl>   <dbl>  <int>            <dbl>             <dbl>
+           <dbl> <lgl> <dbl>   <dbl>  <dbl>            <dbl>             <dbl>
        1       0 FALSE    43       9      1               72                72
        2       0 FALSE    39       9      1               64                64
        3       0 FALSE    36       9      1              101               101
@@ -68,7 +68,7 @@
       $df_notes_long
       # A tibble: 260 x 9
          i_track channel  note i_note type     velocity ticks     b meta 
-           <dbl>   <dbl> <dbl>  <int> <chr>       <dbl> <dbl> <dbl> <lgl>
+           <dbl>   <dbl> <dbl>  <dbl> <chr>       <dbl> <dbl> <dbl> <lgl>
        1       0       9    43      1 note_on        72     0     0 FALSE
        2       0       9    43      1 note_off       72   240     1 FALSE
        3       0       9    39      1 note_on        64     0     0 FALSE
@@ -84,7 +84,7 @@
       $dfm
       # A tibble: 268 x 15
          i_track meta  type     name   note velocity channel ticks     b i_note  tempo
-           <dbl> <lgl> <chr>    <chr> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <int>  <dbl>
+           <dbl> <lgl> <chr>    <chr> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <dbl>  <dbl>
        1       0 TRUE  track_n~ drum~   NaN      NaN     NaN     0     0      0    NaN
        2       0 FALSE note_on  <NA>     43       72       9     0     0      1    NaN
        3       0 FALSE note_on  <NA>     39       64       9     0     0      1    NaN
@@ -222,7 +222,7 @@
     Output
       # A tibble: 2 x 17
         i_track channel  note meta  i_note velocity_note_on velocity_note_off
-          <dbl>   <dbl> <dbl> <lgl>  <int>            <dbl>             <dbl>
+          <dbl>   <dbl> <dbl> <lgl>  <dbl>            <dbl>             <dbl>
       1       0       9    43 FALSE      1               72                72
       2       0       9    39 FALSE      1               64                64
       # i 10 more variables: time_note_on <dbl>, time_note_off <dbl>,

@@ -15,7 +15,7 @@
     Output
       # A tibble: 268 x 15
          i_track meta  type     name   note velocity channel ticks     b i_note  tempo
-           <dbl> <lgl> <chr>    <chr> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <int>  <dbl>
+           <dbl> <lgl> <chr>    <chr> <dbl>    <dbl>   <dbl> <dbl> <dbl>  <dbl>  <dbl>
        1       0 TRUE  track_n~ drum~   NaN      NaN     NaN     0     0      0    NaN
        2       0 FALSE note_on  <NA>     43       72       9     0     0      1    NaN
        3       0 FALSE note_on  <NA>     39       64       9     0     0      1    NaN
@@ -37,7 +37,7 @@
     Output
       # A tibble: 138 x 29
          i_track meta  name   note channel i_note tempo numerator denominator
-           <dbl> <lgl> <chr> <dbl>   <dbl>  <int> <dbl>     <dbl>       <dbl>
+           <dbl> <lgl> <chr> <dbl>   <dbl>  <dbl> <dbl>     <dbl>       <dbl>
        1       0 FALSE <NA>     43       9      1   NaN       NaN         NaN
        2       0 FALSE <NA>     39       9      1   NaN       NaN         NaN
        3       0 FALSE <NA>     36       9      1   NaN       NaN         NaN

@@ -56,7 +56,7 @@ tab_measures <- function(df, ticks_per_beat, columns_to_add = "b") {
     # the "[1]" only takes the first time signature if several in file:
     dplyr::mutate(b = m * tab_time_sig(df)$numerator[1]) %>%
     dplyr::group_by(i_track, note) %>%
-    dplyr::mutate(i_note = cumsum(stringr::str_detect(type, "^note_on$")) |> as.integer()) %>%
+    dplyr::mutate(i_note = cumsum(stringr::str_detect(type, "^note_on$")) |> as.numeric()) %>%
     dplyr::ungroup() %>%
     dplyr::select(-!!columns_to_remove) %>%
     dplyr::relocate(!!cols_to_put_last, .after = dplyr::last_col())
