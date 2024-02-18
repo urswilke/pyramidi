@@ -56,17 +56,10 @@ The midi data can now be
 
 ## Installation
 
-You can install pyramidi from
-[github](https://github.com/urswilke/pyramidi) with:
+You can install pyramidi from R-universe with:
 
 ``` r
-## install remotes package if it's not already
-if (!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("remotes")
-}
-
-## install dev version of rtweettree from github
-remotes::install_github("UrsWilke/pyramidi")
+install.packages('pyramidi', repos = c('https://urswilke.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 The python package [miditapyr](https://pypi.org/project/miditapyr/) also
