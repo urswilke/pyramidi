@@ -42,13 +42,12 @@ but mido (also used to write midi files) already catches some of the possible in
 If you're new to midi, [mido's documentation](https://mido.readthedocs.io/en/latest/) might be a good start.
 
 
-## New in version 0.2
+## New since version 0.2
 
 The midi data can now be 
 
-* played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages [fluidsynth](https://github.com/ropensci/fluidsynth) & [av](https://github.com/ropensci/av/) (see the documentation of the [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-) method in the `MidiFramer` class and its helper function `player()` which use
-* `fluidsynth::midi_convert()` to synthesize midi to wav files (needs [fluidsynth](https://www.fluidsynth.org/) installed, but if I understand correctly R will do that for you),
-* `av::av_audio_convert()` to convert wav to mp3 files 
+* played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages [fluidsynth](https://github.com/ropensci/fluidsynth) (see the documentation of the [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-) method in the `MidiFramer` class and its helper function `player()` which use
+* `fluidsynth::midi_convert()` to synthesize midi to wav files (needs [fluidsynth](https://www.fluidsynth.org/) installed, but if I understand correctly R will do that for you)
 
 
 

@@ -27,7 +27,6 @@ Imports:
     tidyr,
     magrittr,
     R6,
-    av,
     fluidsynth,
     details,
     zeallot,

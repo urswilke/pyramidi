@@ -7,15 +7,13 @@
 #'   
 #' This helper function is also called in the `MidiFramer$play()` method.
 #' 
-#' WARNING: Setting `overwrite = TRUE` or `marie_kondo = TRUE` (the default!!) will DELETE the specified audio files!!!
+#' WARNING: Setting `overwrite = TRUE` (the default!!) will DELETE the specified audio files!!!
 #' (see more details below)
 #'
 #' @param midifile Path to the midi file to synthesize on; character string.
 #' @param soundfont path to sf2 sound font (character string); if not specified,
 #'   the default soundfont of the fluidsynth package (`fluidsynth::soundfont_path()`) will be (downloaded if not present and) used.
-#' @param output Path to the audiofile to be synthesized. If audiofile of type mp3, it will
-#' first be synthesized to wav, and then converted to mp3 the `av` package;
-#' (character string).
+#' @param output Path to the audiofile to be synthesized. (character string).
 #' @param overwrite logical; defaults to TRUE;
 #' if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.
 #' @param verbose logical whether to print command line output; defaults to FALSE
@@ -23,9 +21,6 @@
 #'   the console. If `FALSE` an audio html tag is written. This will generate 
 #'   a small audio player when knitting an Rmd document 
 #'   (and probably also Quarto qmd files; I didn't check).
-#' @param marie_kondo logical, whether to remove intermediate files (the midi
-#'   file, and if live = `FALSE` and `audiofile` is an mp3 it also 
-#'   deletes the intermediate wav file); defaults to `TRUE`
 #' @param ... Arguments passed to the fluidsynth functions 
 #'   (`fluidsynth::midi_play` or `fluidsynth::midi_convert` 
 #'   depending on the value of `live`).
@@ -42,12 +37,9 @@
 #' # The player is a small helper function to do basically this:
 #' \dontrun{
 #' midifile <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-#' audiofile <- "test.wav"
 #' mp3file <- "test.mp3"
-#' fluidsynth::midi_convert(midifile, output = audiofile)
-#' av::av_audio_convert(audiofile, mp3file)
-#' # `marie_kondo` = TRUE, the wav file would be deleted.
-#' # `overwrite` = TRUE would overwrite the wav & mp3 file if previously existing.
+#' fluidsynth::midi_convert(midifile, output = mp3file)
+#' # `overwrite` = TRUE overwrites the mp3 file if previously existing.
 #' }
 player <- function(midifile,
                    soundfont = fluidsynth::soundfont_path(),
@@ -55,7 +47,6 @@ player <- function(midifile,
                    live = interactive(),
                    verbose = interactive(),
                    overwrite = TRUE,
-                   marie_kondo = TRUE,
                    ...) {
   if (live) {
     fluidsynth::midi_play(
@@ -66,32 +57,20 @@ player <- function(midifile,
     )
     return(invisible(NULL))
   }
-  
-  wavfile <- if (grepl(".mp3$", output)) gsub(".mp3$", ".wav", output) 
-  outputs <- c(output, wavfile)
-  outputs_exist <- file.exists(outputs)
-  
-  if (!overwrite & any(outputs_exist)) {
-    stop("The following file(s)  exist(s):\n", paste(outputs[outputs_exist]), "\nUse `overwrite = TRUE` to overwrite it/them.")
+
+  if (!overwrite & file.exists(output)) {
+    stop("The file\n", output, "exists:\nUse `overwrite = TRUE` to overwrite it/them.")
   }
   
-  wav_or_mp3 <- wavfile %||% output
   fluidsynth::midi_convert(
     midifile,
     soundfont,
-    output = wav_or_mp3,
+    output = output,
     verbose = verbose,
     ...
   )
-  if (verbose) message("converted ", midifile, " to ", wav_or_mp3)
-  
-  if (!is.null(wavfile)) {
-    av::av_audio_convert(wavfile, output, verbose = verbose)
-    if (verbose) message("converted ", wavfile, " to ", output)
-    if (marie_kondo) file.remove(wavfile)
-    if (verbose) message("removed ", wavfile)
-  }
-  
+  if (verbose) message("converted ", midifile, " to ", output)
+
   html_tag_audio(output, tools::file_ext(output))
 }
 
