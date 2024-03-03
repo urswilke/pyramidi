@@ -1,0 +1,15 @@
+pandoc: 3.1.8
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  compose: compose.html
+  functions_usage: functions_usage.html
+  mido_from_r: mido_from_r.html
+  package_workflow: package_workflow.html
+  pyramidi: pyramidi.html
+  tuner: tuner.html
+last_built: 2024-03-03T10:09Z
+urls:
+  reference: https://urswilke.github.io/pyramidi/v0.2.1preview/reference
+  article: https://urswilke.github.io/pyramidi/v0.2.1preview/articles
+
