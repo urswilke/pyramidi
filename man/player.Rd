@@ -11,7 +11,6 @@ player(
   live = interactive(),
   verbose = interactive(),
   overwrite = TRUE,
-  marie_kondo = TRUE,
   ...
 )
 }
@@ -21,9 +20,7 @@ player(
 \item{soundfont}{path to sf2 sound font (character string); if not specified,
 the default soundfont of the fluidsynth package (\code{fluidsynth::soundfont_path()}) will be (downloaded if not present and) used.}
 
-\item{output}{Path to the audiofile to be synthesized. If audiofile of type mp3, it will
-first be synthesized to wav, and then converted to mp3 the \code{av} package;
-(character string).}
+\item{output}{Path to the audiofile to be synthesized. (character string).}
 
 \item{live}{logical; if \code{TRUE} the synthesized midi is directly played in
 the console. If \code{FALSE} an audio html tag is written. This will generate
@@ -34,10 +31,6 @@ a small audio player when knitting an Rmd document
 
 \item{overwrite}{logical; defaults to TRUE;
 if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.}
-
-\item{marie_kondo}{logical, whether to remove intermediate files (the midi
-file, and if live = \code{FALSE} and \code{audiofile} is an mp3 it also
-deletes the intermediate wav file); defaults to \code{TRUE}}
 
 \item{...}{Arguments passed to the fluidsynth functions
 (\code{fluidsynth::midi_play} or \code{fluidsynth::midi_convert}
@@ -58,7 +51,7 @@ Helper function to synthesize midi, either:
 
 This helper function is also called in the \code{MidiFramer$play()} method.
 
-WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
+WARNING: Setting \code{overwrite = TRUE} (the default!!) will DELETE the specified audio files!!!
 (see more details below)
 }
 \examples{
@@ -68,11 +61,8 @@ midi_file_string |> player()
 # The player is a small helper function to do basically this:
 \dontrun{
 midifile <- system.file("extdata", "test_midi_file.mid", package = "pyramidi")
-audiofile <- "test.wav"
 mp3file <- "test.mp3"
-fluidsynth::midi_convert(midifile, output = audiofile)
-av::av_audio_convert(audiofile, mp3file)
-# `marie_kondo` = TRUE, the wav file would be deleted.
-# `overwrite` = TRUE would overwrite the wav & mp3 file if previously existing.
+fluidsynth::midi_convert(midifile, output = mp3file)
+# `overwrite` = TRUE overwrites the mp3 file if previously existing.
 }
 }

@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/urswilke/pyramidi.svg?branch=master)](https://travis-ci.org/github/urswilke/pyramidi)
 [![Codecov test
 coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://app.codecov.io/gh/urswilke/pyramidi?branch=master)
 [![R-CMD-check](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
@@ -38,21 +36,20 @@ If you’re new to midi, [mido’s
 documentation](https://mido.readthedocs.io/en/latest/) might be a good
 start.
 
-## New in version 0.2
+## New since version 0.2
 
 The midi data can now be
 
 - played live in the R console OR generate a sound file and a html audio
   player when knitting rmarkdown documents thanks to the excellent R
-  packages [fluidsynth](https://github.com/ropensci/fluidsynth) &
-  [av](https://github.com/ropensci/av/) (see the documentation of the
+  packages [fluidsynth](https://github.com/ropensci/fluidsynth) (see the
+  documentation of the
   [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-)
   method in the `MidiFramer` class and its helper function `player()`
   which use
 - `fluidsynth::midi_convert()` to synthesize midi to wav files (needs
   [fluidsynth](https://www.fluidsynth.org/) installed, but if I
-  understand correctly R will do that for you),
-- `av::av_audio_convert()` to convert wav to mp3 files
+  understand correctly R will do that for you)
 
 ## Installation
 
@@ -216,7 +213,6 @@ authors of the following libraries!
 
 | Package    | Version    | Citation                                                                                      |
 |:-----------|:-----------|:----------------------------------------------------------------------------------------------|
-| av         | 0.9.0      | Ooms (2023)                                                                                   |
 | base       | 4.3.2      | R Core Team (2023a)                                                                           |
 | details    | 0.3.0      | Sidi (2022)                                                                                   |
 | DiagrammeR | 1.0.11     | Iannone and Roy (2024)                                                                        |
@@ -295,17 +291,10 @@ Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg.
 
 </div>
 
-<div id="ref-av" class="csl-entry">
-
-Ooms, Jeroen. 2023. *<span class="nocase">av</span>: Working with Audio
-and Video in r*. <https://CRAN.R-project.org/package=av>.
-
-</div>
-
 <div id="ref-fluidsynth" class="csl-entry">
 
-———. 2024. *<span class="nocase">fluidsynth</span>: Read and Play
-Digital Music (MIDI) in r*. [https://docs.ropensci.org/fluidsynth/
+Ooms, Jeroen. 2024. *<span class="nocase">fluidsynth</span>: Read and
+Play Digital Music (MIDI)*. [https://docs.ropensci.org/fluidsynth/
 https://ropensci.r-universe.dev/fluidsynth](https://docs.ropensci.org/fluidsynth/
 https://ropensci.r-universe.dev/fluidsynth).
 

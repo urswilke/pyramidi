@@ -92,13 +92,10 @@ mfr$play()
 # The play method does basically this:
 \dontrun{
 midi_out <- "my_output.mid"
-audiofile <- "test.wav"
 mp3file <- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midi_out, output = audiofile)
-av::av_audio_convert(audiofile, mp3file)
-# `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
-# `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
+fluidsynth::midi_convert(midi_out, output = mp3file)
+# `overwrite` = TRUE overwrites midi_out & mp3file
 }
 }
 \section{Public fields}{
@@ -241,17 +238,16 @@ or otherwise (\code{live = FALSE}) writes an audio file
 and adding an html \href{https://developer.mozilla.org/docs/Web/HTML/Element/audio}{audio player} in an Rmarkdown (/quarto?) document.
 Calls \code{player()} helper function.
 
-WARNING: Setting \code{overwrite = TRUE} or \code{marie_kondo = TRUE} (the default!!) will DELETE the specified audio files!!!
+WARNING: Setting \code{overwrite = TRUE} (the default!!) will DELETE the specified audio files!!!
 (see more details below)
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MidiFramer$play(
   audiofile = tempfile("mf_out_", fileext = ".mp3"),
   soundfont = fluidsynth::soundfont_path(),
-  midifile = gsub(".mp3$", ".mid", audiofile),
+  midifile = gsub("\\\\....$", ".mid", audiofile),
   live = interactive(),
   verbose = FALSE,
   overwrite = TRUE,
-  marie_kondo = TRUE,
   ...
 )}\if{html}{\out{</div>}}
 }
@@ -266,8 +262,7 @@ first be synthesized to wav, and then converted to mp3 with ffmpeg;
 \item{\code{soundfont}}{path to sf2 sound font (character string); if not specified,
 the default soundfont of the fluidsynth package (\code{fluidsynth::soundfont_path()}) will be (downloaded if not present and) used.}
 
-\item{\code{midifile}}{Path to the midi file to synthesize on. If \code{marie_kondo = TRUE}, it will be cleaned up (removed) at the end;
-(character string).}
+\item{\code{midifile}}{Path to the midi file to synthesize on; (character string).}
 
 \item{\code{live}}{logical; if \code{TRUE} the synthesized midi is directly played in
 the console. If \code{FALSE} an audio html tag is written. This will generate
@@ -278,10 +273,6 @@ a small audio player when knitting an Rmd document
 
 \item{\code{overwrite}}{logical; defaults to TRUE;
 if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.}
-
-\item{\code{marie_kondo}}{logical, whether to remove intermediate files (the midi
-file, and if live = \code{FALSE} and \code{audiofile} is an mp3 also it also
-deletes the intermediate wav file); defaults to \code{TRUE}}
 
 \item{\code{...}}{Arguments passed to the fluidsynth functions
 (\code{fluidsynth::midi_play} or \code{fluidsynth::midi_convert}
@@ -299,13 +290,10 @@ mfr$play()
 # The play method does basically this:
 \dontrun{
 midi_out <- "my_output.mid"
-audiofile <- "test.wav"
 mp3file <- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midi_out, output = audiofile)
-av::av_audio_convert(audiofile, mp3file)
-# `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
-# `overwrite` = TRUE overwrites midi_out, audiofile & mp3file
+fluidsynth::midi_convert(midi_out, output = mp3file)
+# `overwrite` = TRUE overwrites midi_out & mp3file
 }
 }
 \if{html}{\out{</div>}}

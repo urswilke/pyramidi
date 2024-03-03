@@ -2,6 +2,13 @@
 
 Changes:
 
+* **0.2.1**
+
+   * With the new version of the fluidsynth R package the dependency on av could be removed
+   * The `marie_kondo` argument was also removed in `player()` and the `MidiFramer$play()` method.
+
+
+
 * **0.2**
 
    * **breaking changes** -

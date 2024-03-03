@@ -5,7 +5,7 @@
 \alias{mido}
 \title{Mido python module}
 \format{
-An object of class \code{python.builtin.module} (inherits from \code{python.builtin.object}) of length 0.
+An object of class \code{python.builtin.module} (inherits from \code{python.builtin.object}) of length 1.
 }
 \usage{
 mido

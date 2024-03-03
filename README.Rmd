@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 # pyramidi <a href='https://github.com/urswilke/pyramidi/'><img src='man/figures/hex_logo_pyramidi.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/urswilke/pyramidi.svg?branch=master)](https://travis-ci.org/github/urswilke/pyramidi)
 [![Codecov test coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://app.codecov.io/gh/urswilke/pyramidi?branch=master)
 [![R-CMD-check](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -42,13 +41,12 @@ but mido (also used to write midi files) already catches some of the possible in
 If you're new to midi, [mido's documentation](https://mido.readthedocs.io/en/latest/) might be a good start.
 
 
-## New in version 0.2
+## New since version 0.2
 
 The midi data can now be 
 
-* played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages [fluidsynth](https://github.com/ropensci/fluidsynth) & [av](https://github.com/ropensci/av/) (see the documentation of the [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-) method in the `MidiFramer` class and its helper function `player()` which use
-* `fluidsynth::midi_convert()` to synthesize midi to wav files (needs [fluidsynth](https://www.fluidsynth.org/) installed, but if I understand correctly R will do that for you),
-* `av::av_audio_convert()` to convert wav to mp3 files 
+* played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages [fluidsynth](https://github.com/ropensci/fluidsynth) (see the documentation of the [`play()`](https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-) method in the `MidiFramer` class and its helper function `player()` which use
+* `fluidsynth::midi_convert()` to synthesize midi to wav files (needs [fluidsynth](https://www.fluidsynth.org/) installed, but if I understand correctly R will do that for you)
 
 
 
