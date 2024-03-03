@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">pyramidi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,15 +87,13 @@
 <p>Thus, you can manipulate all the intermediate dataframes and create midi files from R. However, you need to make sure yourself that the midi files you write can be understood by your softsynth. The data is not yet validated by pyramidi, but mido (also used to write midi files) already catches some of the possible inconsistencies.</p>
 <p>If you’re new to midi, <a href="https://mido.readthedocs.io/en/latest/" class="external-link">mido’s documentation</a> might be a good start.</p>
 <div class="section level2">
-<h2 id="new-in-version-02">New in version 0.2<a class="anchor" aria-label="anchor" href="#new-in-version-02"></a>
+<h2 id="new-since-version-02">New since version 0.2<a class="anchor" aria-label="anchor" href="#new-since-version-02"></a>
 </h2>
 <p>The midi data can now be</p>
 <ul>
-<li>played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages <a href="https://github.com/ropensci/fluidsynth" class="external-link">fluidsynth</a> &amp; <a href="https://github.com/ropensci/av/" class="external-link">av</a> (see the documentation of the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-"><code>play()</code></a> method in the <code>MidiFramer</code> class and its helper function <code><a href="reference/player.html">player()</a></code> which use</li>
+<li>played live in the R console OR generate a sound file and a html audio player when knitting rmarkdown documents thanks to the excellent R packages <a href="https://github.com/ropensci/fluidsynth" class="external-link">fluidsynth</a> (see the documentation of the <a href="https://urswilke.github.io/pyramidi/reference/MidiFramer.html#method-play-"><code>play()</code></a> method in the <code>MidiFramer</code> class and its helper function <code><a href="reference/player.html">player()</a></code> which use</li>
 <li>
-<code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_convert()</a></code> to synthesize midi to wav files (needs <a href="https://www.fluidsynth.org/" class="external-link">fluidsynth</a> installed, but if I understand correctly R will do that for you),</li>
-<li>
-<code><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av::av_audio_convert()</a></code> to convert wav to mp3 files</li>
+<code><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">fluidsynth::midi_convert()</a></code> to synthesize midi to wav files (needs <a href="https://www.fluidsynth.org/" class="external-link">fluidsynth</a> installed, but if I understand correctly R will do that for you)</li>
 </ul>
 </div>
 <div class="section level2">
@@ -105,7 +103,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'pyramidi'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://urswilke.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The python package <a href="https://pypi.org/project/miditapyr/" class="external-link">miditapyr</a> also needs to be installed in your python environment used by <a href="https://github.com/rstudio/reticulate" class="external-link">reticulate</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">pip</span> install miditapyr</span></code></pre></div>
 <p>But if everything works as I believe it should, miditapyr is automatically installed if you install pyramidi, as soon as you access the module for the first time.</p>
 <p>Otherwise, you can also install it in your reticulate python environment with the included helper function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -208,106 +206,101 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">av</td>
-<td align="left">0.9.0</td>
-<td align="left">Ooms (2023)</td>
-</tr>
-<tr class="even">
 <td align="left">base</td>
 <td align="left">4.3.2</td>
 <td align="left">R Core Team (2023a)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">details</td>
 <td align="left">0.3.0</td>
 <td align="left">Sidi (2022)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">DiagrammeR</td>
 <td align="left">1.0.11</td>
 <td align="left">Iannone and Roy (2024)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">fluidsynth</td>
 <td align="left">1.0.0</td>
 <td align="left">Ooms (2024)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">glue</td>
 <td align="left">1.7.0</td>
 <td align="left">Hester and Bryan (2024)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">grateful</td>
 <td align="left">0.2.6</td>
 <td align="left">Rodriguez-Sanchez and Jackson (2023)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">htmltools</td>
 <td align="left">0.5.7</td>
 <td align="left">Cheng et al. (2023)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">knitr</td>
 <td align="left">1.45</td>
 <td align="left">Xie (2014); Xie (2015); Xie (2023)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">pichor</td>
 <td align="left">0.0.0.9030</td>
 <td align="left">Andersen (2024)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">pkgdown</td>
 <td align="left">2.0.7</td>
 <td align="left">Wickham, Hesselberth, and Salmon (2022)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">R6</td>
 <td align="left">2.5.1</td>
 <td align="left">Chang (2021)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">reticulate</td>
 <td align="left">1.35.0</td>
 <td align="left">Ushey, Allaire, and Tang (2024)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rmarkdown</td>
 <td align="left">2.25</td>
 <td align="left">Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2023)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">spelling</td>
 <td align="left">2.2.1</td>
 <td align="left">Ooms and Hester (2023)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">testthat</td>
 <td align="left">3.2.1</td>
 <td align="left">Wickham (2011)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">tidyverse</td>
 <td align="left">2.0.0</td>
 <td align="left">Wickham et al. (2019)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">tools</td>
 <td align="left">4.3.2</td>
 <td align="left">R Core Team (2023b)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">tuneR</td>
 <td align="left">1.4.6</td>
 <td align="left">Ligges et al. (2023)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">usethis</td>
 <td align="left">2.2.2</td>
 <td align="left">Wickham et al. (2023)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">zeallot</td>
 <td align="left">0.1.0</td>
 <td align="left">Teetor (2018)</td>
@@ -336,11 +329,8 @@ Iannone, Richard, and Olivier Roy. 2024. <em>DiagrammeR: Graph/Network Visualiza
 <div id="ref-tuneR" class="csl-entry">
 Ligges, Uwe, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg. 2023. <em><span class="nocase">tuneR</span>: Analysis of Music and Speech</em>. <a href="https://CRAN.R-project.org/package=tuneR" class="external-link uri">https://CRAN.R-project.org/package=tuneR</a>.
 </div>
-<div id="ref-av" class="csl-entry">
-Ooms, Jeroen. 2023. <em><span class="nocase">av</span>: Working with Audio and Video in r</em>. <a href="https://CRAN.R-project.org/package=av" class="external-link uri">https://CRAN.R-project.org/package=av</a>.
-</div>
 <div id="ref-fluidsynth" class="csl-entry">
-———. 2024. <em><span class="nocase">fluidsynth</span>: Read and Play Digital Music (MIDI) in r</em>. <a href="https://docs.ropensci.org/fluidsynth/%20https://ropensci.r-universe.dev/fluidsynth" class="external-link">https://docs.ropensci.org/fluidsynth/ https://ropensci.r-universe.dev/fluidsynth</a>.
+Ooms, Jeroen. 2024. <em><span class="nocase">fluidsynth</span>: Read and Play Digital Music (MIDI)</em>. <a href="https://docs.ropensci.org/fluidsynth/%20https://ropensci.r-universe.dev/fluidsynth" class="external-link">https://docs.ropensci.org/fluidsynth/ https://ropensci.r-universe.dev/fluidsynth</a>.
 </div>
 <div id="ref-spelling" class="csl-entry">
 Ooms, Jeroen, and Jim Hester. 2023. <em><span class="nocase">spelling</span>: Tools for Spell Checking in r</em>. <a href="https://CRAN.R-project.org/package=spelling" class="external-link uri">https://CRAN.R-project.org/package=spelling</a>.
@@ -427,7 +417,6 @@ Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbo
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/github/urswilke/pyramidi" class="external-link"><img src="https://travis-ci.org/urswilke/pyramidi.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://app.codecov.io/gh/urswilke/pyramidi?branch=master" class="external-link"><img src="https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/urswilke/pyramidi/actions" class="external-link"><img src="https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>

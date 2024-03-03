@@ -26,7 +26,7 @@ can be used to write the data back to a midi file."><!-- mathjax --><script src=
     
     <a class="navbar-brand me-2" href="../index.html">pyramidi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -241,17 +241,16 @@ Writes a midi file and either playing it in the R console (<code>live = TRUE</co
 or otherwise (<code>live = FALSE</code>) writes an audio file
 and adding an html <a href="https://developer.mozilla.org/docs/Web/HTML/Element/audio" class="external-link">audio player</a> in an Rmarkdown (/quarto?) document.
 Calls <code><a href="player.html">player()</a></code> helper function.</p>
-<p>WARNING: Setting <code>overwrite = TRUE</code> or <code>marie_kondo = TRUE</code> (the default!!) will DELETE the specified audio files!!!
+<p>WARNING: Setting <code>overwrite = TRUE</code> (the default!!) will DELETE the specified audio files!!!
 (see more details below)</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MidiFramer</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span></span>
 <span>  audiofile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"mf_out_"</span>, fileext <span class="op">=</span> <span class="st">".mp3"</span><span class="op">)</span>,</span>
 <span>  soundfont <span class="op">=</span> <span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/soundfonts.html" class="external-link">soundfont_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  midifile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">".mp3$"</span>, <span class="st">".mid"</span>, <span class="va">audiofile</span><span class="op">)</span>,</span>
+<span>  midifile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"\\....$"</span>, <span class="st">".mid"</span>, <span class="va">audiofile</span><span class="op">)</span>,</span>
 <span>  live <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  marie_kondo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -270,8 +269,7 @@ the default soundfont of the fluidsynth package (<code><a href="https://docs.rop
 
 
 <dt><code>midifile</code></dt>
-<dd><p>Path to the midi file to synthesize on. If <code>marie_kondo = TRUE</code>, it will be cleaned up (removed) at the end;
-(character string).</p></dd>
+<dd><p>Path to the midi file to synthesize on; (character string).</p></dd>
 
 
 <dt><code>live</code></dt>
@@ -288,12 +286,6 @@ a small audio player when knitting an Rmd document
 <dt><code>overwrite</code></dt>
 <dd><p>logical; defaults to TRUE;
 if file exists and overwrite = FALSE, the existing files will not be overwritten and the function errors out.</p></dd>
-
-
-<dt><code>marie_kondo</code></dt>
-<dd><p>logical, whether to remove intermediate files (the midi
-file, and if live = <code>FALSE</code> and <code>audiofile</code> is an mp3 also it also
-deletes the intermediate wav file); defaults to <code>TRUE</code></p></dd>
 
 
 <dt><code>...</code></dt>
@@ -316,13 +308,10 @@ mfr$play()
 # The play method does basically this:
 \dontrun{
 midi_out &lt;- "my_output.mid"
-audiofile &lt;- "test.wav"
 mp3file &lt;- "test.mp3"
 mfr$mf$write_file(midi_out)
-fluidsynth::midi_convert(midi_out, output = audiofile)
-av::av_audio_convert(audiofile, mp3file)
-# `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.
-# `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file
+fluidsynth::midi_convert(midi_out, output = mp3file)
+# `overwrite` = TRUE overwrites midi_out &amp; mp3file
 }
 </code></pre></div><p></p></div>
 </div>
@@ -420,18 +409,15 @@ av::av_audio_convert(audiofile, mp3file)
 <span class="r-out co"><span class="r-pr">#&gt;</span>   '/opt/hostedtoolcache/Python/3.11.8/x64/bin'</span>
 <span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;audio controls=""&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;source src="/tmp/Rtmp1tZFzC/mf_out_1e4244f56591.mp3" type="audio/mp3"/&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;source src="/tmp/RtmpvoOB8e/mf_out_20e474f1efac.mp3" type="audio/mp3"/&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/audio&gt;</span>
 <span class="r-in"><span><span class="co"># The play method does basically this:</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">midi_out</span> <span class="op">&lt;-</span> <span class="st">"my_output.mid"</span></span></span>
-<span class="r-in"><span><span class="va">audiofile</span> <span class="op">&lt;-</span> <span class="st">"test.wav"</span></span></span>
 <span class="r-in"><span><span class="va">mp3file</span> <span class="op">&lt;-</span> <span class="st">"test.mp3"</span></span></span>
 <span class="r-in"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="fu">write_file</span><span class="op">(</span><span class="va">midi_out</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">midi_convert</a></span><span class="op">(</span><span class="va">midi_out</span>, output <span class="op">=</span> <span class="va">audiofile</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">av</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/av/reference/encoding.html" class="external-link">av_audio_convert</a></span><span class="op">(</span><span class="va">audiofile</span>, <span class="va">mp3file</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># `marie_kondo` = TRUE, the midi (and wav if `audiofile` is an mp3 file) file would be deleted.</span></span></span>
-<span class="r-in"><span><span class="co"># `overwrite` = TRUE overwrites midi_out, audiofile &amp; mp3file</span></span></span>
+<span class="r-in"><span><span class="fu">fluidsynth</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/fluidsynth/reference/fluidsynth.html" class="external-link">midi_convert</a></span><span class="op">(</span><span class="va">midi_out</span>, output <span class="op">=</span> <span class="va">mp3file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># `overwrite` = TRUE overwrites midi_out &amp; mp3file</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
