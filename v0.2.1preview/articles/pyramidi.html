@@ -398,16 +398,16 @@ every note with a random midi note between 60 &amp; 71:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 130 × 11</span></span></span>
 <span><span class="co">#&gt;    i_track meta   note channel i_note velocity_note_on velocity_note_off</span></span>
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE    60       9      1               72                72</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE    64       9      1               64                64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE    71       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE    65       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE    64       9      1              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE    62       9      2               64                64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE    69       9      2              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       0 FALSE    70       9      1               72                72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       0 FALSE    60       9      1               64                64</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       0 FALSE    64       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       0 FALSE    60       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       0 FALSE    68       9      1              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       0 FALSE    64       9      2               64                64</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       0 FALSE    61       9      2              101               101</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       0 FALSE    63       9      3               60                60</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE    69       9      2              101               101</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE    60       9      4               60                60</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       0 FALSE    68       9      2              101               101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       0 FALSE    65       9      4               60                60</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 120 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: ticks_note_on &lt;dbl&gt;, ticks_note_off &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   b_note_on &lt;dbl&gt;, b_note_off &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -423,9 +423,9 @@ depending list elements are also automatically updated.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfr</span><span class="op">$</span><span class="va">mf</span><span class="op">$</span><span class="va">midi_frame_nested</span><span class="op">$</span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   i_track  meta                            msg</span></span>
-<span><span class="co">#&gt; 1       0 FALSE          9, 69, note_on, 72, 0</span></span>
-<span><span class="co">#&gt; 2       0 FALSE          9, 69, note_on, 64, 0</span></span>
-<span><span class="co">#&gt; 3       0 FALSE         9, 60, note_on, 101, 0</span></span>
+<span><span class="co">#&gt; 1       0 FALSE          9, 62, note_on, 72, 0</span></span>
+<span><span class="co">#&gt; 2       0 FALSE          9, 67, note_on, 64, 0</span></span>
+<span><span class="co">#&gt; 3       0 FALSE         9, 61, note_on, 101, 0</span></span>
 <span><span class="co">#&gt; 4       0  TRUE    track_name, drum-t1-1-t1, 0</span></span>
 <span><span class="co">#&gt; 5       0  TRUE           set_tempo, 666666, 0</span></span>
 <span><span class="co">#&gt; 6       0  TRUE time_signature, 4, 4, 24, 8, 0</span></span></code></pre></div>
@@ -451,13 +451,13 @@ that on your computer.</strong></p>
 synthesize them with the convenience function <code><a href="../reference/player.html">player()</a></code></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">midifile</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/player.html">player</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<audio><source src="mod_test_midi_file.mp3"></source></audio><p>As you can hear, the <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code> function in
+<audio controls=""><source src="mod_test_midi_file.mp3" type="audio/mp3"></source></audio><p>As you can hear, the <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code> function in
 <code>mod()</code> changed all midi notes randomly.</p>
 <p>You can also listen to your synthesized files by embedding an audio
 player for the <code>MidiFramer</code> object:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfr</span><span class="op">$</span><span class="fu">play</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<audio><source src="/tmp/RtmpeExk1C/mf_out_e15af758658b2.mp3"></source></audio><p>When using R interactively, this will directly play the generated
+<audio controls=""><source src="/tmp/RtmpXbxNJN/mf_out_e22b07a8754a2.mp3" type="audio/mp3"></source></audio><p>When using R interactively, this will directly play the generated
 audio in the console.</p>
 </div>
 <div class="section level3">
@@ -505,11 +505,11 @@ document using <code><a href="https://purrr.tidyverse.org/reference/imap.html" c
 <span><span class="op">)</span></span></code></pre></div>
 <div>
 <h4>audio result test1.mp3</h4>
-<audio><source src="test1.mp3"></source></audio><br><br>
+<audio controls=""><source src="test1.mp3" type="audio/mp3"></source></audio><br><br>
 </div>
 <div>
 <h4>audio result test2.mp3</h4>
-<audio><source src="test2.mp3"></source></audio><br><br>
+<audio controls=""><source src="test2.mp3" type="audio/mp3"></source></audio><br><br>
 </div>
 <p>Compared to the two audio samples in <a href="#playing-audio">Playing
 audio</a> (which are the same), we now have two different results.</p>
