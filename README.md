@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/urswilke/pyramidi.svg?branch=master)](https://travis-ci.org/github/urswilke/pyramidi)
 [![Codecov test
 coverage](https://codecov.io/gh/urswilke/pyramidi/branch/master/graph/badge.svg)](https://app.codecov.io/gh/urswilke/pyramidi?branch=master)
 [![R-CMD-check](https://github.com/urswilke/pyramidi/workflows/R-CMD-check/badge.svg)](https://github.com/urswilke/pyramidi/actions)
