@@ -59,7 +59,7 @@ player <- function(midifile,
   }
 
   if (!overwrite & file.exists(output)) {
-    stop("The file\n", output, "exists:\nUse `overwrite = TRUE` to overwrite it/them.")
+    stop("The file\n", output, "exists:\nUse `overwrite = TRUE` to overwrite it.")
   }
   
   fluidsynth::midi_convert(
