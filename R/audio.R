@@ -71,12 +71,12 @@ player <- function(midifile,
   )
   if (verbose) message("converted ", midifile, " to ", output)
 
-  html_tag_audio(output, tools::file_ext(output))
+  html_tag_audio(output)
 }
 
 # from here: https://community.rstudio.com/t/audio-files-in-r-markdown/20874/3
-html_tag_audio <- function(file, type = c("wav", "mp3")) {
-  type <- match.arg(type)
+html_tag_audio <- function(file) {
+  type <- tools::file_ext(file)
   htmltools::tags$audio(
     controls = "",
     htmltools::tags$source(
