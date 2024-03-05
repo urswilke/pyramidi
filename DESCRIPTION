@@ -48,7 +48,6 @@ Suggests:
     DiagrammeR,
     tuneR
 Remotes: 
-    ropensci/fluidsynth,
     mikldk/pichor
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
